@@ -33,8 +33,12 @@ TemperatureSafetyDecision decisionFor(
 
 TemperatureSafetyController::TemperatureSafetyController(TemperatureSafetyConfiguration configuration)
     : configuration_(configuration) {
-    if (configuration_.warningCelsius >= configuration_.stopCelsius) {
+    if (!std::isfinite(configuration_.warningCelsius) || !std::isfinite(configuration_.stopCelsius) ||
+        configuration_.warningCelsius >= configuration_.stopCelsius) {
         throw std::invalid_argument("Temperature thresholds must satisfy warningCelsius < stopCelsius");
+    }
+    if (!configuration_.processAtLocalEdge) {
+        throw std::invalid_argument("Temperature safety requires local processing");
     }
 }
 

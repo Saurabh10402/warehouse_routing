@@ -4,6 +4,8 @@
 
 #include <string>
 #include <vector>
+#include <functional>
+#include <unordered_map>
 
 namespace ealr {
 
@@ -16,6 +18,7 @@ struct RoutingNode {
     double communicationRadiusMeters;
     RobotState state;
     std::vector<RobotId> neighbours;
+    bool energyConstrained = true;
 
     static RoutingNode fromRobot(const Robot& robot);
 
@@ -38,6 +41,7 @@ public:
 
 private:
     std::vector<RoutingNode> nodes_;
+    std::unordered_map<RobotId, std::size_t> index_;
 };
 
 struct EalrCostWeights {
@@ -69,7 +73,11 @@ struct RoutingRequest {
     const RoutingTopology& topology;
     RobotId source;
     RobotId destination;
+    // Optional explicit link cost supplied by a fabric adapter; algorithms never parse config.
+    std::function<double(const RoutingNode&, const RoutingNode&)> linkCost = {};
 };
+
+double checkedRoutingCost(double cost);
 
 const char* toString(RouteStatus status);
 

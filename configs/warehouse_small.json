@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 2,
+  "name": "Small deterministic diamond",
+  "topology": {
+    "kind": "graph",
+    "minimumSpinesPerLeaf": 0,
+    "minimumEdges": 0
+  },
+  "simulation": {
+    "durationMs": 100,
+    "drainMs": 100,
+    "seed": 1,
+    "scheduler": "strictPriority"
+  },
+  "routing": {
+    "algorithm": "dijkstra",
+    "alpha": 1,
+    "beta": 1,
+    "gamma": 1,
+    "latencyScaleMs": 1,
+    "maxStretch": 1.5
+  },
+  "deadlinesMs": [
+    10,
+    20,
+    40,
+    100
+  ],
+  "safety": {
+    "warningCelsius": 70,
+    "stopCelsius": 80,
+    "broadcastEmergencyStop": true,
+    "processAtLocalEdge": true,
+    "requireManualResetAfterStop": true,
+    "processingMs": 0.1
+  },
+  "zones": [
+    "A"
+  ],
+  "nodes": [
+    {
+      "id": "source",
+      "role": "endpoint",
+      "x": 0,
+      "y": 0,
+      "zone": "A",
+      "access": "wired"
+    },
+    {
+      "id": "fast",
+      "role": "relay",
+      "x": 1,
+      "y": 0,
+      "zone": "A",
+      "access": "wired"
+    },
+    {
+      "id": "alternate",
+      "role": "relay",
+      "x": 1,
+      "y": 1,
+      "zone": "A",
+      "access": "wired"
+    },
+    {
+      "id": "edge0",
+      "role": "edge",
+      "x": 2,
+      "y": 0,
+      "zone": "A",
+      "access": "wired"
+    },
+    {
+      "id": "edge1",
+      "role": "edge",
+      "x": 2,
+      "y": 1,
+      "zone": "A",
+      "access": "wired"
+    }
+  ],
+  "links": [
+    {
+      "id": "source--fast",
+      "from": "source",
+      "to": "fast",
+      "capacityMbps": 10,
+      "delayMs": 0.2,
+      "queuePackets": 100
+    },
+    {
+      "id": "fast--edge0",
+      "from": "fast",
+      "to": "edge0",
+      "capacityMbps": 10,
+      "delayMs": 0.2,
+      "queuePackets": 100
+    },
+    {
+      "id": "source--alternate",
+      "from": "source",
+      "to": "alternate",
+      "capacityMbps": 10,
+      "delayMs": 0.2,
+      "queuePackets": 100
+    },
+    {
+      "id": "alternate--edge0",
+      "from": "alternate",
+      "to": "edge0",
+      "capacityMbps": 10,
+      "delayMs": 0.2,
+      "queuePackets": 100
+    },
+    {
+      "id": "alternate--edge1",
+      "from": "alternate",
+      "to": "edge1",
+      "capacityMbps": 10,
+      "delayMs": 0.2,
+      "queuePackets": 100
+    }
+  ],
+  "traffic": [
+    {
+      "id": "p0",
+      "source": "source",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 0,
+      "bytes": 500,
+      "startMs": 0,
+      "stopMs": 90,
+      "intervalMs": 10
+    },
+    {
+      "id": "p1",
+      "source": "source",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 1,
+      "bytes": 500,
+      "startMs": 1,
+      "stopMs": 90,
+      "intervalMs": 10
+    },
+    {
+      "id": "p2",
+      "source": "source",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 2,
+      "bytes": 500,
+      "startMs": 2,
+      "stopMs": 90,
+      "intervalMs": 10
+    },
+    {
+      "id": "p3",
+      "source": "source",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 3,
+      "bytes": 500,
+      "startMs": 3,
+      "stopMs": 90,
+      "intervalMs": 10
+    }
+  ],
+  "events": []
+}

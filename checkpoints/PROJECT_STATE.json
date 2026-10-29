@@ -1,18 +1,44 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_001",
-  "utc": "2026-10-29T18:30:00Z",
-  "phase": "recovery-audit",
-  "source_state": "manifests/checkpoint_001.json",
-  "configuration_versions": ["legacy robot", "legacy warehouse plan"],
-  "implemented": ["legacy routing", "robot state", "JSON validation", "metrics", "safety state machine"],
-  "pending": ["stationary variable topology", "packet forwarding", "priority queues", "failover", "experiments"],
-  "known_defects": ["equal zone sizes enforced", "nonfinite safety thresholds accepted by constructor", "configuration enum collides with routing interface name", "ns3 dependency check omits flow-monitor and unnecessarily requires MPI"],
-  "build_status": "BLOCKED: no CMake/compiler on PATH",
-  "test_status": "C++ NOT RUN",
+  "checkpoint": "checkpoint_002",
+  "utc": "2026-10-29T21:02:41.2646686Z",
+  "phase": "core-forwarding-validated",
+  "source_state": "manifests/checkpoint_002.json",
+  "configuration_versions": [
+    "legacy robot",
+    "legacy warehouse plan"
+  ],
+  "implemented": [
+    "stationary explicit graph",
+    "unequal zones",
+    "reused Dijkstra Greedy EALR with link costs",
+    "finite priority queues",
+    "per-hop forwarding",
+    "energy exclusion",
+    "node/link failure and recovery",
+    "ordered backup destinations",
+    "local safety processing and packet broadcasts",
+    "per-packet and per-class metrics"
+  ],
+  "pending": [
+    "execute experiment matrix",
+    "CLI integration checks",
+    "documentation and final recovery package"
+  ],
+  "known_defects": [
+    "GCC legacy JSON helper dangling-reference diagnostics require review"
+  ],
+  "build_status": "PASS GCC 14.2.0 Boost 1.85 portable Debug",
+  "test_status": "15 of 15 CTest tests PASS",
   "experiment_identifiers": [],
-  "dependencies": {"ns3": "not installed", "5g_lena": "not installed", "portable_toolchain": "being acquired"},
-  "blockers": ["missing native toolchain"],
-  "next_action": "Establish clean baseline build using portable dependencies"
+  "dependencies": {
+    "ns3": "not installed; unverified",
+    "5g_lena": "not installed",
+    "portable_toolchain": "GCC 14.2.0, Boost 1.85 SHA256 verified"
+  },
+  "blockers": [
+    "ns-3 and 5G-LENA absent"
+  ],
+  "next_action": "Run the full experiment matrix, verify exported traces and metrics, document fidelity"
 }

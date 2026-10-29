@@ -52,7 +52,8 @@ RouteResult EalrRouting::computeRoute(const RoutingRequest& request) const {
                 continue;
             }
 
-            const double candidateCost = currentCost + edgeCost(*currentNode, *neighbour);
+            const double cost = checkedRoutingCost(request.linkCost ? request.linkCost(*currentNode,*neighbour) : edgeCost(*currentNode, *neighbour));
+            const double candidateCost = checkedRoutingCost(currentCost + cost);
             const auto knownCost = costs.find(neighbourId);
             if (knownCost == costs.end() || candidateCost < knownCost->second) {
                 costs[neighbourId] = candidateCost;
@@ -85,7 +86,7 @@ const EalrCostWeights& EalrRouting::weights() const {
 
 double EalrRouting::edgeCost(const RoutingNode& current, const RoutingNode& neighbour) const {
     const double distance = current.position.distanceTo(neighbour.position);
-    const double batteryPenalty = (100.0 - neighbour.batteryPercent) / 100.0;
+    const double batteryPenalty = neighbour.energyConstrained ? (100.0 - neighbour.batteryPercent) / 100.0 : 0.0;
     const double congestionPenalty = static_cast<double>(neighbour.queueLength);
     return (weights_.alpha * distance) + (weights_.beta * batteryPenalty) + (weights_.gamma * congestionPenalty);
 }

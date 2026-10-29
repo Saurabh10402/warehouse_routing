@@ -69,6 +69,7 @@ RoutingTopology::RoutingTopology(vector<RoutingNode> nodes) : nodes_(std::move(n
     for (const RoutingNode& node : nodes_) {
         validateNode(node, nodeIds);
     }
+    for (std::size_t i=0;i<nodes_.size();++i) index_.emplace(nodes_[i].id,i);
 }
 
 const vector<RoutingNode>& RoutingTopology::nodes() const {
@@ -76,12 +77,13 @@ const vector<RoutingNode>& RoutingTopology::nodes() const {
 }
 
 const RoutingNode* RoutingTopology::findNode(RobotId id) const {
-    for (const RoutingNode& node : nodes_) {
-        if (node.id == id) {
-            return &node;
-        }
-    }
-    return nullptr;
+    auto it=index_.find(id);
+    return it==index_.end()?nullptr:&nodes_[it->second];
+}
+
+double checkedRoutingCost(double cost) {
+    if(!std::isfinite(cost)||cost<0) throw std::invalid_argument("Routing cost must be finite and nonnegative");
+    return cost;
 }
 
 void EalrCostWeights::validate() const {

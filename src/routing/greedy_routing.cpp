@@ -47,7 +47,8 @@ RouteResult GreedyRouting::computeRoute(const RoutingRequest& request) const {
             return {RouteStatus::NoRoute, {}, 0.0};
         }
 
-        totalDistance += current->position.distanceTo(next->position);
+        const double cost = checkedRoutingCost(request.linkCost ? request.linkCost(*current,*next) : current->position.distanceTo(next->position));
+        totalDistance = checkedRoutingCost(totalDistance + cost);
         current = next;
         visited.insert(current->id);
         hops.push_back(current->id);

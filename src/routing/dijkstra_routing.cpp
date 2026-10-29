@@ -47,8 +47,8 @@ RouteResult DijkstraRouting::computeRoute(const RoutingRequest& request) const {
                 continue;
             }
 
-            const double edgeDistance = currentNode->position.distanceTo(neighbour->position);
-            const double candidateDistance = currentDistance + edgeDistance;
+            const double edgeDistance = checkedRoutingCost(request.linkCost ? request.linkCost(*currentNode,*neighbour) : currentNode->position.distanceTo(neighbour->position));
+            const double candidateDistance = checkedRoutingCost(currentDistance + edgeDistance);
             const auto knownDistance = distances.find(neighbourId);
             if (knownDistance == distances.end() || candidateDistance < knownDistance->second) {
                 distances[neighbourId] = candidateDistance;

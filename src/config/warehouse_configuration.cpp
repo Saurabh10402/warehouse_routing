@@ -19,7 +19,7 @@ namespace json = boost::json;
     throw WarehouseConfigurationError(message);
 }
 
-const json::value& requiredValue(const json::object& object, const char* key, const std::string& path) {
+const json::value& requiredValue(const json::object& object, const char* key, std::string path) {
     const auto value = object.find(key);
     if (value == object.end()) {
         fail("Missing required property '" + std::string(key) + "' at " + path);
@@ -27,7 +27,7 @@ const json::value& requiredValue(const json::object& object, const char* key, co
     return value->value();
 }
 
-const json::object& requiredObject(const json::object& object, const char* key, const std::string& path) {
+const json::object& requiredObject(const json::object& object, const char* key, std::string path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_object()) {
         fail("Property '" + std::string(key) + "' at " + path + " must be an object");
@@ -35,7 +35,7 @@ const json::object& requiredObject(const json::object& object, const char* key, 
     return value.as_object();
 }
 
-void validateKeys(const json::object& object, std::initializer_list<const char*> allowed, const std::string& path) {
+void validateKeys(const json::object& object, std::initializer_list<const char*> allowed, std::string path) {
     for (const auto& entry : object) {
         const bool known = std::any_of(allowed.begin(), allowed.end(), [&entry](const char* key) {
             return entry.key() == key;
@@ -46,7 +46,7 @@ void validateKeys(const json::object& object, std::initializer_list<const char*>
     }
 }
 
-double requiredNumber(const json::object& object, const char* key, const std::string& path) {
+double requiredNumber(const json::object& object, const char* key, std::string path) {
     const json::value& value = requiredValue(object, key, path);
     double number = 0.0;
     if (value.is_double()) {
@@ -64,7 +64,7 @@ double requiredNumber(const json::object& object, const char* key, const std::st
     return number;
 }
 
-std::uint32_t requiredPositiveInteger(const json::object& object, const char* key, const std::string& path) {
+std::uint32_t requiredPositiveInteger(const json::object& object, const char* key, std::string path) {
     const double number = requiredNumber(object, key, path);
     if (number < 1.0 || std::floor(number) != number || number > std::numeric_limits<std::uint32_t>::max()) {
         fail("Property '" + std::string(key) + "' at " + path + " must be a positive integer");
@@ -72,7 +72,7 @@ std::uint32_t requiredPositiveInteger(const json::object& object, const char* ke
     return static_cast<std::uint32_t>(number);
 }
 
-double requiredPositiveNumber(const json::object& object, const char* key, const std::string& path) {
+double requiredPositiveNumber(const json::object& object, const char* key, std::string path) {
     const double number = requiredNumber(object, key, path);
     if (number <= 0.0) {
         fail("Property '" + std::string(key) + "' at " + path + " must be greater than zero");
@@ -80,7 +80,7 @@ double requiredPositiveNumber(const json::object& object, const char* key, const
     return number;
 }
 
-bool requiredBoolean(const json::object& object, const char* key, const std::string& path) {
+bool requiredBoolean(const json::object& object, const char* key, std::string path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_bool()) {
         fail("Property '" + std::string(key) + "' at " + path + " must be a boolean");
@@ -88,7 +88,7 @@ bool requiredBoolean(const json::object& object, const char* key, const std::str
     return value.as_bool();
 }
 
-std::string requiredString(const json::object& object, const char* key, const std::string& path) {
+std::string requiredString(const json::object& object, const char* key, std::string path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_string() || value.as_string().empty()) {
         fail("Property '" + std::string(key) + "' at " + path + " must be a non-empty string");
@@ -96,7 +96,7 @@ std::string requiredString(const json::object& object, const char* key, const st
     return std::string(value.as_string());
 }
 
-AccessTechnology parseAccessTechnology(const std::string& technology, const std::string& path) {
+AccessTechnology parseAccessTechnology(const std::string& technology, std::string path) {
     if (technology == "wired") {
         return AccessTechnology::Wired;
     }
@@ -109,7 +109,7 @@ AccessTechnology parseAccessTechnology(const std::string& technology, const std:
     fail("Property 'accessTechnology' at " + path + " must be one of: wired, wifi, private5g");
 }
 
-TrafficPriority parseTrafficPriority(const std::string& priority, const std::string& path) {
+TrafficPriority parseTrafficPriority(const std::string& priority, std::string path) {
     if (priority == "safety") {
         return TrafficPriority::Safety;
     }

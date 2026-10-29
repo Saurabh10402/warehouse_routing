@@ -84,7 +84,7 @@ json::object loadDocument(const filesystem::path& filePath, vector<filesystem::p
     return mergeObjects(std::move(parent), document);
 }
 
-const json::value& requiredValue(const json::object& object, const char* key, const string& path) {
+const json::value& requiredValue(const json::object& object, const char* key, string path) {
     const auto value = object.find(key);
     if (value == object.end()) {
         fail("Missing required property '" + string(key) + "' at " + path);
@@ -92,7 +92,7 @@ const json::value& requiredValue(const json::object& object, const char* key, co
     return value->value();
 }
 
-const json::object& requiredObject(const json::object& object, const char* key, const string& path) {
+const json::object& requiredObject(const json::object& object, const char* key, string path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_object()) {
         fail("Property '" + string(key) + "' at " + path + " must be an object");
@@ -100,7 +100,7 @@ const json::object& requiredObject(const json::object& object, const char* key, 
     return value.as_object();
 }
 
-void validateKeys(const json::object& object, initializer_list<const char*> allowed, const string& path) {
+void validateKeys(const json::object& object, initializer_list<const char*> allowed, string path) {
     for (const auto& entry : object) {
         const bool known = any_of(allowed.begin(), allowed.end(), [&entry](const char* key) {
             return entry.key() == key;
@@ -111,7 +111,7 @@ void validateKeys(const json::object& object, initializer_list<const char*> allo
     }
 }
 
-double requiredNumber(const json::object& object, const char* key, const string& path) {
+double requiredNumber(const json::object& object, const char* key, string path) {
     const json::value& value = requiredValue(object, key, path);
     double number = 0.0;
     if (value.is_double()) {
@@ -129,7 +129,7 @@ double requiredNumber(const json::object& object, const char* key, const string&
     return number;
 }
 
-uint32_t requiredPositiveInteger(const json::object& object, const char* key, const string& path) {
+uint32_t requiredPositiveInteger(const json::object& object, const char* key, string path) {
     const double number = requiredNumber(object, key, path);
     if (number < 1.0 || floor(number) != number || number > numeric_limits<uint32_t>::max()) {
         fail("Property '" + string(key) + "' at " + path + " must be a positive integer");
@@ -137,7 +137,7 @@ uint32_t requiredPositiveInteger(const json::object& object, const char* key, co
     return static_cast<uint32_t>(number);
 }
 
-uint32_t requiredNonNegativeInteger(const json::object& object, const char* key, const string& path) {
+uint32_t requiredNonNegativeInteger(const json::object& object, const char* key, string path) {
     const double number = requiredNumber(object, key, path);
     if (number < 0.0 || floor(number) != number || number > numeric_limits<uint32_t>::max()) {
         fail("Property '" + string(key) + "' at " + path + " must be a non-negative integer");
@@ -145,7 +145,7 @@ uint32_t requiredNonNegativeInteger(const json::object& object, const char* key,
     return static_cast<uint32_t>(number);
 }
 
-double requiredPositiveNumber(const json::object& object, const char* key, const string& path) {
+double requiredPositiveNumber(const json::object& object, const char* key, string path) {
     const double number = requiredNumber(object, key, path);
     if (number <= 0.0) {
         fail("Property '" + string(key) + "' at " + path + " must be greater than zero");
@@ -153,7 +153,7 @@ double requiredPositiveNumber(const json::object& object, const char* key, const
     return number;
 }
 
-double requiredNonNegativeNumber(const json::object& object, const char* key, const string& path) {
+double requiredNonNegativeNumber(const json::object& object, const char* key, string path) {
     const double number = requiredNumber(object, key, path);
     if (number < 0.0) {
         fail("Property '" + string(key) + "' at " + path + " must not be negative");
@@ -161,7 +161,7 @@ double requiredNonNegativeNumber(const json::object& object, const char* key, co
     return number;
 }
 
-string requiredString(const json::object& object, const char* key, const string& path) {
+string requiredString(const json::object& object, const char* key, string path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_string()) {
         fail("Property '" + string(key) + "' at " + path + " must be a string");
@@ -173,20 +173,20 @@ string requiredString(const json::object& object, const char* key, const string&
     return result;
 }
 
-RoutingAlgorithm parseRoutingAlgorithm(const string& algorithm, const string& path) {
+RoutingAlgorithmKind parseRoutingAlgorithmKind(const string& algorithm, string path) {
     if (algorithm == "dijkstra") {
-        return RoutingAlgorithm::Dijkstra;
+        return RoutingAlgorithmKind::Dijkstra;
     }
     if (algorithm == "greedy") {
-        return RoutingAlgorithm::Greedy;
+        return RoutingAlgorithmKind::Greedy;
     }
     if (algorithm == "ealr") {
-        return RoutingAlgorithm::Ealr;
+        return RoutingAlgorithmKind::Ealr;
     }
     fail("Property 'algorithm' at " + path + " must be one of: dijkstra, greedy, ealr");
 }
 
-MobilityModel parseMobilityModel(const string& model, const string& path) {
+MobilityModel parseMobilityModel(const string& model, string path) {
     if (model == "static") {
         return MobilityModel::Static;
     }
@@ -234,7 +234,7 @@ ExperimentConfiguration validate(const json::object& root) {
 
     ExperimentConfiguration configuration{
         {requiredPositiveNumber(simulation, "durationSeconds", "simulation"), requiredPositiveInteger(simulation, "seed", "simulation")},
-        {parseRoutingAlgorithm(requiredString(routing, "algorithm", "routing"), "routing"), requiredNonNegativeNumber(routing, "alpha", "routing"), requiredNonNegativeNumber(routing, "beta", "routing"), requiredNonNegativeNumber(routing, "gamma", "routing")},
+        {parseRoutingAlgorithmKind(requiredString(routing, "algorithm", "routing"), "routing"), requiredNonNegativeNumber(routing, "alpha", "routing"), requiredNonNegativeNumber(routing, "beta", "routing"), requiredNonNegativeNumber(routing, "gamma", "routing")},
         {requiredNumber(battery, "initialPercent", "battery"), requiredNumber(battery, "lowBatteryThreshold", "battery"), requiredNumber(battery, "criticalBatteryThreshold", "battery"), requiredNonNegativeNumber(battery, "transmitCost", "battery"), requiredNonNegativeNumber(battery, "receiveCost", "battery"), requiredNonNegativeNumber(battery, "relayCost", "battery"), requiredNonNegativeNumber(battery, "idleCostPerSecond", "battery")},
         {requiredPositiveInteger(traffic, "packetsPerSecond", "traffic"), requiredPositiveInteger(traffic, "packetSizeBytes", "traffic")},
         {parseMobilityModel(requiredString(mobility, "model", "mobility"), "mobility"), requiredPositiveNumber(mobility, "factoryWidthMeters", "mobility"), requiredPositiveNumber(mobility, "factoryHeightMeters", "mobility"), requiredPositiveNumber(mobility, "randomWaypointMinSpeedMetersPerSecond", "mobility"), requiredPositiveNumber(mobility, "randomWaypointMaxSpeedMetersPerSecond", "mobility"), requiredNonNegativeNumber(mobility, "randomWaypointPauseSeconds", "mobility")},
@@ -268,13 +268,13 @@ ExperimentConfiguration ConfigurationLoader::load(const filesystem::path& config
     return validate(loadDocument(configurationPath, ancestry));
 }
 
-const char* toString(RoutingAlgorithm algorithm) {
+const char* toString(RoutingAlgorithmKind algorithm) {
     switch (algorithm) {
-        case RoutingAlgorithm::Dijkstra:
+        case RoutingAlgorithmKind::Dijkstra:
             return "dijkstra";
-        case RoutingAlgorithm::Greedy:
+        case RoutingAlgorithmKind::Greedy:
             return "greedy";
-        case RoutingAlgorithm::Ealr:
+        case RoutingAlgorithmKind::Ealr:
             return "ealr";
     }
     return "unknown";

@@ -7,7 +7,7 @@
 
 namespace ealr {
 
-enum class RoutingAlgorithm {
+enum class RoutingAlgorithmKind {
     Dijkstra,
     Greedy,
     Ealr
@@ -25,7 +25,7 @@ struct SimulationConfiguration {
 };
 
 struct RoutingConfiguration {
-    RoutingAlgorithm algorithm;
+    RoutingAlgorithmKind algorithm;
     double alpha;
     double beta;
     double gamma;
@@ -111,7 +111,7 @@ public:
     static ExperimentConfiguration load(const std::filesystem::path& configurationPath);
 };
 
-const char* toString(RoutingAlgorithm algorithm);
+const char* toString(RoutingAlgorithmKind algorithm);
 const char* toString(MobilityModel model);
 
 }  // namespace ealr

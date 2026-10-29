@@ -16,7 +16,19 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(CompilerWarnings)
 include(EalrDependencies)
 
-find_package(boost_json CONFIG REQUIRED)
+set(EALR_BOOST_SOURCE "" CACHE PATH "Optional extracted official Boost source tree (offline portable build)")
+if(EALR_BOOST_SOURCE)
+    if(NOT EXISTS "${EALR_BOOST_SOURCE}/boost/json/src.hpp")
+        message(FATAL_ERROR "EALR_BOOST_SOURCE must contain boost/json/src.hpp")
+    endif()
+    file(CONFIGURE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/boost_json_source.cpp" CONTENT "#include <boost/json/src.hpp>\n")
+    add_library(ealr_boost_json STATIC "${CMAKE_CURRENT_BINARY_DIR}/boost_json_source.cpp")
+    target_include_directories(ealr_boost_json SYSTEM PUBLIC "${EALR_BOOST_SOURCE}")
+    target_compile_features(ealr_boost_json PUBLIC cxx_std_17)
+    add_library(Boost::json ALIAS ealr_boost_json)
+else()
+    find_package(boost_json CONFIG REQUIRED)
+endif()
 
 add_library(ealr_project_options INTERFACE)
 target_compile_features(ealr_project_options INTERFACE cxx_std_17)
@@ -27,6 +39,9 @@ add_library(ealr_core
         src/framework.cpp
         src/config/configuration.cpp
         src/config/warehouse_configuration.cpp
+        src/config/fabric_configuration.cpp
+        src/simulation/fabric_simulator.cpp
+        src/metrics/fabric_metrics.cpp
         src/network/device_policy.cpp
         src/safety/temperature_safety_controller.cpp
         src/metrics/metrics_collector.cpp
@@ -44,6 +59,8 @@ target_include_directories(ealr_core
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 target_compile_definitions(ealr_core PRIVATE EALR_PROJECT_VERSION="${PROJECT_VERSION}")
+add_executable(ealr-fabric src/app/ealr_fabric_main.cpp)
+target_link_libraries(ealr-fabric PRIVATE EALR::core)
 
 if(EALR_ENABLE_NS3)
     ealr_find_ns3()

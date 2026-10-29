@@ -37,7 +37,11 @@ double Position2D::distanceTo(const Position2D& other) const {
     validatePosition(other);
     const double xDifference = x - other.x;
     const double yDifference = y - other.y;
-    return sqrt((xDifference * xDifference) + (yDifference * yDifference));
+    const double distance = hypot(xDifference, yDifference);
+    if (!isfinite(distance)) {
+        throw overflow_error("Position distance is not finite");
+    }
+    return distance;
 }
 
 Robot::Robot(RobotId id,

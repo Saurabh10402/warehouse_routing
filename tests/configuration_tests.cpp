@@ -35,14 +35,14 @@ std::filesystem::path sourcePath(const std::string& relativePath) {
 
 int main() {
     const ealr::ExperimentConfiguration baseline = ealr::ConfigurationLoader::load(sourcePath("configs/baseline.json"));
-    expect(baseline.routing.algorithm == ealr::RoutingAlgorithm::Dijkstra, "baseline uses Dijkstra");
+    expect(baseline.routing.algorithm == ealr::RoutingAlgorithmKind::Dijkstra, "baseline uses Dijkstra");
     expect(baseline.robots.count == 16, "baseline robot count is read");
     expect(std::abs(baseline.battery.idleCostPerSecond - 0.001) < 0.00001, "baseline battery cost is read");
     expect(std::abs(baseline.private5g.centralFrequencyHz - 3500000000.0) < 0.00001, "private 5G carrier frequency is read");
     expect(baseline.private5g.numerology == 1, "private 5G numerology is read");
 
     const ealr::ExperimentConfiguration lowBattery = ealr::ConfigurationLoader::load(sourcePath("configs/low_battery.json"));
-    expect(lowBattery.routing.algorithm == ealr::RoutingAlgorithm::Ealr, "derived configuration overrides routing algorithm");
+    expect(lowBattery.routing.algorithm == ealr::RoutingAlgorithmKind::Ealr, "derived configuration overrides routing algorithm");
     expect(lowBattery.robots.count == 16, "derived configuration inherits unmodified objects");
     expect(std::abs(lowBattery.battery.initialPercent - 35.0) < 0.00001, "derived configuration overrides battery values");
 
