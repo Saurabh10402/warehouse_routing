@@ -1,0 +1,59 @@
+{
+  "simulation": {
+    "durationSeconds": 60,
+    "seed": 1
+  },
+  "routing": {
+    "algorithm": "dijkstra",
+    "alpha": 1.0,
+    "beta": 0.0,
+    "gamma": 0.0
+  },
+  "battery": {
+    "initialPercent": 100.0,
+    "lowBatteryThreshold": 25.0,
+    "criticalBatteryThreshold": 10.0,
+    "transmitCost": 0.02,
+    "receiveCost": 0.01,
+    "relayCost": 0.01,
+    "idleCostPerSecond": 0.001
+  },
+  "traffic": {
+    "packetsPerSecond": 10,
+    "packetSizeBytes": 512
+  },
+  "mobility": {
+    "model": "grid",
+    "factoryWidthMeters": 100.0,
+    "factoryHeightMeters": 100.0,
+    "randomWaypointMinSpeedMetersPerSecond": 0.5,
+    "randomWaypointMaxSpeedMetersPerSecond": 1.5,
+    "randomWaypointPauseSeconds": 1.0
+  },
+  "robots": {
+    "count": 16,
+    "communicationRadiusMeters": 35.0
+  },
+  "chargingStation": {
+    "x": 0.0,
+    "y": 0.0
+  },
+  "metrics": {
+    "sampleIntervalSeconds": 1.0
+  },
+  "private5g": {
+    "gnbX": 50.0,
+    "gnbY": 50.0,
+    "centralFrequencyHz": 3500000000.0,
+    "channelBandwidthHz": 20000000.0,
+    "numerology": 1,
+    "gnbTxPowerDbm": 30.0,
+    "ueTxPowerDbm": 23.0,
+    "channelScenario": "UMi",
+    "channelCondition": "Default",
+    "channelModel": "ThreeGpp"
+  },
+  "output": {
+    "directory": "results"
+  }
+}

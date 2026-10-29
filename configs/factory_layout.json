@@ -1,0 +1,12 @@
+{
+  "extends": "baseline.json",
+  "mobility": {
+    "model": "static",
+    "factoryWidthMeters": 120.0,
+    "factoryHeightMeters": 80.0
+  },
+  "robots": {
+    "count": 24,
+    "communicationRadiusMeters": 30.0
+  }
+}

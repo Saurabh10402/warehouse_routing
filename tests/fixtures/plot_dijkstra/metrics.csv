@@ -1,0 +1,8 @@
+metric,value
+average_end_to_end_delay_ms,18.5
+throughput_mbps,4.2
+packet_delivery_ratio_percent,93.0
+packet_loss_percent,7.0
+average_battery_remaining_percent,58.0
+network_lifetime_seconds,42.0
+charging_events,4

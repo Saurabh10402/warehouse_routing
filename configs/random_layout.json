@@ -1,0 +1,12 @@
+{
+  "extends": "baseline.json",
+  "mobility": {
+    "model": "randomWaypoint",
+    "factoryWidthMeters": 100.0,
+    "factoryHeightMeters": 100.0
+  },
+  "robots": {
+    "count": 20,
+    "communicationRadiusMeters": 30.0
+  }
+}

@@ -1,0 +1,18 @@
+# CMake and compiler output
+/build/
+/CMakeCache.txt
+/CMakeFiles/
+/Testing/
+compile_commands.json
+
+# Generated simulation output
+/results/*/
+/logs/*.log
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+/.tools/
+/.recovery/
+__pycache__/

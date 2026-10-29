@@ -1,0 +1,6 @@
+{
+  "simulation": {
+    "durationSeconds": 60,
+    "seed": 1
+  }
+}

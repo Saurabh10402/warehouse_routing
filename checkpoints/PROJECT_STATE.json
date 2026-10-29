@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "project": "wipro-warehouse-routing",
+  "checkpoint": "checkpoint_001",
+  "utc": "2026-10-29T18:30:00Z",
+  "phase": "recovery-audit",
+  "source_state": "manifests/checkpoint_001.json",
+  "configuration_versions": ["legacy robot", "legacy warehouse plan"],
+  "implemented": ["legacy routing", "robot state", "JSON validation", "metrics", "safety state machine"],
+  "pending": ["stationary variable topology", "packet forwarding", "priority queues", "failover", "experiments"],
+  "known_defects": ["equal zone sizes enforced", "nonfinite safety thresholds accepted by constructor", "configuration enum collides with routing interface name", "ns3 dependency check omits flow-monitor and unnecessarily requires MPI"],
+  "build_status": "BLOCKED: no CMake/compiler on PATH",
+  "test_status": "C++ NOT RUN",
+  "experiment_identifiers": [],
+  "dependencies": {"ns3": "not installed", "5g_lena": "not installed", "portable_toolchain": "being acquired"},
+  "blockers": ["missing native toolchain"],
+  "next_action": "Establish clean baseline build using portable dependencies"
+}

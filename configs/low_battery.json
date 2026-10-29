@@ -1,0 +1,18 @@
+{
+  "extends": "baseline.json",
+  "routing": {
+    "algorithm": "ealr",
+    "alpha": 1.0,
+    "beta": 2.0,
+    "gamma": 1.0
+  },
+  "battery": {
+    "initialPercent": 35.0,
+    "lowBatteryThreshold": 25.0,
+    "criticalBatteryThreshold": 10.0,
+    "transmitCost": 0.05,
+    "receiveCost": 0.02,
+    "relayCost": 0.03,
+    "idleCostPerSecond": 0.002
+  }
+}

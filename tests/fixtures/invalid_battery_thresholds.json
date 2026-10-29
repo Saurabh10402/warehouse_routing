@@ -1,0 +1,12 @@
+{
+  "extends": "../../configs/baseline.json",
+  "battery": {
+    "initialPercent": 100.0,
+    "lowBatteryThreshold": 10.0,
+    "criticalBatteryThreshold": 20.0,
+    "transmitCost": 0.02,
+    "receiveCost": 0.01,
+    "relayCost": 0.01,
+    "idleCostPerSecond": 0.001
+  }
+}

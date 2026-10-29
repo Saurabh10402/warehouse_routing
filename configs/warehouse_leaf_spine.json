@@ -1,0 +1,57 @@
+{
+  "name": "Wipro warehouse low-latency network",
+  "topology": {
+    "zoneCount": 10,
+    "endpointsPerZone": 50,
+    "leafSwitchesPerZone": 1,
+    "spineSwitchCount": 2,
+    "headNodeCount": 2,
+    "leafUplinkGbps": 10,
+    "spineUplinkGbps": 25
+  },
+  "radioPolicy": {
+    "allowWiredCriticalDevices": true,
+    "allowWifiDevices": true,
+    "allowPrivate5gDevices": true,
+    "requireDualHomedLeafUplinks": true
+  },
+  "latencyTargets": {
+    "safetyMaximumLatencyMs": 10.0,
+    "controlMaximumLatencyMs": 20.0,
+    "normalMaximumLatencyMs": 40.0,
+    "backgroundMaximumLatencyMs": 100.0
+  },
+  "temperatureSafety": {
+    "warningCelsius": 70.0,
+    "stopCelsius": 80.0,
+    "broadcastEmergencyStop": true,
+    "processAtLocalEdge": true,
+    "requireManualResetAfterStop": true
+  },
+  "deviceProfiles": [
+    {
+      "name": "critical-zone-temperature-sensors",
+      "count": 10,
+      "accessTechnology": "wired",
+      "priority": "safety"
+    },
+    {
+      "name": "robot-control-endpoints",
+      "count": 250,
+      "accessTechnology": "private5g",
+      "priority": "control"
+    },
+    {
+      "name": "warehouse-cameras-and-scanners",
+      "count": 140,
+      "accessTechnology": "wifi",
+      "priority": "normal"
+    },
+    {
+      "name": "humidity-and-routine-iot-sensors",
+      "count": 100,
+      "accessTechnology": "wifi",
+      "priority": "background"
+    }
+  ]
+}
