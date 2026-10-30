@@ -87,5 +87,22 @@
   ],
   "baseline_regression_experiment": "experiments-20261030T180019Z-2441a69a",
   "baseline_comparison_reference": "experiments-20261030T173542Z-c74e4faf",
-  "protected_regression_experiment": "experiments-20261030T175551Z-a5db7fd7"
+  "protected_regression_experiment": "experiments-20261030T175551Z-a5db7fd7",
+  "handoff_requirements": {
+    "user_constraint": "User cannot run or debug the project now; Mac access and future agent access may be unavailable. Minimize manual debugging at handoff.",
+    "target_platforms": [
+      "macOS on MacBook Air M4 (Apple Silicon)",
+      "Ubuntu 24.04 in UTM on that Mac"
+    ],
+    "completion_checks": [
+      "Document and automate prerequisites and launch workflow for the target platforms, including architecture checks.",
+      "Use fresh extraction/build paths with no dependency on Codex Python, Windows binaries, stale caches or current absolute paths.",
+      "Provide a small first-run verification with expected outputs before the full experiment matrix.",
+      "Detect missing dependencies early with actionable errors and retain setup/build/run logs.",
+      "Preserve source, pinned dependency information, representative verified outputs and recovery instructions.",
+      "Distinguish actually executed target-platform tests from documented but unexecuted commands.",
+      "Resolve and validate real ns-3/schema-v2/NR integration before describing the whole requested product as finished."
+    ],
+    "current_readiness": "Core validated on Windows; final Mac/Ubuntu and ns-3/NR handoff not yet validated."
+  }
 }

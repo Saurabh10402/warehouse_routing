@@ -26,3 +26,13 @@ Fixed 20% policing at 5 Mbps flood averages 46.6875% P0 misses. No default was c
 Next: recorded ns-3 dependency build repair, minimal real packet runtime, then schema-v2
 forwarding/QoS integration and NR. Existing external blocker remains; no new build attempted.
 Keep the calibrated physical-input and cross-platform limitations explicit.
+
+## Handoff requirement reaffirmed — 31 October 2026
+
+User reiterated that they cannot execute/debug the project now and need a well-finished
+product for later use. Re-read the original target: MacBook Air M4 / Ubuntu 24.04 in UTM.
+Recorded explicit handoff acceptance checks in PROJECT_STATE.handoff_requirements.
+Source checkpoint_007 still verifies; this update changes recovery metadata only.
+Do not substitute Windows-only verification, a roadmap, or undocumented manual fixes for
+finished target-platform setup and runtime validation. Do not promise zero future issues;
+report exact evidence and remaining unverified integration/platform requirements.
