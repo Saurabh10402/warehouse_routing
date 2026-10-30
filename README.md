@@ -15,6 +15,12 @@ infrastructure**. The default experiment matrix compares shortest-path and ECMP 
 with FIFO and strict-priority queues. EALR remains preserved as earlier relay research;
 it is not the primary warehouse routing proposal. See [the study design](docs/warehouse-study.md).
 
+The next comparison adds [protected emergency queues](docs/protected-queues.md), bounded
+P0 admissions and byte-weighted lower-class service. The [traffic specification](docs/traffic-requirements.md)
+declares inputs and acceptance checks; these are experimental assumptions, not measured
+warehouse requirements. Run it with `python scripts/run_all_experiments.py --suite protected-qos`
+(144 runs). The original default warehouse matrix remains unchanged.
+
 ## Start or resume
 
 Read `checkpoints/CURRENT_STATUS.md`, `PROJECT_STATE.json`, `NEXT_STEPS.md`, and the latest
@@ -56,6 +62,7 @@ setup, direct CMake commands, dependency hashes and recovery packaging.
 | File | Purpose |
 |---|---|
 | `configs/warehouse_communications.json` | Primary wired peer/service traffic, unequal zones, dual spines and edges |
+| `configs/warehouse_protected.json` | Destination bottleneck with protectedPriority and explicit queue parameters |
 | `configs/warehouse_small.json` | Five-node deterministic graph with four traffic classes |
 | `configs/warehouse_uneven.json` | Four zones: 10, 35, 75, 20 endpoints |
 | `configs/warehouse_reference.json` | 500 endpoints in 10 zones, dual spines and edges |
@@ -81,6 +88,7 @@ is on PATH; the Python runner manages this automatically. Existing result direct
 - Stable per-flow ECMP using equal minimum-cost next hops, with unavailable paths excluded.
 - EALR normalized latency/queue/energy cost and a snapshot latency guard.
 - Per-direction finite queues: strict priority 0..3, FIFO within each class, nonpreemptive frames.
+- Optional reserved P0 slots, token-bucket P0 admission and byte-weighted P1/P2/P3 service.
 - Actual packet forwarding over selected links, with serialization and propagation delay.
 - Per-hop route selection, node/link outages, ordered backup edges and component recovery.
 - Battery accounting only on constrained endpoints/relays; no infrastructure battery penalty.
@@ -112,6 +120,8 @@ convergence, admission control, hard deadline assurance, disjoint packet replica
 certified emergency-stop behavior. Safety readings start at a local edge; sensor transport
 and actuator response are outside the model. Energy uses configured percentage points, not joules.
 Strict priority can starve lower classes, and a full shared queue can drop safety traffic.
+The protected policy counts policing/reservation losses explicitly; it cannot promise deadlines
+or admission for every packet. Lower-class fairness applies to packets admitted to its queues.
 
 The retained [legacy project documentation](docs/legacy-project.md) describes the original
 robot experiment and its incomplete ns-3 orchestration. It is historical context, not the

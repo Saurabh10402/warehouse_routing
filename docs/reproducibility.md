@@ -91,6 +91,9 @@ in the current matrix, raw artifact validation, a replay, aggregate CSVs and opt
 The primary scenarios are documented in `docs/warehouse-study.md`: same/cross-zone and
 edge-service traffic with four forwarding/scheduling policies and three seeds each.
 `python scripts/run_all_experiments.py --suite legacy-ealr` retains the earlier 114-run suite.
+`python scripts/run_all_experiments.py --suite protected-qos` runs 144 protected-queue comparisons.
+To regression-check the four-policy baseline, add `--baseline results/experiments-20261030T140941Z-dd164497`
+to the default command; this requires identical configuration and packet traces in all 132 runs.
 Those legacy scenarios include baseline, 500 endpoints, uneven zones, 10/40/100 scaling, congestion,
 priority mix/FIFO ablation, energy/congestion-weight ablations, an energy/latency tradeoff, link/spine/edge failures,
 complete outage, and cloud-independent safety. Random-phase workloads use seeds 1,2,3.

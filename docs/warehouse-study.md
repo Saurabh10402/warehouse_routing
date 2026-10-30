@@ -1,5 +1,9 @@
 # Powered warehouse communication study
 
+This document defines the preserved four-policy baseline. The subsequent protected queue
+comparison is in protected-queues.md, with declared inputs in traffic-requirements.md.
+Statements below about absent reservations describe the FIFO/strictPriority baseline.
+
 ## Research direction
 
 The primary question is how same-zone, cross-zone and edge-service traffic meet configured

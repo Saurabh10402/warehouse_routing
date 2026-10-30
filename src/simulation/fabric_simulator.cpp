@@ -24,12 +24,18 @@ struct Scheduled {
     std::function<void()> action;
     bool operator>(const Scheduled& other) const {return std::tie(time,order,sequence)>std::tie(other.time,other.order,other.sequence);}
 };
-struct PendingPacket {std::vector<std::string> destinations; std::size_t node; std::uint64_t queueOrder=0;};
+struct PendingPacket {
+    std::vector<std::string> destinations; std::size_t node; std::uint64_t queueOrder=0;
+    double enqueuedMs=0, fairFinish=0;
+};
 struct Direction {
     std::size_t link, from, to;
     std::array<std::deque<std::size_t>,4> queues;
     bool busy=false;
     double busyUntil=0;
+    double emergencyTokens=0, tokenUpdatedMs=0, fairClock=0;
+    std::array<double,3> lastFinish{};
+    std::array<QueueStatistics,4> statistics{};
 };
 
 class Engine {
@@ -134,9 +140,32 @@ class Engine {
         if(!chosen.found()){finish(id,"no_route");return;}
         if(chosen.hops.size()==1){finish(id,"delivered");return;}
         auto direction=directionIds.at({source,chosen.hops[1]});auto& d=directions[direction];
+        auto priority=result.packets[id].priority;auto bytes=result.packets[id].bytes;
+        auto& stats=d.statistics[priority];++stats.attempts;
         std::size_t count=0;for(const auto& q:d.queues)count+=q.size();
-        if(count>=c.links[d.link].queuePackets){finish(id,"queue_overflow");return;}
-        d.queues[result.packets[id].priority].push_back(id);
+        if(count>=c.links[d.link].queuePackets){++stats.overflowDrops;finish(id,"queue_overflow");return;}
+        if(c.scheduler=="protectedPriority") {
+            const auto& policy=c.protectedQueues;
+            if(priority>0&&count-d.queues[0].size()>=c.links[d.link].queuePackets-policy.reservedEmergencyPackets) {
+                ++stats.reservationDrops;finish(id,"reserved_capacity");return;
+            }
+            if(priority==0) {
+                double rate=c.links[d.link].capacityMbps*1000/8*policy.emergencyRateFraction;
+                d.emergencyTokens=std::min(static_cast<double>(policy.emergencyBurstBytes),d.emergencyTokens+(now-d.tokenUpdatedMs)*rate);
+                d.tokenUpdatedMs=now;
+                if(d.emergencyTokens+1e-9<bytes){++stats.policedDrops;finish(id,"priority_policed");return;}
+                d.emergencyTokens=std::max(0.0,d.emergencyTokens-bytes);
+            } else {
+                // Self-clocked fair queueing among P1..P3: byte-weighted finish tags,
+                // not packet-count round robin. FIFO is retained within each class.
+                auto index=priority-1;
+                pending[id].fairFinish=std::max(d.lastFinish[index],d.fairClock)+static_cast<double>(bytes)/policy.lowerClassWeights[index];
+                d.lastFinish[index]=pending[id].fairFinish;
+            }
+        }
+        d.queues[priority].push_back(id);++stats.admitted;
+        stats.peakWaiting=std::max(stats.peakWaiting,static_cast<std::uint64_t>(d.queues[priority].size()));
+        pending[id].enqueuedMs=now;
         pending[id].queueOrder=sequence++;
         // Service is ordered after all arrivals/generations at this instant.
         schedule(now,3,[this,direction]{pump(direction);});
@@ -145,12 +174,21 @@ class Engine {
         auto& d=directions[direction];if(d.busy)return;
         unsigned selected=4;
         for(unsigned p=0;p<4;++p)if(!d.queues[p].empty()) {
-            if(selected==4 || (c.scheduler=="fifo"&&pending[d.queues[p].front()].queueOrder<pending[d.queues[selected].front()].queueOrder))selected=p;
+            if(selected==4 || (c.scheduler=="fifo"&&pending[d.queues[p].front()].queueOrder<pending[d.queues[selected].front()].queueOrder) ||
+               (c.scheduler=="protectedPriority"&&selected>0&&pending[d.queues[p].front()].fairFinish<pending[d.queues[selected].front()].fairFinish))selected=p;
             if(c.scheduler=="strictPriority")break;
+            if(c.scheduler=="protectedPriority"&&p==0)break;
         }
         if(selected==4)return;
         auto id=d.queues[selected].front();d.queues[selected].pop_front();
-        if(!usable(d)){forward(id);schedule(now,3,[this,direction]{pump(direction);});return;}
+        if(!usable(d)){
+            ++d.statistics[selected].rerouted;
+            if(selected>0&&d.queues[selected].empty())d.lastFinish[selected-1]=d.fairClock;
+            forward(id);schedule(now,3,[this,direction]{pump(direction);});return;
+        }
+        if(c.scheduler=="protectedPriority"&&selected>0)d.fairClock=pending[id].fairFinish;
+        auto& stats=d.statistics[selected];++stats.serviceStarts;stats.bytesStarted+=result.packets[id].bytes;
+        double wait=now-pending[id].enqueuedMs;stats.totalWaitMs+=wait;stats.maxWaitMs=std::max(stats.maxWaitMs,wait);
         d.busy=true;d.busyUntil=now+serialization(d,result.packets[id].bytes);
         auto le=linkEpoch[d.link], fromEpoch=nodeEpoch[d.from], toEpoch=nodeEpoch[d.to];
         consume(d.from,nodes[d.from].txPercentPerByte*result.packets[id].bytes);
@@ -181,7 +219,10 @@ class Engine {
         // Flush affected waiting packets for immediate rerouting. Already-transmitting packets
         // retain epochs and are lost even if the failed component recovers before arrival.
         std::vector<std::size_t> reroute;
-        for(auto& d:directions)if(!usable(d))for(auto& q:d.queues){reroute.insert(reroute.end(),q.begin(),q.end());q.clear();}
+        for(auto& d:directions)if(!usable(d)) {
+            for(unsigned p=0;p<4;++p){auto& q=d.queues[p];d.statistics[p].rerouted+=q.size();reroute.insert(reroute.end(),q.begin(),q.end());q.clear();}
+            d.lastFinish.fill(d.fairClock);
+        }
         std::sort(reroute.begin(),reroute.end());for(auto id:reroute)forward(id);
     }
     void safetyEvent(const Event& e) {
@@ -211,6 +252,7 @@ public:
             directionIds.emplace(std::make_pair(from,to),directions.size());directions.push_back({i,from,to,{}});
             directionIds.emplace(std::make_pair(to,from),directions.size());directions.push_back({i,to,from,{}});
         }
+        for(auto& d:directions)d.emergencyTokens=c.protectedQueues.emergencyBurstBytes;
     }
     SimulationResult run() {
         for(const auto& n:nodes)if(n.energyConstrained&&n.batteryPercent<=n.criticalPercent)result.firstEnergyExclusionMs=0;
@@ -235,6 +277,10 @@ public:
         result.stationary=true;
         for(std::size_t i=0;i<nodes.size();++i)if(nodes[i].position.x!=c.nodes[i].position.x||nodes[i].position.y!=c.nodes[i].position.y)result.stationary=false;
         if(!result.stationary)throw std::logic_error("Stationary-node invariant violated");
+        for(auto& d:directions)for(unsigned p=0;p<4;++p) {
+            d.statistics[p].queuedAtCutoff=d.queues[p].size();
+            result.queues.push_back({c.links[d.link].id,nodes[d.from].id,nodes[d.to].id,p,d.statistics[p]});
+        }
         result.finalNodes=nodes;return result;
     }
 };

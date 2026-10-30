@@ -44,6 +44,8 @@ examples are fully expanded; the C++ simulator never guesses connectivity or zon
   battery penalty. This is percentage-point accounting, not a calibrated joule model.
 - `simulation`: durationMs required; drainMs defaults 100, seed 1, scheduler strictPriority.
   Alternative scheduler `fifo` is an explicit priority ablation. No physical mobility field.
+  Optional `protectedPriority` and `simulation.protectedQueues` add reserved emergency slots,
+  a per-direction P0 admission bucket, and weighted lower-class service; see protected-queues.md.
 - Traffic requires id, source, ordered destinations, priority 0..3, bytes, stopMs, intervalMs.
   startMs defaults zero, phaseJitterMs zero. One seeded random phase per flow is uniform
   in [0,jitter); subsequent arrivals are periodic in [start+phase,stop). Jitter < interval.
@@ -130,6 +132,7 @@ path costs. This is still abstract-link simulation time, not measured ns-3 packe
 | packets.csv | Every generated packet: status, creation/finish ms, delivered latency, actual hop trace |
 | metrics.csv | Aggregate metric,value rows |
 | per_priority.csv | Independent class 0..3 counts, delivery, deadlines, latency and throughput |
+| queue_stats.csv | Per-direction/class admissions, rejection causes, service starts, waits, peaks, reroutes and cutoff occupancy |
 | nodes.csv | Initial/final positions, availability, battery for every node |
 | events.csv | Availability/cloud/energy event log |
 | safety.csv | Local controller response time and state; broadcast delivery is in packets.csv |

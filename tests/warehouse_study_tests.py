@@ -6,8 +6,23 @@ import unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from warehouse_study import communications, scenarios, scope_metrics, POLICIES
+from protected_queue_study import scenarios as qos_scenarios, POLICIES as QOS_POLICIES, configure_policy
 
 class WarehouseStudyTests(unittest.TestCase):
+    def test_protected_study_and_one_factor_ablations(self):
+        cases={name:c for name,c,_ in qos_scenarios()}
+        self.assertEqual(len(cases),8)
+        self.assertEqual(len(QOS_POLICIES),6)
+        original=cases['destination_bottleneck']
+        for name in ['no_reserved_buffer','equal_lower_class_weights']:
+            modified=cases[name]
+            self.assertEqual(original['traffic'],modified['traffic'])
+            self.assertEqual(original['links'],modified['links'])
+        configure_policy(cases['no_reserved_buffer'],'protectedPriority')
+        self.assertEqual(cases['no_reserved_buffer']['simulation']['protectedQueues']['reservedEmergencyPackets'],0)
+        configure_policy(cases['no_reserved_buffer'],'fifo')
+        self.assertNotIn('protectedQueues',cases['no_reserved_buffer']['simulation'])
+
     def test_primary_matrix(self):
         cases=scenarios()
         self.assertEqual(len(cases),11)
@@ -39,5 +54,17 @@ class WarehouseStudyTests(unittest.TestCase):
             self.assertEqual(rows['same_zone']['mean_ms'],9.5)
             self.assertEqual(rows['cross_zone']['deadline_miss_percent'],100)
             self.assertEqual(rows['cross_zone']['mean_ms'],'')
+
+    def test_policing_and_reservation_losses_are_not_hidden(self):
+        c=communications([4,4]);flow=c['traffic'][0]
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            with (root/'packets.csv').open('w',newline='') as f:
+                writer=csv.DictWriter(f,['flow','priority','status','latency_ms']);writer.writeheader()
+                for status in ['priority_policed','reserved_capacity','queue_overflow']:
+                    writer.writerow(dict(flow=flow['id'],priority=0,status=status,latency_ms=''))
+            row=scope_metrics(root,c)[0]
+            self.assertEqual(row['sent'],3);self.assertEqual(row['deadline_miss_percent'],100)
+            for status in ['priority_policed','reserved_capacity','queue_overflow']:self.assertEqual(row[status],1)
 
 if __name__=='__main__':unittest.main()

@@ -64,8 +64,22 @@ Configuration load(const std::filesystem::path& path) {
     keys(topology,{"kind","minimumSpinesPerLeaf","minimumEdges"},"topology");
     c.topology=string(value(topology,"kind")); c.minimumSpinesPerLeaf=integer(topology,"minimumSpinesPerLeaf",0); c.minimumEdges=integer(topology,"minimumEdges",0);
     const auto& sim=object(value(root,"simulation"));
-    keys(sim,{"durationMs","drainMs","seed","scheduler"},"simulation");
+    keys(sim,{"durationMs","drainMs","seed","scheduler","protectedQueues"},"simulation");
     c.durationMs=number(value(sim,"durationMs")); c.drainMs=num(sim,"drainMs",100); c.seed=integer(sim,"seed",1); c.scheduler=str(sim,"scheduler","strictPriority");
+    if(auto p=sim.if_contains("protectedQueues")) {
+        require(c.scheduler=="protectedPriority","simulation.protectedQueues","requires protectedPriority scheduler");
+        const auto& q=object(*p);keys(q,{"reservedEmergencyPackets","emergencyBurstBytes","emergencyRateFraction","lowerClassWeights"},"simulation.protectedQueues");
+        c.protectedQueues.reservedEmergencyPackets=integer(q,"reservedEmergencyPackets",8);
+        c.protectedQueues.emergencyBurstBytes=integer(q,"emergencyBurstBytes",512);
+        c.protectedQueues.emergencyRateFraction=num(q,"emergencyRateFraction",0.2);
+        if(auto weights=q.if_contains("lowerClassWeights")) {
+            const auto& values=array(*weights);require(values.size()==3,"lowerClassWeights","requires P1/P2/P3 weights");
+            for(unsigned i=0;i<3;++i) {
+                double weight=number(values[i]);require(weight>=1&&weight<=1024&&std::floor(weight)==weight,"lowerClassWeights","integer weights in [1,1024] required");
+                c.protectedQueues.lowerClassWeights[i]=static_cast<unsigned>(weight);
+            }
+        }
+    }
     if(auto p=root.if_contains("routing")) {
         const auto& r=object(*p); keys(r,{"algorithm","alpha","beta","gamma","latencyScaleMs","maxStretch"},"routing");
         c.routing={str(r,"algorithm","dijkstra"),num(r,"alpha",1),num(r,"beta",1),num(r,"gamma",1),num(r,"latencyScaleMs",1),num(r,"maxStretch",1.5)};
@@ -116,7 +130,14 @@ Configuration load(const std::filesystem::path& path) {
 void validate(const Configuration& c) {
     require(!c.name.empty(),"name","must not be empty");
     require(c.topology=="graph"||c.topology=="leafSpine","topology.kind","supported: graph, leafSpine");
-    require(c.scheduler=="strictPriority"||c.scheduler=="fifo","simulation.scheduler","supported: strictPriority, fifo");
+    require(c.scheduler=="strictPriority"||c.scheduler=="fifo"||c.scheduler=="protectedPriority","simulation.scheduler","supported: strictPriority, fifo, protectedPriority");
+    if(c.scheduler=="protectedPriority") {
+        const auto& q=c.protectedQueues;
+        require(std::isfinite(q.emergencyRateFraction)&&q.emergencyRateFraction>0&&q.emergencyRateFraction<1,"protectedQueues.emergencyRateFraction","must be strictly between 0 and 1");
+        require(q.emergencyBurstBytes>0&&q.emergencyBurstBytes<=1000000000,"protectedQueues.emergencyBurstBytes","expected 1..1000000000");
+        for(auto weight:q.lowerClassWeights)require(weight>=1&&weight<=1024,"protectedQueues.lowerClassWeights","expected 1..1024");
+        require(c.routing.algorithm!="ealr","routing.algorithm","EALR queue estimator does not support protectedPriority scheduling");
+    }
     positive(c.durationMs,"simulation.durationMs"); finite(c.drainMs,"simulation.drainMs");positive(c.durationMs+c.drainMs,"simulation.end");
     finite(c.safetyProcessingMs,"safety.processingMs"); TemperatureSafetyController controller(c.safety);
     require(c.routing.algorithm=="dijkstra"||c.routing.algorithm=="ecmp"||c.routing.algorithm=="greedy"||c.routing.algorithm=="ealr","routing.algorithm","supported: dijkstra, ecmp, greedy, ealr");
@@ -152,6 +173,7 @@ void validate(const Configuration& c) {
         require(nodes.count(l.from)&&nodes.count(l.to)&&l.from!=l.to,l.id,"invalid link endpoints");
         require(pairs.insert(std::minmax(l.from,l.to)).second,l.id,"parallel links unsupported; use distinct intermediary nodes");
         positive(l.capacityMbps,l.id+".capacityMbps");finite(l.delayMs,l.id+".delayMs");require(l.queuePackets>0,l.id+".queuePackets","must be positive");
+        if(c.scheduler=="protectedPriority")require(c.protectedQueues.reservedEmergencyPackets<l.queuePackets,l.id+".queuePackets","must exceed reservedEmergencyPackets");
         // Bound extreme inputs so serialisation/arrival arithmetic remains representable.
         require(l.capacityMbps>=1e-6&&l.capacityMbps<=1e9&&l.delayMs<=1e9,l.id,"link parameters outside supported numerical range");
         adjacency[l.from].push_back(l.to);adjacency[l.to].push_back(l.from);
@@ -188,6 +210,7 @@ void validate(const Configuration& c) {
         require(nodes.count(w.source),w.id+".source","unknown node");require(!w.destinations.empty(),w.id+".destinations","must not be empty");
         std::set<std::string> unique;for(const auto& d:w.destinations)require(nodes.count(d)&&unique.insert(d).second,w.id+".destinations","unknown or duplicate destination");
         require(w.priority<4,w.id+".priority","expected 0..3");require(w.bytes>0&&w.bytes<=1000000,w.id+".bytes","expected 1..1000000");
+        if(c.scheduler=="protectedPriority"&&w.priority==0)require(w.bytes<=c.protectedQueues.emergencyBurstBytes,w.id+".bytes","P0 packet exceeds emergencyBurstBytes");
         finite(w.startMs,w.id+".startMs");positive(w.stopMs,w.id+".stopMs");positive(w.intervalMs,w.id+".intervalMs");finite(w.phaseJitterMs,w.id+".phaseJitterMs");
         require(w.startMs<w.stopMs&&w.stopMs<=c.durationMs,w.id,"require 0 <= start < stop <= duration");
         require(w.phaseJitterMs<w.intervalMs,w.id+".phaseJitterMs","must be less than interval");
@@ -198,6 +221,7 @@ void validate(const Configuration& c) {
         if(e.type=="node")require(nodes.count(e.target),"event.target","unknown node "+e.target);
         else if(e.type=="link")require(linkIds.count(e.target),"event.target","unknown link "+e.target);
         else if(e.type=="temperature"||e.type=="reset") {
+            if(c.scheduler=="protectedPriority"&&c.safety.broadcastEmergencyStop)require(c.protectedQueues.emergencyBurstBytes>=64,"protectedQueues.emergencyBurstBytes","safety fan-out requires at least 64 bytes");
             require(zones.count(e.zone),"event.zone","unknown zone");require(nodes.count(e.target)&&nodes.at(e.target)->role=="edge","event.target","safety processing target must be a local edge node");
             require(std::isfinite(e.temperatureCelsius),"event.temperatureCelsius","must be finite");
         } else require(e.type=="cloud","event.type","unsupported event type");

@@ -108,7 +108,10 @@ def scope_metrics(directory, config):
         misses = sent-delivered+sum(d>=config['deadlinesMs'][priority] for d in delays)
         rows.append(dict(scope=scope, priority=priority, sent=sent, delivered=delivered,
             lost=sent-delivered, mean_ms=statistics.mean(delays) if delays else '',
-            delivery_percent=100*delivered/sent, deadline_miss_percent=100*misses/sent))
+            delivery_percent=100*delivered/sent, deadline_miss_percent=100*misses/sent,
+            queue_overflow=sum(p['status']=='queue_overflow' for p in values),
+            reserved_capacity=sum(p['status']=='reserved_capacity' for p in values),
+            priority_policed=sum(p['status']=='priority_policed' for p in values)))
     return rows
 
 

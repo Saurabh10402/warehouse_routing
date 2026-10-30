@@ -17,6 +17,7 @@ from checkpoint import manifest
 from generate_examples import warehouse
 from verify import ROOT, execute, verify
 from warehouse_study import POLICIES, scenarios as warehouse_scenarios, scope_metrics
+from protected_queue_study import POLICIES as QOS_POLICIES, scenarios as qos_scenarios, configure_policy
 if (ROOT/'.tools/plotting').is_dir():
     sys.path.insert(0,str(ROOT/'.tools/plotting'))
 
@@ -82,6 +83,14 @@ def validate_artifacts(directory, config):
         ensure(abs(average-metrics['average_end_to_end_delay_ms'])<1e-7)
     ensure(sum(int(p['deadline_miss']) for p in packets)==round(metrics['deadline_miss_percent']*len(packets)/100))
     classes=rows('per_priority.csv')
+    queues=rows('queue_stats.csv')
+    for q in queues:
+        ensure(int(q['attempts'])==sum(int(q[k]) for k in ['admitted','overflow_drops','reservation_drops','policed_drops']))
+        ensure(int(q['admitted'])==sum(int(q[k]) for k in ['service_starts','rerouted','queued_at_cutoff']))
+        ensure(float(q['mean_wait_before_service_ms'])>=0 and float(q['max_wait_before_service_ms'])>=0)
+    for status,column in [('queue_overflow','overflow_drops'),('reserved_capacity','reservation_drops'),('priority_policed','policed_drops')]:
+        count=sum(p['status']==status for p in packets)
+        ensure(metrics[status+'_packets']==count==sum(int(q[column]) for q in queues))
     for row in classes:
         values=[p for p in packets if p['priority']==row['priority']]
         ensure(int(row['sent'])==len(values))
@@ -94,12 +103,17 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--quick',action='store_true',help='One seed per case; omits extra scaling cases')
     parser.add_argument('--preset',choices=['bootstrap','default'],default='bootstrap')
-    parser.add_argument('--suite',choices=['warehouse','legacy-ealr'],default='warehouse',
+    parser.add_argument('--suite',choices=['warehouse','protected-qos','legacy-ealr'],default='warehouse',
                         help='Powered warehouse communication study (default) or preserved EALR study')
     parser.add_argument('--output-root',type=Path,default=ROOT/'results')
+    parser.add_argument('--baseline',type=Path,help='Require identical inputs and packet traces for every run in a previously validated batch')
     args=parser.parse_args()
-    cases=warehouse_scenarios(args.quick) if args.suite=='warehouse' else legacy_scenarios(args.quick)
-    policies=POLICIES if args.suite=='warehouse' else [(a,a,None) for a in ['dijkstra','greedy','ealr']]
+    cases={'warehouse':warehouse_scenarios,'protected-qos':qos_scenarios,'legacy-ealr':legacy_scenarios}[args.suite](args.quick)
+    policies=QOS_POLICIES if args.suite=='protected-qos' else POLICIES if args.suite=='warehouse' else [(a,a,None) for a in ['dijkstra','greedy','ealr']]
+    if args.baseline:
+        previous=json.loads((args.baseline/'RUN_STATUS.json').read_text())
+        if previous['status']!='PASS' or previous['runs']!=sum(len(seeds)*len(policies) for _,_,seeds in cases):
+            raise ValueError('Baseline must be a complete validated matrix with the same run count')
     build,env=verify(args.preset)
     executable=build/('ealr-fabric.exe' if sys.platform=='win32' else 'ealr-fabric')
     stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8]
@@ -110,6 +124,8 @@ def main():
                     executable_sha256=hashlib.sha256(executable.read_bytes()).hexdigest(),model='stationary abstract full-duplex links; not ns-3 or NR',
                     command=sys.argv,python=sys.version,suite=args.suite,
                     seed_policy='identical inputs and phase seeds across forwarding/scheduling policies')
+    if args.baseline:provenance['baseline']=dict(path=str(args.baseline.resolve()),
+        source_sha256=json.loads((args.baseline/'provenance.json').read_text())['source']['source_sha256'])
     (output/'provenance.json').write_text(json.dumps(provenance,indent=2),encoding='utf-8')
     run_rows=[];class_rows=[];scope_rows=[];replay_id=None
     for case,base,seeds in cases:
@@ -118,12 +134,19 @@ def main():
             for policy,algorithm,scheduler in policies:
                 c=copy.deepcopy(base);c['routing']['algorithm']=algorithm;c['simulation']['seed']=seed
                 if scheduler is not None:c['simulation']['scheduler']=scheduler
+                if args.suite=='protected-qos':configure_policy(c,scheduler)
                 run_id=f'{case}-s{seed}-{policy}';input_path=output/'inputs'/f'{run_id}.json'
                 if case==cases[0][0] and seed==1:replay_id=run_id
                 input_path.write_text(json.dumps(c,indent=2)+'\n',encoding='utf-8')
                 run=output/run_id
                 execute([executable,'--config',input_path,'--output',run],env,output/'execution.log')
                 metrics,classes=validate_artifacts(run,c)
+                if args.baseline:
+                    old=args.baseline/run_id
+                    if json.loads((old/'config.json').read_text())!=c:raise ValueError('Baseline input differs: '+run_id)
+                    if (old/'packets.csv').read_bytes()!=(run/'packets.csv').read_bytes():raise ValueError('Baseline packet trace differs: '+run_id)
+                if args.suite=='protected-qos' and case=='communications' and metrics['deadline_miss_percent']!=0:
+                    raise ValueError('Nominal communication deadline acceptance failed: '+run_id)
                 with (run/'packets.csv').open(newline='',encoding='utf-8') as f:
                     current=[tuple(p[k] for k in ['flow','source','priority','bytes','created_ms']) for p in csv.DictReader(f)]
                 if offered is not None and current!=offered:raise ValueError('Offered traffic differs across algorithms: '+run_id)
@@ -155,7 +178,8 @@ def main():
     plotting='unavailable (matplotlib not installed)'
     if importlib.util.find_spec('matplotlib'):
         execute([sys.executable,ROOT/'scripts/plot_fabric.py',output],env,output/'execution.log');plotting='PASS'
-    (output/'RUN_STATUS.json').write_text(json.dumps(dict(status='PASS',suite=args.suite,runs=len(run_rows),artifact_checks='PASS',replay='PASS',plots=plotting),indent=2),encoding='utf-8')
+    (output/'RUN_STATUS.json').write_text(json.dumps(dict(status='PASS',suite=args.suite,runs=len(run_rows),artifact_checks='PASS',replay='PASS',plots=plotting,
+        baseline_comparison='PASS' if args.baseline else 'not requested'),indent=2),encoding='utf-8')
     print(f'PASS: {len(run_rows)} experiments; packet/position/metric checks and replay verified. Plots: {plotting}.\nOUTPUT: {output}')
 
 if __name__=='__main__':main()

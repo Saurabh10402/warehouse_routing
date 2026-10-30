@@ -61,6 +61,16 @@ void writeResults(const Configuration& c,const SimulationResult& r,const std::fi
         <<"\nstationary,"<<r.stationary<<"\nobservation_window_ms,"<<c.durationMs+c.drainMs<<'\n';
     if(m.p95Ms)metrics<<"p95_latency_ms,"<<*m.p95Ms<<'\n';
     if(m.p99Ms)metrics<<"p99_latency_ms,"<<*m.p99Ms<<'\n';
+    for(const auto* status:{"queue_overflow","reserved_capacity","priority_policed"})
+        metrics<<status<<"_packets,"<<std::count_if(r.packets.begin(),r.packets.end(),[&](const auto& p){return p.status==status;})<<'\n';
+    auto queues=file(output/"queue_stats.csv");
+    queues<<"link,from,to,priority,attempts,admitted,service_starts,bytes_started,overflow_drops,reservation_drops,policed_drops,rerouted,queued_at_cutoff,peak_waiting_packets,mean_wait_before_service_ms,max_wait_before_service_ms\n";
+    for(const auto& q:r.queues) {
+        const auto& s=q.statistics;
+        queues<<q.link<<','<<q.from<<','<<q.to<<','<<q.priority<<','<<s.attempts<<','<<s.admitted<<','<<s.serviceStarts<<','<<s.bytesStarted
+            <<','<<s.overflowDrops<<','<<s.reservationDrops<<','<<s.policedDrops<<','<<s.rerouted<<','<<s.queuedAtCutoff<<','<<s.peakWaiting
+            <<','<<(s.serviceStarts?s.totalWaitMs/static_cast<double>(s.serviceStarts):0)<<','<<s.maxWaitMs<<'\n';
+    }
     double sum=0,minimum=100,energy=0;std::size_t count=0;
     auto positions=file(output/"nodes.csv");positions<<"id,role,zone,access,initial_x,initial_y,final_x,final_y,energy_constrained,battery_percent,available\n";
     for(std::size_t i=0;i<r.finalNodes.size();++i) {

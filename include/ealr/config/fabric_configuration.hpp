@@ -38,6 +38,11 @@ struct RoutingPolicy {
     std::string algorithm = "dijkstra";
     double alpha = 1, beta = 1, gamma = 1, latencyScaleMs = 1, maxStretch = 1.5;
 };
+struct ProtectedQueuePolicy {
+    unsigned reservedEmergencyPackets = 8, emergencyBurstBytes = 512;
+    double emergencyRateFraction = 0.2;
+    std::array<unsigned,3> lowerClassWeights{{4,2,1}};
+};
 struct Configuration {
     std::string name, topology = "graph", scheduler = "strictPriority";
     unsigned seed = 1, minimumSpinesPerLeaf = 0, minimumEdges = 0;
@@ -45,6 +50,7 @@ struct Configuration {
     std::array<double,4> deadlinesMs{{10,20,40,100}};
     TemperatureSafetyConfiguration safety{70,80,true,true,true};
     RoutingPolicy routing;
+    ProtectedQueuePolicy protectedQueues;
     std::vector<std::string> zones;
     std::vector<Node> nodes;
     std::vector<Link> links;

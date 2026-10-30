@@ -16,11 +16,18 @@ struct SafetyRecord {
     bool controllerAvailable = true;
 };
 struct EventRecord { double timeMs; std::string type, target; bool available; };
+struct QueueStatistics {
+    std::uint64_t attempts=0, admitted=0, serviceStarts=0, bytesStarted=0;
+    std::uint64_t overflowDrops=0, reservationDrops=0, policedDrops=0, rerouted=0, queuedAtCutoff=0, peakWaiting=0;
+    double totalWaitMs=0, maxWaitMs=0;
+};
+struct QueueRecord { std::string link, from, to; unsigned priority; QueueStatistics statistics; };
 struct SimulationResult {
     std::vector<PacketRecord> packets;
     std::vector<SafetyRecord> safetyEvents;
     std::vector<EventRecord> events;
     std::vector<Node> finalNodes;
+    std::vector<QueueRecord> queues;
     std::uint64_t routeComputations = 0, latencyGuardFallbacks = 0;
     bool stationary = false;
     // First constrained device to reach critical threshold; -1 means censored/not observed.
