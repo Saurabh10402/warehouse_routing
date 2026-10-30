@@ -19,8 +19,16 @@ class CliTests(unittest.TestCase):
             self.assertEqual(result.returncode,0,result.stderr)
             c=json.loads(config.read_text());metrics,_=validate_artifacts(root/'valid',c)
             self.assertGreater(metrics['transmitted_packets'],0)
+            c['simulation']['protectedQueues']['emergencyPolicingEnabled']=False
+            c['simulation']['protectedQueues']['emergencyBurstBytes']=1
+            path=root/'unpoliced.json';path.write_text(json.dumps(c))
+            result=subprocess.run([str(EXE),'--config',str(path),'--output',str(root/'unpoliced')],capture_output=True,text=True)
+            self.assertEqual(result.returncode,0,result.stderr)
+            metrics,_=validate_artifacts(root/'unpoliced',c)
+            self.assertEqual(metrics['priority_policed_packets'],0)
             for name,value in [('emergencyRateFraction',1),('lowerClassWeights',[1,0,1]),
-                               ('lowerClassWeights',[1,1]),('lowerClassWeights',[1.5,1,1])]:
+                               ('lowerClassWeights',[1,1]),('lowerClassWeights',[1.5,1,1]),
+                               ('emergencyPolicingEnabled',0)]:
                 bad=json.loads(config.read_text());bad['simulation']['protectedQueues'][name]=value
                 path=root/'bad.json';path.write_text(json.dumps(bad))
                 rejected=subprocess.run([str(EXE),'--config',str(path),'--output',str(root/'invalid')],capture_output=True)

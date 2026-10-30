@@ -68,7 +68,8 @@ Configuration load(const std::filesystem::path& path) {
     c.durationMs=number(value(sim,"durationMs")); c.drainMs=num(sim,"drainMs",100); c.seed=integer(sim,"seed",1); c.scheduler=str(sim,"scheduler","strictPriority");
     if(auto p=sim.if_contains("protectedQueues")) {
         require(c.scheduler=="protectedPriority","simulation.protectedQueues","requires protectedPriority scheduler");
-        const auto& q=object(*p);keys(q,{"reservedEmergencyPackets","emergencyBurstBytes","emergencyRateFraction","lowerClassWeights"},"simulation.protectedQueues");
+        const auto& q=object(*p);keys(q,{"reservedEmergencyPackets","emergencyBurstBytes","emergencyRateFraction","emergencyPolicingEnabled","lowerClassWeights"},"simulation.protectedQueues");
+        c.protectedQueues.emergencyPolicingEnabled=boolean(q,"emergencyPolicingEnabled",true);
         c.protectedQueues.reservedEmergencyPackets=integer(q,"reservedEmergencyPackets",8);
         c.protectedQueues.emergencyBurstBytes=integer(q,"emergencyBurstBytes",512);
         c.protectedQueues.emergencyRateFraction=num(q,"emergencyRateFraction",0.2);
@@ -210,7 +211,7 @@ void validate(const Configuration& c) {
         require(nodes.count(w.source),w.id+".source","unknown node");require(!w.destinations.empty(),w.id+".destinations","must not be empty");
         std::set<std::string> unique;for(const auto& d:w.destinations)require(nodes.count(d)&&unique.insert(d).second,w.id+".destinations","unknown or duplicate destination");
         require(w.priority<4,w.id+".priority","expected 0..3");require(w.bytes>0&&w.bytes<=1000000,w.id+".bytes","expected 1..1000000");
-        if(c.scheduler=="protectedPriority"&&w.priority==0)require(w.bytes<=c.protectedQueues.emergencyBurstBytes,w.id+".bytes","P0 packet exceeds emergencyBurstBytes");
+        if(c.scheduler=="protectedPriority"&&c.protectedQueues.emergencyPolicingEnabled&&w.priority==0)require(w.bytes<=c.protectedQueues.emergencyBurstBytes,w.id+".bytes","P0 packet exceeds emergencyBurstBytes");
         finite(w.startMs,w.id+".startMs");positive(w.stopMs,w.id+".stopMs");positive(w.intervalMs,w.id+".intervalMs");finite(w.phaseJitterMs,w.id+".phaseJitterMs");
         require(w.startMs<w.stopMs&&w.stopMs<=c.durationMs,w.id,"require 0 <= start < stop <= duration");
         require(w.phaseJitterMs<w.intervalMs,w.id+".phaseJitterMs","must be less than interval");
@@ -221,7 +222,7 @@ void validate(const Configuration& c) {
         if(e.type=="node")require(nodes.count(e.target),"event.target","unknown node "+e.target);
         else if(e.type=="link")require(linkIds.count(e.target),"event.target","unknown link "+e.target);
         else if(e.type=="temperature"||e.type=="reset") {
-            if(c.scheduler=="protectedPriority"&&c.safety.broadcastEmergencyStop)require(c.protectedQueues.emergencyBurstBytes>=64,"protectedQueues.emergencyBurstBytes","safety fan-out requires at least 64 bytes");
+            if(c.scheduler=="protectedPriority"&&c.protectedQueues.emergencyPolicingEnabled&&c.safety.broadcastEmergencyStop)require(c.protectedQueues.emergencyBurstBytes>=64,"protectedQueues.emergencyBurstBytes","safety fan-out requires at least 64 bytes");
             require(zones.count(e.zone),"event.zone","unknown zone");require(nodes.count(e.target)&&nodes.at(e.target)->role=="edge","event.target","safety processing target must be a local edge node");
             require(std::isfinite(e.temperatureCelsius),"event.temperatureCelsius","must be finite");
         } else require(e.type=="cloud","event.type","unsupported event type");

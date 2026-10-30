@@ -27,6 +27,10 @@ int main() {
     auto protectedResult=simulate(c);conservation(protectedResult);
     check(protectedResult.packets[3].status=="reserved_capacity","background cannot consume emergency reservation");
     check(protectedResult.packets[4].status=="delivered"&&std::abs(protectedResult.packets[4].finishedMs-8.8)<1e-9,"reserved P0 waits for current frame then transmits");
+    c.protectedQueues.emergencyPolicingEnabled=false;
+    c.protectedQueues.emergencyBurstBytes=1;
+    auto unpolicedReserved=simulate(c);conservation(unpolicedReserved);
+    check(unpolicedReserved.packets[3].status=="reserved_capacity"&&unpolicedReserved.packets[4].status=="delivered","disabled policing keeps reservation and permits payload above inactive burst");
     c.scheduler="strictPriority";check(simulate(c).packets[4].status=="queue_overflow","unchanged baseline drops P0 at shared-full buffer");
 
     c=fixture;c.protectedQueues.emergencyBurstBytes=100;
@@ -66,6 +70,11 @@ int main() {
         if(q.priority==0)check(q.statistics.admitted*100<=1100,"token admission bound burst plus rate times duration");
         if(q.priority==3)check(q.statistics.serviceStarts>0,"P0 flood cannot starve admitted background forever");
     }
+    c.protectedQueues.emergencyPolicingEnabled=false;
+    auto unpoliced=simulate(c);conservation(unpoliced);
+    check(std::none_of(unpoliced.packets.begin(),unpoliced.packets.end(),[](const auto& p){return p.status=="priority_policed";}),"disabled policing never rejects for tokens");
+    for(const auto& q:unpoliced.queues)if(q.from=="source"&&q.priority==3)
+        check(q.statistics.admitted>0&&q.statistics.serviceStarts==0,"unpoliced P0 flood can starve admitted lower traffic");
     c=fixture;c.links[0].delayMs=20;c.traffic={{"failed","source",{"edge0"},2,1000,0,10,1,0}};
     c.events={{"link","single","",2,20,false},{"link","single","",6,20,true}};
     conservation(simulate(c));

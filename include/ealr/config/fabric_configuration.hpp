@@ -39,6 +39,7 @@ struct RoutingPolicy {
     double alpha = 1, beta = 1, gamma = 1, latencyScaleMs = 1, maxStretch = 1.5;
 };
 struct ProtectedQueuePolicy {
+    bool emergencyPolicingEnabled = true;
     unsigned reservedEmergencyPackets = 8, emergencyBurstBytes = 512;
     double emergencyRateFraction = 0.2;
     std::array<unsigned,3> lowerClassWeights{{4,2,1}};

@@ -18,6 +18,7 @@ from generate_examples import warehouse
 from verify import ROOT, execute, verify
 from warehouse_study import POLICIES, scenarios as warehouse_scenarios, scope_metrics
 from protected_queue_study import POLICIES as QOS_POLICIES, scenarios as qos_scenarios, configure_policy
+import capacity_study
 if (ROOT/'.tools/plotting').is_dir():
     sys.path.insert(0,str(ROOT/'.tools/plotting'))
 
@@ -103,13 +104,13 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--quick',action='store_true',help='One seed per case; omits extra scaling cases')
     parser.add_argument('--preset',choices=['bootstrap','default'],default='bootstrap')
-    parser.add_argument('--suite',choices=['warehouse','protected-qos','legacy-ealr'],default='warehouse',
+    parser.add_argument('--suite',choices=['warehouse','protected-qos','capacity-admission','legacy-ealr'],default='warehouse',
                         help='Powered warehouse communication study (default) or preserved EALR study')
     parser.add_argument('--output-root',type=Path,default=ROOT/'results')
     parser.add_argument('--baseline',type=Path,help='Require identical inputs and packet traces for every run in a previously validated batch')
     args=parser.parse_args()
-    cases={'warehouse':warehouse_scenarios,'protected-qos':qos_scenarios,'legacy-ealr':legacy_scenarios}[args.suite](args.quick)
-    policies=QOS_POLICIES if args.suite=='protected-qos' else POLICIES if args.suite=='warehouse' else [(a,a,None) for a in ['dijkstra','greedy','ealr']]
+    cases={'warehouse':warehouse_scenarios,'protected-qos':qos_scenarios,'capacity-admission':capacity_study.scenarios,'legacy-ealr':legacy_scenarios}[args.suite](args.quick)
+    policies=capacity_study.POLICIES if args.suite=='capacity-admission' else QOS_POLICIES if args.suite=='protected-qos' else POLICIES if args.suite=='warehouse' else [(a,a,None) for a in ['dijkstra','greedy','ealr']]
     if args.baseline:
         previous=json.loads((args.baseline/'RUN_STATUS.json').read_text())
         if previous['status']!='PASS' or previous['runs']!=sum(len(seeds)*len(policies) for _,_,seeds in cases):
@@ -135,8 +136,9 @@ def main():
                 c=copy.deepcopy(base);c['routing']['algorithm']=algorithm;c['simulation']['seed']=seed
                 if scheduler is not None:c['simulation']['scheduler']=scheduler
                 if args.suite=='protected-qos':configure_policy(c,scheduler)
+                if args.suite=='capacity-admission':capacity_study.configure_policy(c,policy)
                 run_id=f'{case}-s{seed}-{policy}';input_path=output/'inputs'/f'{run_id}.json'
-                if case==cases[0][0] and seed==1:replay_id=run_id
+                if case==cases[0][0] and seed==cases[0][2][0]:replay_id=run_id
                 input_path.write_text(json.dumps(c,indent=2)+'\n',encoding='utf-8')
                 run=output/run_id
                 execute([executable,'--config',input_path,'--output',run],env,output/'execution.log')
@@ -172,6 +174,7 @@ def main():
                                        sample_stddev=statistics.stdev(values) if len(values)>1 else ''))
     with (output/'aggregate.csv').open('w',newline='',encoding='utf-8') as f:
         writer=csv.DictWriter(f,aggregates[0].keys());writer.writeheader();writer.writerows(aggregates)
+    if args.suite=='capacity-admission':capacity_study.write_tables(output,cases,class_rows,run_rows)
     # Replay baseline: byte-for-byte packet trace, independent of wall clock.
     replay=output/'replay';execute([executable,'--config',output/'inputs'/f'{replay_id}.json','--output',replay],env,output/'execution.log')
     if (replay/'packets.csv').read_bytes()!=(output/replay_id/'packets.csv').read_bytes():raise ValueError('Replay mismatch')

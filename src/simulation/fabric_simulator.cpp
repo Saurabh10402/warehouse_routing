@@ -149,13 +149,13 @@ class Engine {
             if(priority>0&&count-d.queues[0].size()>=c.links[d.link].queuePackets-policy.reservedEmergencyPackets) {
                 ++stats.reservationDrops;finish(id,"reserved_capacity");return;
             }
-            if(priority==0) {
+            if(priority==0&&policy.emergencyPolicingEnabled) {
                 double rate=c.links[d.link].capacityMbps*1000/8*policy.emergencyRateFraction;
                 d.emergencyTokens=std::min(static_cast<double>(policy.emergencyBurstBytes),d.emergencyTokens+(now-d.tokenUpdatedMs)*rate);
                 d.tokenUpdatedMs=now;
                 if(d.emergencyTokens+1e-9<bytes){++stats.policedDrops;finish(id,"priority_policed");return;}
                 d.emergencyTokens=std::max(0.0,d.emergencyTokens-bytes);
-            } else {
+            } else if(priority>0) {
                 // Self-clocked fair queueing among P1..P3: byte-weighted finish tags,
                 // not packet-count round robin. FIFO is retained within each class.
                 auto index=priority-1;

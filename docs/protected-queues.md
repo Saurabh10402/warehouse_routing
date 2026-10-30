@@ -13,6 +13,7 @@ and self-clocked byte-weighted fair queueing for P1/P2/P3. FIFO and strictPriori
   "scheduler": "protectedPriority",
   "protectedQueues": {
     "reservedEmergencyPackets": 8,
+    "emergencyPolicingEnabled": true,
     "emergencyRateFraction": 0.2,
     "emergencyBurstBytes": 512,
     "lowerClassWeights": [4, 2, 1]
@@ -24,10 +25,15 @@ These are also the defaults when protectedPriority omits the optional object. Su
 object with another scheduler is rejected. Reservation must be less than each link's finite
 waiting capacity. Zero reserved slots is allowed as an ablation. Weights are integers 1..1024;
 rate fraction is strictly between zero and one; burst allowance is positive and must fit
-each configured P0 packet (and 64-byte safety fan-out when configured). The legacy EALR
+each configured P0 packet (and 64-byte safety fan-out when configured) when policing is enabled. The legacy EALR
 snapshot queue-cost estimator does not support this scheduler, and that combination is rejected.
 
 ## Admission and service semantics
+
+`emergencyPolicingEnabled` defaults to true. Setting it to false skips token admission,
+while preserving reservation and service ordering. The rate and burst must remain valid
+numbers but are inactive; packets may exceed the inactive burst size. This control can
+starve lower classes under a sustained P0 backlog. See capacity-study.md for the comparison.
 
 All queues are per link direction, full duplex, and count waiting packets, excluding the
 transmitting packet. A port's total buffer remains Q slots, not Q plus the reservation.

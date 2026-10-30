@@ -7,8 +7,29 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from warehouse_study import communications, scenarios, scope_metrics, POLICIES
 from protected_queue_study import scenarios as qos_scenarios, POLICIES as QOS_POLICIES, configure_policy
+import copy
+import capacity_study
 
 class WarehouseStudyTests(unittest.TestCase):
+    def test_capacity_matrix_is_paired_and_uses_new_seeds(self):
+        cases=capacity_study.scenarios()
+        self.assertEqual(sum(len(seeds)*len(capacity_study.POLICIES) for _,_,seeds in cases),288)
+        for name,base,seeds in cases:
+            self.assertEqual(seeds,[4,5,6])
+            for policy,_,_ in capacity_study.POLICIES:
+                c=copy.deepcopy(base);capacity_study.configure_policy(c,policy)
+                self.assertEqual(c['traffic'],base['traffic'])
+                self.assertEqual(c['links'],base['links'])
+            if name=='mixed-c1':
+                rows={(r['endpoint'],r['direction']):r for r in capacity_study.endpoint_envelopes(base)}
+                self.assertAlmostEqual(rows['zone1-ep0','outgoing']['p0_periodic_mbps'],0.2304)
+                self.assertEqual(rows['zone1-ep0','outgoing']['p0_source_sigma_bytes'],288)
+                self.assertAlmostEqual(rows['zone1-ep0','incoming']['p0_periodic_mbps'],0.1536)
+            if name=='burst-c1':
+                rows={(r['endpoint'],r['direction']):r for r in capacity_study.endpoint_envelopes(base)}
+                self.assertEqual(rows['zone1-ep0','incoming']['p0_source_sigma_bytes'],3264)
+                self.assertAlmostEqual(rows['zone1-ep0','incoming']['p0_periodic_mbps'],0.1536)
+
     def test_protected_study_and_one_factor_ablations(self):
         cases={name:c for name,c,_ in qos_scenarios()}
         self.assertEqual(len(cases),8)
