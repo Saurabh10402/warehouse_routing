@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_003",
-  "utc": "2026-10-30T10:46:55.7556227Z",
-  "phase": "experiments-validated-optional-ns3-building",
-  "source_state": "manifests/checkpoint_003.json",
+  "checkpoint": "checkpoint_004",
+  "utc": "2026-10-30T10:56:05.626137+00:00",
+  "phase": "core-validated-handoff",
+  "source_state": "manifests/checkpoint_004.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -23,24 +23,29 @@
     "per-packet and per-class metrics"
   ],
   "pending": [
-    "final script verification with strengthened fairness assertions",
     "optional ns-3 link/runtime verification",
-    "final handoff package"
+    "schema-v2 ns-3 forwarding and QoS integration",
+    "matched 5G-LENA NR integration and runtime validation",
+    "cross-platform execution and physical-model calibration"
   ],
   "known_defects": [],
-  "build_status": "PASS GCC 14.2.0 Boost 1.85 portable Debug",
-  "test_status": "16 of 16 core CTest tests PASS; expanded 114 experiments and replay PASS",
+  "build_status": "PASS GCC 14.2.0 Boost 1.85 portable Debug, bootstrap and default core-only",
+  "test_status": "16/16 CTest PASS in both presets; final 114 experiments, fairness/raw-metric checks, replay and 72 plots PASS",
   "experiment_identifiers": [
     "experiments-20261029T210304Z-82f715a2",
-    "experiments-20261029T212427Z-4a13d923"
+    "experiments-20261029T212427Z-4a13d923",
+    "experiments-20261030T104837Z-6863eef6"
   ],
   "dependencies": {
-    "ns3": "3.46.1 source compiling locally; adapter syntax checks PASS; runtime pending",
+    "ns3": "3.46.1 external Release build FAILED in Wi-Fi with -Werror=maybe-uninitialized; three adapter syntax checks PASS; link/runtime BLOCKED",
     "5g_lena": "not installed",
     "portable_toolchain": "GCC 14.2.0, Boost 1.85 SHA256 verified"
   },
   "blockers": [
+    "External ns-3.46.1 Wi-Fi compile failure with GCC 14.2.0, preserved diagnostics",
     "NR module absent and unverified"
   ],
-  "next_action": "Finish optional ns-3 build and run default tests; validate final runner and produce recovery package"
+  "next_action": "Verify checkpoint_004 source manifest; reproduce core on target host; resolve external ns-3 build diagnostic before adapter runtime work",
+  "tested_code_commit": "b8214a51edf075295aa0b00bf0b20cda2354d9df",
+  "authoritative_experiment": "experiments-20261030T104837Z-6863eef6"
 }

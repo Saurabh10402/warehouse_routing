@@ -11,3 +11,10 @@ Added schema-v2 explicit graph and 3 examples; stationary discrete-event forward
 
 ## checkpoint_003
 16/16 core/default tests PASS. Full 114-run matrix, replay, exports and charts PASS. Added accurate model/reproducibility/report documentation, recovery tools and resume instructions. Fixed duplicated-availability event packet loss, access-type consistency and legacy count overflow; expanded guard/congestion tests. Removed GCC false dangling-reference diagnostics with string_view error paths, without disabling warnings. Optional ns-3.46.1 configured and compiling; adapter syntax PASS. NR unverified.
+
+## checkpoint_004
+Final 114-run matrix from b8214a5 passed raw-metric/fairness checks, deterministic replay
+and plotting (72 charts). Both core presets pass 16/16 tests. Preserved final evidence,
+updated validation report and recovery state. External ns-3.46.1 Wi-Fi build failed with
+GCC maybe-uninitialized; diagnostic retained, runtime and NR unverified. Implementation
+unchanged since the tested commit.

@@ -1,0 +1,82 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --preset default -B C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\build\verified-default -DPython3_EXECUTABLE=C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -DEALR_BOOST_SOURCE=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\boost_1_85_0
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  EALR_BUILD_TESTS="ON"
+  EALR_ENABLE_NS3="ON"
+
+CMake Warning at cmake/EalrDependencies.cmake:35 (message):
+  Required ns-3 targets (core/network/mobility/netanim/flow-monitor) were not
+  found.  Only the independent core is available.  Set CMAKE_PREFIX_PATH to
+  enable ns-3; MPI is needed only when required by that ns-3 build.
+Call Stack (most recent call first):
+  CMakeLists.txt:66 (ealr_find_ns3)
+
+
+-- EALR 0.1.0: repository bootstrap configured
+-- ns-3 support: not found (CMake-only bootstrap remains buildable)
+-- 5G-LENA NR support: not found
+-- Configuring done (10.3s)
+-- Generating done (0.9s)
+-- Build files have been written to: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/build/verified-default
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --build C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\build\verified-default -j 4
+[1/21] Building CXX object CMakeFiles/ealr_core.dir/src/config/warehouse_configuration.cpp.obj
+[2/21] Building CXX object tests/CMakeFiles/ealr_fabric_configuration_tests.dir/fabric_configuration_tests.cpp.obj
+[3/21] Building CXX object CMakeFiles/ealr_core.dir/src/config/fabric_configuration.cpp.obj
+[4/21] Building CXX object tests/CMakeFiles/ealr_fabric_simulation_tests.dir/fabric_simulation_tests.cpp.obj
+[5/21] Building CXX object CMakeFiles/ealr_core.dir/src/simulation/fabric_simulator.cpp.obj
+[6/21] Linking CXX static library libealr_core.a
+[7/21] Linking CXX executable tests\ealr_framework_smoke.exe
+[8/21] Linking CXX executable tests\ealr_configuration_tests.exe
+[9/21] Linking CXX executable tests\ealr_warehouse_configuration_tests.exe
+[10/21] Linking CXX executable ealr-fabric.exe
+[11/21] Linking CXX executable tests\ealr_temperature_safety_controller_tests.exe
+[12/21] Linking CXX executable tests\ealr_robot_tests.exe
+[13/21] Linking CXX executable tests\ealr_routing_interface_tests.exe
+[14/21] Linking CXX executable tests\ealr_dijkstra_tests.exe
+[15/21] Linking CXX executable tests\ealr_greedy_tests.exe
+[16/21] Linking CXX executable tests\ealr_ealr_tests.exe
+[17/21] Linking CXX executable tests\ealr_metrics_tests.exe
+[18/21] Linking CXX executable tests\ealr_core_regression_tests.exe
+[19/21] Linking CXX executable tests\ealr_fabric_configuration_tests.exe
+[20/21] Linking CXX executable tests\ealr_fabric_metrics_tests.exe
+[21/21] Linking CXX executable tests\ealr_fabric_simulation_tests.exe
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\ctest.EXE --test-dir C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\build\verified-default --output-on-failure
+Internal ctest changing into directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/build/verified-default
+Test project C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/build/verified-default
+      Start  1: ealr_framework_smoke
+ 1/16 Test  #1: ealr_framework_smoke .......................   Passed    0.61 sec
+      Start  2: ealr_configuration_tests
+ 2/16 Test  #2: ealr_configuration_tests ...................   Passed    0.89 sec
+      Start  3: ealr_warehouse_configuration_tests
+ 3/16 Test  #3: ealr_warehouse_configuration_tests .........   Passed    1.83 sec
+      Start  4: ealr_temperature_safety_controller_tests
+ 4/16 Test  #4: ealr_temperature_safety_controller_tests ...   Passed    0.62 sec
+      Start  5: ealr_robot_tests
+ 5/16 Test  #5: ealr_robot_tests ...........................   Passed    0.63 sec
+      Start  6: ealr_routing_interface_tests
+ 6/16 Test  #6: ealr_routing_interface_tests ...............   Passed    0.66 sec
+      Start  7: ealr_dijkstra_tests
+ 7/16 Test  #7: ealr_dijkstra_tests ........................   Passed    0.73 sec
+      Start  8: ealr_greedy_tests
+ 8/16 Test  #8: ealr_greedy_tests ..........................   Passed    0.68 sec
+      Start  9: ealr_ealr_tests
+ 9/16 Test  #9: ealr_ealr_tests ............................   Passed    0.73 sec
+      Start 10: ealr_metrics_tests
+10/16 Test #10: ealr_metrics_tests .........................   Passed    0.69 sec
+      Start 11: ealr_core_regression_tests
+11/16 Test #11: ealr_core_regression_tests .................   Passed    0.67 sec
+      Start 12: ealr_fabric_configuration_tests
+12/16 Test #12: ealr_fabric_configuration_tests ............   Passed    1.92 sec
+      Start 13: ealr_fabric_simulation_tests
+13/16 Test #13: ealr_fabric_simulation_tests ...............   Passed    1.98 sec
+      Start 14: ealr_fabric_metrics_tests
+14/16 Test #14: ealr_fabric_metrics_tests ..................   Passed    0.67 sec
+      Start 15: ealr_plotting_tests
+15/16 Test #15: ealr_plotting_tests ........................   Passed    0.21 sec
+      Start 16: ealr_fabric_cli_tests
+16/16 Test #16: ealr_fabric_cli_tests ......................   Passed    2.45 sec
+
+100% tests passed, 0 tests failed out of 16
+
+Total Test time (real) =  16.01 sec

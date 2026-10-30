@@ -11,10 +11,13 @@ The recovered baseline compiled and passed 11 tests. The expanded core suite pas
 including the real CLI and exported artifacts. `checkpoints/evidence/` preserves test logs.
 Primary language standard remains C++17; dependencies used: GCC 14.2.0 and Boost 1.85.0.
 
-Completed full batch: `results/experiments-20261029T212427Z-4a13d923`:
+Final full batch: `results/experiments-20261030T104837Z-6863eef6`:
 114 runs, all artifact checks passed, deterministic replay identical, 72 comparison charts.
 The first 111-run batch is also retained under `experiments-20261029T210304Z-82f715a2`.
-The current checkpoint names the final authoritative batch and source state.
+The final batch ran code from commit `b8214a51edf075295aa0b00bf0b20cda2354d9df`.
+It also verifies identical offered traffic across algorithms and recalculates mean delay
+and deadline misses from raw packet traces. Subsequent changes document these results and
+the external ns-3 blocker; the tested implementation is unchanged.
 
 ## Executed checks
 
@@ -74,11 +77,13 @@ The original runner only installs nodes/mobility/optional NR devices and animati
 does not wire EALR into ns-3 application forwarding. The primary core results above do not
 come from that runner or from FlowMonitor.
 
-This session downloaded official ns-3.46.1 and began a portable native build. The three
-existing adapter source files passed syntax checks against those actual headers. Full link/
-runtime verification status is recorded in CURRENT_STATUS.md and TEST_STATUS.md; a syntax
-check alone is not a runtime result. The downloaded release requires C++23, selected only
-for the optional adapter target. 5G-LENA NR is not installed or verified in this session.
+This session downloaded official ns-3.46.1 and attempted a portable native build. The three
+existing adapter source files passed syntax checks against those actual headers. The external
+Release build failed in its Wi-Fi dependency with GCC `-Werror=maybe-uninitialized` involving
+`std::optional<NonInheritance>` in `wifi-mgt-header.h`. The diagnostic was retained and not
+suppressed. Full ns-3 link/runtime verification is blocked by that failure; syntax success
+is not a runtime result. The downloaded release requires C++23, selected only for the
+optional adapter target. 5G-LENA NR is not installed or verified in this session.
 
 The primary fabric schema has not yet been mapped into ns-3 NetDevices/QoS queues. That is
 an isolated future integration task, not a hidden dependency of the working core model.
