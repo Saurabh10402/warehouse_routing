@@ -23,9 +23,14 @@ warehouse requirements. Run it with `python scripts/run_all_experiments.py --sui
 See [protected queue results](docs/protected-queue-results.md) for both improvements and
 admission losses; the fixed 20% P0 budget is not a production recommendation.
 
+The completed [capacity/admission study](docs/capacity-study.md) compares eight settings at
+four destination attachment capacities with new seeds (288 runs). Its [results and operating
+limits](docs/capacity-results.md) include reservation without policing, burst/flood failures,
+and the cost to lower-priority traffic. Run `python scripts/run_all_experiments.py --suite capacity-admission`.
+
 ## Start or resume
 
-Read `checkpoints/CURRENT_STATUS.md`, `PROJECT_STATE.json`, `NEXT_STEPS.md`, and the latest
+Read `checkpoints/CURRENT_STATUS.md`, `checkpoints/PROJECT_STATE.json`, `checkpoints/NEXT_STEPS.md`, and the latest
 session summary. Verify the recorded manifest with:
 
 ```sh

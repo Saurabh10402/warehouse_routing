@@ -18,6 +18,9 @@ The protected-qos suite is experimental. Read docs/traffic-requirements.md and
 docs/protected-queue-results.md before changing queue parameters. Its fixed 20% P0 admission
 ceiling worsens emergency-flood results; do not silently promote it to the default or hide
 policed packets from offered-traffic/deadline denominators.
+The completed capacity-admission sweep and its limitations are in docs/capacity-results.md.
+No tested setting eliminated P0 misses under burst/flood traffic. Reservation without policing
+can starve lower traffic; do not adopt it as a default solely from the mixed-load result.
 
 Run `python scripts/verify.py` after coherent code changes. Use `scripts/run_all_experiments.py`
 for full validation; a quick run is not evidence of multiple-seed evaluation. Never call core

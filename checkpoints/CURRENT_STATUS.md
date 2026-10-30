@@ -1,24 +1,25 @@
-# checkpoint_006 — traffic contract and protected queues validated
+# checkpoint_007 — capacity/admission sweep validated
 
-Implemented experimental P0 reserved waiting space, per-direction byte-rate admission,
-and byte-weighted service for admitted P1/P2/P3. Existing policies/default matrix preserved.
+Completed the declared 288-run study: three workloads, four attachment capacities,
+eight ECMP queue settings, new seeds 4/5/6. Read docs/capacity-study.md and
+docs/capacity-results.md. No parameters were retuned after execution.
 
-- Both core build presets: **19/19 CTest PASS**.
-- Protected study: results/experiments-20261030T173430Z-db8fbaf2 — **144 runs PASS**, three
-  seeds, six policies, raw/queue/fairness checks, replay, **40 charts**.
-- Baseline regression: results/experiments-20261030T173542Z-c74e4faf — **132 runs PASS**;
-  every input matches and packet trace is byte-identical to checkpoint_005's primary batch;
-  replay and **55 charts PASS**.
-- Tested code: 2d0dcede78ce551db9a4fdee21bd24bcc9919c42.
-- Source manifest: manifests/checkpoint_006.json. Later changes are documentation only.
+- Tested source: 8fe3f315881f197b3af4a7d381913b04602e117b. Subsequent source edits are docs only.
+- Manifest: manifests/checkpoint_007.json.
+- Both core build presets: 19/19 CTest PASS.
+- Capacity batch: experiments-20261030T175442Z-cb0b1ccc — 288 PASS, replay, 60 charts.
+- Protected regression: experiments-20261030T175551Z-a5db7fd7 — 144 exact inputs/traces PASS, replay, 40 charts.
+- Warehouse regression: experiments-20261030T180019Z-2441a69a — 132 exact inputs/traces PASS, replay, 55 charts.
+- Independent raw-packet recomputation: all 96 operating-limit rows PASS.
 
-Read docs/traffic-requirements.md, protected-queues.md and protected-queue-results.md.
-Cross-zone P0 misses at the destination bottleneck improve from 41.25% to 6.25% with ECMP
-protected, but the emergency flood is worse: aggregate P0 misses rise from 1.5% to 25.5625%.
-All policed/reservation losses remain in denominators. Do not adopt the 20% admission ceiling
-as a production default; it can reject P0 with unused total link capacity.
+At 1 Mbps mixed load, unpoliced reservation reduces P0 misses from strict's 15.278% to
+1.944%. At 2 Mbps it has zero P0 misses in these seeds but 23.556% P3 misses. No tested
+setting eliminates P0 misses in burst/flood workloads. At 5 Mbps flood, unpoliced P0
+misses are 1.285%, versus 46.688% with rate20; unpoliced P3 delivery is only 79.5%.
+Neither is promoted to a production default. All loss causes remain in denominators.
 
-Next: capacity/admission sensitivity and per-port critical traffic envelopes. Real warehouse
-requirements, ns-3/NR runtime integration and cross-platform verification remain unfinished.
-The external ns-3 Wi-Fi build failure is unchanged; no new attempt was made in this milestone.
-Recovery ZIPs/bundles are under recovery_packages/. Prior archives and checkpoints are retained.
+Next: repair the recorded ns-3 build and validate a minimal actual packet runtime before
+schema-v2/QoS/NR integration. Calibration and cross-platform execution remain unfinished.
+No new ns-3 build attempt occurred during this milestone; previous external failure remains.
+Recovery packages preserve each completed batch separately under recovery_packages/;
+receipt-checkpoint_007.json records exact archive hashes. Keep previous archives/manifests.

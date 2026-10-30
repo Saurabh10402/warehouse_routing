@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "suite": "capacity-admission",
+  "runs": 288,
+  "artifact_checks": "PASS",
+  "replay": "PASS",
+  "plots": "PASS",
+  "baseline_comparison": "not requested"
+}

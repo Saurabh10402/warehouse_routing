@@ -30,3 +30,9 @@ Declared traffic/acceptance specification; optional protectedPriority with reser
 per-direction P0 policing and weighted lower-class service; queue accounting/diagnostics.
 19/19 tests both presets, 144 protected runs, 132 byte-identical baseline regressions and
 replays/charts PASS. Preserved both improved and adverse P0 results; defaults unchanged.
+
+## checkpoint_007
+Added explicit unpoliced reservation control and a preregistered 288-run capacity/admission
+study with new seeds. Both presets 19/19 PASS; 144 protected and 132 warehouse exact regressions
+PASS. Independent 96-row raw table audit, replay and 60/40/55 charts PASS. Retained adverse
+burst/flood and lower-class results; no default retuned. ns-3/NR remains unfinished.

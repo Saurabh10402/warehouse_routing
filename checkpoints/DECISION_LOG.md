@@ -35,3 +35,10 @@
     sensitivity and per-port traffic envelopes before choosing a default.
 18. Weighted fairness concerns admitted lower-class packets. It does not promise admission
     for every flow, prevent all overload loss or certify emergency-stop behavior.
+
+19. Isolate policing by disabling only token admission, retaining reservation and weighted
+    lower service. Explicitly demonstrate possible lower-class starvation without policing.
+20. Declare capacity/rate/burst variants before new seeds 4/5/6; preserve every outcome.
+    Source-time endpoint envelopes are not downstream arrival or deadline guarantees.
+21. Zero mixed-load P0 misses at a tested capacity do not establish burst/flood safety or
+    acceptable lower-class service. Keep defaults unchanged and preserve both regressions.

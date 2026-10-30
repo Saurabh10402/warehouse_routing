@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_006",
-  "utc": "2026-10-30T17:43:04.147212+00:00",
-  "phase": "traffic-contract-and-protected-queues-validated",
-  "source_state": "manifests/checkpoint_006.json",
+  "checkpoint": "checkpoint_007",
+  "utc": "2026-10-30T21:01:01.210326+00:00",
+  "phase": "capacity-admission-sensitivity-validated",
+  "source_state": "manifests/checkpoint_007.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -31,18 +31,23 @@
     "self-clocked byte-weighted service for admitted lower classes",
     "per-queue accounting and service-wait measurements",
     "144-run protected policy study with ablations",
-    "132-run byte-identical baseline regression"
+    "132-run byte-identical baseline regression",
+    "optional policing-disabled reservation control",
+    "declared 288-run capacity/rate/burst sweep using new seeds 4/5/6",
+    "96-row operating-limit table with every class and rejection cause",
+    "endpoint source-time P0 traffic envelopes",
+    "144-run byte-identical protected regression"
   ],
   "pending": [
-    "capacity and admission-budget sensitivity with per-port traffic envelopes",
     "warehouse traffic/loss/availability calibration",
     "ns-3 build/runtime repair and schema-v2/NR integration",
     "cross-platform execution",
-    "final research/deployment claim validation"
+    "final research/deployment claim validation",
+    "per-port downstream arrival bounds, uplink/reservation-size sensitivity and calibrated admission policy"
   ],
   "known_defects": [],
   "build_status": "PASS GCC 14.2.0 Boost 1.85 portable Debug, bootstrap and default core-only",
-  "test_status": "19/19 CTest PASS both core presets; 144 protected runs/replay/40 charts PASS; 132 baseline runs/exact packet comparisons/replay/55 charts PASS",
+  "test_status": "19/19 CTest PASS both core presets; 288 capacity runs and independent 96-row raw audit; 144 protected and 132 warehouse exact regressions; replays and 60/40/55 charts PASS",
   "experiment_identifiers": [
     "experiments-20261029T210304Z-82f715a2",
     "experiments-20261029T212427Z-4a13d923",
@@ -50,7 +55,10 @@
     "experiments-20261030T140941Z-dd164497",
     "experiments-20261030T141204Z-9e04fe27",
     "experiments-20261030T173430Z-db8fbaf2",
-    "experiments-20261030T173542Z-c74e4faf"
+    "experiments-20261030T173542Z-c74e4faf",
+    "experiments-20261030T175442Z-cb0b1ccc",
+    "experiments-20261030T175551Z-a5db7fd7",
+    "experiments-20261030T180019Z-2441a69a"
   ],
   "dependencies": {
     "ns3": "3.46.1 external Release build FAILED in Wi-Fi with -Werror=maybe-uninitialized; three adapter syntax checks PASS; link/runtime BLOCKED",
@@ -61,9 +69,9 @@
     "External ns-3.46.1 Wi-Fi compile failure with GCC 14.2.0, preserved diagnostics",
     "NR module absent and unverified"
   ],
-  "next_action": "Read the traffic contract and adverse results; declare capacity/admission sensitivity sweep and per-port P0 envelopes before choosing a queue policy",
-  "tested_code_commit": "2d0dcede78ce551db9a4fdee21bd24bcc9919c42",
-  "authoritative_experiment": "experiments-20261030T173430Z-db8fbaf2",
+  "next_action": "Resolve the recorded ns-3 compiler failure with diagnostics intact; validate a minimal real packet runtime before schema-v2/QoS/NR integration; keep abstract-link results frozen",
+  "tested_code_commit": "8fe3f315881f197b3af4a7d381913b04602e117b",
+  "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
   "research_direction": "Powered stationary fabric; priority scheduling and resilience. EALR preserved as legacy, excluded from primary matrix.",
   "known_limitations": [
@@ -72,8 +80,12 @@
     "Weighted service covers admitted packets; lower-class admission losses remain possible",
     "Nonpreemptive frames and finite destination capacity can still miss deadlines",
     "Immediate centralized failure knowledge, single-leaf/attachment failure points",
-    "Illustrative workloads and three seeds are not deployment guarantees"
+    "Illustrative workloads and three seeds are not deployment guarantees",
+    "No tested capacity/admission setting eliminates P0 misses in burst/flood cases",
+    "Unpoliced P0 can starve lower classes; zero mixed-load P0 misses are finite-run observations",
+    "Endpoint envelopes bound source generation, not post-queue downstream arrivals"
   ],
-  "baseline_regression_experiment": "experiments-20261030T173542Z-c74e4faf",
-  "baseline_comparison_reference": "experiments-20261030T140941Z-dd164497"
+  "baseline_regression_experiment": "experiments-20261030T180019Z-2441a69a",
+  "baseline_comparison_reference": "experiments-20261030T173542Z-c74e4faf",
+  "protected_regression_experiment": "experiments-20261030T175551Z-a5db7fd7"
 }

@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "rows": 96,
+  "runs": 288,
+  "checks": "Raw packets independently reproduce all class mean/worst/SD/delivery fields and all loss means"
+}
