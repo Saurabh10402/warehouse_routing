@@ -1,5 +1,12 @@
 # Configuration files
 
+Primary experiments use **schemaVersion 2**, loaded by `ealr::fabric::load`. It explicitly
+represents arbitrary/unequal zones, fixed nodes, links, workloads, priorities and events.
+See [fabric-model.md](fabric-model.md#configuration-and-topology) and the warehouse_small,
+warehouse_uneven and warehouse_reference JSON examples. No random mobility is accepted.
+The sections below document preserved legacy schemas. Their equal-zone planning restrictions
+do not apply to schema v2; they are not the current architectural requirements.
+
 `ConfigurationLoader::load()` turns a JSON scenario into an `ExperimentConfiguration` before the simulation is created. The loader accepts the following top-level sections: `simulation`, `routing`, `battery`, `traffic`, `mobility`, `robots`, `chargingStation`, `metrics`, `private5g`, and `output`.
 
 All required fields are type checked. Numeric values must be finite; counts, packet rates, and packet sizes must be positive integers. Battery percentages are constrained to 0–100 and their thresholds must satisfy `0 <= critical < low <= 100`. Unknown properties are rejected to prevent silent configuration typos.

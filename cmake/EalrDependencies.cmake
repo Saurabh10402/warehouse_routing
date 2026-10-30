@@ -9,6 +9,9 @@ function(ealr_find_ns3)
     # Define its imported target before loading ns-3's exported targets.
     find_package(MPI QUIET COMPONENTS CXX)
     find_package(ns3 CONFIG QUIET)
+    if(ns3_FOUND)
+        set(EALR_NS3_VERSION "${ns3_VERSION}" PARENT_SCOPE)
+    endif()
 
     if(ns3_FOUND AND TARGET ns3::core AND TARGET ns3::network AND TARGET ns3::mobility AND TARGET ns3::netanim AND TARGET ns3::flow-monitor)
         set(EALR_NS3_STATUS "available" CACHE INTERNAL "Availability of ns-3 dependencies" FORCE)

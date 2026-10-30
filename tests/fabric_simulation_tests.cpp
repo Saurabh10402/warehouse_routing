@@ -38,6 +38,8 @@ int main() {
     }
     auto c=sample;c.traffic.resize(1);c.traffic[0].stopMs=1;c.events={{"link","source--fast","",0.1,20,false},{"link","source--fast","",0.2,20,true}};
     check(simulate(c).packets[0].status=="in_flight_failure","in-flight loss survives fast failure recovery");
+    c.events={{"link","source--fast","",0.1,20,true},{"node","fast","",0.2,20,true}};
+    check(simulate(c).packets[0].status=="delivered","redundant availability notification does not lose packet");
     c=sample;c.traffic.clear();c.links={{"bottleneck","source","edge0",1,0,100,true}};
     c.traffic={{"active","source",{"edge0"},3,1000,0,1,10,0},
                {"waiting","source",{"edge0"},3,1000,1,2,10,0},
@@ -53,8 +55,12 @@ int main() {
     c=sample;c.routing.algorithm="ealr";c.nodes[1].energyConstrained=true;c.nodes[1].batteryPercent=11;c.routing.beta=2;
     check(simulate(c).packets[0].path[1]=="alternate","EALR avoids low battery with equal latency");
     c.routing.beta=0;check(simulate(c).packets[0].path[1]=="fast","energy ablation restores baseline");
-    c.routing.beta=2;c.links[2].delayMs=30;c.links[3].delayMs=30;
-    auto guarded=simulate(c);check(guarded.packets[0].path[1]=="fast","latency cost prevents energy detour");
+    c.routing.beta=100;c.links[2].delayMs=30;c.links[3].delayMs=30;
+    auto guarded=simulate(c);check(guarded.packets[0].path[1]=="fast"&&guarded.latencyGuardFallbacks>0,"latency guard overrides excessive energy detour");
+    c=sample;for(auto& l:c.links)l.capacityMbps=1;
+    for(auto& w:c.traffic){w.startMs=0;w.stopMs=1;w.bytes=1000;}
+    auto distanceCongestion=simulate(c);c.routing.algorithm="ealr";auto adaptiveCongestion=simulate(c);
+    check(distanceCongestion.packets[1].path[1]=="fast"&&adaptiveCongestion.packets[1].path[1]=="alternate","queue state changes actual EALR forwarding");
     c=sample;c.events={{"cloud","","",0,20,false},{"temperature","edge0","A",10,80,false},{"temperature","edge0","A",20,50,false},{"reset","edge0","A",30,70,false},{"reset","edge0","A",40,60,false}};
     auto safe=simulate(c);check(safe.safetyEvents.size()==4,"safety events logged");
     check(safe.safetyEvents[0].state=="emergencyStop"&&safe.safetyEvents[1].state=="emergencyStop","latched safety independent of cloud");

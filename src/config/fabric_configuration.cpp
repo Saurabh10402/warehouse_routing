@@ -159,8 +159,14 @@ void validate(const Configuration& c) {
             auto a=nodes.at(l.from), b=nodes.at(l.to);
             auto rolePair=std::minmax(a->role,b->role);
             bool ok=(rolePair.first=="leaf"&&rolePair.second=="spine") || (rolePair.first=="edge"&&rolePair.second=="spine");
-            ok=ok || ((a->role=="endpoint"||a->role=="access")&&(b->role=="leaf"||b->role=="access")&&a->zone==b->zone)
-                  || ((b->role=="endpoint"||b->role=="access")&&(a->role=="leaf"||a->role=="access")&&a->zone==b->zone);
+            auto accessLink=[](const Node& endpoint,const Node& uplink) {
+                if(endpoint.zone!=uplink.zone)return false;
+                if(endpoint.role=="access"&&uplink.role=="leaf")return true;
+                if(endpoint.role!="endpoint")return false;
+                return (uplink.role=="leaf"&&endpoint.access=="wired") ||
+                       (uplink.role=="access"&&endpoint.access==uplink.access);
+            };
+            ok=ok || accessLink(*a,*b) || accessLink(*b,*a);
             require(ok,l.id,"link contradicts leafSpine role/zone constraints");
         }
     }

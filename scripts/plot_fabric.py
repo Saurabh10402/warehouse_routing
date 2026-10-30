@@ -3,6 +3,8 @@
 import csv
 import sys
 from pathlib import Path
+portable=Path(__file__).resolve().parents[1]/'.tools/plotting'
+if portable.is_dir():sys.path.insert(0,str(portable))
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt

@@ -8,6 +8,7 @@
 #include <iterator>
 #include <limits>
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace ealr {
@@ -19,34 +20,34 @@ namespace json = boost::json;
     throw WarehouseConfigurationError(message);
 }
 
-const json::value& requiredValue(const json::object& object, const char* key, std::string path) {
+const json::value& requiredValue(const json::object& object, const char* key, std::string_view path) {
     const auto value = object.find(key);
     if (value == object.end()) {
-        fail("Missing required property '" + std::string(key) + "' at " + path);
+        fail("Missing required property '" + std::string(key) + "' at " + std::string(path));
     }
     return value->value();
 }
 
-const json::object& requiredObject(const json::object& object, const char* key, std::string path) {
+const json::object& requiredObject(const json::object& object, const char* key, std::string_view path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_object()) {
-        fail("Property '" + std::string(key) + "' at " + path + " must be an object");
+        fail("Property '" + std::string(key) + "' at " + std::string(path) + " must be an object");
     }
     return value.as_object();
 }
 
-void validateKeys(const json::object& object, std::initializer_list<const char*> allowed, std::string path) {
+void validateKeys(const json::object& object, std::initializer_list<const char*> allowed, std::string_view path) {
     for (const auto& entry : object) {
         const bool known = std::any_of(allowed.begin(), allowed.end(), [&entry](const char* key) {
             return entry.key() == key;
         });
         if (!known) {
-            fail("Unknown property '" + std::string(entry.key()) + "' at " + path);
+            fail("Unknown property '" + std::string(entry.key()) + "' at " + std::string(path));
         }
     }
 }
 
-double requiredNumber(const json::object& object, const char* key, std::string path) {
+double requiredNumber(const json::object& object, const char* key, std::string_view path) {
     const json::value& value = requiredValue(object, key, path);
     double number = 0.0;
     if (value.is_double()) {
@@ -56,47 +57,47 @@ double requiredNumber(const json::object& object, const char* key, std::string p
     } else if (value.is_uint64()) {
         number = static_cast<double>(value.as_uint64());
     } else {
-        fail("Property '" + std::string(key) + "' at " + path + " must be a number");
+        fail("Property '" + std::string(key) + "' at " + std::string(path) + " must be a number");
     }
     if (!std::isfinite(number)) {
-        fail("Property '" + std::string(key) + "' at " + path + " must be finite");
+        fail("Property '" + std::string(key) + "' at " + std::string(path) + " must be finite");
     }
     return number;
 }
 
-std::uint32_t requiredPositiveInteger(const json::object& object, const char* key, std::string path) {
+std::uint32_t requiredPositiveInteger(const json::object& object, const char* key, std::string_view path) {
     const double number = requiredNumber(object, key, path);
     if (number < 1.0 || std::floor(number) != number || number > std::numeric_limits<std::uint32_t>::max()) {
-        fail("Property '" + std::string(key) + "' at " + path + " must be a positive integer");
+        fail("Property '" + std::string(key) + "' at " + std::string(path) + " must be a positive integer");
     }
     return static_cast<std::uint32_t>(number);
 }
 
-double requiredPositiveNumber(const json::object& object, const char* key, std::string path) {
+double requiredPositiveNumber(const json::object& object, const char* key, std::string_view path) {
     const double number = requiredNumber(object, key, path);
     if (number <= 0.0) {
-        fail("Property '" + std::string(key) + "' at " + path + " must be greater than zero");
+        fail("Property '" + std::string(key) + "' at " + std::string(path) + " must be greater than zero");
     }
     return number;
 }
 
-bool requiredBoolean(const json::object& object, const char* key, std::string path) {
+bool requiredBoolean(const json::object& object, const char* key, std::string_view path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_bool()) {
-        fail("Property '" + std::string(key) + "' at " + path + " must be a boolean");
+        fail("Property '" + std::string(key) + "' at " + std::string(path) + " must be a boolean");
     }
     return value.as_bool();
 }
 
-std::string requiredString(const json::object& object, const char* key, std::string path) {
+std::string requiredString(const json::object& object, const char* key, std::string_view path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_string() || value.as_string().empty()) {
-        fail("Property '" + std::string(key) + "' at " + path + " must be a non-empty string");
+        fail("Property '" + std::string(key) + "' at " + std::string(path) + " must be a non-empty string");
     }
     return std::string(value.as_string());
 }
 
-AccessTechnology parseAccessTechnology(const std::string& technology, std::string path) {
+AccessTechnology parseAccessTechnology(const std::string& technology, std::string_view path) {
     if (technology == "wired") {
         return AccessTechnology::Wired;
     }
@@ -106,10 +107,10 @@ AccessTechnology parseAccessTechnology(const std::string& technology, std::strin
     if (technology == "private5g") {
         return AccessTechnology::Private5g;
     }
-    fail("Property 'accessTechnology' at " + path + " must be one of: wired, wifi, private5g");
+    fail("Property 'accessTechnology' at " + std::string(path) + " must be one of: wired, wifi, private5g");
 }
 
-TrafficPriority parseTrafficPriority(const std::string& priority, std::string path) {
+TrafficPriority parseTrafficPriority(const std::string& priority, std::string_view path) {
     if (priority == "safety") {
         return TrafficPriority::Safety;
     }
@@ -122,7 +123,7 @@ TrafficPriority parseTrafficPriority(const std::string& priority, std::string pa
     if (priority == "background") {
         return TrafficPriority::Background;
     }
-    fail("Property 'priority' at " + path + " must be one of: safety, control, normal, background");
+    fail("Property 'priority' at " + std::string(path) + " must be one of: safety, control, normal, background");
 }
 
 std::vector<DeviceProfile> parseDeviceProfiles(const json::object& root) {
@@ -136,7 +137,7 @@ std::vector<DeviceProfile> parseDeviceProfiles(const json::object& root) {
         const json::value& value = profilesValue.as_array()[index];
         const std::string path = "deviceProfiles[" + std::to_string(index) + "]";
         if (!value.is_object()) {
-            fail("Property '" + path + "' must be an object");
+            fail("Property '" + std::string(path) + "' must be an object");
         }
         const json::object& profile = value.as_object();
         validateKeys(profile, {"name", "count", "accessTechnology", "priority"}, path);
@@ -197,7 +198,7 @@ WarehouseNetworkConfiguration validate(const json::object& root) {
     if (!configuration.temperatureSafety.processAtLocalEdge) {
         fail("Temperature safety events must be processed at the local edge");
     }
-    std::uint32_t profileEndpointCount = 0;
+    std::uint64_t profileEndpointCount = 0;
     for (const DeviceProfile& profile : configuration.deviceProfiles) {
         profileEndpointCount += profile.count;
         if (profile.accessTechnology == AccessTechnology::Wired && !configuration.radioPolicy.allowWiredCriticalDevices) {
@@ -210,7 +211,7 @@ WarehouseNetworkConfiguration validate(const json::object& root) {
             fail("Private-5G device profiles require allowPrivate5gDevices to be true");
         }
     }
-    const std::uint32_t plannedEndpointCount = configuration.topology.zoneCount * configuration.topology.endpointsPerZone;
+    const std::uint64_t plannedEndpointCount = static_cast<std::uint64_t>(configuration.topology.zoneCount) * configuration.topology.endpointsPerZone;
     if (profileEndpointCount != plannedEndpointCount) {
         fail("Device profile counts must equal zoneCount * endpointsPerZone");
     }

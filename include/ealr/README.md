@@ -1,5 +1,10 @@
 # Public headers
 
+Primary stationary contracts: `config/fabric_configuration.hpp`,
+`simulation/fabric_simulator.hpp`, and `metrics/fabric_metrics.hpp`.
+The legacy energy/mobility/traffic directories listed below include placeholders;
+their primary-model behavior is implemented in fabric_simulator, not separate legacy modules.
+
 Public C++ headers are organised by the same module names as `src/`:
 
 - `config/` — JSON loading, schema validation, and typed experiment settings.

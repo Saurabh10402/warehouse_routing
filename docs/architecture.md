@@ -1,5 +1,17 @@
 # Architecture
 
+## Primary stationary warehouse workflow
+
+`fabric_configuration` parses/validates schema-v2 explicit nodes, links, workloads and events.
+`fabric_simulator` owns the event calendar, queues, forwarding, availability and constrained
+device energy. Routing reuses Dijkstra/Greedy/EALR via an optional link-cost callback; legacy
+distance behavior remains the default when no callback is supplied. `fabric_metrics` aggregates
+raw packet outcomes without mutating topology. The CLI writes results; Python orchestrates
+fair comparisons and provenance. See [fabric model](fabric-model.md) for the executable contract.
+
+The following section describes the retained legacy ns-3/robot design; some named modules
+there were planned interfaces, not implemented orchestration.
+
 The framework is divided by responsibility so experiments remain reproducible and routing can evolve independently of ns-3 scenario setup.
 
 ```text

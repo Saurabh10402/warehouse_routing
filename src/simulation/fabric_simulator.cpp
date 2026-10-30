@@ -165,8 +165,8 @@ class Engine {
     }
     void topologyEvent(const Event& e) {
         result.events.push_back({now,e.type,e.target,e.available});
-        if(e.type=="node") {auto i=nodeIds.at(e.target);nodes[i].available=e.available;++nodeEpoch[i];}
-        if(e.type=="link") {auto i=linkIds.at(e.target);linkUp[i]=e.available;++linkEpoch[i];}
+        if(e.type=="node") {auto i=nodeIds.at(e.target);if(nodes[i].available!=e.available){nodes[i].available=e.available;++nodeEpoch[i];}}
+        if(e.type=="link") {auto i=linkIds.at(e.target);if(linkUp[i]!=e.available){linkUp[i]=e.available;++linkEpoch[i];}}
         // Flush affected waiting packets for immediate rerouting. Already-transmitting packets
         // retain epochs and are lost even if the failed component recovers before arrival.
         std::vector<std::size_t> reroute;

@@ -84,34 +84,34 @@ json::object loadDocument(const filesystem::path& filePath, vector<filesystem::p
     return mergeObjects(std::move(parent), document);
 }
 
-const json::value& requiredValue(const json::object& object, const char* key, string path) {
+const json::value& requiredValue(const json::object& object, const char* key, std::string_view path) {
     const auto value = object.find(key);
     if (value == object.end()) {
-        fail("Missing required property '" + string(key) + "' at " + path);
+        fail("Missing required property '" + string(key) + "' at " + std::string(path));
     }
     return value->value();
 }
 
-const json::object& requiredObject(const json::object& object, const char* key, string path) {
+const json::object& requiredObject(const json::object& object, const char* key, std::string_view path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_object()) {
-        fail("Property '" + string(key) + "' at " + path + " must be an object");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must be an object");
     }
     return value.as_object();
 }
 
-void validateKeys(const json::object& object, initializer_list<const char*> allowed, string path) {
+void validateKeys(const json::object& object, initializer_list<const char*> allowed, std::string_view path) {
     for (const auto& entry : object) {
         const bool known = any_of(allowed.begin(), allowed.end(), [&entry](const char* key) {
             return entry.key() == key;
         });
         if (!known) {
-            fail("Unknown property '" + string(entry.key()) + "' at " + path);
+            fail("Unknown property '" + string(entry.key()) + "' at " + std::string(path));
         }
     }
 }
 
-double requiredNumber(const json::object& object, const char* key, string path) {
+double requiredNumber(const json::object& object, const char* key, std::string_view path) {
     const json::value& value = requiredValue(object, key, path);
     double number = 0.0;
     if (value.is_double()) {
@@ -121,59 +121,59 @@ double requiredNumber(const json::object& object, const char* key, string path) 
     } else if (value.is_uint64()) {
         number = static_cast<double>(value.as_uint64());
     } else {
-        fail("Property '" + string(key) + "' at " + path + " must be a number");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must be a number");
     }
     if (!isfinite(number)) {
-        fail("Property '" + string(key) + "' at " + path + " must be finite");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must be finite");
     }
     return number;
 }
 
-uint32_t requiredPositiveInteger(const json::object& object, const char* key, string path) {
+uint32_t requiredPositiveInteger(const json::object& object, const char* key, std::string_view path) {
     const double number = requiredNumber(object, key, path);
     if (number < 1.0 || floor(number) != number || number > numeric_limits<uint32_t>::max()) {
-        fail("Property '" + string(key) + "' at " + path + " must be a positive integer");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must be a positive integer");
     }
     return static_cast<uint32_t>(number);
 }
 
-uint32_t requiredNonNegativeInteger(const json::object& object, const char* key, string path) {
+uint32_t requiredNonNegativeInteger(const json::object& object, const char* key, std::string_view path) {
     const double number = requiredNumber(object, key, path);
     if (number < 0.0 || floor(number) != number || number > numeric_limits<uint32_t>::max()) {
-        fail("Property '" + string(key) + "' at " + path + " must be a non-negative integer");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must be a non-negative integer");
     }
     return static_cast<uint32_t>(number);
 }
 
-double requiredPositiveNumber(const json::object& object, const char* key, string path) {
+double requiredPositiveNumber(const json::object& object, const char* key, std::string_view path) {
     const double number = requiredNumber(object, key, path);
     if (number <= 0.0) {
-        fail("Property '" + string(key) + "' at " + path + " must be greater than zero");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must be greater than zero");
     }
     return number;
 }
 
-double requiredNonNegativeNumber(const json::object& object, const char* key, string path) {
+double requiredNonNegativeNumber(const json::object& object, const char* key, std::string_view path) {
     const double number = requiredNumber(object, key, path);
     if (number < 0.0) {
-        fail("Property '" + string(key) + "' at " + path + " must not be negative");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must not be negative");
     }
     return number;
 }
 
-string requiredString(const json::object& object, const char* key, string path) {
+string requiredString(const json::object& object, const char* key, std::string_view path) {
     const json::value& value = requiredValue(object, key, path);
     if (!value.is_string()) {
-        fail("Property '" + string(key) + "' at " + path + " must be a string");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must be a string");
     }
     const string result(value.as_string());
     if (result.empty()) {
-        fail("Property '" + string(key) + "' at " + path + " must not be empty");
+        fail("Property '" + string(key) + "' at " + std::string(path) + " must not be empty");
     }
     return result;
 }
 
-RoutingAlgorithmKind parseRoutingAlgorithmKind(const string& algorithm, string path) {
+RoutingAlgorithmKind parseRoutingAlgorithmKind(const string& algorithm, std::string_view path) {
     if (algorithm == "dijkstra") {
         return RoutingAlgorithmKind::Dijkstra;
     }
@@ -183,10 +183,10 @@ RoutingAlgorithmKind parseRoutingAlgorithmKind(const string& algorithm, string p
     if (algorithm == "ealr") {
         return RoutingAlgorithmKind::Ealr;
     }
-    fail("Property 'algorithm' at " + path + " must be one of: dijkstra, greedy, ealr");
+    fail("Property 'algorithm' at " + std::string(path) + " must be one of: dijkstra, greedy, ealr");
 }
 
-MobilityModel parseMobilityModel(const string& model, string path) {
+MobilityModel parseMobilityModel(const string& model, std::string_view path) {
     if (model == "static") {
         return MobilityModel::Static;
     }
@@ -196,7 +196,7 @@ MobilityModel parseMobilityModel(const string& model, string path) {
     if (model == "randomWaypoint") {
         return MobilityModel::RandomWaypoint;
     }
-    fail("Property 'model' at " + path + " must be one of: static, grid, randomWaypoint");
+    fail("Property 'model' at " + std::string(path) + " must be one of: static, grid, randomWaypoint");
 }
 
 ExperimentConfiguration validate(const json::object& root) {

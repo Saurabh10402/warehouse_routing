@@ -16,3 +16,5 @@ compile_commands.json
 /.tools/
 /.recovery/
 __pycache__/
+/recovery_packages/
+/.venv/

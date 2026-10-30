@@ -26,7 +26,7 @@ def execute(command, env, log):
     if result.returncode:
         raise SystemExit(result.returncode)
 
-def verify(preset='bootstrap', build_dir=None):
+def verify(preset='bootstrap', build_dir=None, ns3_prefix=None):
     env = environment()
     for tool in ('cmake', 'ninja', 'ctest'):
         if not shutil.which(tool, path=env['PATH']):
@@ -36,6 +36,11 @@ def verify(preset='bootstrap', build_dir=None):
     build.mkdir(parents=True, exist_ok=True)
     log = build / 'verification.log'
     command = ['cmake', '--preset', preset, '-B', build, '-DPython3_EXECUTABLE=' + sys.executable]
+    if preset=='default':
+        prefix=Path(ns3_prefix).resolve() if ns3_prefix else ROOT/'.tools/ns3-install'
+        if prefix.is_dir():
+            command.append('-DCMAKE_PREFIX_PATH='+str(prefix))
+            env['PATH']=str(prefix/'lib')+os.pathsep+str(prefix/'bin')+os.pathsep+env['PATH']
     boost = ROOT / '.tools/boost_1_85_0'
     if boost.is_dir():
         command.append('-DEALR_BOOST_SOURCE=' + str(boost))
@@ -48,5 +53,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--preset', choices=['bootstrap', 'default'], default='bootstrap')
     parser.add_argument('--build-dir')
+    parser.add_argument('--ns3-prefix',help='Explicit installed ns-3 prefix; default detects .tools/ns3-install')
     args = parser.parse_args()
-    verify(args.preset, args.build_dir)
+    verify(args.preset, args.build_dir, args.ns3_prefix)

@@ -1,253 +1,107 @@
-# Private 5G Energy-Aware Routing
+# WIPRO warehouse networking research prototype
 
-Private 5G Energy-Aware Routing (EALR) is a modular C++ research framework for evaluating multi-hop routing decisions among industrial robots on a private 5G factory floor. It compares a distance-only Dijkstra baseline, geographic Greedy routing, and EALR—an energy- and congestion-aware shortest-path algorithm.
+A configurable **stationary warehouse network** with priority-aware packet forwarding,
+Dijkstra/Greedy/EALR comparisons, local safety events, failures, and reproducible metrics.
+The reference leaf-spine design is supported; the physical warehouse layout is not finalized.
+Ten zones and 500 endpoints are example inputs, not algorithm requirements.
 
-The project is structured for reproducible experiments: JSON scenarios define a run, CMake manages the native build, ns-3 provides mobility and NetAnim integration, and Python produces one comparison chart per metric.
+The primary executable is `ealr-fabric`, an independently tested C++17 discrete-event
+**abstract-link simulator**. It models transmission, propagation, finite queues and packet
+paths. Wi-Fi/private-5G labels do not implement radio scheduling or a full 5G core.
+Legacy ns-3/5G-LENA scaffolding is separate and has its own verification status.
 
-## Motivation
+## Start or resume
 
-Industrial robots must exchange data with low latency while operating on constrained batteries and potentially congested wireless links. A route that is geographically short can still be undesirable if it repeatedly selects a low-battery relay or a robot with a growing packet queue. EALR makes these trade-offs explicit and comparable against simpler baselines.
+Read `checkpoints/CURRENT_STATUS.md`, `PROJECT_STATE.json`, `NEXT_STEPS.md`, and the latest
+session summary. Verify the recorded manifest with:
+
+```sh
+python scripts/checkpoint.py CHECKPOINT_ID --verify
+```
+
+## One-command validation and experiments
+
+With Python 3.10+, CMake 3.22+, Ninja, a C++17 compiler and Boost.JSON available:
+
+```sh
+python scripts/run_all_experiments.py
+```
+
+This configures a fresh host-specific build, runs CTest, runs all algorithms on the same
+inputs/seeds, checks packet paths and stationary positions, exports raw/per-class metrics,
+replays a run, and produces comparison plots when matplotlib is installed. It exits nonzero
+on required-step failure and prints a unique results directory. `--quick` uses one seed and
+omits additional scaling cases; it is not the full research matrix.
+
+Windows local setup (optional, no global installation or PATH changes):
+
+```powershell
+python scripts/setup_portable.py --plots
+python scripts/run_all_experiments.py
+```
+
+The current recovered workspace already has the portable toolchain under `.tools/`.
+See [reproducibility](docs/reproducibility.md) for the exact local Python command, platform
+setup, direct CMake commands, dependency hashes and recovery packaging.
+
+## Primary configurations
+
+| File | Purpose |
+|---|---|
+| `configs/warehouse_small.json` | Five-node deterministic graph with four traffic classes |
+| `configs/warehouse_uneven.json` | Four zones: 10, 35, 75, 20 endpoints |
+| `configs/warehouse_reference.json` | 500 endpoints in 10 zones, dual spines and edges |
+
+Each schema-v2 file explicitly defines zones, nodes, endpoint access, links, capacities,
+delays, queue sizes, ordered service destinations, workload priorities and optional failures.
+Graph mode supports arbitrary test graphs. Leaf-spine mode validates role/zone connectivity.
+The old `warehouse_leaf_spine.json` is a preserved legacy planning schema, not the executable
+primary configuration. Legacy robot/mobility experiments remain outside the primary scope.
+
+```sh
+python scripts/verify.py
+./build/verified-bootstrap/ealr-fabric --config configs/warehouse_small.json --output results/my-new-run
+```
+
+On Windows use `build/verified-bootstrap/ealr-fabric.exe` and ensure the compiler DLL directory
+is on PATH; the Python runner manages this automatically. Existing result directories are rejected.
 
 ## What is implemented
 
-- Validated, typed JSON experiment configuration with relative scenario inheritance.
-- Robot domain model: position, battery, queue length, neighbour set, and routing eligibility.
-- Dijkstra, Greedy, and EALR routing implementations behind a common interface.
-- EALR cost model with configurable distance, battery, and congestion weights.
-- Metrics collector with CSV and summary exports, plus an ns-3 FlowMonitor adapter.
-- ns-3 factory-floor scenario runner with static, grid, and random-waypoint mobility.
-- Conditional 5G-LENA NR gNB/UE setup when the discovered ns-3 build exports `ns3::nr`.
-- NetAnim XML, robot-state colours, packet metadata, and return-to-charge animation support.
-- Python comparison plotting for latency, throughput, battery, delivery ratio, loss, network lifetime, and charging events.
-
-## Architecture
-
-```mermaid
-flowchart LR
-    Config["JSON configuration"] --> Simulation["Simulation orchestration"]
-    Simulation --> Robot["Robot model"]
-    Simulation --> Mobility["ns-3 mobility"]
-    Simulation --> Network["5G-LENA NR / ns-3"]
-    Robot --> Routing["Dijkstra · Greedy · EALR"]
-    Network --> Flow["FlowMonitor"]
-    Robot --> Metrics["Metrics collector"]
-    Routing --> Metrics
-    Flow --> Metrics
-    Simulation --> Anim["NetAnim"]
-    Metrics --> Plots["Python comparison plots"]
-```
-
-Module ownership is deliberately separated: configuration does not contain routing logic; routing does not parse JSON; metrics does not own mobility; and visualization does not make energy decisions. See [the architecture guide](docs/architecture.md).
-
-## Repository layout
-
-| Path | Purpose |
-| --- | --- |
-| `configs/` | Reproducible JSON experiment configurations. |
-| `include/ealr/` | Public C++ interfaces. |
-| `src/config/` | JSON loading, inheritance, and validation. |
-| `src/robot/` | Robot state, battery thresholds, neighbours, and queues. |
-| `src/routing/` | Routing contract plus Dijkstra, Greedy, and EALR. |
-| `src/metrics/` | Framework metrics and ns-3 FlowMonitor adapter. |
-| `src/simulation/` | ns-3 and optional 5G-LENA scenario setup. |
-| `src/visualization/` | NetAnim presentation support. |
-| `scripts/` | Python plotting utility and its requirements. |
-| `tests/` | CTest, ns-3, and Python regression tests. |
-| `results/` | Timestamped experiment output (ignored by Git). |
-| `docs/` | Detailed component documentation. |
-
-## Dependencies
-
-Required for the core framework:
-
-- CMake 3.22 or newer
-- C++17 compiler
-- Boost.JSON CMake package (`boost_json`)
-
-Required for ns-3 scenarios:
-
-- ns-3 with `core`, `network`, `mobility`, `netanim`, and FlowMonitor modules
-- An MPI C++ toolchain when required by the installed ns-3 package
-- C++20 compiler support for ns-3 3.46 public headers
-
-Required for real 5G-LENA NR device installation:
-
-- An ns-3/5G-LENA build exporting the `ns3::nr` CMake target
-
-Required for comparison charts:
-
-- Python 3.10 or newer
-- Packages in [`scripts/requirements.txt`](scripts/requirements.txt)
-
-The CMake configuration reports ns-3 and 5G-LENA availability separately. A standard ns-3 installation can build mobility and NetAnim support, but only an installation exposing `ns3::nr` enables NR UE/gNB device setup.
-
-## Build and test
-
-### Core-only bootstrap
-
-Use this preset when ns-3 is not installed or when working only on configuration, routing, robot, and metrics code.
-
-```sh
-cmake --preset bootstrap
-cmake --build --preset bootstrap
-ctest --preset bootstrap
-```
-
-### ns-3 development build
-
-Make the ns-3 CMake package discoverable through `CMAKE_PREFIX_PATH` if it is not installed in a standard prefix.
-
-```sh
-cmake --preset default
-cmake --build --preset default
-ctest --preset default
-```
-
-The `default` build creates `ealr-ns3-scenario` when the required ns-3 targets are present.
-
-## Run an ns-3 scenario
-
-The current ns-3 runner creates robot and gNB nodes, installs configured mobility, produces NetAnim XML, and installs 5G-LENA NR devices when supported by the build.
-
-```sh
-./build/default/ealr-ns3-scenario \
-  --config configs/baseline.json \
-  --animation results/baseline/animation.xml
-```
-
-Open the generated XML with NetAnim to inspect node positions, labels, and state colours. The runner reports whether NR devices were installed. See [ns-3 and 5G-LENA integration](docs/ns3-integration.md) and [NetAnim](docs/netanim.md).
-
-## Configuration
-
-Every scenario is JSON. The supplied configurations are:
-
-| Scenario | Purpose |
-| --- | --- |
-| `baseline.json` | Grid deployment with Dijkstra routing. |
-| `low_battery.json` | EALR weights and constrained starting battery. |
-| `dense_network.json` | Higher robot density and shorter communication radius. |
-| `high_traffic.json` | Increased packet rate and size. |
-| `factory_layout.json` | Static factory layout. |
-| `random_layout.json` | Random-waypoint factory layout. |
-
-Derived scenarios use relative inheritance:
-
-```json
-{
-  "extends": "baseline.json",
-  "routing": {
-    "algorithm": "ealr",
-    "alpha": 1.0,
-    "beta": 2.0,
-    "gamma": 1.0
-  }
-}
-```
-
-The loader deep-merges nested objects, rejects circular inheritance, validates unknown properties, and emits `ConfigurationError` messages that identify the failing field. Top-level sections are `simulation`, `routing`, `battery`, `traffic`, `mobility`, `robots`, `chargingStation`, `metrics`, `private5g`, and `output`. See [the configuration guide](docs/configuration.md).
-
-The warehouse deployment plan is maintained separately in [`configs/warehouse_leaf_spine.json`](configs/warehouse_leaf_spine.json). It models the fixed-endpoint leaf–spine network rather than the legacy multi-hop robot experiment, and keeps safety thresholds and QoS latency targets configurable.
-
-## Routing algorithms
-
-| Algorithm | Decision rule | Cost |
-| --- | --- | --- |
-| Dijkstra | Globally shortest route over permitted neighbour links. | Euclidean distance only. |
-| Greedy | At each hop, choose the unvisited eligible neighbour closest to the destination. | Local geographic distance to destination. |
-| EALR | Shortest path using energy and congestion awareness. | `alpha × distance + beta × batteryPenalty + gamma × congestionPenalty` |
-
-For EALR, `batteryPenalty = (100 - remainingBatteryPercent) / 100` and congestion penalty is the candidate forwarding robot’s queue length. Low-battery robots remain routable but become less attractive; robots in `ReturningToCharge` are never selected as source, destination, or relay. See [the routing guide](docs/routing.md).
-
-## Battery and robot states
-
-The robot model validates battery thresholds and supports the following states:
-
-- `Idle` and `Working`: normal operation; shown in green in NetAnim.
-- `LowBattery`: entered at or below `lowBatteryThreshold`; still routable; shown in yellow.
-- `ReturningToCharge`: entered at or below `criticalBatteryThreshold`; permanently removed from routing; shown in red and can be animated toward the charging station.
-
-Battery consumption is monotonic in the robot model. The energy subsystem supplies the configured transmit, receive, relay, and idle costs when traffic orchestration is added.
-
-## Metrics and FlowMonitor
-
-`MetricsCollector` records and exports:
-
-- Average end-to-end delay
-- Throughput
-- Packet delivery ratio and packet loss
-- Average and minimum battery remaining
-- Charging events
-- Robots removed from routing
-- Network lifetime
-- Route recomputations
-
-Use `writeCsv()` for the standard `metric,value` file and `writeSummary()` for a readable report. In ns-3 traffic scenarios, call `Ns3FlowMonitorCollector::collect()` after `Simulator::Run()` and before `Simulator::Destroy()` to import FlowMonitor counters. See [the metrics guide](docs/metrics.md).
-
-## NetAnim
-
-`NetAnimVisualization` writes packet metadata and assigns labels and state colours to robot and gNB nodes. When a robot transitions to `ReturningToCharge`, update its visual state and schedule `animateReturnToCharge()` with the configured charging-station position. See [the NetAnim guide](docs/netanim.md).
-
-## Generate comparison plots
-
-Install the plotting dependency:
-
-```sh
-python3 -m pip install -r scripts/requirements.txt
-```
-
-Pass one experiment directory per algorithm. The script reads each directory’s `metrics.csv` and uses `routing.algorithm` from `config.json` as its label when available.
-
-```sh
-python3 scripts/plot_results.py \
-  --input results/dijkstra-run \
-  --input results/greedy-run \
-  --input results/ealr-run \
-  --output-dir results/comparison-graphs
-```
-
-Each metric is rendered as its own PNG chart. Use `--format pdf` or `--label` when needed. See [the plotting guide](docs/plotting.md).
-
-## Standard experiment artifacts
-
-The intended timestamped experiment directory is:
-
-```text
-results/
-└── 2026-07-26_18-45-00/
-    ├── config.json
-    ├── summary.txt
-    ├── metrics.csv
-    ├── animation.xml
-    ├── simulation.log
-    ├── routing.log
-    └── graphs/
-        ├── latency-comparison.png
-        ├── throughput-comparison.png
-        └── ...
-```
-
-The current components already create the underlying NetAnim, metrics, and plotting artifacts. Timestamped-folder creation and one-command assembly are the remaining orchestration work described below.
-
-## Current integration boundary
-
-The framework components are implemented and tested independently. The next orchestration step is to connect configured packet traffic, battery-cost events, custom multi-hop forwarding, FlowMonitor collection, and timestamped result-folder assembly into one end-to-end experiment command. Until then, use the individual scenario, metrics, NetAnim, and plotting entry points documented above.
-
-## Future extensions
-
-The module boundaries support future work without changing the routing contract:
-
-- Obstacle-aware factory topology and radio propagation
-- Dynamic factory environments and task-aware mobility
-- Charging schedule optimisation
-- Additional routing algorithms
-- Multiple gNBs, network slicing, and QoS flows
-- Security and resilience modules
-
-## Contributing
-
-Keep new responsibilities within their module boundary, add CTest coverage, and preserve JSON-driven experiment parameters. New routing algorithms should implement `RoutingAlgorithm` and operate only on `RoutingTopology` snapshots. Run both presets before submitting changes:
-
-```sh
-cmake --build --preset default && ctest --preset default
-cmake --build --preset bootstrap && ctest --preset bootstrap
-```
+- Validated explicit topology with arbitrary zone membership and unequal endpoint counts.
+- Reused routing algorithms with explicit fabric link costs; legacy distance APIs preserved.
+- EALR normalized latency/queue/energy cost and a snapshot latency guard.
+- Per-direction finite queues: strict priority 0..3, FIFO within each class, nonpreemptive frames.
+- Actual packet forwarding over selected links, with serialization and propagation delay.
+- Per-hop route selection, node/link outages, ordered backup edges and component recovery.
+- Battery accounting only on constrained endpoints/relays; no infrastructure battery penalty.
+- Local configurable temperature safety, latched stops, manual reset and priority-0 fan-out.
+- Raw packet traces, measured latency distributions, delivery/deadline rates and application throughput.
+- Source/configuration/executable provenance, seed comparisons, ablations and recovery checkpoints.
+
+The [model specification](docs/fabric-model.md) defines defaults, algorithms, units, timing,
+loss semantics, safety behavior and fidelity limits. [Validation results](docs/validation-report.md)
+separate executed evidence from limitations. Do not interpret configured latency targets as guarantees.
+
+## Layout and build boundaries
+
+`src/config` validates JSON; `src/routing` selects paths without parsing JSON;
+`src/simulation/fabric_simulator.cpp` runs events/forwarding; `src/metrics/fabric_metrics.cpp`
+aggregates packet observations; `scripts` builds, runs and plots experiments; `tests` contains
+legacy and primary regression suites. Public contracts are under `include/ealr/`.
+
+The core remains C++17 and never requires ns-3. `EALR_BOOST_SOURCE` optionally compiles the
+existing Boost.JSON implementation from an official extracted Boost tree; no replacement parser.
+The optional ns-3 target has its own C++ standard setting. See [ns-3 integration](docs/ns3-integration.md).
+
+## Explicit limitations
+
+No calibrated radio PHY/MAC, collision/retransmission model, full 5G core, distributed route
+convergence, admission control, hard deadline assurance, disjoint packet replication, or
+certified emergency-stop behavior. Safety readings start at a local edge; sensor transport
+and actuator response are outside the model. Energy uses configured percentage points, not joules.
+Strict priority can starve lower classes, and a full shared queue can drop safety traffic.
+
+The retained [legacy project documentation](docs/legacy-project.md) describes the original
+robot experiment and its incomplete ns-3 orchestration. It is historical context, not the
+current primary workflow or evidence of verified 5G behavior.

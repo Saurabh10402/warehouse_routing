@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_002",
-  "utc": "2026-10-29T21:02:41.2646686Z",
-  "phase": "core-forwarding-validated",
-  "source_state": "manifests/checkpoint_002.json",
+  "checkpoint": "checkpoint_003",
+  "utc": "2026-10-30T10:46:55.7556227Z",
+  "phase": "experiments-validated-optional-ns3-building",
+  "source_state": "manifests/checkpoint_003.json",
   "configuration_versions": [
+    "schema v2 stationary fabric",
     "legacy robot",
     "legacy warehouse plan"
   ],
@@ -22,23 +23,24 @@
     "per-packet and per-class metrics"
   ],
   "pending": [
-    "execute experiment matrix",
-    "CLI integration checks",
-    "documentation and final recovery package"
+    "final script verification with strengthened fairness assertions",
+    "optional ns-3 link/runtime verification",
+    "final handoff package"
   ],
-  "known_defects": [
-    "GCC legacy JSON helper dangling-reference diagnostics require review"
-  ],
+  "known_defects": [],
   "build_status": "PASS GCC 14.2.0 Boost 1.85 portable Debug",
-  "test_status": "15 of 15 CTest tests PASS",
-  "experiment_identifiers": [],
+  "test_status": "16 of 16 core CTest tests PASS; expanded 114 experiments and replay PASS",
+  "experiment_identifiers": [
+    "experiments-20261029T210304Z-82f715a2",
+    "experiments-20261029T212427Z-4a13d923"
+  ],
   "dependencies": {
-    "ns3": "not installed; unverified",
+    "ns3": "3.46.1 source compiling locally; adapter syntax checks PASS; runtime pending",
     "5g_lena": "not installed",
     "portable_toolchain": "GCC 14.2.0, Boost 1.85 SHA256 verified"
   },
   "blockers": [
-    "ns-3 and 5G-LENA absent"
+    "NR module absent and unverified"
   ],
-  "next_action": "Run the full experiment matrix, verify exported traces and metrics, document fidelity"
+  "next_action": "Finish optional ns-3 build and run default tests; validate final runner and produce recovery package"
 }

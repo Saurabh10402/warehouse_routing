@@ -63,6 +63,7 @@ add_dependencies(ealr_tests ealr_fabric_metrics_tests)
 find_package(Python3 COMPONENTS Interpreter QUIET)
 if(Python3_Interpreter_FOUND)
     add_test(NAME ealr_plotting_tests COMMAND "${Python3_EXECUTABLE}" "${PROJECT_SOURCE_DIR}/tests/plotting_tests.py")
+    add_test(NAME ealr_fabric_cli_tests COMMAND "${Python3_EXECUTABLE}" "${PROJECT_SOURCE_DIR}/tests/fabric_cli_tests.py" "$<TARGET_FILE:ealr-fabric>")
 endif()
 
 if(TARGET ealr_ns3)

@@ -79,8 +79,13 @@ if(EALR_ENABLE_NS3 AND EALR_NS3_AVAILABLE)
         PUBLIC ns3::core ns3::network ns3::mobility ns3::netanim ns3::flow-monitor
     )
     target_include_directories(ealr_ns3 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
-    # ns-3 3.46 uses C++20 library facilities in public module headers.
-    target_compile_features(ealr_ns3 PUBLIC cxx_std_20)
+    # Match the external package's public-header requirements without changing the core.
+    set(_ealr_ns3_standard 20)
+    if(EALR_NS3_VERSION VERSION_GREATER_EQUAL "3.46.1")
+        set(_ealr_ns3_standard 23)
+    endif()
+    set(EALR_NS3_CXX_STANDARD "${_ealr_ns3_standard}" CACHE STRING "C++ standard required by the installed ns-3 headers")
+    target_compile_features(ealr_ns3 PUBLIC cxx_std_${EALR_NS3_CXX_STANDARD})
 
     add_executable(ealr-ns3-scenario src/app/ealr_ns3_main.cpp)
     target_link_libraries(ealr-ns3-scenario PRIVATE EALR::ns3)

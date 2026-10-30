@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DIRECTORIES = ('src', 'include', 'cmake', 'configs', 'tests', 'scripts', 'docs')
 
 def source_files():
-    files = [ROOT / name for name in ('CMakeLists.txt', 'CMakePresets.json', 'README.md', '.gitignore')]
+    files = [ROOT / name for name in ('CMakeLists.txt', 'CMakePresets.json', 'README.md', '.gitignore', 'AGENTS.md') if (ROOT/name).is_file()]
     for directory in DIRECTORIES:
         files.extend(p for p in (ROOT / directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
     return sorted(files)

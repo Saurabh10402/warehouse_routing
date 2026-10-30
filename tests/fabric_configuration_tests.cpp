@@ -35,6 +35,8 @@ int main() {
     reject([](auto& x){x.scheduler="bogus";});
     reject([](auto& x){x.topology="leafSpine";});
     auto disconnected=ref;disconnected.links.clear();try{validate(disconnected);++failures;}catch(const std::exception&){}
+    auto mismatched=ref;for(auto& n:mismatched.nodes)if(n.role=="endpoint"&&n.access=="private5g"){n.access="wifi";break;}
+    try{validate(mismatched);++failures;}catch(const std::exception&){}
     // Explicit graph supports disconnected topology for loss experiments.
     c.links.clear();validate(c);
     std::cout<<"configuration failures: "<<failures<<'\n';return failures?1:0;

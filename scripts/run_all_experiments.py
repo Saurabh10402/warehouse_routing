@@ -14,11 +14,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from checkpoint import manifest
-from generate_examples import small, warehouse
+from generate_examples import warehouse
 from verify import ROOT, execute, verify
+if (ROOT/'.tools/plotting').is_dir():
+    sys.path.insert(0,str(ROOT/'.tools/plotting'))
 
 def scenarios(quick=False):
     cases=[]
+    def small():return json.loads((ROOT/'configs/warehouse_small.json').read_text(encoding='utf-8'))
     def add(name, config, stochastic=False): cases.append((name,config,[1,2,3] if stochastic and not quick else [1]))
     add('baseline',small())
     c=small()
@@ -34,6 +37,10 @@ def scenarios(quick=False):
     c=small();c['nodes'][1]['energy']=dict(batteryPercent=12,criticalPercent=10,txPercentPerByte=0.005,rxPercentPerByte=0)
     add('low_battery',c)
     no_energy=copy.deepcopy(c);no_energy['routing']['beta']=0;add('energy_weight_off',no_energy)
+    tradeoff=copy.deepcopy(c)
+    tradeoff['nodes'][1]['energy'].update(batteryPercent=35,txPercentPerByte=0.00001)
+    tradeoff['links'][2]['delayMs']=0.3;tradeoff['links'][3]['delayMs']=0.3
+    add('energy_latency_tradeoff',tradeoff)
     for name,events in [
         ('uplink_failure',[dict(type='link',target='leaf0--spine0',timeMs=300,available=False),dict(type='link',target='leaf0--spine0',timeMs=700,available=True)]),
         ('spine_failure',[dict(type='node',target='spine0',timeMs=300,available=False),dict(type='node',target='spine0',timeMs=700,available=True)]),
@@ -41,27 +48,34 @@ def scenarios(quick=False):
         ('complete_outage',[dict(type='node',target=f'spine{i}',timeMs=300,available=False) for i in range(2)]),
         ('safety_cloud_off',[dict(type='cloud',timeMs=100,available=False),dict(type='temperature',target='edge0',zone='zone0',timeMs=300,temperatureCelsius=80),dict(type='reset',target='edge0',zone='zone0',timeMs=700,temperatureCelsius=60)])]:
         c=warehouse([10,12]);c['events']=events;add(name,c,True)
-    add('uneven',warehouse([10,35,75,20]),True)
-    add('reference_500',warehouse([50]*10),True)
+    add('uneven',json.loads((ROOT/'configs/warehouse_uneven.json').read_text(encoding='utf-8')),True)
+    add('reference_500',json.loads((ROOT/'configs/warehouse_reference.json').read_text(encoding='utf-8')),True)
     if not quick:
         for count in [10,40,100]:add(f'scaling_{count}',warehouse([count]),True)
     return cases
 
 def validate_artifacts(directory, config):
+    def ensure(condition):
+        if not condition:raise ValueError('Artifact validation failed in '+str(directory))
     def rows(name):
         with (directory/name).open(newline='',encoding='utf-8') as f:return list(csv.DictReader(f))
     packets=rows('packets.csv');metrics={r['metric']:float(r['value']) for r in rows('metrics.csv')}
-    assert len(packets)==metrics['transmitted_packets']
-    assert sum(p['status']=='delivered' for p in packets)==metrics['received_packets']
-    assert metrics['received_packets']+metrics['lost_packets']==len(packets)
-    assert metrics['stationary']==1
-    assert all(n['initial_x']==n['final_x'] and n['initial_y']==n['final_y'] for n in rows('nodes.csv'))
+    ensure(len(packets)==metrics['transmitted_packets'])
+    ensure(sum(p['status']=='delivered' for p in packets)==metrics['received_packets'])
+    ensure(metrics['received_packets']+metrics['lost_packets']==len(packets))
+    ensure(metrics['stationary']==1)
+    ensure(all(n['initial_x']==n['final_x'] and n['initial_y']==n['final_y'] for n in rows('nodes.csv')))
     links={frozenset([l['from'],l['to']]) for l in config['links']}
     for p in packets:
         path=p['path'].split('>')
-        assert path[0]==p['source'] and len(path)==len(set(path))
-        assert all(frozenset([a,b]) in links for a,b in zip(path,path[1:]))
-        if p['status']=='delivered':assert path[-1]==p['destination']
+        ensure(path[0]==p['source'] and len(path)==len(set(path)))
+        ensure(all(frozenset([a,b]) in links for a,b in zip(path,path[1:])))
+        if p['status']=='delivered':ensure(path[-1]==p['destination'])
+    delivered=[p for p in packets if p['status']=='delivered']
+    if delivered:
+        average=statistics.mean(float(p['finished_ms'])-float(p['created_ms']) for p in delivered)
+        ensure(abs(average-metrics['average_end_to_end_delay_ms'])<1e-7)
+    ensure(sum(int(p['deadline_miss']) for p in packets)==round(metrics['deadline_miss_percent']*len(packets)/100))
     return metrics, rows('per_priority.csv')
 
 def main():
@@ -83,6 +97,7 @@ def main():
     run_rows=[];class_rows=[]
     for case,base,seeds in scenarios(args.quick):
         for seed in seeds:
+            offered=None
             for algorithm in ['dijkstra','greedy','ealr']:
                 c=copy.deepcopy(base);c['routing']['algorithm']=algorithm;c['simulation']['seed']=seed
                 run_id=f'{case}-s{seed}-{algorithm}';input_path=output/'inputs'/f'{run_id}.json'
@@ -90,6 +105,10 @@ def main():
                 run=output/run_id
                 execute([executable,'--config',input_path,'--output',run],env,output/'execution.log')
                 metrics,classes=validate_artifacts(run,c)
+                with (run/'packets.csv').open(newline='',encoding='utf-8') as f:
+                    current=[tuple(p[k] for k in ['flow','source','priority','bytes','created_ms']) for p in csv.DictReader(f)]
+                if offered is not None and current!=offered:raise ValueError('Offered traffic differs across algorithms: '+run_id)
+                offered=current
                 (run/'provenance.json').write_text(json.dumps(dict(run_id=run_id,source_sha256=source['source_sha256'],
                      config_sha256=hashlib.sha256(input_path.read_bytes()).hexdigest(),seed=seed,algorithm=algorithm,
                      executable_sha256=provenance['executable_sha256']),indent=2),encoding='utf-8')
@@ -111,7 +130,7 @@ def main():
         writer=csv.DictWriter(f,aggregates[0].keys());writer.writeheader();writer.writerows(aggregates)
     # Replay baseline: byte-for-byte packet trace, independent of wall clock.
     replay=output/'replay';execute([executable,'--config',output/'inputs/baseline-s1-ealr.json','--output',replay],env,output/'execution.log')
-    assert (replay/'packets.csv').read_bytes()==(output/'baseline-s1-ealr/packets.csv').read_bytes(),'Replay mismatch'
+    if (replay/'packets.csv').read_bytes()!=(output/'baseline-s1-ealr/packets.csv').read_bytes():raise ValueError('Replay mismatch')
     plotting='unavailable (matplotlib not installed)'
     if importlib.util.find_spec('matplotlib'):
         execute([sys.executable,ROOT/'scripts/plot_fabric.py',output],env,output/'execution.log');plotting='PASS'
