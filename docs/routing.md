@@ -1,7 +1,9 @@
 # Routing contract
 
 For the primary warehouse workflow, `RoutingRequest.linkCost` supplies explicit link latency
-or normalized EALR costs. Checked costs must be finite/nonnegative. Geographic Greedy is
+to Dijkstra and ECMP. ECMP uses strictly positive costs and stable per-flow equal-cost
+next-hop selection; see [study design](warehouse-study.md). The legacy EALR comparison uses
+normalized EALR costs. Checked costs must be finite/nonnegative. Geographic Greedy is
 retained as an imperfect heuristic and can fail on a connected switch fabric. See
 [fabric routing and scheduling](fabric-model.md#routing-and-scheduling). The distance formula
 below describes the preserved legacy default only; it is not used as fabric latency.

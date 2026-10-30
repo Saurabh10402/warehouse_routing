@@ -1,5 +1,10 @@
 # Validation report — 30 October 2026 (India time)
 
+This report preserves checkpoint_004's EALR-oriented recovery results. The current primary
+research direction is the powered warehouse communication study in `warehouse-study.md`.
+The latest checkpoint identifies its separately validated batch; the historical results
+below are not evidence for new ECMP behavior.
+
 ## Verified primary prototype
 
 The repository now has a complete executable **stationary abstract-link** experiment path:

@@ -18,3 +18,9 @@ and plotting (72 charts). Both core presets pass 16/16 tests. Preserved final ev
 updated validation report and recovery state. External ns-3.46.1 Wi-Fi build failed with
 GCC maybe-uninitialized; diagnostic retained, runtime and NR unverified. Implementation
 unchanged since the tested commit.
+
+## checkpoint_005
+Shifted the primary study to powered peer/service communication. Added per-flow ECMP,
+FIFO/priority factorial comparison, scope/class metrics and plots. Preserved EALR under
+--suite legacy-ealr. 18/18 tests both presets; 132 primary runs and 45 legacy smoke runs
+with artifact checks/replay/charts PASS. Reported unresolved destination/queue bottlenecks.

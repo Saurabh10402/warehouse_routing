@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_004",
-  "utc": "2026-10-30T10:56:05.626137+00:00",
-  "phase": "core-validated-handoff",
-  "source_state": "manifests/checkpoint_004.json",
+  "checkpoint": "checkpoint_005",
+  "utc": "2026-10-30T14:25:09.226717+00:00",
+  "phase": "powered-warehouse-communication-baseline-validated",
+  "source_state": "manifests/checkpoint_005.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -20,21 +20,28 @@
     "node/link failure and recovery",
     "ordered backup destinations",
     "local safety processing and packet broadcasts",
-    "per-packet and per-class metrics"
+    "per-packet and per-class metrics",
+    "same-zone/cross-zone/edge-service primary traffic",
+    "per-flow equal-cost multipath forwarding",
+    "four-policy forwarding/scheduling factorial comparison",
+    "scope/class metrics including lost packets"
   ],
   "pending": [
-    "optional ns-3 link/runtime verification",
-    "schema-v2 ns-3 forwarding and QoS integration",
-    "matched 5G-LENA NR integration and runtime validation",
-    "cross-platform execution and physical-model calibration"
+    "protected emergency queue space and bounded high-priority admission",
+    "service allocation preventing lower-class starvation",
+    "warehouse traffic/topology calibration",
+    "optional ns-3 build/runtime repair and schema-v2/NR integration",
+    "cross-platform execution"
   ],
   "known_defects": [],
   "build_status": "PASS GCC 14.2.0 Boost 1.85 portable Debug, bootstrap and default core-only",
-  "test_status": "16/16 CTest PASS in both presets; final 114 experiments, fairness/raw-metric checks, replay and 72 plots PASS",
+  "test_status": "18/18 CTest PASS in bootstrap and default core-only; primary 132 runs/3 seeds/replay/55 charts PASS; legacy 45-run single-seed smoke/replay/75 charts PASS",
   "experiment_identifiers": [
     "experiments-20261029T210304Z-82f715a2",
     "experiments-20261029T212427Z-4a13d923",
-    "experiments-20261030T104837Z-6863eef6"
+    "experiments-20261030T104837Z-6863eef6",
+    "experiments-20261030T140941Z-dd164497",
+    "experiments-20261030T141204Z-9e04fe27"
   ],
   "dependencies": {
     "ns3": "3.46.1 external Release build FAILED in Wi-Fi with -Werror=maybe-uninitialized; three adapter syntax checks PASS; link/runtime BLOCKED",
@@ -45,7 +52,16 @@
     "External ns-3.46.1 Wi-Fi compile failure with GCC 14.2.0, preserved diagnostics",
     "NR module absent and unverified"
   ],
-  "next_action": "Verify checkpoint_004 source manifest; reproduce core on target host; resolve external ns-3 build diagnostic before adapter runtime work",
-  "tested_code_commit": "b8214a51edf075295aa0b00bf0b20cda2354d9df",
-  "authoritative_experiment": "experiments-20261030T104837Z-6863eef6"
+  "next_action": "Verify checkpoint_005, read docs/warehouse-results.md, then design/test reserved emergency buffering and bounded priority admission against the unchanged baseline",
+  "tested_code_commit": "1da7f3fb2eb48e9941228e17ae3b607614c256a9",
+  "authoritative_experiment": "experiments-20261030T140941Z-dd164497",
+  "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
+  "research_direction": "Powered stationary fabric; priority scheduling and resilience. EALR preserved as legacy, excluded from primary matrix.",
+  "known_limitations": [
+    "Primary study uses wired abstract links, not wireless/NR",
+    "Shared tail-drop queues can discard P0; strict priority can starve lower classes",
+    "Instant centralized failure knowledge; no convergence or detection delay",
+    "Single zone leaf and endpoint attachment remain failure points",
+    "Illustrative workloads and three seeds do not establish deployment guarantees"
+  ]
 }

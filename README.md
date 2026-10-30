@@ -89,8 +89,9 @@ is on PATH; the Python runner manages this automatically. Existing result direct
 - Source/configuration/executable provenance, seed comparisons, ablations and recovery checkpoints.
 
 The [model specification](docs/fabric-model.md) defines defaults, algorithms, units, timing,
-loss semantics, safety behavior and fidelity limits. [Validation results](docs/validation-report.md)
-separate executed evidence from limitations. Do not interpret configured latency targets as guarantees.
+loss semantics, safety behavior and fidelity limits. [Current warehouse results](docs/warehouse-results.md)
+and [earlier recovery validation](docs/validation-report.md) separate executed evidence from
+limitations. Do not interpret configured latency targets as guarantees.
 
 ## Layout and build boundaries
 

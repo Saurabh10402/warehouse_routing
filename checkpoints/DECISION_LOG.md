@@ -17,3 +17,12 @@
 10. Preserve the external ns-3.46.1 maybe-uninitialized failure without suppressing it or
     asserting it is harmless. Complete the independent core handoff; leave schema-v2
     ns-3 forwarding and NR as explicit integration work.
+
+11. User approved powered-fabric communication/QoS/resilience as the primary direction after
+    questioning energy-aware routing. Preserve EALR as legacy, not the primary proposal.
+12. Isolate wired fabric forwarding/scheduling first; real Wi-Fi/NR access needs separate
+    models and explicit 5G UPF paths. No direct base-station switching is assumed.
+13. Compare shortest/ECMP and FIFO/priority factorially with identical offered traffic.
+    Preserve losses and scope-level deadline misses, including ECMP hash imbalance.
+14. Do not claim queue reservation/admission exists: shared-buffer P0 drops are a measured
+    limitation and motivate the next controlled extension.

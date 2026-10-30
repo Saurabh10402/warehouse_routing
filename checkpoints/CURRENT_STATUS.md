@@ -1,18 +1,22 @@
-# checkpoint_004 — validated core and recovery handoff
+# checkpoint_005 — powered warehouse communication baseline
 
-Core bootstrap and default (core-only) CTest: **16/16 PASS each**.
-Final batch: results/experiments-20261030T104837Z-6863eef6 — **114 runs PASS**,
-identical offered traffic, raw-packet metric checks, deterministic replay, **72 charts**.
-Tested implementation commit: b8214a51edf075295aa0b00bf0b20cda2354d9df.
-Source manifest: manifests/checkpoint_004.json. Later edits only document final evidence.
+Approved direction: powered infrastructure, same-zone/cross-zone peers and local edge
+services, priority scheduling and resilience. EALR is preserved as legacy work.
 
-The primary model is a stationary abstract-link simulator; it is not ns-3/NR.
-Optional ns-3.46.1 Release build **FAILED** in its Wi-Fi dependency with GCC
-`-Werror=maybe-uninitialized` (wifi-mgt-header.h / optional<NonInheritance>).
-Three adapter files pass syntax checks. Full adapter link/runtime is BLOCKED; NR is
-not installed or verified. Schema-v2 ns-3 forwarding remains future integration work.
+- Bootstrap and default core-only CTest: **18/18 PASS each**.
+- Primary batch: results/experiments-20261030T140941Z-dd164497 — **132 runs PASS**,
+  11 scenarios, three seeds, four policies; raw/fairness checks, replay and **55 charts**.
+- Legacy smoke: results/experiments-20261030T141204Z-9e04fe27 — **45 runs PASS**, one
+  seed per case, replay and 75 charts. The earlier full legacy batches remain preserved.
+- Tested code commit: 1da7f3fb2eb48e9941228e17ae3b607614c256a9.
+- Source manifest: manifests/checkpoint_005.json. Post-run source edits are documentation only.
 
-Start with NEXT_STEPS.md and docs/validation-report.md. Recovery ZIPs and bundles are
-in recovery_packages/; each ZIP carries a verified PACKAGE_MANIFEST.json. Toolchains
-and build caches are excluded. Original archive remains .recovery/original.zip,
-SHA256 6e0e84ba7f075737da9299ec3520bb875404556a9199a9b92468b938e6da1838.
+Read docs/warehouse-study.md and docs/warehouse-results.md. The primary study uses wired
+abstract links. Two spines do not protect a failed zone leaf or remove a destination-link
+bottleneck. With ECMP+priority, cross-zone P0 misses average 41.25% in the destination
+bottleneck case. No admission control or reserved emergency buffer is implemented yet.
+
+Optional ns-3.46.1 still fails in its Wi-Fi dependency with GCC maybe-uninitialized;
+adapter runtime/NR remain unverified. No new ns-3 attempt was made in this milestone.
+Original archive, prior checkpoints and results are retained. Recovery ZIPs and Git bundles
+are in recovery_packages/; tools and build caches are excluded. See NEXT_STEPS.md.

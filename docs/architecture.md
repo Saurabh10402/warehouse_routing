@@ -4,10 +4,13 @@
 
 `fabric_configuration` parses/validates schema-v2 explicit nodes, links, workloads and events.
 `fabric_simulator` owns the event calendar, queues, forwarding, availability and constrained
-device energy. Routing reuses Dijkstra/Greedy/EALR via an optional link-cost callback; legacy
+device energy. The primary powered-fabric study uses Dijkstra/ECMP with FIFO/priority queues;
+Greedy/EALR are preserved as legacy comparisons. All use an optional link-cost callback; legacy
 distance behavior remains the default when no callback is supplied. `fabric_metrics` aggregates
 raw packet outcomes without mutating topology. The CLI writes results; Python orchestrates
 fair comparisons and provenance. See [fabric model](fabric-model.md) for the executable contract.
+See [warehouse study](warehouse-study.md) for peer/service paths, failure domains and the
+current controlled experiment design. The first study isolates wired fabric behavior.
 
 The following section describes the retained legacy ns-3/robot design; some named modules
 there were planned interfaces, not implemented orchestration.
