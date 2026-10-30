@@ -86,9 +86,12 @@ Compiler warnings remain enabled. Verification logs append under the selected bu
 
 ## Experiment outputs and interpretation
 
-`python scripts/run_all_experiments.py` performs configure/build/tests, 114 comparison runs
+`python scripts/run_all_experiments.py` performs configure/build/tests, 132 primary comparison runs
 in the current matrix, raw artifact validation, a replay, aggregate CSVs and optional plots.
-The scenarios include baseline, 500 endpoints, uneven zones, 10/40/100 scaling, congestion,
+The primary scenarios are documented in `docs/warehouse-study.md`: same/cross-zone and
+edge-service traffic with four forwarding/scheduling policies and three seeds each.
+`python scripts/run_all_experiments.py --suite legacy-ealr` retains the earlier 114-run suite.
+Those legacy scenarios include baseline, 500 endpoints, uneven zones, 10/40/100 scaling, congestion,
 priority mix/FIFO ablation, energy/congestion-weight ablations, an energy/latency tradeoff, link/spine/edge failures,
 complete outage, and cloud-independent safety. Random-phase workloads use seeds 1,2,3.
 
@@ -100,7 +103,8 @@ If it is absent, inspect `execution.log`; the batch is incomplete even if some r
 
 Full experiments are intentionally distinct from unit tests. `--quick` is a single-seed smoke
 matrix and should not be substituted for the full stochastic comparison in a report.
-`comparison.csv`, `priority_comparison.csv`, `aggregate.csv`, `graphs/` are the main comparisons.
+`comparison.csv`, `priority_comparison.csv`, `scope_priority_comparison.csv`, `aggregate.csv`,
+and `graphs/` are the main comparisons.
 Plots are grouped by identical scenario; bars are seed means with sample-standard-deviation
 error bars. A single sample has no estimated variability. Raw per-priority observations remain
 available even when an aggregate plot hides class differences.

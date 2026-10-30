@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.22)
 project(
     Private5GEnergyAwareRouting
     VERSION 0.1.0
-    DESCRIPTION "Energy-Aware Low-Latency Routing framework for private 5G robotic networks"
+    DESCRIPTION "Stationary warehouse communication, priority and resilience research"
     LANGUAGES CXX
 )
 
@@ -48,6 +48,7 @@ add_library(ealr_core
         src/robot/robot.cpp
         src/routing/routing_types.cpp
         src/routing/dijkstra_routing.cpp
+        src/routing/ecmp_routing.cpp
         src/routing/greedy_routing.cpp
         src/routing/ealr_routing.cpp
 )

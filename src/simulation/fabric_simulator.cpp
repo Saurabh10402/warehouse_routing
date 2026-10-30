@@ -1,5 +1,6 @@
 #include "ealr/simulation/fabric_simulator.hpp"
 #include "ealr/routing/dijkstra_routing.hpp"
+#include "ealr/routing/ecmp_routing.hpp"
 #include "ealr/routing/ealr_routing.hpp"
 #include "ealr/routing/greedy_routing.hpp"
 #include "ealr/safety/temperature_safety_controller.hpp"
@@ -94,6 +95,16 @@ class Engine {
         ++result.routeComputations;
         if(c.routing.algorithm=="greedy")return GreedyRouting().computeRoute(request);
         if(c.routing.algorithm=="dijkstra")return DijkstraRouting().computeRoute(request);
+        if(c.routing.algorithm=="ecmp") {
+            // Stable flow identity + source + chosen destination + seed. Packet ID/time
+            // and queue occupancy deliberately do not change the flow's selected path.
+            std::uint64_t hash=UINT64_C(14695981039346656037);
+            for(const auto& field:{p.flow,p.source,nodes[target].id,std::to_string(c.seed)}) {
+                for(unsigned char byte:field){hash^=byte;hash*=UINT64_C(1099511628211);}
+                hash^=0;hash*=UINT64_C(1099511628211);
+            }
+            return EcmpRouting(hash).computeRoute(request);
+        }
         auto shortest=DijkstraRouting().computeRoute(request);
         request.linkCost=[&](const RoutingNode& a,const RoutingNode& b) {
             const auto& d=directions[directionIds.at({a.id,b.id})];

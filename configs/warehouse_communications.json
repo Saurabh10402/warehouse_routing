@@ -1,0 +1,827 @@
+{
+  "schemaVersion": 2,
+  "name": "Powered warehouse fabric; illustrative wired communication baseline",
+  "topology": {
+    "kind": "leafSpine",
+    "minimumSpinesPerLeaf": 2,
+    "minimumEdges": 2
+  },
+  "simulation": {
+    "durationMs": 1000,
+    "drainMs": 200,
+    "seed": 1,
+    "scheduler": "strictPriority"
+  },
+  "routing": {
+    "algorithm": "ecmp"
+  },
+  "deadlinesMs": [
+    10,
+    20,
+    40,
+    100
+  ],
+  "safety": {
+    "warningCelsius": 70,
+    "stopCelsius": 80,
+    "broadcastEmergencyStop": true,
+    "processAtLocalEdge": true,
+    "requireManualResetAfterStop": true,
+    "processingMs": 0.1
+  },
+  "zones": [
+    "zone0",
+    "zone1"
+  ],
+  "nodes": [
+    {
+      "id": "spine0",
+      "role": "spine",
+      "x": 0,
+      "y": 200,
+      "zone": "",
+      "access": "wired"
+    },
+    {
+      "id": "spine1",
+      "role": "spine",
+      "x": 20,
+      "y": 200,
+      "zone": "",
+      "access": "wired"
+    },
+    {
+      "id": "edge0",
+      "role": "edge",
+      "x": 0,
+      "y": 300,
+      "zone": "",
+      "access": "wired"
+    },
+    {
+      "id": "edge1",
+      "role": "edge",
+      "x": 20,
+      "y": 300,
+      "zone": "",
+      "access": "wired"
+    },
+    {
+      "id": "leaf0",
+      "role": "leaf",
+      "x": 0,
+      "y": 100,
+      "zone": "zone0",
+      "access": "wired"
+    },
+    {
+      "id": "zone0-ep0",
+      "role": "endpoint",
+      "x": 0,
+      "y": 0,
+      "zone": "zone0",
+      "access": "wired"
+    },
+    {
+      "id": "zone0-ep1",
+      "role": "endpoint",
+      "x": 1,
+      "y": 0,
+      "zone": "zone0",
+      "access": "wired"
+    },
+    {
+      "id": "zone0-ep2",
+      "role": "endpoint",
+      "x": 2,
+      "y": 0,
+      "zone": "zone0",
+      "access": "wired"
+    },
+    {
+      "id": "zone0-ep3",
+      "role": "endpoint",
+      "x": 3,
+      "y": 0,
+      "zone": "zone0",
+      "access": "wired"
+    },
+    {
+      "id": "leaf1",
+      "role": "leaf",
+      "x": 20,
+      "y": 100,
+      "zone": "zone1",
+      "access": "wired"
+    },
+    {
+      "id": "zone1-ep0",
+      "role": "endpoint",
+      "x": 20,
+      "y": 0,
+      "zone": "zone1",
+      "access": "wired"
+    },
+    {
+      "id": "zone1-ep1",
+      "role": "endpoint",
+      "x": 21,
+      "y": 0,
+      "zone": "zone1",
+      "access": "wired"
+    },
+    {
+      "id": "zone1-ep2",
+      "role": "endpoint",
+      "x": 22,
+      "y": 0,
+      "zone": "zone1",
+      "access": "wired"
+    },
+    {
+      "id": "zone1-ep3",
+      "role": "endpoint",
+      "x": 23,
+      "y": 0,
+      "zone": "zone1",
+      "access": "wired"
+    },
+    {
+      "id": "zone1-ep4",
+      "role": "endpoint",
+      "x": 24,
+      "y": 0,
+      "zone": "zone1",
+      "access": "wired"
+    },
+    {
+      "id": "zone1-ep5",
+      "role": "endpoint",
+      "x": 25,
+      "y": 0,
+      "zone": "zone1",
+      "access": "wired"
+    },
+    {
+      "id": "zone1-ep6",
+      "role": "endpoint",
+      "x": 26,
+      "y": 0,
+      "zone": "zone1",
+      "access": "wired"
+    },
+    {
+      "id": "zone1-ep7",
+      "role": "endpoint",
+      "x": 27,
+      "y": 0,
+      "zone": "zone1",
+      "access": "wired"
+    }
+  ],
+  "links": [
+    {
+      "id": "spine0--edge0",
+      "from": "spine0",
+      "to": "edge0",
+      "capacityMbps": 1000,
+      "delayMs": 0.05,
+      "queuePackets": 100
+    },
+    {
+      "id": "spine1--edge0",
+      "from": "spine1",
+      "to": "edge0",
+      "capacityMbps": 1000,
+      "delayMs": 0.05,
+      "queuePackets": 100
+    },
+    {
+      "id": "spine0--edge1",
+      "from": "spine0",
+      "to": "edge1",
+      "capacityMbps": 1000,
+      "delayMs": 0.05,
+      "queuePackets": 100
+    },
+    {
+      "id": "spine1--edge1",
+      "from": "spine1",
+      "to": "edge1",
+      "capacityMbps": 1000,
+      "delayMs": 0.05,
+      "queuePackets": 100
+    },
+    {
+      "id": "leaf0--spine0",
+      "from": "leaf0",
+      "to": "spine0",
+      "capacityMbps": 1000,
+      "delayMs": 0.05,
+      "queuePackets": 100
+    },
+    {
+      "id": "leaf0--spine1",
+      "from": "leaf0",
+      "to": "spine1",
+      "capacityMbps": 1000,
+      "delayMs": 0.05,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone0-ep0--leaf0",
+      "from": "zone0-ep0",
+      "to": "leaf0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone0-ep1--leaf0",
+      "from": "zone0-ep1",
+      "to": "leaf0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone0-ep2--leaf0",
+      "from": "zone0-ep2",
+      "to": "leaf0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone0-ep3--leaf0",
+      "from": "zone0-ep3",
+      "to": "leaf0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "leaf1--spine0",
+      "from": "leaf1",
+      "to": "spine0",
+      "capacityMbps": 1000,
+      "delayMs": 0.05,
+      "queuePackets": 100
+    },
+    {
+      "id": "leaf1--spine1",
+      "from": "leaf1",
+      "to": "spine1",
+      "capacityMbps": 1000,
+      "delayMs": 0.05,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone1-ep0--leaf1",
+      "from": "zone1-ep0",
+      "to": "leaf1",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone1-ep1--leaf1",
+      "from": "zone1-ep1",
+      "to": "leaf1",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone1-ep2--leaf1",
+      "from": "zone1-ep2",
+      "to": "leaf1",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone1-ep3--leaf1",
+      "from": "zone1-ep3",
+      "to": "leaf1",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone1-ep4--leaf1",
+      "from": "zone1-ep4",
+      "to": "leaf1",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone1-ep5--leaf1",
+      "from": "zone1-ep5",
+      "to": "leaf1",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone1-ep6--leaf1",
+      "from": "zone1-ep6",
+      "to": "leaf1",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "zone1-ep7--leaf1",
+      "from": "zone1-ep7",
+      "to": "leaf1",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    }
+  ],
+  "traffic": [
+    {
+      "id": "flow-zone0-ep0-0",
+      "source": "zone0-ep0",
+      "destinations": [
+        "zone0-ep1"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep0-1",
+      "source": "zone0-ep0",
+      "destinations": [
+        "zone1-ep0"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep0-2",
+      "source": "zone0-ep0",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep1-0",
+      "source": "zone0-ep1",
+      "destinations": [
+        "zone0-ep2"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep1-1",
+      "source": "zone0-ep1",
+      "destinations": [
+        "zone1-ep1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep1-2",
+      "source": "zone0-ep1",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep2-0",
+      "source": "zone0-ep2",
+      "destinations": [
+        "zone0-ep3"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep2-1",
+      "source": "zone0-ep2",
+      "destinations": [
+        "zone1-ep2"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep2-2",
+      "source": "zone0-ep2",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep3-0",
+      "source": "zone0-ep3",
+      "destinations": [
+        "zone0-ep0"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep3-1",
+      "source": "zone0-ep3",
+      "destinations": [
+        "zone1-ep3"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone0-ep3-2",
+      "source": "zone0-ep3",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep0-0",
+      "source": "zone1-ep0",
+      "destinations": [
+        "zone1-ep1"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep0-1",
+      "source": "zone1-ep0",
+      "destinations": [
+        "zone0-ep0"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep0-2",
+      "source": "zone1-ep0",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep1-0",
+      "source": "zone1-ep1",
+      "destinations": [
+        "zone1-ep2"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep1-1",
+      "source": "zone1-ep1",
+      "destinations": [
+        "zone0-ep1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep1-2",
+      "source": "zone1-ep1",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep2-0",
+      "source": "zone1-ep2",
+      "destinations": [
+        "zone1-ep3"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep2-1",
+      "source": "zone1-ep2",
+      "destinations": [
+        "zone0-ep2"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep2-2",
+      "source": "zone1-ep2",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep3-0",
+      "source": "zone1-ep3",
+      "destinations": [
+        "zone1-ep4"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep3-1",
+      "source": "zone1-ep3",
+      "destinations": [
+        "zone0-ep3"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep3-2",
+      "source": "zone1-ep3",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep4-0",
+      "source": "zone1-ep4",
+      "destinations": [
+        "zone1-ep5"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep4-1",
+      "source": "zone1-ep4",
+      "destinations": [
+        "zone0-ep0"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep4-2",
+      "source": "zone1-ep4",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 0,
+      "bytes": 96,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep5-0",
+      "source": "zone1-ep5",
+      "destinations": [
+        "zone1-ep6"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep5-1",
+      "source": "zone1-ep5",
+      "destinations": [
+        "zone0-ep1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep5-2",
+      "source": "zone1-ep5",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep6-0",
+      "source": "zone1-ep6",
+      "destinations": [
+        "zone1-ep7"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep6-1",
+      "source": "zone1-ep6",
+      "destinations": [
+        "zone0-ep2"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep6-2",
+      "source": "zone1-ep6",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 2,
+      "bytes": 512,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep7-0",
+      "source": "zone1-ep7",
+      "destinations": [
+        "zone1-ep0"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep7-1",
+      "source": "zone1-ep7",
+      "destinations": [
+        "zone0-ep3"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    },
+    {
+      "id": "flow-zone1-ep7-2",
+      "source": "zone1-ep7",
+      "destinations": [
+        "edge0",
+        "edge1"
+      ],
+      "priority": 3,
+      "bytes": 1200,
+      "startMs": 0,
+      "stopMs": 1000,
+      "intervalMs": 200,
+      "phaseJitterMs": 20
+    }
+  ],
+  "events": []
+}

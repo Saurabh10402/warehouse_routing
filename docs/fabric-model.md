@@ -18,7 +18,7 @@ return-to-charge animation are outside this primary workflow.
 
 The root requires `schemaVersion: 2`, `name`, `topology`, `simulation`, `zones`, `nodes`,
 `links`, and `traffic`. Optional `routing`, `deadlinesMs`, `safety`, and `events` have
-the documented defaults in `fabric_configuration.hpp` and below. The three shipped
+the documented defaults in `fabric_configuration.hpp` and below. The shipped
 examples are fully expanded; the C++ simulator never guesses connectivity or zone counts.
 
 - `topology.kind`: `graph` for arbitrary test graphs, or `leafSpine` for role-validated
@@ -61,6 +61,10 @@ The configuration enum is now `RoutingAlgorithmKind` to avoid colliding with the
 For the stationary fabric:
 
 - Dijkstra minimizes link propagation + serialization of this packet (milliseconds).
+- ECMP selects among equal-cost paths using the same positive link costs and a stable
+  flow hash. It does not inspect queue occupancy or consume energy weights. Full hash,
+  equality tolerance and failure semantics are specified in `docs/warehouse-study.md`.
+  Dijkstra/ECMP are the primary study policies; Greedy/EALR are retained legacy comparisons.
 - Greedy selects the eligible, unvisited neighbour geographically closest to the destination,
   using numeric node index for ties, then reports the configured link costs. It does not
   backtrack. Geography can be a poor heuristic for a switch fabric; failure is reported.
@@ -156,7 +160,7 @@ path costs. This is still abstract-link simulation time, not measured ns-3 packe
   flow unaffected by the failure. It is not an isolated convergence measurement. Use paths
   and events together to establish which traffic actually used an alternate path.
 
-The experiment runner uses identical topology/traffic/seeds across algorithms, emits sample
+The experiment runner uses identical topology/traffic/seeds across policies, emits sample
 counts and between-seed sample standard deviations, and keeps ablations in separately named
 cases. A no-jitter case has one deterministic sample; stochastic cases use three seeds.
 These small illustrative samples are not confidence claims or proof of general superiority.

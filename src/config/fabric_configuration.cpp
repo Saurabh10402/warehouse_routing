@@ -119,7 +119,7 @@ void validate(const Configuration& c) {
     require(c.scheduler=="strictPriority"||c.scheduler=="fifo","simulation.scheduler","supported: strictPriority, fifo");
     positive(c.durationMs,"simulation.durationMs"); finite(c.drainMs,"simulation.drainMs");positive(c.durationMs+c.drainMs,"simulation.end");
     finite(c.safetyProcessingMs,"safety.processingMs"); TemperatureSafetyController controller(c.safety);
-    require(c.routing.algorithm=="dijkstra"||c.routing.algorithm=="greedy"||c.routing.algorithm=="ealr","routing.algorithm","unknown algorithm");
+    require(c.routing.algorithm=="dijkstra"||c.routing.algorithm=="ecmp"||c.routing.algorithm=="greedy"||c.routing.algorithm=="ealr","routing.algorithm","supported: dijkstra, ecmp, greedy, ealr");
     positive(c.routing.alpha,"routing.alpha");finite(c.routing.beta,"routing.beta");finite(c.routing.gamma,"routing.gamma");positive(c.routing.latencyScaleMs,"routing.latencyScaleMs");finite(c.routing.maxStretch,"routing.maxStretch",1);
     for(unsigned i=0;i<4;++i){positive(c.deadlinesMs[i],"deadlinesMs");if(i)require(c.deadlinesMs[i]>=c.deadlinesMs[i-1],"deadlinesMs","must be ascending");}
     std::set<std::string> zones;

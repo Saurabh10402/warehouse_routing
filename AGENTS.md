@@ -9,6 +9,12 @@ Primary scope is the schema-v2 **stationary** warehouse network. No random movem
 primary runner. Zones and endpoint counts are configuration data; ten equal zones is only
 a reference example. Preserve legacy APIs/examples but clearly label their different scope.
 
+The approved direction now emphasizes powered infrastructure, peer/service communication,
+priority scheduling and failure resilience. Default experiments compare shortest path/ECMP
+and FIFO/strict priority. Preserve EALR as legacy work; do not restore battery-aware relay
+routing to the primary study without a relevant architecture and explicit user direction.
+Read docs/warehouse-study.md before extending the primary experiment matrix.
+
 Run `python scripts/verify.py` after coherent code changes. Use `scripts/run_all_experiments.py`
 for full validation; a quick run is not evidence of multiple-seed evaluation. Never call core
 abstraction results ns-3/NR measurements or configured deadlines guaranteed performance.
