@@ -14,6 +14,10 @@ priority scheduling and failure resilience. Default experiments compare shortest
 and FIFO/strict priority. Preserve EALR as legacy work; do not restore battery-aware relay
 routing to the primary study without a relevant architecture and explicit user direction.
 Read docs/warehouse-study.md before extending the primary experiment matrix.
+The protected-qos suite is experimental. Read docs/traffic-requirements.md and
+docs/protected-queue-results.md before changing queue parameters. Its fixed 20% P0 admission
+ceiling worsens emergency-flood results; do not silently promote it to the default or hide
+policed packets from offered-traffic/deadline denominators.
 
 Run `python scripts/verify.py` after coherent code changes. Use `scripts/run_all_experiments.py`
 for full validation; a quick run is not evidence of multiple-seed evaluation. Never call core

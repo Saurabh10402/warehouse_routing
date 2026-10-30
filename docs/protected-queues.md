@@ -42,6 +42,9 @@ packet must have enough tokens when admitted; otherwise it is dropped as `priori
 Tokens are consumed only on successful enqueue, not on rejection. They are not refunded for
 later failures/reroutes. Link downtime permits refill up to B; availability does not reset
 the bucket. This is per-hop packet policing, not flow admission/reservation negotiation.
+The rate ceiling applies even without competing lower-class traffic. It may reject P0
+packets while total link capacity remains unused; the default 20% is a study parameter,
+not a recommended production allocation or congestion-conditional low-latency queue.
 
 Admission precedence: total-full `queue_overflow`; non-P0 reserved-space restriction
 `reserved_capacity`; P0 token rejection `priority_policed`; otherwise enqueue. Admission
@@ -68,6 +71,8 @@ packets and mean/maximum queue wait **among service starts**. A frame started be
 may not finish, so bytes_started is not delivered throughput or measured utilization. Waiting
 packets at cutoff and rerouted waiting packets are excluded from the wait-time sample; do not
 interpret that sample as the unconditional delay of every offered packet.
+The rerouted counter counts removal for a rerouting attempt, including attempts that fail
+to find another path. It does not assert successful delivery via the alternate route.
 
 End-to-end packets and deadline denominators include all rejection causes. The scope/class
 comparison table now includes their counts. The protected study uses the four existing

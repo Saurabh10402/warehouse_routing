@@ -20,6 +20,8 @@ P0 admissions and byte-weighted lower-class service. The [traffic specification]
 declares inputs and acceptance checks; these are experimental assumptions, not measured
 warehouse requirements. Run it with `python scripts/run_all_experiments.py --suite protected-qos`
 (144 runs). The original default warehouse matrix remains unchanged.
+See [protected queue results](docs/protected-queue-results.md) for both improvements and
+admission losses; the fixed 20% P0 budget is not a production recommendation.
 
 ## Start or resume
 

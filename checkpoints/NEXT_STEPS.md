@@ -1,22 +1,26 @@
-# Resume after checkpoint_005
+# Resume after checkpoint_006
 
-1. Read CURRENT_STATUS, PROJECT_STATE, sessions/session_002.md and docs/warehouse-results.md.
-   Inspect Git status and run `python scripts/checkpoint.py checkpoint_005 --verify`.
-2. Next controlled extension: define reserved emergency buffer space, bounded high-priority
-   admission, and lower-class service allocation. Add tests for a full buffer, overload,
-   competing traffic and starvation; compare against the unchanged 132-run baseline.
-   Do not claim capacity or deadlines can be guaranteed simply by queue priority.
-3. Run `python scripts/verify.py`, then `python scripts/run_all_experiments.py` for full
-   three-seed primary evaluation. `--suite legacy-ealr` selects the preserved 114-run legacy
-   study; `--quick` is only a smoke check. Keep each new result directory and provenance.
-4. Request actual warehouse traffic/layout/access inputs when preparing calibrated scenarios.
-   Current baseline is wired; real private-5G peer forwarding requires explicit UPF paths.
-5. Optional ns-3: preserve the external Wi-Fi diagnostic in evidence/ns3-build-failure.txt.
-   Resolve it on an appropriate toolchain, install only after success, and run
-   `python scripts/verify.py --preset default --build-dir build/verified-ns3 --ns3-prefix PATH`.
-   Then implement/test schema-v2 forwarding/QoS and matched NR. Syntax is not runtime proof.
-6. Reproduce on the Mac/Ubuntu host using docs/reproducibility.md. Those platforms remain
-   unexecuted here. Verify package hashes and manifests before rebuilding.
+1. Read CURRENT_STATUS, PROJECT_STATE, sessions/session_003.md and docs/protected-queue-results.md.
+   Inspect Git status; run `python scripts/checkpoint.py checkpoint_006 --verify`.
+2. Define the next sweep before inspecting results: endpoint/uplink capacity, P0 rate/burst
+   budgets and reservation sizes. Keep current parameters as reference and use additional or
+   held-out seeds. Derive per-port critical-traffic envelopes from declared flows rather than
+   blindly applying 20% everywhere. Report admission losses as deadline misses.
+3. If considering a congestion-conditional policer or per-link policy overrides, specify the
+   new semantics separately, test token/queue accounting and admitted lower-class service,
+   and compare against the current always-on ceiling. Do not silently retune the old batch.
+4. Existing commands:
+   `python scripts/run_all_experiments.py --suite protected-qos` (144 runs);
+   `python scripts/run_all_experiments.py --suite warehouse --baseline results/experiments-20261030T140941Z-dd164497`
+   (132 exact baseline comparisons on this host). `--quick` remains a smoke check only.
+5. Obtain actual warehouse traffic, layout, loss/availability requirements and the application
+   versus network deadline boundary before calibration. EALR remains legacy scope.
+6. Resolve the documented external ns-3 dependency build failure on an appropriate toolchain,
+   then run adapter runtime tests and implement real schema-v2/QoS/NR forwarding with explicit
+   user-plane paths. Syntax success is not runtime proof. Reproduce core on Mac/Linux too.
+7. Final completion needs validated simulator fidelity, calibrated evaluation and a research
+   report that distinguishes ordinary QoS mechanisms from any substantiated novel contribution.
 
-EALR is legacy scope. Do not reintroduce energy-aware relay optimization into powered
-infrastructure experiments without a relevant architecture and explicit user direction.
+Recovery packages for this milestone preserve the protected study and baseline regression
+separately; each contains source/checkpoints and a complete Git bundle. Keep both and the
+original archive. Toolchains/build caches are excluded.

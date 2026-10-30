@@ -24,3 +24,9 @@ Shifted the primary study to powered peer/service communication. Added per-flow 
 FIFO/priority factorial comparison, scope/class metrics and plots. Preserved EALR under
 --suite legacy-ealr. 18/18 tests both presets; 132 primary runs and 45 legacy smoke runs
 with artifact checks/replay/charts PASS. Reported unresolved destination/queue bottlenecks.
+
+## checkpoint_006
+Declared traffic/acceptance specification; optional protectedPriority with reservation,
+per-direction P0 policing and weighted lower-class service; queue accounting/diagnostics.
+19/19 tests both presets, 144 protected runs, 132 byte-identical baseline regressions and
+replays/charts PASS. Preserved both improved and adverse P0 results; defaults unchanged.

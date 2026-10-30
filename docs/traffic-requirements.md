@@ -55,8 +55,9 @@ policies always receive identical inputs and arrival phases within each seed.
    packets or reporting only admitted emergency traffic as the primary success metric.
 5. The nominal communications case must meet its configured deadlines for all six policies.
    Stress cases are measurements, not pass/fail promises that every deadline is achievable.
-6. The preserved four-policy 132-run warehouse matrix must reproduce its inputs and raw
-   packet traces byte-for-byte. The new policy does not redefine the old baseline.
+6. The preserved four-policy 132-run warehouse matrix must use semantically identical JSON
+   inputs and reproduce raw packet traces byte-for-byte on this host. The new policy does
+   not redefine the old baseline. Cross-platform execution remains a separate validation.
 7. Three seeds, raw traces, per-scope/per-class outcomes, rejection causes, queue observations,
    deterministic replay and source/configuration/executable provenance are required.
 

@@ -26,3 +26,12 @@
     Preserve losses and scope-level deadline misses, including ECMP hash imbalance.
 14. Do not claim queue reservation/admission exists: shared-buffer P0 drops are a measured
     limitation and motivate the next controlled extension.
+
+15. Keep the 132-run baseline unchanged; evaluate protected queues in a separate 144-run suite.
+16. Count every rate-policed/reservation-rejected packet as loss and deadline miss. Per-hop
+    queue admission/service statistics are distinct from end-to-end packet outcomes.
+17. Fixed 20% P0 policing is an always-on experimental ceiling, not flow negotiation or a
+    production recommendation. Adverse emergency-overload results require capacity/admission
+    sensitivity and per-port traffic envelopes before choosing a default.
+18. Weighted fairness concerns admitted lower-class packets. It does not promise admission
+    for every flow, prevent all overload loss or certify emergency-stop behavior.

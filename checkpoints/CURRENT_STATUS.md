@@ -1,22 +1,24 @@
-# checkpoint_005 — powered warehouse communication baseline
+# checkpoint_006 — traffic contract and protected queues validated
 
-Approved direction: powered infrastructure, same-zone/cross-zone peers and local edge
-services, priority scheduling and resilience. EALR is preserved as legacy work.
+Implemented experimental P0 reserved waiting space, per-direction byte-rate admission,
+and byte-weighted service for admitted P1/P2/P3. Existing policies/default matrix preserved.
 
-- Bootstrap and default core-only CTest: **18/18 PASS each**.
-- Primary batch: results/experiments-20261030T140941Z-dd164497 — **132 runs PASS**,
-  11 scenarios, three seeds, four policies; raw/fairness checks, replay and **55 charts**.
-- Legacy smoke: results/experiments-20261030T141204Z-9e04fe27 — **45 runs PASS**, one
-  seed per case, replay and 75 charts. The earlier full legacy batches remain preserved.
-- Tested code commit: 1da7f3fb2eb48e9941228e17ae3b607614c256a9.
-- Source manifest: manifests/checkpoint_005.json. Post-run source edits are documentation only.
+- Both core build presets: **19/19 CTest PASS**.
+- Protected study: results/experiments-20261030T173430Z-db8fbaf2 — **144 runs PASS**, three
+  seeds, six policies, raw/queue/fairness checks, replay, **40 charts**.
+- Baseline regression: results/experiments-20261030T173542Z-c74e4faf — **132 runs PASS**;
+  every input matches and packet trace is byte-identical to checkpoint_005's primary batch;
+  replay and **55 charts PASS**.
+- Tested code: 2d0dcede78ce551db9a4fdee21bd24bcc9919c42.
+- Source manifest: manifests/checkpoint_006.json. Later changes are documentation only.
 
-Read docs/warehouse-study.md and docs/warehouse-results.md. The primary study uses wired
-abstract links. Two spines do not protect a failed zone leaf or remove a destination-link
-bottleneck. With ECMP+priority, cross-zone P0 misses average 41.25% in the destination
-bottleneck case. No admission control or reserved emergency buffer is implemented yet.
+Read docs/traffic-requirements.md, protected-queues.md and protected-queue-results.md.
+Cross-zone P0 misses at the destination bottleneck improve from 41.25% to 6.25% with ECMP
+protected, but the emergency flood is worse: aggregate P0 misses rise from 1.5% to 25.5625%.
+All policed/reservation losses remain in denominators. Do not adopt the 20% admission ceiling
+as a production default; it can reject P0 with unused total link capacity.
 
-Optional ns-3.46.1 still fails in its Wi-Fi dependency with GCC maybe-uninitialized;
-adapter runtime/NR remain unverified. No new ns-3 attempt was made in this milestone.
-Original archive, prior checkpoints and results are retained. Recovery ZIPs and Git bundles
-are in recovery_packages/; tools and build caches are excluded. See NEXT_STEPS.md.
+Next: capacity/admission sensitivity and per-port critical traffic envelopes. Real warehouse
+requirements, ns-3/NR runtime integration and cross-platform verification remain unfinished.
+The external ns-3 Wi-Fi build failure is unchanged; no new attempt was made in this milestone.
+Recovery ZIPs/bundles are under recovery_packages/. Prior archives and checkpoints are retained.

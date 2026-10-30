@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "suite": "protected-qos",
+  "runs": 144,
+  "artifact_checks": "PASS",
+  "replay": "PASS",
+  "plots": "PASS",
+  "baseline_comparison": "not requested"
+}

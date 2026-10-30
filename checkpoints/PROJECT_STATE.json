@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_005",
-  "utc": "2026-10-30T14:25:09.226717+00:00",
-  "phase": "powered-warehouse-communication-baseline-validated",
-  "source_state": "manifests/checkpoint_005.json",
+  "checkpoint": "checkpoint_006",
+  "utc": "2026-10-30T17:43:04.147212+00:00",
+  "phase": "traffic-contract-and-protected-queues-validated",
+  "source_state": "manifests/checkpoint_006.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -24,24 +24,33 @@
     "same-zone/cross-zone/edge-service primary traffic",
     "per-flow equal-cost multipath forwarding",
     "four-policy forwarding/scheduling factorial comparison",
-    "scope/class metrics including lost packets"
+    "scope/class metrics including lost packets",
+    "declared traffic and acceptance contract",
+    "reserved P0 buffer slots",
+    "per-direction P0 byte token-bucket policer",
+    "self-clocked byte-weighted service for admitted lower classes",
+    "per-queue accounting and service-wait measurements",
+    "144-run protected policy study with ablations",
+    "132-run byte-identical baseline regression"
   ],
   "pending": [
-    "protected emergency queue space and bounded high-priority admission",
-    "service allocation preventing lower-class starvation",
-    "warehouse traffic/topology calibration",
-    "optional ns-3 build/runtime repair and schema-v2/NR integration",
-    "cross-platform execution"
+    "capacity and admission-budget sensitivity with per-port traffic envelopes",
+    "warehouse traffic/loss/availability calibration",
+    "ns-3 build/runtime repair and schema-v2/NR integration",
+    "cross-platform execution",
+    "final research/deployment claim validation"
   ],
   "known_defects": [],
   "build_status": "PASS GCC 14.2.0 Boost 1.85 portable Debug, bootstrap and default core-only",
-  "test_status": "18/18 CTest PASS in bootstrap and default core-only; primary 132 runs/3 seeds/replay/55 charts PASS; legacy 45-run single-seed smoke/replay/75 charts PASS",
+  "test_status": "19/19 CTest PASS both core presets; 144 protected runs/replay/40 charts PASS; 132 baseline runs/exact packet comparisons/replay/55 charts PASS",
   "experiment_identifiers": [
     "experiments-20261029T210304Z-82f715a2",
     "experiments-20261029T212427Z-4a13d923",
     "experiments-20261030T104837Z-6863eef6",
     "experiments-20261030T140941Z-dd164497",
-    "experiments-20261030T141204Z-9e04fe27"
+    "experiments-20261030T141204Z-9e04fe27",
+    "experiments-20261030T173430Z-db8fbaf2",
+    "experiments-20261030T173542Z-c74e4faf"
   ],
   "dependencies": {
     "ns3": "3.46.1 external Release build FAILED in Wi-Fi with -Werror=maybe-uninitialized; three adapter syntax checks PASS; link/runtime BLOCKED",
@@ -52,16 +61,19 @@
     "External ns-3.46.1 Wi-Fi compile failure with GCC 14.2.0, preserved diagnostics",
     "NR module absent and unverified"
   ],
-  "next_action": "Verify checkpoint_005, read docs/warehouse-results.md, then design/test reserved emergency buffering and bounded priority admission against the unchanged baseline",
-  "tested_code_commit": "1da7f3fb2eb48e9941228e17ae3b607614c256a9",
-  "authoritative_experiment": "experiments-20261030T140941Z-dd164497",
+  "next_action": "Read the traffic contract and adverse results; declare capacity/admission sensitivity sweep and per-port P0 envelopes before choosing a queue policy",
+  "tested_code_commit": "2d0dcede78ce551db9a4fdee21bd24bcc9919c42",
+  "authoritative_experiment": "experiments-20261030T173430Z-db8fbaf2",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
   "research_direction": "Powered stationary fabric; priority scheduling and resilience. EALR preserved as legacy, excluded from primary matrix.",
   "known_limitations": [
-    "Primary study uses wired abstract links, not wireless/NR",
-    "Shared tail-drop queues can discard P0; strict priority can starve lower classes",
-    "Instant centralized failure knowledge; no convergence or detection delay",
-    "Single zone leaf and endpoint attachment remain failure points",
-    "Illustrative workloads and three seeds do not establish deployment guarantees"
-  ]
+    "Wired abstract links, not actual Wi-Fi/NR",
+    "Protected 20% P0 ceiling rejects traffic even with spare total capacity and worsens emergency-overload P0 delivery",
+    "Weighted service covers admitted packets; lower-class admission losses remain possible",
+    "Nonpreemptive frames and finite destination capacity can still miss deadlines",
+    "Immediate centralized failure knowledge, single-leaf/attachment failure points",
+    "Illustrative workloads and three seeds are not deployment guarantees"
+  ],
+  "baseline_regression_experiment": "experiments-20261030T173542Z-c74e4faf",
+  "baseline_comparison_reference": "experiments-20261030T140941Z-dd164497"
 }
