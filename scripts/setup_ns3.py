@@ -23,6 +23,23 @@ TOOLS = ROOT / '.tools'
 PREFIX = TOOLS / 'ns3-wired-install'
 
 
+def run_unit_suites(runner, env, log):
+    """ns-3.46.1 requires each discovered suite in its own process."""
+    listing = log.with_name(log.stem+'-list.log')
+    execute([runner, '--print-test-name-list', '--test-type=unit', '--fullness=QUICK'], env, listing)
+    names = [line.strip() for line in listing.read_text(encoding='utf-8').splitlines()
+             if line.strip() and not line.startswith('+ ')]
+    if not names or len(names) != len(set(names)):
+        raise SystemExit('Upstream unit-suite discovery was empty or ambiguous; refusing a false PASS')
+    for name in names:
+        execute([runner, '--test-name='+name, '--test-type=unit', '--fullness=QUICK'], env, log)
+    reports = [line[5:].rsplit(' ', 2)[0] for line in log.read_text(encoding='utf-8').splitlines()
+               if line.startswith('PASS ')]
+    if sorted(reports) != sorted(names):
+        raise SystemExit('Upstream passing-suite reports do not match the discovered suites')
+    return len(names)
+
+
 def source_tree(archive, parent):
     """Verify the pinned archive, validate members, and preserve existing source/builds."""
     if hashlib.sha256(archive.read_bytes()).hexdigest() != SHA256:
@@ -78,6 +95,7 @@ def main():
         if hashlib.sha256(partial.read_bytes()).hexdigest()!=SHA256:
             raise SystemExit('Downloaded archive checksum mismatch; partial file preserved')
         partial.rename(archive)
+    print('Verifying pinned archive and source tree before reusing build files...',flush=True)
     source=source_tree(archive,TOOLS)
     build=TOOLS/'ns3-wired-build'
     # Isolated from the previous full/NetAnim build, preserving its failure evidence.
@@ -96,9 +114,7 @@ def main():
     if len(runners)!=1:raise SystemExit('Expected one upstream test runner, found '+str(runners))
     env['PATH']=str(output/'lib')+os.pathsep+env['PATH']
     test_log=log.with_name(log.stem+'-unit-tests.log')
-    execute([runners[0],'--test-type=unit','--fullness=QUICK'],env,test_log)
-    passed=sum(line.startswith('PASS ') for line in test_log.read_text(encoding='utf-8').splitlines())
-    if passed==0:raise SystemExit('Upstream test runner reported no passing unit suites; refusing a false PASS')
+    passed=run_unit_suites(runners[0],env,test_log)
     execute(['cmake','--install',build],env,log)
     receipt=dict(status='PASS',version=VERSION,archive_sha256=SHA256,url=URL,modules=MODULES,
         platform=platform.platform(),architecture=platform.machine(),python=sys.version,

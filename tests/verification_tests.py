@@ -15,6 +15,27 @@ import checkpoint
 
 
 class VerificationTests(unittest.TestCase):
+    def test_upstream_suites_run_separately_and_require_matching_pass_reports(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            log=Path(tmp)/'units.log'
+            def execute(command, env, destination):
+                with destination.open('a',encoding='utf-8') as output:
+                    output.write('+ '+' '.join(map(str,command))+'\n')
+                    if '--print-test-name-list' in command:
+                        output.write('suite-one\nsuite with spaces\n')
+                    else:
+                        name=next(arg.removeprefix('--test-name=') for arg in command if arg.startswith('--test-name='))
+                        output.write('PASS '+name+' 0.001 s\n')
+            with patch.object(setup_ns3,'execute',side_effect=execute) as run:
+                self.assertEqual(setup_ns3.run_unit_suites('runner',{},log),2)
+                self.assertEqual(run.call_count,3)
+            # A successful process exit without suite PASS records is insufficient.
+            def silent(command,env,destination):
+                destination.write_text('suite-one\n' if '--print-test-name-list' in command else '')
+            with patch.object(setup_ns3,'execute',side_effect=silent):
+                with self.assertRaisesRegex(SystemExit,'reports do not match'):
+                    setup_ns3.run_unit_suites('runner',{},Path(tmp)/'silent.log')
+
     def test_source_archive_does_not_inherit_an_enclosing_repository_commit(self):
         with patch.object(checkpoint.shutil,'which',return_value='git'),patch.object(checkpoint.subprocess,'run') as run:
             run.return_value.returncode=0
