@@ -77,6 +77,7 @@ if(EALR_ENABLE_NS3 AND EALR_NS3_AVAILABLE)
         STATIC
             src/metrics/ns3_flow_monitor_collector.cpp
             src/simulation/ns3_packet_smoke.cpp
+            src/simulation/ns3_fabric.cpp
     )
     add_library(EALR::ns3 ALIAS ealr_ns3)
     target_link_libraries(ealr_ns3
@@ -95,6 +96,8 @@ if(EALR_ENABLE_NS3 AND EALR_NS3_AVAILABLE)
 
     add_executable(ealr-ns3-smoke src/app/ealr_ns3_smoke_main.cpp)
     target_link_libraries(ealr-ns3-smoke PRIVATE EALR::ns3)
+    add_executable(ealr-ns3-fabric src/app/ealr_ns3_fabric_main.cpp)
+    target_link_libraries(ealr-ns3-fabric PRIVATE EALR::ns3)
 
     if(EALR_NETANIM_AVAILABLE)
         target_sources(ealr_ns3 PRIVATE src/simulation/ns3_private_5g_scenario.cpp src/visualization/netanim_visualization.cpp)

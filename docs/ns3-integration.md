@@ -4,7 +4,9 @@
 
 The primary stationary experiment executable is `ealr-fabric`; its outputs remain independent
 abstract-link measurements. `ealr-ns3-smoke` is a separate real wired IPv4/UDP prerequisite
-fixture. It does not yet consume schema-v2 warehouse configurations or implement their QoS.
+fixture. The new `ealr-ns3-fabric` consumes a strict stationary wired schema-v2 subset with
+FIFO queues and size-aware Dijkstra forwarding; see [its contract and workflow](ns3-wired-warehouse.md).
+Native priority/ECMP/failure/radio support remains outside that initial subset.
 The preserved legacy robot/NetAnim adapter has a different configuration and scope.
 
 On 31 October 2026, the wired ns-3.46.1 Release build and all 150 upstream UNIT QUICK
@@ -12,7 +14,8 @@ suites passed on Windows 11 / MinGW GCC 14.2. The installed package passed all 2
 tests, including actual routed delay and receive-error loss checks. The two-hop fixture
 delivered 3/3 packets at 4.416 ms mean delay with byte-identical replay. See
 [the runtime validation report](runtime-validation.md) and checkpoint_008 for raw evidence.
-These are small wired prerequisite measurements; schema-v2 warehouse QoS and NR remain pending.
+Those checkpoint_008 results are small prerequisite measurements. The new schema-v2 slice
+has separate validation and output batches; priority QoS and NR remain pending.
 
 ## Reproducible wired prerequisites
 

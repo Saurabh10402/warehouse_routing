@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 2,
+  "name": "ns-3 wired FIFO: unequal three-zone peer/service fixture",
+  "topology": {
+    "kind": "leafSpine",
+    "minimumSpinesPerLeaf": 1,
+    "minimumEdges": 1
+  },
+  "simulation": {
+    "durationMs": 110,
+    "drainMs": 20,
+    "seed": 1,
+    "scheduler": "fifo"
+  },
+  "routing": {
+    "algorithm": "dijkstra"
+  },
+  "deadlinesMs": [
+    20,
+    20,
+    40,
+    100
+  ],
+  "zones": [
+    "A",
+    "B",
+    "C"
+  ],
+  "nodes": [
+    {
+      "id": "A0",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": "A1",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 5,
+      "y": 0
+    },
+    {
+      "id": "leafA",
+      "role": "leaf",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 10
+    },
+    {
+      "id": "B0",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 0,
+      "y": 1
+    },
+    {
+      "id": "leafB",
+      "role": "leaf",
+      "zone": "B",
+      "access": "wired",
+      "x": 0,
+      "y": 11
+    },
+    {
+      "id": "C0",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 0,
+      "y": 2
+    },
+    {
+      "id": "C1",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 5,
+      "y": 2
+    },
+    {
+      "id": "C2",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 10,
+      "y": 2
+    },
+    {
+      "id": "leafC",
+      "role": "leaf",
+      "zone": "C",
+      "access": "wired",
+      "x": 0,
+      "y": 12
+    },
+    {
+      "id": "spine",
+      "role": "spine",
+      "access": "wired",
+      "x": 0,
+      "y": 20
+    },
+    {
+      "id": "edge",
+      "role": "edge",
+      "access": "wired",
+      "x": 0,
+      "y": 30
+    }
+  ],
+  "links": [
+    {
+      "id": "A0--leafA",
+      "from": "A0",
+      "to": "leafA",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "A1--leafA",
+      "from": "A1",
+      "to": "leafA",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "leafA--spine",
+      "from": "leafA",
+      "to": "spine",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "B0--leafB",
+      "from": "B0",
+      "to": "leafB",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "leafB--spine",
+      "from": "leafB",
+      "to": "spine",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "C0--leafC",
+      "from": "C0",
+      "to": "leafC",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "C1--leafC",
+      "from": "C1",
+      "to": "leafC",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "C2--leafC",
+      "from": "C2",
+      "to": "leafC",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "leafC--spine",
+      "from": "leafC",
+      "to": "spine",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    },
+    {
+      "id": "spine--edge",
+      "from": "spine",
+      "to": "edge",
+      "capacityMbps": 5,
+      "delayMs": 2,
+      "queuePackets": 8
+    }
+  ],
+  "traffic": [
+    {
+      "id": "same-zone",
+      "source": "A0",
+      "destinations": [
+        "A1"
+      ],
+      "priority": 0,
+      "bytes": 100,
+      "startMs": 10,
+      "stopMs": 11,
+      "intervalMs": 10,
+      "phaseJitterMs": 0
+    },
+    {
+      "id": "cross-zone",
+      "source": "A0",
+      "destinations": [
+        "B0"
+      ],
+      "priority": 1,
+      "bytes": 100,
+      "startMs": 40,
+      "stopMs": 41,
+      "intervalMs": 10,
+      "phaseJitterMs": 0
+    },
+    {
+      "id": "edge-service",
+      "source": "C2",
+      "destinations": [
+        "edge"
+      ],
+      "priority": 2,
+      "bytes": 100,
+      "startMs": 70,
+      "stopMs": 71,
+      "intervalMs": 10,
+      "phaseJitterMs": 0
+    }
+  ],
+  "events": []
+}

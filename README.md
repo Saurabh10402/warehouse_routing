@@ -36,6 +36,9 @@ Mac M4/Ubuntu 24.04 setup commands, a small checked example, expected outputs an
 separately requires a real installed ns-3 wired runtime. Neither implies NR validation.
 See [runtime validation](docs/runtime-validation.md) for the executed Windows tests and
 remaining schema-v2/NR and Mac/Ubuntu boundaries.
+The initial [native wired warehouse backend](docs/ns3-wired-warehouse.md) now accepts a strict
+schema-v2 FIFO/Dijkstra subset. Run `python scripts/run_ns3_warehouse.py` for its deterministic
+packet/queue/path acceptance cases; it has separate outputs and does not replace the core study.
 
 Read `checkpoints/CURRENT_STATUS.md`, `checkpoints/PROJECT_STATE.json`, `checkpoints/NEXT_STEPS.md`, and the latest
 session summary. Verify the recorded manifest with:

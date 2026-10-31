@@ -1,6 +1,8 @@
 # Next integration contract: stationary schema-v2 in ns-3
 
-This is an implementation and acceptance contract, not an implemented backend or a result.
+This is the staged implementation and acceptance contract. The initial stationary wired
+FIFO/Dijkstra slice is now implemented as `ealr-ns3-fabric`; see its
+[supported subset and validation workflow](ns3-wired-warehouse.md). Later gates remain open.
 The small `ealr-ns3-smoke` fixture establishes dependency/runtime prerequisites only.
 Keep existing abstract-link results and their model labels unchanged.
 

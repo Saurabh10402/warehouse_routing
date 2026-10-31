@@ -97,6 +97,20 @@ NetAnim/Wi-Fi build failure is retained separately and is not fixed by excluding
 NR must use a verified compatible ns-3 release; the [upstream compatibility table](https://cttc-lena.gitlab.io/nr/html/)
 is authoritative. Do not mix the pinned wired build with an arbitrary NR release.
 
+## Native wired warehouse check
+
+After the small wired runtime check, run the supported schema-v2 warehouse acceptance cases:
+
+```sh
+python scripts/run_ns3_warehouse.py
+```
+
+This runs seven deterministic native wired FIFO/Dijkstra cases and audits packet paths,
+queues, deadlines, positions and replay. It uses a separate supported example rather than
+silently converting the primary ECMP/priority configuration. See the
+[native wired warehouse guide](ns3-wired-warehouse.md) for limits and expected outputs.
+Native priority scheduling, ECMP, failures, NR and target-host execution remain pending.
+
 ## If a command fails
 
 | Symptom | Action |

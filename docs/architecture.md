@@ -12,6 +12,12 @@ fair comparisons and provenance. See [fabric model](fabric-model.md) for the exe
 See [warehouse study](warehouse-study.md) for peer/service paths, failure domains and the
 current controlled experiment design. The first study isolates wired fabric behavior.
 
+`ns3_fabric` is a separate initial native wired schema-v2 backend. It installs stationary
+nodes, finite native device FIFOs and static size-aware Dijkstra forwarding, and records
+actual IPv4/UDP packet paths and queue events. Its strict capability checks and independent
+raw-output audit are described in [the native wired guide](ns3-wired-warehouse.md). It does
+not yet implement the primary matrix's ECMP, priority scheduling or failure events.
+
 The following section describes the retained legacy ns-3/robot design; some named modules
 there were planned interfaces, not implemented orchestration.
 
