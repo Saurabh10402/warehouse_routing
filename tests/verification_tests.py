@@ -25,7 +25,7 @@ class VerificationTests(unittest.TestCase):
                         output.write('suite-one\nsuite with spaces\n')
                     else:
                         name=next(arg.removeprefix('--test-name=') for arg in command if arg.startswith('--test-name='))
-                        output.write('PASS '+name+' 0.001 s\n')
+                        output.write('PASS subcase diagnostic: values agree\nPASS '+name+' 0.001 s\n')
             with patch.object(setup_ns3,'execute',side_effect=execute) as run:
                 self.assertEqual(setup_ns3.run_unit_suites('runner',{},log),2)
                 self.assertEqual(run.call_count,3)

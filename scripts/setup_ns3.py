@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -33,8 +34,10 @@ def run_unit_suites(runner, env, log):
         raise SystemExit('Upstream unit-suite discovery was empty or ambiguous; refusing a false PASS')
     for name in names:
         execute([runner, '--test-name='+name, '--test-type=unit', '--fullness=QUICK'], env, log)
-    reports = [line[5:].rsplit(' ', 2)[0] for line in log.read_text(encoding='utf-8').splitlines()
-               if line.startswith('PASS ')]
+    # Some suites print their own "PASS ..." diagnostics. Only the runner's complete
+    # "PASS <suite> <elapsed> s" report establishes that a suite completed.
+    reports = [match.group(1) for line in log.read_text(encoding='utf-8').splitlines()
+               if (match := re.fullmatch(r'PASS (.+) [0-9]+(?:\.[0-9]+)? s', line))]
     if sorted(reports) != sorted(names):
         raise SystemExit('Upstream passing-suite reports do not match the discovered suites')
     return len(names)
