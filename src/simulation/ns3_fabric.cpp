@@ -1,5 +1,6 @@
 #include "ealr/simulation/ns3_fabric.hpp"
 #include "ealr/routing/dijkstra_routing.hpp"
+#include "ealr/routing/ecmp_routing.hpp"
 #include <boost/json.hpp>
 #include <ns3/flow-monitor-helper.h>
 #include <ns3/internet-module.h>
@@ -18,6 +19,7 @@
 #include <map>
 #include <set>
 #include <stdexcept>
+#include <tuple>
 
 namespace ealr::fabric {
 namespace {
@@ -43,12 +45,64 @@ public:
     void Print(std::ostream& out) const override { out << id; }
 };
 
-// Centrally installed, static, size-aware forwarding tables. This is not an IGP.
-// Outbound UDP socket lookup occurs before the UDP header is added; input lookup
-// sees that header. Fragmentation and all other traffic are explicitly unsupported.
+// Read real PPP/IPv4/UDP headers, never observer tags, for queue classification.
+struct WireHeaders { ns3::Ipv4Header ip; ns3::UdpHeader udp; };
+WireHeaders wireHeaders(ns3::Ptr<const ns3::Packet> packet) {
+    auto copy = packet->Copy(); ns3::PppHeader ppp; WireHeaders headers;
+    require(copy->RemoveHeader(ppp) == 2 && ppp.GetProtocol() == 0x0021,
+            "queue requires PPP IPv4 frames");
+    require(copy->RemoveHeader(headers.ip) == 20 && headers.ip.GetProtocol() == 17 &&
+            copy->RemoveHeader(headers.udp) == 8, "queue requires unfragmented IPv4/UDP");
+    return headers;
+}
+unsigned wirePriority(ns3::Ptr<const ns3::Packet> packet) {
+    const auto tos = wireHeaders(packet).ip.GetTos();
+    // Explicit local DSCP mapping P0..P3 -> CS7, CS5, CS3, CS0; ECN bits ignored.
+    switch (tos >> 2) { case 56: return 0; case 40: return 1; case 24: return 2; case 0: return 3; }
+    throw std::invalid_argument("ns-3 wired fabric: unknown priority DSCP");
+}
+class StrictPriorityQueue : public ns3::Queue<ns3::Packet> {
+public:
+    static ns3::TypeId GetTypeId() {
+        static ns3::TypeId type = ns3::TypeId("ealr::FabricStrictPriorityQueue")
+            .SetParent<ns3::Queue<ns3::Packet>>().AddConstructor<StrictPriorityQueue>();
+        return type;
+    }
+    bool Enqueue(ns3::Ptr<ns3::Packet> packet) override {
+        // Shared finite tail-drop buffer; no eviction or admission preference.
+        return DoEnqueue(GetContainer().end(), packet);
+    }
+    ns3::Ptr<ns3::Packet> Dequeue() override { return DoDequeue(best()); }
+    ns3::Ptr<ns3::Packet> Remove() override { return DoRemove(best()); }
+    ns3::Ptr<const ns3::Packet> Peek() const override { return DoPeek(best()); }
+private:
+    ConstIterator best() const {
+        // min_element keeps the first of equal priorities: FIFO within class.
+        return std::min_element(GetContainer().begin(), GetContainer().end(),
+            [](const auto& a, const auto& b) { return wirePriority(a) < wirePriority(b); });
+    }
+};
+using FlowKey = std::tuple<std::uint32_t, std::uint32_t, unsigned, unsigned, unsigned>;
+FlowKey flowKey(std::uint32_t source, std::uint32_t destination, unsigned sourcePort, unsigned destinationPort) {
+    return {source, destination, 17, sourcePort, destinationPort};
+}
+std::uint64_t transportHash(const FlowKey& key, unsigned seed) {
+    auto [source, destination, protocol, sourcePort, destinationPort] = key;
+    std::uint64_t hash = UINT64_C(14695981039346656037);
+    // Fixed-width big-endian fields: IPv4 addresses, protocol, UDP ports, seed.
+    auto add = [&](std::uint32_t value, unsigned bytes) {
+        for (unsigned i = bytes; i > 0; --i) {
+            hash ^= (value >> ((i - 1) * 8)) & 255U; hash *= UINT64_C(1099511628211);
+        }
+    };
+    add(source,4); add(destination,4); add(protocol,1); add(sourcePort,2); add(destinationPort,2); add(seed,4);
+    return hash;
+}
+// Centrally installed static tables keyed by real five-tuple and payload size.
+// Explicit source binding makes RouteOutput receive the UDP header at the IP layer.
 class FabricRouting : public ns3::Ipv4RoutingProtocol {
 public:
-    using Key = std::pair<std::uint32_t, unsigned>;
+    using Key = std::pair<FlowKey, unsigned>;
     std::map<Key, ns3::Ptr<ns3::Ipv4Route>> routes;
     ns3::Ipv4Address address;
     ns3::Ptr<ns3::Ipv4> ipv4;
@@ -57,14 +111,19 @@ public:
             .SetParent<ns3::Ipv4RoutingProtocol>().AddConstructor<FabricRouting>();
         return type;
     }
-    ns3::Ptr<ns3::Ipv4Route> lookup(ns3::Ipv4Address destination, unsigned payload) const {
-        auto found = routes.find({destination.Get(), payload});
+    ns3::Ptr<ns3::Ipv4Route> lookup(const FlowKey& key, unsigned payload) const {
+        auto found = routes.find({key, payload});
         return found == routes.end() ? nullptr : found->second;
+    }
+    ns3::Ptr<ns3::Ipv4Route> packetRoute(ns3::Ptr<const ns3::Packet> packet, const ns3::Ipv4Header& ip) const {
+        if (!packet || ip.GetProtocol() != 17 || packet->GetSize() < 8) return nullptr;
+        ns3::UdpHeader udp; packet->PeekHeader(udp);
+        return lookup(flowKey(ip.GetSource().Get(), ip.GetDestination().Get(), udp.GetSourcePort(), udp.GetDestinationPort()), packet->GetSize()-8);
     }
     ns3::Ptr<ns3::Ipv4Route> RouteOutput(ns3::Ptr<ns3::Packet> packet,
         const ns3::Ipv4Header& header, ns3::Ptr<ns3::NetDevice> device,
         ns3::Socket::SocketErrno& error) override {
-        auto route = packet && header.GetProtocol() == 17 ? lookup(header.GetDestination(), packet->GetSize()) : nullptr;
+        auto route = packetRoute(packet, header);
         if (route && device && route->GetOutputDevice() != device) route = nullptr;
         error = route ? ns3::Socket::ERROR_NOTERROR : ns3::Socket::ERROR_NOROUTETOHOST;
         return route;
@@ -81,7 +140,7 @@ public:
         }
         auto route = header.GetProtocol() == 17 && packet->GetSize() >= 8 &&
                      ipv4->IsForwarding(static_cast<unsigned>(interface))
-            ? lookup(header.GetDestination(), packet->GetSize() - 8) : nullptr;
+            ? packetRoute(packet, header) : nullptr;
         if (route) forward(route, packet, header);
         else error(packet, header, ns3::Socket::ERROR_NOROUTETOHOST);
         return true;
@@ -92,7 +151,7 @@ public:
     void NotifyAddAddress(std::uint32_t, ns3::Ipv4InterfaceAddress) override {}
     void NotifyRemoveAddress(std::uint32_t, ns3::Ipv4InterfaceAddress) override {}
     void PrintRoutingTable(ns3::Ptr<ns3::OutputStreamWrapper> out, ns3::Time::Unit) const override {
-        *out->GetStream() << "Static size-aware wired fabric table: " << routes.size() << " entries\n";
+        *out->GetStream() << "Static transport/size-aware wired fabric table: " << routes.size() << " entries\n";
     }
     void DoDispose() override { routes.clear(); ipv4 = nullptr; ns3::Ipv4RoutingProtocol::DoDispose(); }
 };
@@ -132,6 +191,10 @@ struct Observer {
             result.hops.push_back({record.id, queue.link, receive ? queue.to : queue.from,
                 receive ? queue.from : queue.to, kind == 0 ? "attempt" : (kind == 1 ? "enqueue" : (kind == 2 ? "tx" : (receive ? "rx" : "drop"))),
                 nowMs(), packet->GetSize()});
+            const auto headers = wireHeaders(packet);
+            auto& hop = result.hops.back(); hop.ipTos = headers.ip.GetTos();
+            hop.sourcePort = headers.udp.GetSourcePort(); hop.destinationPort = headers.udp.GetDestinationPort();
+            hop.sourceAddress = headers.ip.GetSource().Get(); hop.destinationAddress = headers.ip.GetDestination().Get();
         }
     }
     void receive(ns3::Ptr<ns3::Socket> socket) {
@@ -149,6 +212,11 @@ struct Observer {
         auto& record = result.packets.at(id);
         const auto& flow = config.traffic.at(record.flowIndex);
         record.createdMs = nowMs();
+        // Explicit-address UDP sockets report acceptance even without an IP route.
+        // Check the installed static table before sending, preserving no-route accounting.
+        if (record.expectedPath.empty()) {
+            record.status = "no_route"; record.finishedMs = nowMs(); return;
+        }
         auto packet = ns3::Create<ns3::Packet>(flow.bytes);
         ObservationTag tag; tag.id = id; packet->AddPacketTag(tag);
         const int sent = senders.at(record.flowIndex)->SendTo(packet, 0,
@@ -177,8 +245,8 @@ void validateNs3Fabric(const Configuration& c) {
     require(c.seed > 0 && c.seed <= 1000000000, "seed must be in [1,1000000000]");
     require(c.durationMs >= 1e-6 && c.durationMs + c.drainMs <= 1e9,
             "duration must be at least 1 ns and total simulated time at most 1e9 ms");
-    require(c.scheduler == "fifo", "only scheduler=fifo is implemented; priority/protected queues are not available");
-    require(c.routing.algorithm == "dijkstra", "only routing.algorithm=dijkstra is implemented; ECMP/legacy routing are not available");
+    require(c.scheduler == "fifo" || c.scheduler == "strictPriority", "protected queues are not implemented; use fifo/strictPriority");
+    require(c.routing.algorithm == "dijkstra" || c.routing.algorithm == "ecmp", "legacy routing is not implemented; use dijkstra/ecmp");
     require(c.events.empty(), "availability/safety/cloud events are not implemented");
     require(c.nodes.size() <= 4096 && c.links.size() <= 16384 && c.traffic.size() <= 4096,
             "initial backend limits are 4096 nodes/flows and 16384 links");
@@ -243,6 +311,11 @@ Ns3FabricResult simulateNs3Fabric(const Configuration& c) {
         for (unsigned side = 0; side < 2; ++side) {
             auto from = side == 0 ? a : b, to = side == 0 ? b : a;
             auto device = ns3::DynamicCast<ns3::PointToPointNetDevice>(devices.Get(side));
+            if (c.scheduler == "strictPriority") {
+                auto queue = ns3::CreateObject<StrictPriorityQueue>();
+                queue->SetMaxSize(ns3::QueueSize(std::to_string(link.queuePackets) + "p"));
+                device->SetQueue(queue);
+            }
             auto index = observer.directions.size();
             directions[{from, to}] = index; links[{from, to}] = &link;
             observer.directions.push_back({from, to, device, interfaces.GetAddress(1 - side)});
@@ -254,9 +327,11 @@ Ns3FabricResult simulateNs3Fabric(const Configuration& c) {
             require(device->GetQueue()->TraceConnectWithoutContext("Enqueue", ns3::MakeBoundCallback(&tracePacket, &observer, index, 1U)), "queue trace unavailable");
         }
     }
-    std::set<std::pair<std::size_t, unsigned>> routeKeys;
-    for (const auto& flow : c.traffic) routeKeys.insert({ids.at(flow.destinations.front()), flow.bytes});
-    for (auto [target, payload] : routeKeys) for (std::size_t source = 0; source < c.nodes.size(); ++source) {
+    for (std::size_t f = 0; f < c.traffic.size(); ++f) for (std::size_t source = 0; source < c.nodes.size(); ++source) {
+        const auto& flow = c.traffic[f]; const auto target = ids.at(flow.destinations.front());
+        const auto payload = flow.bytes;
+        const auto key = flowKey(routing[ids.at(flow.source)]->address.Get(), routing[target]->address.Get(),
+                                 static_cast<unsigned>(20000+f), static_cast<unsigned>(10000+f));
         if (source == target) continue;
         std::vector<RoutingNode> snapshot;
         for (std::size_t i = 0; i < c.nodes.size(); ++i)
@@ -267,18 +342,20 @@ Ns3FabricResult simulateNs3Fabric(const Configuration& c) {
                 snapshot[pair.first].neighbours.push_back(static_cast<RobotId>(pair.second));
         }
         RoutingTopology topology(std::move(snapshot));
-        auto path = DijkstraRouting().computeRoute({topology, static_cast<RobotId>(source), static_cast<RobotId>(target),
+        const RoutingRequest request{topology, static_cast<RobotId>(source), static_cast<RobotId>(target),
             [&](const RoutingNode& from, const RoutingNode& to) {
                 const auto& link = *links.at({from.id, to.id});
                 return link.delayMs + (payload + 30.0) * 8 / (link.capacityMbps * 1000);
-            }});
+            }};
+        auto path = c.routing.algorithm == "ecmp" ? EcmpRouting(transportHash(key, c.seed)).computeRoute(request)
+                                                  : DijkstraRouting().computeRoute(request);
         if (!path.found()) continue;
         require(path.hops.size() <= 255, "route exceeds supported IPv4 TTL");
         const auto& direction = observer.directions.at(directions.at({source, path.hops.at(1)}));
         auto route = ns3::Create<ns3::Ipv4Route>();
         route->SetDestination(routing[target]->address); route->SetSource(routing[source]->address);
         route->SetGateway(direction.gateway); route->SetOutputDevice(direction.device);
-        routing[source]->routes[{routing[target]->address.Get(), payload}] = route;
+        routing[source]->routes[{key, payload}] = route;
     }
     ns3::FlowMonitorHelper flowMonitor;
     flowMonitor.SetMonitorAttribute("MaxPerHopDelay", ns3::TimeValue(timeMs(c.durationMs + c.drainMs) + ns3::Seconds(1)));
@@ -289,12 +366,16 @@ Ns3FabricResult simulateNs3Fabric(const Configuration& c) {
         require(receiver->Bind(ns3::InetSocketAddress(ns3::Ipv4Address::GetAny(), static_cast<std::uint16_t>(10000 + f))) == 0, "UDP receiver bind failed");
         receiver->SetRecvCallback(ns3::MakeCallback(&Observer::receive, &observer));
         auto sender = ns3::Socket::CreateSocket(nodes.Get(static_cast<unsigned>(source)), ns3::UdpSocketFactory::GetTypeId());
-        require(sender->Bind() == 0, "UDP sender bind failed"); sender->SetIpTtl(255);
+        require(sender->Bind(ns3::InetSocketAddress(routing[source]->address, static_cast<std::uint16_t>(20000+f))) == 0, "UDP sender bind failed");
+        sender->SetIpTtl(255);
+        const unsigned tos[] = {224,160,96,0}; sender->SetIpTos(static_cast<std::uint8_t>(tos[flow.priority]));
+        const auto key = flowKey(routing[source]->address.Get(), routing[target]->address.Get(),
+                                 static_cast<unsigned>(20000+f), static_cast<unsigned>(10000+f));
         observer.senders.push_back(sender); observer.receivers.push_back(receiver); observer.destinations.push_back(routing[target]->address);
         std::vector<std::string> expected{flow.source};
         auto node = source;
         while (node != target) {
-            auto route = routing[node]->lookup(routing[target]->address, flow.bytes);
+            auto route = routing[node]->lookup(key, flow.bytes);
             if (!route) { expected.clear(); break; }
             auto direction = std::find_if(observer.directions.begin(), observer.directions.end(), [&](const auto& d) { return d.device == route->GetOutputDevice(); });
             require(direction != observer.directions.end(), "route has unknown output device");
@@ -361,8 +442,8 @@ void writeNs3FabricResults(const Configuration& c, const Ns3FabricResult& r, con
         packets << p.id << ',' << f.id << ',' << f.source << ',' << f.destinations.front() << ',' << f.priority << ',' << f.bytes << ',' << p.status << ','
                 << p.createdMs << ',' << p.finishedMs << ',' << c.deadlinesMs[f.priority] << ',' << met << ',' << pathText(p.observedPath) << ',' << pathText(p.expectedPath) << '\n';
     }
-    hops << std::setprecision(17) << "packet,link,from,to,event,time_ms,wire_bytes\n";
-    for (const auto& h : r.hops) hops << h.packet << ',' << h.link << ',' << h.from << ',' << h.to << ',' << h.event << ',' << h.timeMs << ',' << h.wireBytes << '\n';
+    hops << std::setprecision(17) << "packet,link,from,to,event,time_ms,wire_bytes,ip_tos,source_port,destination_port,source_ipv4,destination_ipv4\n";
+    for (const auto& h : r.hops) hops << h.packet << ',' << h.link << ',' << h.from << ',' << h.to << ',' << h.event << ',' << h.timeMs << ',' << h.wireBytes << ',' << h.ipTos << ',' << h.sourcePort << ',' << h.destinationPort << ',' << ns3::Ipv4Address(h.sourceAddress) << ',' << ns3::Ipv4Address(h.destinationAddress) << '\n';
     queues << "link,from,to,attempts,admitted,started,dropped,waiting_at_cutoff,peak_waiting\n";
     for (const auto& q : r.queues) queues << q.link << ',' << q.from << ',' << q.to << ',' << q.attempts << ',' << q.admitted << ',' << q.started << ',' << q.dropped << ',' << q.waiting << ',' << q.peak << '\n';
     nodes << std::setprecision(17) << "id,role,zone,x,y,z\n";
@@ -371,7 +452,7 @@ void writeNs3FabricResults(const Configuration& c, const Ns3FabricResult& r, con
         nodes << c.nodes[i].id << ',' << c.nodes[i].role << ',' << c.nodes[i].zone << ',' << position[0] << ',' << position[1] << ',' << position[2] << '\n';
     }
     boost::json::object summary{{"model", "ns-3 stationary wired IPv4/UDP schema-v2 subset; not Ethernet switching or radio"},
-        {"scheduler", "fifo"}, {"routing", "static size-aware Dijkstra; propagation plus payload/UDP/IPv4/PPP serialization"},
+        {"scheduler", c.scheduler}, {"routing", c.routing.algorithm == "dijkstra" ? "static size-aware Dijkstra; propagation plus payload/UDP/IPv4/PPP serialization" : "static five-tuple ECMP; propagation plus payload/UDP/IPv4/PPP serialization"},
         {"offered_packets", r.packets.size()}, {"delivered_packets", delivered}, {"deadline_missed_packets", missed},
         {"packet_statuses", statuses}, {"stationary", r.stationary}, {"cutoff_ms", c.durationMs + c.drainMs},
         {"ip_transmitted_packets", r.ipTransmitted}, {"ip_received_packets", r.ipReceived},

@@ -1,7 +1,7 @@
 # Next integration contract: stationary schema-v2 in ns-3
 
 This is the staged implementation and acceptance contract. The initial stationary wired
-FIFO/Dijkstra slice is now implemented as `ealr-ns3-fabric`; see its
+FIFO/strict-priority and Dijkstra/ECMP slice is now implemented as `ealr-ns3-fabric`; see its
 [supported subset and validation workflow](ns3-wired-warehouse.md). Later gates remain open.
 The small `ealr-ns3-smoke` fixture establishes dependency/runtime prerequisites only.
 Keep existing abstract-link results and their model labels unchanged.
@@ -15,7 +15,7 @@ Represent the first wired leaf/spine model explicitly as IP routers. This does n
 transparent Ethernet switching, Wi-Fi association, or a private-5G user-plane implementation.
 
 Reject unsupported fields/modes before starting the simulator. In particular, do not silently
-ignore ECMP, protected queues, availability events, backup destinations, energy limits or
+ignore protected queues, availability events, backup destinations, energy limits or
 local safety events until each has an implementation and tests. A staged backend must clearly
 state which configurations it accepts; the existing primary matrix remains on the core runner.
 

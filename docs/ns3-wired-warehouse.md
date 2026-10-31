@@ -1,4 +1,4 @@
-# Native wired warehouse backend: first supported schema-v2 slice
+# Native wired warehouse backend: static schema-v2 policies
 
 `ealr-ns3-fabric` consumes the existing schema-v2 configuration and sends actual IPv4/UDP
 packets through ns-3 point-to-point devices. Nodes remain stationary. Zone sizes and zone
@@ -10,16 +10,17 @@ the source-extraction comparison; the statements below define the implemented mo
 ## Supported behavior and model boundary
 
 This slice supports available, continuously powered wired nodes, static topology, one
-destination per flow, deterministic periodic UDP traffic, finite FIFO queues and Dijkstra
-forwarding. Priorities select the recorded deadline; they do not change FIFO service order.
+destination per flow, deterministic periodic UDP traffic, finite FIFO or strict-priority queues and Dijkstra or per-flow ECMP forwarding.
+See [the declared native comparison](ns3-policy-study.md) for queue and transport semantics.
 The wired leaf/spine nodes are modeled as IP routers, not transparent Ethernet switches.
 No radio, NR user plane, routing-protocol convergence or physical warehouse calibration is
 implied. This is a centrally installed forwarding model with native packet transport.
 
 Each node has a stable virtual /32 address on its loopback interface. Each point-to-point
-link has its own /30 subnet. Static next-hop tables are keyed by destination and UDP payload
+link has its own /30 subnet. Static next-hop tables are keyed by explicit IP/UDP five-tuple and UDP payload
 length, so mixed packet sizes can choose different minimum free-flow-delay routes. The
-existing Dijkstra implementation supplies those tables. Costs include propagation and
+existing Dijkstra/ECMP implementations supply those tables, with ECMP hashing the actual
+transport identity and seed; observer tags never select a route. Costs include propagation and
 serialization of the payload plus UDP, IPv4 and PPP headers. Endpoint nodes cannot carry
 transit traffic. Native IP forwarding uses the installed output device and next-hop address;
 reported paths come from physical receive traces, independently of the planned table.
@@ -30,16 +31,18 @@ differs from the core's abstract byte convention; raw delays should not be equat
 accounting for headers and ns-3's nanosecond time resolution. Capacity must represent a whole
 number of bits per second. Sub-nanosecond timing is rounded to the ns-3 clock.
 
-Each link direction has one native DropTail FIFO queue. `queuePackets` counts waiting
+Each link direction has one native DropTail FIFO or custom strict-priority device queue.
+Strict priority reads IPv4 DSCP, keeps FIFO order within class and never preempts a frame.
+The buffer remains shared tail-drop: P0 can be rejected when full and lower traffic can starve. `queuePackets` counts waiting
 packets, excluding the in-service frame. Device flow control is disabled so address setup
 does not create a hidden default QueueDisc. Native attempt/enqueue/transmit/drop traces
 establish the admission and service counts. Queue capacity, both conservation equations and
-FIFO order are independently checked from exported observations. The reported peak includes
+configured service order are independently checked from exported observations. The reported peak includes
 the instantaneous enqueue before immediate service on an idle device.
 
 ## Strict unsupported-input checks
 
-The backend rejects ECMP, Greedy/EALR, strict/protected priority scheduling, all configured
+The backend rejects Greedy/EALR, protected priority scheduling, all configured
 events, unavailable nodes/links, energy-constrained nodes, Wi-Fi/NR access, backup destinations,
 self-destination flows, nonzero phase jitter, and payloads above 1472 bytes (IPv4 fragmentation).
 Safety policy fields are validated by the common schema but are inactive with no events;
@@ -60,11 +63,11 @@ After completing the prerequisites in [the first-run guide](first-run.md):
 python scripts/run_ns3_warehouse.py
 ```
 
-This requires real ns-3, configures/builds/tests the project, runs all seven declared
-deterministic acceptance cases, independently audits every exported packet/queue/node trace,
-and replays the communication case byte-for-byte. The cases are communication paths, FIFO
-overload, drain cutoff, disconnected destination, full duplex, size-sensitive routing and
-endpoint transit exclusion. They are not a multiple-seed stochastic study.
+This requires real ns-3, configures/builds/tests the project, runs all 12 declared
+acceptance controls plus the 36-run forwarding/scheduling matrix, independently audits every
+exported packet/queue/node/header trace, and replays every case byte-for-byte. The original
+seven controls are preserved. Seeds 1/2/3 vary the ECMP hash only: this is deterministic hash
+sensitivity, not stochastic replication. Scope/class tables retain all offered packets.
 
 The command prints a new `results/ns3-warehouse-...` directory. Each case includes its exact
 input plus `packets.csv`, `hops.csv`, `queues.csv`, `nodes.csv` and `summary.json`. The batch
@@ -88,7 +91,7 @@ and unloaded application delays are:
 ## Loss and deadline interpretation
 
 All offered packets remain in the deadline denominator. Delivered packets can still miss
-their configured deadline. `no_route` is an application send failure before IP transmission;
+their configured deadline. `no_route` is a static-table reachability rejection before IP transmission;
 `queue_overflow` is a native device drop. `cutoff` means still queued/in flight at the
 duration+drain boundary and is censored, not proof of permanent loss.
 
@@ -97,11 +100,10 @@ zero-delay lost-packet check counts outstanding IP packets for reconciliation. T
 field is therefore `ip_unreceived_at_cutoff`; it must not be presented as eventual network
 loss. Native application receive counts and IP byte counts are checked independently.
 
-The raw audit reconstructs physical paths and delays, directional FIFO order/occupancy,
+The raw audit reconstructs physical paths and delays, directional queue policy/occupancy,
 minimum route cost, stationarity, offered traffic and deadline outcomes. It also detects
 deliberately corrupted summary counts and wire-byte records in the CLI tests.
 
-Next extensions are native strict-priority scheduling and per-flow ECMP with controlled
-comparisons, followed by failures/services, protected queues and radio access. Keep the
+Next extensions are explicit failures/services, protected queues and radio access. Keep the
 [integration contract](ns3-warehouse-contract.md) and recorded checkpoint limitations visible.
 Mac M4 and Ubuntu ARM64 execution remain separate uncompleted validation gates.

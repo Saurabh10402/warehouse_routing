@@ -3,6 +3,7 @@
 #include <cmath>
 #include <functional>
 #include <iostream>
+#include <set>
 
 using namespace ealr::fabric;
 namespace {
@@ -71,8 +72,58 @@ int main() {
         diamond.nodes[2].role = "endpoint"; diamond.nodes[2].zone = "A";
         auto transit = simulateNs3Fabric(diamond);
         check(transit.packets[0].observedPath == std::vector<std::string>({"a", "fast", "b"}), "Endpoints never act as transit routers");
-        rejected(c, [](auto& x) { x.scheduler = "strictPriority"; }, "scheduler=fifo");
-        rejected(c, [](auto& x) { x.routing.algorithm = "ecmp"; }, "algorithm=dijkstra");
+        auto priority = pair(); priority.scheduler = "strictPriority";
+        priority.durationMs = 6; priority.drainMs = 1000; priority.links[0].queuePackets = 8;
+        priority.traffic.clear();
+        for (unsigned i = 0; i < 5; ++i) {
+            const unsigned classes[] = {3,3,0,0,1};
+            priority.traffic.push_back({"p"+std::to_string(i), "a", {"b"}, classes[i], 100,
+                                       static_cast<double>(i), static_cast<double>(i+1), 10, 0});
+        }
+        auto ordered = simulateNs3Fabric(priority); std::vector<std::size_t> order;
+        for (const auto& h : ordered.hops) if (h.event == "tx") order.push_back(h.packet);
+        check(order == std::vector<std::size_t>({0,2,3,4,1}), "Nonpreemption, strict priority, FIFO within class");
+        check(ordered.ipReceived == 5 && ordered.queues[0].peak == 4, "Priority shared-buffer conservation");
+        priority.links[0].queuePackets = 1;
+        auto full = simulateNs3Fabric(priority);
+        check(full.packets[2].status == "queue_overflow" && full.packets[1].status == "delivered",
+              "P0 arrival cannot evict a lower-class packet from a full shared buffer");
+        priority.links[0].queuePackets = 16; priority.durationMs = 400; priority.drainMs = 0;
+        priority.traffic.resize(2);
+        priority.traffic.push_back({"flood", "a", {"b"}, 0, 100, 2, 400, 100, 0});
+        auto starved = simulateNs3Fabric(priority);
+        check(starved.packets[1].status == "cutoff" && starved.packets[2].status == "delivered" &&
+              starved.packets[3].status == "delivered", "Sustained high priority can starve admitted lower traffic");
+
+        diamond.nodes[2].role = "relay"; diamond.nodes[2].zone.clear();
+        diamond.routing.algorithm = "ecmp"; diamond.durationMs = 100; diamond.drainMs = 1000;
+        for (auto& link : diamond.links) { link.capacityMbps = 1; link.delayMs = .1; link.queuePackets = 512; }
+        diamond.traffic.clear();
+        for (unsigned i = 0; i < 32; ++i)
+            diamond.traffic.push_back({"f"+std::to_string(i), "a", {"b"}, i%4, 100, i*3., i*3.+3, 1, 0});
+        auto balanced = simulateNs3Fabric(diamond); std::set<std::string> branches;
+        for (std::size_t i = 0; i < balanced.packets.size(); i += 3) {
+            const auto& path = balanced.packets[i].observedPath; branches.insert(path.at(1));
+            check(path == balanced.packets[i+1].observedPath && path == balanced.packets[i+2].observedPath,
+                  "Consecutive packets retain the transport flow path");
+        }
+        check(branches.size() == 2 && balanced.ipReceived == 96, "ECMP uses both eligible branches for the declared flows");
+        diamond.seed = 2; auto reseeded = simulateNs3Fabric(diamond); bool changed = false;
+        for (std::size_t i = 0; i < balanced.packets.size(); ++i)
+            changed = changed || balanced.packets[i].observedPath != reseeded.packets[i].observedPath;
+        check(changed, "ECMP seed participates in transport hash");
+        auto replay = simulateNs3Fabric(diamond);
+        for (std::size_t i = 0; i < replay.packets.size(); ++i)
+            check(replay.packets[i].observedPath == reseeded.packets[i].observedPath &&
+                  replay.packets[i].finishedMs == reseeded.packets[i].finishedMs, "ECMP deterministic replay");
+        diamond.nodes[2].role = "endpoint"; diamond.nodes[2].zone = "A";
+        for (const auto& packet : simulateNs3Fabric(diamond).packets)
+            check(packet.observedPath == std::vector<std::string>({"a","fast","b"}), "ECMP excludes endpoint transit");
+        diamond.nodes[2].role = "relay"; diamond.nodes[2].zone.clear(); diamond.links[0].delayMs = 10;
+        for (const auto& packet : simulateNs3Fabric(diamond).packets)
+            check(packet.observedPath == std::vector<std::string>({"a","fast","b"}), "ECMP excludes more expensive branches");
+        rejected(c, [](auto& x) { x.scheduler = "protectedPriority"; x.protectedQueues.reservedEmergencyPackets = 1; }, "protected queues");
+        rejected(c, [](auto& x) { x.routing.algorithm = "greedy"; }, "legacy routing");
         rejected(c, [](auto& x) { x.events.push_back({"node", "spine", "", 5, 20, false}); }, "events");
         rejected(c, [](auto& x) { x.topology = "graph"; x.nodes[0].access = "wifi"; }, "Wi-Fi/NR");
         rejected(c, [](auto& x) { x.nodes[0].available = false; }, "unavailable");

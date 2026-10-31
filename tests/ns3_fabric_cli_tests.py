@@ -35,11 +35,28 @@ class NativeCliTests(unittest.TestCase):
                 writer = csv.DictWriter(stream,fieldnames=list(hops[0])); writer.writeheader(); writer.writerows(hops)
             with self.assertRaisesRegex(ValueError,'PPP wire byte count'): validate_output(output,config)
 
+    def test_priority_and_ecmp_audits_reject_forged_metadata(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for name,config in cases():
+                if name not in ['priority-order','matrix-mixed-s1-ecmp-fifo']: continue
+                path = root/(name+'.json'); output=root/name
+                path.write_text(json.dumps(config))
+                run=subprocess.run([EXE,'--config',path,'--output',output],capture_output=True,text=True)
+                self.assertEqual(run.returncode,0,run.stderr); validate_output(output,config)
+                artifact='hops.csv' if name=='priority-order' else 'packets.csv'
+                with (output/artifact).open(newline='') as stream: records=list(csv.DictReader(stream))
+                if name=='priority-order': records[0]['ip_tos']='224'
+                else: records[0]['expected_path']='forged'
+                with (output/artifact).open('w',newline='') as stream:
+                    writer=csv.DictWriter(stream,fieldnames=list(records[0]));writer.writeheader();writer.writerows(records)
+                with self.assertRaisesRegex(ValueError,'wire DSCP|ECMP transport hash'): validate_output(output,config)
+
     def test_unsupported_settings_fail_without_output(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            for name, change in [('priority',lambda c:c['simulation'].update(scheduler='strictPriority')),
-                                 ('ecmp',lambda c:c['routing'].update(algorithm='ecmp')),
+            for name, change in [('protected',lambda c:c['simulation'].update(scheduler='protectedPriority',protectedQueues=dict(reservedEmergencyPackets=1))),
+                                 ('legacy',lambda c:c['routing'].update(algorithm='greedy')),
                                  ('events',lambda c:c.update(events=[dict(type='link',target='leafA--spine',timeMs=5,available=False)]))]:
                 config = copy.deepcopy(cases()[0][1]); change(config); path = root/(name+'.json')
                 path.write_text(json.dumps(config)); output = root/name

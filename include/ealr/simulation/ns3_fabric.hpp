@@ -14,6 +14,8 @@ struct Ns3HopRecord {
     std::string link, from, to, event;
     double timeMs = 0;
     unsigned wireBytes = 0;
+    unsigned ipTos = 0, sourcePort = 0, destinationPort = 0;
+    std::uint32_t sourceAddress = 0, destinationAddress = 0;
 };
 struct Ns3QueueRecord {
     std::string link, from, to;

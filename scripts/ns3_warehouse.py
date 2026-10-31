@@ -4,6 +4,7 @@ import csv
 import heapq
 import json
 import math
+import ipaddress
 from collections import Counter, defaultdict, deque
 from pathlib import Path
 
@@ -33,8 +34,48 @@ def cases():
     diamond['traffic'] = [dict(pair['traffic'][0], id='small', bytes=1, startMs=10, stopMs=11, intervalMs=10),
                           dict(pair['traffic'][0], id='large', bytes=1400, startMs=50, stopMs=51, intervalMs=10, priority=3)]
     transit = copy.deepcopy(diamond); transit['nodes'][2].update(role='endpoint', zone='A')
-    return [('communications', base), ('fifo-overload', pair), ('cutoff', cutoff),
-            ('disconnected', disconnected), ('full-duplex', duplex), ('size-sensitive', diamond), ('endpoint-transit', transit)]
+    controls = [('communications', base), ('fifo-overload', pair), ('cutoff', cutoff),
+                ('disconnected', disconnected), ('full-duplex', duplex), ('size-sensitive', diamond), ('endpoint-transit', transit)]
+    priority = copy.deepcopy(pair)
+    priority['simulation'].update(scheduler='strictPriority',durationMs=6,drainMs=1000)
+    priority['links'][0]['queuePackets'] = 8
+    priority['traffic'] = [dict(pair['traffic'][0],id='p'+str(i),priority=p,startMs=i,stopMs=i+1,intervalMs=10) for i,p in enumerate([3,3,0,0,1])]
+    full = copy.deepcopy(priority); full['links'][0]['queuePackets'] = 1
+    starved = copy.deepcopy(priority)
+    starved['simulation'].update(durationMs=400,drainMs=0); starved['links'][0]['queuePackets'] = 16
+    starved['traffic'] = starved['traffic'][:2]+[dict(pair['traffic'][0],id='flood',startMs=2,stopMs=400,intervalMs=100)]
+    expensive = copy.deepcopy(diamond); expensive['routing']['algorithm']='ecmp'
+    excluded = copy.deepcopy(transit); excluded['routing']['algorithm']='ecmp'
+    controls += [('priority-order',priority),('priority-full',full),('priority-starvation',starved),
+                 ('ecmp-size-sensitive',expensive),('ecmp-endpoint-transit',excluded)]
+    return controls + policy_cases(base)
+
+
+def policy_cases(base):
+    """Predeclared three scenarios x seeds 1/2/3 x four forwarding/service policies."""
+    fabric = copy.deepcopy(base)
+    fabric['nodes'].append(dict(id='spine2',role='spine',access='wired',x=60,y=20))
+    fabric['links'] += [dict(link,id=link['id']+'-second', **{'from': 'spine2' if link['from']=='spine' else link['from'],
+                         'to': 'spine2' if link['to']=='spine' else link['to']}) for link in base['links'] if 'spine' in [link['from'],link['to']]]
+    fabric['simulation'].update(durationMs=80,drainMs=1000)
+    fabric['traffic'] = [dict(id=scope+'-p'+str(p), source=source,destinations=[target],priority=p,bytes=[64,128,256,1000][p],
+                             startMs=p*.1+i*.01,stopMs=80,intervalMs=[4,6,8,10][p],phaseJitterMs=0)
+                         for i,(scope,source,target) in enumerate([('same','A0','A1'),('cross','A0','B0'),('edge','C2','edge')]) for p in range(4)]
+    runs = []
+    for scenario in ['mixed','uplink-contention','destination-bottleneck']:
+        for seed in [1,2,3]:
+            for routing in ['dijkstra','ecmp']:
+                for scheduler in ['fifo','strictPriority']:
+                    config = copy.deepcopy(fabric)
+                    config['simulation'].update(seed=seed,scheduler=scheduler); config['routing']['algorithm']=routing
+                    config['name']='Native static policy comparison: '+scenario
+                    for link in config['links']:
+                        ends={link['from'],link['to']}
+                        if (scenario=='uplink-contention' and ends & {'leafA','leafC'} and ends & {'spine','spine2'}) or (scenario=='destination-bottleneck' and 'edge' in ends):
+                            link.update(capacityMbps=.2,queuePackets=4)
+                    runs.append((f'matrix-{scenario}-s{seed}-{routing}-{scheduler}',config))
+    return runs
+
 
 
 def require(condition, message):
@@ -68,6 +109,35 @@ def minimum_delay(config, source, target, payload):
     return math.inf
 
 
+def ecmp_path(config, flow, flow_index):
+    """Independent reverse-distance eligibility plus specified wire-tuple hash."""
+    nodes = {n['id']:n for n in config['nodes']}
+    indices = {n['id']:i for i,n in enumerate(config['nodes'])}
+    source, target = flow['source'], flow['destinations'][0]
+    adjacency = defaultdict(list)
+    for link in config['links']:
+        cost = link['delayMs']+(flow['bytes']+30)*8/(link['capacityMbps']*1000)
+        for a,b in [(link['from'],link['to']),(link['to'],link['from'])]: adjacency[a].append((b,cost))
+    distance = {n:minimum_delay(config,n,target,flow['bytes']) if nodes[n]['role']!='endpoint' or n in [source,target] else math.inf for n in nodes}
+    if math.isinf(distance[source]): return []
+    mask = (1<<64)-1; value = 14695981039346656037
+    fields = [(0xac100001+indices[source],4),(0xac100001+indices[target],4),(17,1),(20000+flow_index,2),(10000+flow_index,2),(config['simulation']['seed'],4)]
+    for field, width in fields:
+        for byte in field.to_bytes(width,'big'): value = ((value^byte)*1099511628211)&mask
+    path = [source]
+    while path[-1] != target:
+        node = path[-1]
+        eligible = sorted((b for b,cost in adjacency[node] if distance[b]<distance[node] and abs(cost+distance[b]-distance[node])<=1e-12*max(1.,distance[node])), key=indices.get)
+        require(bool(eligible), 'ECMP no eligible next hop')
+        h = (value+indices[node]+0x9e3779b97f4a7c15)&mask
+        h = ((h^(h>>30))*0xbf58476d1ce4e5b9)&mask
+        h = ((h^(h>>27))*0x94d049bb133111eb)&mask
+        h ^= h>>31
+        path.append(eligible[h%len(eligible)])
+        require(len(path)<=len(nodes), 'ECMP reference loop')
+    return path
+
+
 def validate_output(output, config):
     """Recompute counts, FIFO conservation, hop timing, paths and deadlines from traces."""
     output = Path(output)
@@ -75,7 +145,7 @@ def validate_output(output, config):
     packets, hops, queues, positions = [rows(output/name) for name in ARTIFACTS[:4]]
     flows = {f['id']: f for f in config['traffic']}; nodes = {n['id']: n for n in config['nodes']}
     links = {link['id']: link for link in config['links']}
-    require('ns-3 stationary wired' in summary['model'] and summary['scheduler'] == 'fifo', 'wrong model label')
+    require('ns-3 stationary wired' in summary['model'] and summary['scheduler'] == config['simulation']['scheduler'], 'wrong model label')
     require(summary['stationary'] is True and len(positions) == len(nodes), 'stationarity/node count')
     require({n['id'] for n in positions} == set(nodes), 'node IDs')
     for actual in positions:
@@ -88,6 +158,9 @@ def validate_output(output, config):
         while flow.get('startMs', 0)+k*flow['intervalMs'] < flow['stopMs']:
             offered.append((flow, flow.get('startMs', 0)+k*flow['intervalMs'])); k += 1
     require(len(packets) == len(offered), 'offered packet denominator')
+    flow_indices = {f['id']:i for i,f in enumerate(config['traffic'])}
+    node_indices = {n['id']:i for i,n in enumerate(config['nodes'])}
+    planned = {f['id']:ecmp_path(config, f, i) for i,f in enumerate(config['traffic'])} if config['routing']['algorithm']=='ecmp' else {}
     by_id = {}; statuses = Counter(); missed = 0; received_bytes = 0
     cutoff = config['simulation']['durationMs']+config['simulation'].get('drainMs', 100)
     require(summary['cutoff_ms'] == cutoff, 'measurement cutoff')
@@ -106,6 +179,8 @@ def validate_output(output, config):
         path = packet['observed_path'].split('>')
         require(path[0] == flow['source'] and len(path) == len(set(path)), 'observed source/path loop')
         require(all(nodes[n]['role'] != 'endpoint' for n in path[1:-1]), 'endpoint used as transit')
+        if planned:
+            require(packet['expected_path'] == '>'.join(planned[flow['id']]), 'ECMP transport hash/eligible next hop')
         minimum = minimum_delay(config, flow['source'], flow['destinations'][0], flow['bytes'])
         if status == 'no_route': require(math.isinf(minimum) and path == [flow['source']], 'incorrect no-route result')
         if status == 'delivered':
@@ -128,6 +203,11 @@ def validate_output(output, config):
         require(math.isfinite(time) and last_time <= time <= cutoff+1e-6, 'hop chronology'); last_time = time
         require(float(packet['created_ms'])-1e-9 <= time <= float(packet['finished_ms'])+1e-9, 'hop outside packet lifetime')
         require(int(hop['wire_bytes']) == int(packet['payload_bytes'])+30, 'wrong PPP wire byte count')
+        flow = flows[packet['flow']]; f = flow_indices[flow['id']]
+        require(int(hop['source_port']) == 20000+f and int(hop['destination_port']) == 10000+f, 'UDP transport identity')
+        require(hop['source_ipv4'] == str(ipaddress.IPv4Address(0xac100001+node_indices[flow['source']])) and
+                hop['destination_ipv4'] == str(ipaddress.IPv4Address(0xac100001+node_indices[flow['destinations'][0]])), 'IPv4 transport identity')
+        require(int(hop['ip_tos']) == [224,160,96,0][flow['priority']], 'wire DSCP priority mapping')
         counts[key][event] += 1
         if event == 'attempt':
             require(packet_id not in drop_ids and packet_id not in in_flight and paths[packet_id][-1] == hop['from'], 'attempt from wrong node/state')
@@ -136,10 +216,12 @@ def validate_output(output, config):
             require((packet_id,key) in attempted and len(waiting[key]) < link.get('queuePackets',100), 'queue admission exceeds capacity')
             waiting[key].append(packet_id); peaks[key] = max(peaks[key],len(waiting[key]))
         elif event == 'tx':
-            require(waiting[key] and waiting[key][0] == packet_id and packet_id not in in_flight, 'FIFO order or duplicate transmission')
+            require(bool(waiting[key]), 'transmission from empty queue')
+            chosen = waiting[key][0] if config['simulation']['scheduler']=='fifo' else min(waiting[key], key=lambda p:int(by_id[p]['priority']))
+            require(chosen == packet_id and packet_id not in in_flight, 'queue service order or duplicate transmission')
             require(time >= tx_free[key]-2e-6, 'overlapping transmissions on one directional port')
             tx_free[key] = time+int(hop['wire_bytes'])*8/(link['capacityMbps']*1000)
-            waiting[key].popleft(); in_flight[packet_id] = (key,time)
+            waiting[key].remove(packet_id); in_flight[packet_id] = (key,time)
         elif event == 'rx':
             require(packet_id in in_flight, 'receive without physical transmission')
             sent_key, sent_time = in_flight.pop(packet_id)

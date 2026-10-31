@@ -105,11 +105,12 @@ After the small wired runtime check, run the supported schema-v2 warehouse accep
 python scripts/run_ns3_warehouse.py
 ```
 
-This runs seven deterministic native wired FIFO/Dijkstra cases and audits packet paths,
-queues, deadlines, positions and replay. It uses a separate supported example rather than
-silently converting the primary ECMP/priority configuration. See the
+This runs 12 native wired controls and 36 policy comparisons (three scenarios, three ECMP
+hash seeds, four policies), auditing packet paths, headers, queues, deadlines, positions and
+every replay. It uses declared supported inputs with identical offered traffic across policies. See the
 [native wired warehouse guide](ns3-wired-warehouse.md) for limits and expected outputs.
-Native priority scheduling, ECMP, failures, NR and target-host execution remain pending.
+Native failures, protected queues, NR and target-host execution remain pending.
+See [the native policy declaration](ns3-policy-study.md) for interpretation and limits.
 
 ## If a command fails
 
