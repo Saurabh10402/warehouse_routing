@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_009",
-  "utc": "2026-10-31T18:57:01.841296+00:00",
-  "phase": "initial-native-wired-schema-v2-validated",
-  "source_state": "manifests/checkpoint_009.json",
+  "checkpoint": "checkpoint_010",
+  "utc": "2026-10-31T22:00:29.828456+00:00",
+  "phase": "native-static-priority-ecmp-validated",
+  "source_state": "manifests/checkpoint_010.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -46,18 +46,24 @@
     "native finite per-direction FIFO queues without hidden QueueDisc",
     "native packet/hop/queue/position traces and explicit cutoff versus observed loss",
     "independent native trace/FIFO/deadline/IP audit, replay and fresh-source reproduction",
-    "strict early capability/numerical bounds and output preservation"
+    "strict early capability/numerical bounds and output preservation",
+    "native finite shared nonpreemptive strict-priority queues classified from actual IPv4 DSCP",
+    "native transport-keyed static ECMP with explicit UDP source binding and seed",
+    "native wire header traces and independent queue-service/ECMP-hash audit",
+    "predeclared 12 native controls + 36 policy runs with identical arrivals and every replay",
+    "fresh native source build reproduces 240 measurements and all policy tables"
   ],
   "pending": [
+    "bounded native process supervision; diagnose intermittent Windows exit delay",
     "warehouse traffic/loss/availability calibration",
-    "native ns-3 strict priority/per-flow ECMP, dynamic failures/backup services, protected queues and compatible NR user-plane integration",
+    "native ns-3 dynamic failures/backup services, protected queues and compatible NR user-plane integration",
     "cross-platform execution",
     "final research/deployment claim validation",
     "per-port downstream arrival bounds, uplink/reservation-size sensitivity and calibrated admission policy"
   ],
   "known_defects": [],
   "build_status": "PASS native and isolated fresh-source project Debug builds on Windows GCC 14.2 / Boost 1.85 / existing verified ns-3.46.1 wired Release",
-  "test_status": "24/24 native project tests and 24/24 fresh source; seven deterministic cases/audits/replay in each, 35 byte-identical artifacts across roots; core 20/20 and full 132 exact regressions/replay/55 charts PASS",
+  "test_status": "24 native/fresh tests each; 12 controls + 36 native policy runs in each with every replay/audit; 240 identical measurements. Core 20 tests and 132 exact comparisons/replay/55 charts PASS",
   "experiment_identifiers": [
     "experiments-20261029T210304Z-82f715a2",
     "experiments-20261029T212427Z-4a13d923",
@@ -74,10 +80,13 @@
     "ns3-smoke-20261031T102542Z-fd5d9232",
     "ns3-warehouse-20261031T183840Z-7256a26e",
     "ns3-warehouse-20261031T185300Z-b07383e3",
-    "experiments-20261031T173020Z-a8e5dbed"
+    "experiments-20261031T173020Z-a8e5dbed",
+    "ns3-warehouse-20261031T215600Z-dd1a4b9a",
+    "ns3-warehouse-20261031T215445Z-85e4fb40",
+    "experiments-20261031T215045Z-6af82532"
   ],
   "dependencies": {
-    "ns3": "Verified 3.46.1 wired Release retained (150 UNIT QUICK suites at checkpoint_008); initial schema-v2 linked backend now passes 24 project tests and seven deterministic native cases. Full Wi-Fi/NetAnim failure remains unresolved.",
+    "ns3": "Verified wired 3.46.1 Release retained; 150 prior UNIT QUICK suites. Static native priority/ECMP passes 24 tests and 48 runs in main/fresh builds. Radio remains unvalidated.",
     "5g_lena": "not installed",
     "portable_toolchain": "GCC 14.2.0, Boost 1.85 SHA256 verified"
   },
@@ -86,8 +95,8 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Add native strict-priority scheduling and per-flow ECMP with controlled comparisons; retain FIFO/native seven-case evidence and exact core regressions. See docs/ns3-wired-warehouse.md and docs/ns3-warehouse-results.md.",
-  "tested_code_commit": "49d4f4538873ec2619b52b726e70d1c7693f8ccd",
+  "next_action": "Bounded/logged native subprocess supervision with timeout test; then explicit native failure/recovery and backup-service controls.",
+  "tested_code_commit": "3e97cd064d8e8fe102b928b7fb03a147cb9b1611",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
   "research_direction": "Powered stationary fabric; priority scheduling and resilience. EALR preserved as legacy, excluded from primary matrix.",
@@ -101,15 +110,16 @@
     "No tested capacity/admission setting eliminates P0 misses in burst/flood cases",
     "Unpoliced P0 can starve lower classes; zero mixed-load P0 misses are finite-run observations",
     "Endpoint envelopes bound source generation, not post-queue downstream arrivals",
-    "Native schema-v2 results cover seven deterministic wired FIFO/Dijkstra acceptance cases, not the full primary matrix or NR",
     "Release ns-3 UNIT QUICK tests only; system/extensive suites were not run",
     "Mac/Ubuntu installation recipes are prepared but not executed on those platforms",
     "Native wired model uses IP routers, virtual node /32 addresses and static size-aware forwarding, not Ethernet switching or an IGP",
-    "Native subset rejects priority/ECMP/events/energy/radio/backup/jitter/fragmentation; numerical/resource limits are explicit",
-    "Native cutoff packets are censored and included as deadline misses; FlowMonitor unreceived-at-cutoff is not proven permanent loss"
+    "Native cutoff packets are censored and included as deadline misses; FlowMonitor unreceived-at-cutoff is not proven permanent loss",
+    "Native 12 controls + 36 policy runs cover static wired behavior; three seeds vary ECMP hash only, not stochastic arrivals or radio",
+    "Native protected queues/events/energy/radio/backup/jitter/fragmentation remain unsupported",
+    "One Windows native child delayed exit after writing results; exact retry/full retry/fresh workflow passed, cause unestablished; interrupted raw batch retained"
   ],
-  "baseline_regression_experiment": "experiments-20261031T173020Z-a8e5dbed",
-  "baseline_comparison_reference": "experiments-20261031T094745Z-723bc3c8",
+  "baseline_regression_experiment": "experiments-20261031T215045Z-6af82532",
+  "baseline_comparison_reference": "experiments-20261031T173020Z-a8e5dbed",
   "protected_regression_experiment": "experiments-20261030T175551Z-a5db7fd7",
   "handoff_requirements": {
     "user_constraint": "User cannot run or debug the project now; Mac access and future agent access may be unavailable. Minimize manual debugging at handoff.",
@@ -126,10 +136,10 @@
       "Distinguish actually executed target-platform tests from documented but unexecuted commands.",
       "Resolve and validate real ns-3/schema-v2/NR integration before describing the whole requested product as finished."
     ],
-    "current_readiness": "Core plus initial native schema-v2 wired FIFO/Dijkstra backend validated on Windows, including fresh source build. Native QoS/ECMP/failures/NR, calibration and actual Mac/Ubuntu tests still required; whole product not complete."
+    "current_readiness": "Core and static native FIFO/priority Dijkstra/ECMP validated, including fresh source. Process supervision, native failures/services/protected queues/NR, calibration and actual target-host builds remain required."
   },
   "ns3_smoke_experiment": "ns3-smoke-20261031T102542Z-fd5d9232",
   "first_run_experiment": "first-run-20261031T101929Z-5481bba4",
-  "ns3_warehouse_experiment": "ns3-warehouse-20261031T183840Z-7256a26e",
-  "fresh_ns3_experiment": "ns3-warehouse-20261031T185300Z-b07383e3"
+  "ns3_warehouse_experiment": "ns3-warehouse-20261031T215600Z-dd1a4b9a",
+  "fresh_ns3_experiment": "ns3-warehouse-20261031T215445Z-85e4fb40"
 }

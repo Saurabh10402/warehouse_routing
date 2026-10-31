@@ -64,3 +64,8 @@
     queue loss and cutoff censoring. Name FlowMonitor reconciliation unreceived-at-cutoff.
 30. Reject unsupported native features before simulation/output; preserve the full core study.
     Seven deterministic native acceptance cases are not a multiple-seed stochastic study.
+
+31. Native scheduling reads actual DSCP; shared tail-drop, nonpreemption and FIFO within class.
+32. Native ECMP uses actual explicit IP/UDP transport identity and seed, never observer tags.
+33. Three native seeds are hash sensitivity only. Preserve losses and lower-class tradeoffs.
+34. Successful retries do not establish the cause or repair of intermittent process-exit delays.

@@ -4,7 +4,7 @@
 packets through ns-3 point-to-point devices. Nodes remain stationary. Zone sizes and zone
 counts are input data. The new example has three zones with 2, 1 and 3 endpoints.
 The existing `ealr-fabric` model and its primary research matrix remain independent.
-See [checkpoint_009 results](ns3-warehouse-results.md) for actual tests, raw outcomes and
+See [current priority/ECMP results](ns3-policy-results.md) and [checkpoint_009 results](ns3-warehouse-results.md) for actual tests, raw outcomes and
 the source-extraction comparison; the statements below define the implemented model.
 
 ## Supported behavior and model boundary

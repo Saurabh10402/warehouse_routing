@@ -1,28 +1,25 @@
-# Resume after checkpoint_009
+# Resume after checkpoint_010
 
-1. Read CURRENT_STATUS, PROJECT_STATE, sessions/session_006.md, docs/ns3-wired-warehouse.md
-   and docs/ns3-warehouse-results.md. Inspect Git status and verify checkpoint_009.
-2. Add native strict-priority queue service with one explicit finite waiting buffer per
-   direction. Test nonpreemption, priority and same-priority ordering, admission/overflow,
-   lower-class starvation and conservation. Preserve the native FIFO controls.
-3. Add per-flow ECMP keyed by explicit transport flow identity and seed. Do not substitute
-   per-packet random routing or use observer tags to fabricate a wire-level routing policy.
-   Test equal-cost path eligibility, stable flows, endpoint exclusion and deterministic replay.
-4. Declare the native forwarding/scheduling comparison before running it. Keep payload/IP/PPP
-   byte conventions and cutoff/drop/deadline accounting explicit. Do not equate native/core
-   delays or describe repeated deterministic fixtures as stochastic seed evaluation.
-5. Add explicit failure detection/recovery, backup services, protected queues and safety
-   fan-out only with separate native tests; retain unsupported-input rejection until ready.
-6. Pin compatible ns-3/5G-LENA versions and verify EPC/UPF receiver traffic before NR claims.
-   Existing optional Wi-Fi/NetAnim compiler diagnostic remains preserved.
-7. Run actual clean MacBook Air M4 / Ubuntu 24.04 ARM64 UTM builds when available. Current
-   source-extraction evidence uses Windows with external verified dependencies, not those hosts.
-8. Calibrate warehouse workload/access/deadline requirements before deployment conclusions.
+Read CURRENT_STATUS, PROJECT_STATE, sessions/session_007.md and native policy study/results.
+Inspect Git status and verify checkpoint_010 before changes.
 
-Completed: scripts/run_ns3_warehouse.py (all seven cases, raw audit and replay); the same
-workflow from isolated source (24 tests, 35 identical artifacts); full scripts/run_all_experiments.py
---suite warehouse --preset bootstrap --baseline results/experiments-20261031T094745Z-723bc3c8
-(132 exact comparisons, replay, 55 charts). The earlier 150-suite ns-3 dependency validation
-remains applicable to the unchanged installed runtime; it was not needlessly rerun.
+Next exact action: implement bounded, logged subprocess supervision for deterministic native
+cases, with a controlled hung-child/partial-log regression test. Preserve timeout outputs
+without declaring PASS. Then declare/implement native link/node failure detection, recovery,
+queue/in-flight fate and backup destinations. No invented convergence or service replication.
+Protected queues/safety/NR remain rejected until implemented and tested. Read traffic and
+capacity findings before queue changes. Actual Mac M4/Ubuntu ARM64 builds, compatible NR/UPF
+tests and workload calibration remain required; whole product readiness is still open.
 
-Preserve all prior archives/manifests/raw batches. No random movement in the primary runners.
+Retain all 48 native cases/replays, identical policy arrivals, hash sensitivity and original
+seven-case FIFO controls. Run the full 132-run core baseline regression. Keep models distinct
+and all raw/provenance/history artifacts; no random movement in the primary workflow.
+
+Completed:
+Tested implementation: 3e97cd064d8e8fe102b928b7fb03a147cb9b1611. Later source edits are reports only.
+Main: ns3-warehouse-20261031T215600Z-dd1a4b9a. Fresh: ns3-warehouse-20261031T215445Z-85e4fb40.
+Each passed 24/24 CTest, 12 acceptance controls + 36 native policy runs, independent audits
+and every replay. All 48 inputs, 240 measurement artifacts and aggregate tables match
+byte-for-byte across builds. Original seven FIFO controls match every pre-existing field.
+Core: experiments-20261031T215045Z-6af82532, 20 tests and 132 exact baseline input/packet comparisons
+versus experiments-20261031T173020Z-a8e5dbed, replay and 55 charts PASS.

@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "main": "ns3-warehouse-20261031T215600Z-dd1a4b9a",
+  "fresh": "ns3-warehouse-20261031T215445Z-85e4fb40",
+  "measurement_artifacts": 240,
+  "input_configs": 48,
+  "aggregate_tables": "byte-identical",
+  "source_sha256": "c0fb49089570ee29fd103103714bcf98a8dd91204217dafc4cc081479afc67b3",
+  "scope": "Fresh Windows source build with external verified dependencies; not Mac/Ubuntu execution"
+}

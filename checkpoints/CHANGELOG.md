@@ -52,3 +52,9 @@ artifact auditing. Main and fresh source: 24 tests and seven deterministic cases
 35 measurement artifacts byte-identical. Core 20 tests and 132 exact regression runs/replay/55
 charts PASS. Preserved interrupted timeout diagnostics and adverse loss/deadline outcomes.
 Native strict priority/ECMP/dynamic failures/NR and actual Mac/Ubuntu tests remain pending.
+
+## checkpoint_010
+Native DSCP shared priority queues, explicit transport ECMP, raw headers, independent audits,
+12 controls and declared 36-run matrix. Main/fresh 24 tests and 48 cases/replays PASS; 240
+identical artifacts. Core 20 tests/132 exact regressions/55 charts PASS. Retained adverse P0/P3
+tradeoffs and an interrupted Windows exit delay; bounded supervision is the next task.
