@@ -1,0 +1,396 @@
+Start testing: Nov 01 00:10 India Standard Time
+----------------------------------------------------------
+1/24 Testing: ealr_framework_smoke
+1/24 Test: ealr_framework_smoke
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_framework_smoke.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_framework_smoke" start time: Nov 01 00:10 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.51 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_framework_smoke" end time: Nov 01 00:10 India Standard Time
+"ealr_framework_smoke" time elapsed: 00:00:01
+----------------------------------------------------------
+
+2/24 Testing: ealr_configuration_tests
+2/24 Test: ealr_configuration_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_configuration_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_configuration_tests" start time: Nov 01 00:10 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.70 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_configuration_tests" end time: Nov 01 00:10 India Standard Time
+"ealr_configuration_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+3/24 Testing: ealr_warehouse_configuration_tests
+3/24 Test: ealr_warehouse_configuration_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_warehouse_configuration_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_warehouse_configuration_tests" start time: Nov 01 00:10 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   2.51 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_warehouse_configuration_tests" end time: Nov 01 00:10 India Standard Time
+"ealr_warehouse_configuration_tests" time elapsed: 00:00:02
+----------------------------------------------------------
+
+4/24 Testing: ealr_temperature_safety_controller_tests
+4/24 Test: ealr_temperature_safety_controller_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_temperature_safety_controller_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_temperature_safety_controller_tests" start time: Nov 01 00:10 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.47 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_temperature_safety_controller_tests" end time: Nov 01 00:10 India Standard Time
+"ealr_temperature_safety_controller_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+5/24 Testing: ealr_robot_tests
+5/24 Test: ealr_robot_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_robot_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_robot_tests" start time: Nov 01 00:10 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.59 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_robot_tests" end time: Nov 01 00:10 India Standard Time
+"ealr_robot_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+6/24 Testing: ealr_routing_interface_tests
+6/24 Test: ealr_routing_interface_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_routing_interface_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_routing_interface_tests" start time: Nov 01 00:10 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.57 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_routing_interface_tests" end time: Nov 01 00:10 India Standard Time
+"ealr_routing_interface_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+7/24 Testing: ealr_dijkstra_tests
+7/24 Test: ealr_dijkstra_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_dijkstra_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_dijkstra_tests" start time: Nov 01 00:10 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.77 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_dijkstra_tests" end time: Nov 01 00:10 India Standard Time
+"ealr_dijkstra_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+8/24 Testing: ealr_greedy_tests
+8/24 Test: ealr_greedy_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_greedy_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_greedy_tests" start time: Nov 01 00:10 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time = 728.14 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_greedy_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_greedy_tests" time elapsed: 00:12:08
+----------------------------------------------------------
+
+9/24 Testing: ealr_ealr_tests
+9/24 Test: ealr_ealr_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_ealr_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_ealr_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   3.74 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_ealr_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_ealr_tests" time elapsed: 00:00:03
+----------------------------------------------------------
+
+10/24 Testing: ealr_metrics_tests
+10/24 Test: ealr_metrics_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_metrics_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_metrics_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   2.29 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_metrics_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_metrics_tests" time elapsed: 00:00:02
+----------------------------------------------------------
+
+11/24 Testing: ealr_core_regression_tests
+11/24 Test: ealr_core_regression_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_core_regression_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_core_regression_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+regression failures: 0
+<end of output>
+Test time =   1.60 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_core_regression_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_core_regression_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+12/24 Testing: ealr_fabric_configuration_tests
+12/24 Test: ealr_fabric_configuration_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_fabric_configuration_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_fabric_configuration_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+configuration failures: 0
+<end of output>
+Test time =   1.84 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_fabric_configuration_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_fabric_configuration_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+13/24 Testing: ealr_fabric_simulation_tests
+13/24 Test: ealr_fabric_simulation_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_fabric_simulation_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_fabric_simulation_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+simulation failures: 0
+<end of output>
+Test time =   2.07 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_fabric_simulation_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_fabric_simulation_tests" time elapsed: 00:00:02
+----------------------------------------------------------
+
+14/24 Testing: ealr_fabric_metrics_tests
+14/24 Test: ealr_fabric_metrics_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_fabric_metrics_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_fabric_metrics_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+metrics failures: 0
+<end of output>
+Test time =   1.60 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_fabric_metrics_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_fabric_metrics_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+15/24 Testing: ealr_ecmp_tests
+15/24 Test: ealr_ecmp_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_ecmp_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_ecmp_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+ECMP/communications failures: 0
+<end of output>
+Test time =   2.35 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_ecmp_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_ecmp_tests" time elapsed: 00:00:02
+----------------------------------------------------------
+
+16/24 Testing: ealr_protected_queue_tests
+16/24 Test: ealr_protected_queue_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_protected_queue_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_protected_queue_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+protected queue failures: 0
+<end of output>
+Test time =   2.08 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_protected_queue_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_protected_queue_tests" time elapsed: 00:00:02
+----------------------------------------------------------
+
+17/24 Testing: ealr_verification_tests
+17/24 Test: ealr_verification_tests
+Command: "C:/Users/ermec/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe" "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/tests/verification_tests.py"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_verification_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+...+ C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -c print('diagnostic before failure'); raise SystemExit(7)
+diagnostic before failure
+.....
+----------------------------------------------------------------------
+Ran 8 tests in 0.109s
+
+OK
+<end of output>
+Test time =   0.47 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_verification_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_verification_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/24 Testing: ealr_warehouse_study_tests
+18/24 Test: ealr_warehouse_study_tests
+Command: "C:/Users/ermec/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe" "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/tests/warehouse_study_tests.py"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_warehouse_study_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.174s
+
+OK
+<end of output>
+Test time =   0.37 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_warehouse_study_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_warehouse_study_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/24 Testing: ealr_plotting_tests
+19/24 Test: ealr_plotting_tests
+Command: "C:/Users/ermec/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe" "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/tests/plotting_tests.py"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_plotting_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.018s
+
+OK
+<end of output>
+Test time =   0.17 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_plotting_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_plotting_tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/24 Testing: ealr_fabric_cli_tests
+20/24 Test: ealr_fabric_cli_tests
+Command: "C:/Users/ermec/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe" "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/tests/fabric_cli_tests.py" "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/ealr-fabric.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_fabric_cli_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+...
+----------------------------------------------------------------------
+Ran 3 tests in 4.685s
+
+OK
+<end of output>
+Test time =   4.89 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_fabric_cli_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_fabric_cli_tests" time elapsed: 00:00:04
+----------------------------------------------------------
+
+21/24 Testing: ealr_ns3_fabric_tests
+21/24 Test: ealr_ns3_fabric_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_ns3_fabric_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_ns3_fabric_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   2.24 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_ns3_fabric_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_ns3_fabric_tests" time elapsed: 00:00:02
+----------------------------------------------------------
+
+22/24 Testing: ealr_ns3_fabric_cli_tests
+22/24 Test: ealr_ns3_fabric_cli_tests
+Command: "C:/Users/ermec/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe" "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/tests/ns3_fabric_cli_tests.py" "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/ealr-ns3-fabric.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_ns3_fabric_cli_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+..
+----------------------------------------------------------------------
+Ran 2 tests in 2.752s
+
+OK
+<end of output>
+Test time =   3.05 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_ns3_fabric_cli_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_ns3_fabric_cli_tests" time elapsed: 00:00:03
+----------------------------------------------------------
+
+23/24 Testing: ealr_ns3_packet_tests
+23/24 Test: ealr_ns3_packet_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_ns3_packet_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_ns3_packet_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.61 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_ns3_packet_tests" end time: Nov 01 00:22 India Standard Time
+"ealr_ns3_packet_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+24/24 Testing: ealr_flow_monitor_tests
+24/24 Test: ealr_flow_monitor_tests
+Command: "C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests/ealr_flow_monitor_tests.exe"
+Directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3/tests
+"ealr_flow_monitor_tests" start time: Nov 01 00:22 India Standard Time
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.55 sec
+----------------------------------------------------------
+Test Passed.
+"ealr_flow_monitor_tests" end time: Nov 01 00:23 India Standard Time
+"ealr_flow_monitor_tests" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Nov 01 00:23 India Standard Time

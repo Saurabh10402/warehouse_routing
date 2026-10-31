@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "source": "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011",
+  "experiment": "ns3-warehouse-20261031T185300Z-b07383e3",
+  "source_sha256": "e72c2386769b988a3269e5130e3d6ad32fe43b8c407bb9f37fabeb003490d339",
+  "scope": "Fresh project source/build on Windows with external verified compiler/Boost/ns-3; not Mac/Ubuntu execution"
+}

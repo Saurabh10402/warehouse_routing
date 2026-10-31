@@ -39,6 +39,8 @@ remaining schema-v2/NR and Mac/Ubuntu boundaries.
 The initial [native wired warehouse backend](docs/ns3-wired-warehouse.md) now accepts a strict
 schema-v2 FIFO/Dijkstra subset. Run `python scripts/run_ns3_warehouse.py` for its deterministic
 packet/queue/path acceptance cases; it has separate outputs and does not replace the core study.
+Its [validation results](docs/ns3-warehouse-results.md) include exact peer/service paths,
+native queue loss, cutoff accounting and an independently rebuilt source copy.
 
 Read `checkpoints/CURRENT_STATUS.md`, `checkpoints/PROJECT_STATE.json`, `checkpoints/NEXT_STEPS.md`, and the latest
 session summary. Verify the recorded manifest with:

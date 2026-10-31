@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "cases": 7,
+  "artifacts_per_case": 5,
+  "main": "ns3-warehouse-20261031T183840Z-7256a26e",
+  "fresh": "ns3-warehouse-20261031T185300Z-b07383e3",
+  "comparison": "Byte-identical native measurements across independently built source roots"
+}

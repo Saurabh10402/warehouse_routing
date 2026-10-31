@@ -1,31 +1,30 @@
-# checkpoint_008 — real wired ns-3 runtime and first-run workflow validated
+# checkpoint_009 - initial native wired schema-v2 warehouse validated
 
-The independent stationary warehouse core remains the primary model. Actual ns-3 wired
-prerequisites now build, install and exchange measured packets. Read docs/runtime-validation.md,
-docs/first-run.md and docs/ns3-integration.md. This is not full schema-v2/NR integration.
+The project now has a separate `ealr-ns3-fabric` backend for stationary wired schema-v2
+FIFO/Dijkstra configurations. Read docs/ns3-wired-warehouse.md and docs/ns3-warehouse-results.md.
+The independent core and its primary study are unchanged; native priority/ECMP/NR are pending.
 
-- Tested code: 47088f1 (after a2bf99f implementation and 39ff2af installer fix).
-- Source manifest: manifests/checkpoint_008.json; previous manifests/results retained.
-- ns-3.46.1 Release / GCC 14.2: 150/150 upstream UNIT QUICK suites PASS, warnings-as-errors ON.
-- Linked project build: 22/22 CTest PASS, including actual one/two-hop UDP delay and loss.
-- ns3-smoke-20261031T102542Z-fd5d9232: 3/3 packets, 4.416 ms, stationary, exact replay.
-- Final extracted code: 20/20 tests and 180/180 first run, no Git/cache dependency.
-  Batch first-run-20261031T101929Z-5481bba4; copied unchanged from isolated extraction.
-- Warehouse regression experiments-20261031T094745Z-723bc3c8: 132 identical inputs/traces
-  versus experiments-20261030T180019Z-2441a69a; replay and 55 charts PASS.
-- Required dependency/prefix isolation and existing-output preservation checks PASS.
+- Tested code: 49d4f4538873ec2619b52b726e70d1c7693f8ccd. Source manifest: manifests/checkpoint_009.json.
+- Main and independently rebuilt source: 24/24 CTest PASS each; all seven deterministic native
+  cases, raw artifact audit and replay PASS; all 35 measurement artifacts match byte-for-byte.
+- Native batch: ns3-warehouse-20261031T183840Z-7256a26e.
+- Fresh source batch: ns3-warehouse-20261031T185300Z-b07383e3, copied unchanged for recovery.
+- Same-zone/cross-zone/edge-service packets followed actual observed routes at 4.416/8.832/6.624 ms.
+- Native queue loss, FIFO conservation, duplex independence, no-route and cutoff accounting,
+  mixed-size route selection, endpoint transit exclusion and unsupported-input guards PASS.
+- Core: 20/20 CTest and full 132 exact baseline comparisons, replay and 55 charts PASS.
+  Batch experiments-20261031T173020Z-a8e5dbed, reference experiments-20261031T094745Z-723bc3c8.
 
-Upstream suites must run separately. Fixed the invocation and summary parser; retained every
-failed attempt. The slow threaded suite passed naturally (275 s first run, 179 s final run).
-Final installer completed successfully; no test or warning was suppressed. The previous
-Wi-Fi/NetAnim diagnostic is still unresolved; separating optional modules is not its repair.
+One CLI test timed out during an interrupted invocation; retained log, unchanged targeted
+retry (3.66 s), full retry and fresh build PASS. No timeout/test/warning was relaxed.
+The native cases are deterministic acceptance fixtures, NOT a multiple-seed radio study.
+Queue drops and late arrivals are retained. Cutoff is censored, not proven permanent loss.
 
-Next exact action: implement the first wired schema-v2 ns-3 slice described in
-docs/ns3-warehouse-contract.md, with real same-zone/cross-zone/edge-service packets and
-observed paths. Then add explicitly tested QoS/failures and compatible NR user-plane paths.
-Mac M4 and Ubuntu 24.04 ARM64 commands are prepared but not executed. Calibration remains
-open; neither abstract results nor this fixture guarantee deadlines or radio performance.
+Next exact action: implement native strict priority and per-flow ECMP with packet-level
+controls and explicit transport/queue semantics. Preserve these FIFO cases. Then add dynamic
+failures, backup services, protected queues and a compatible NR user plane. Mac M4/Ubuntu
+ARM64 commands are prepared but not executed; calibration and full product readiness remain open.
 
-Recovery packages preserve the real ns-3 fixture, final extracted first run and 132-run
-regression separately with source/checkpoints/Git history. See recovery_packages/
-receipt-checkpoint_008.json after packaging. Keep previous archives and original.zip.
+Recovery archives separately preserve the main native batch, fresh-source batch and complete
+core regression, each with source/checkpoints/Git history. See recovery_packages/
+receipt-checkpoint_009.json after packaging. Original archives, prior manifests and results remain.

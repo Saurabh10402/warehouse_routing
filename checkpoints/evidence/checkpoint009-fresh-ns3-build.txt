@@ -1,0 +1,161 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --preset default -B C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3 -DPython3_EXECUTABLE=C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -DEALR_REQUIRE_NS3=ON -DEALR_NS3_PREFIX= -DCMAKE_PREFIX_PATH=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-install -DEALR_NS3_PREFIX=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-install -DEALR_BOOST_SOURCE=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\boost_1_85_0
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  EALR_BUILD_TESTS="ON"
+  EALR_ENABLE_NS3="ON"
+
+-- The CXX compiler identification is GNU 14.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/mingw64/bin/c++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ns-3 wired packet runtime targets.
+-- Optional NetAnim unavailable: legacy animation scenario excluded; wired packet runtime enabled.
+-- 5G-LENA NR unavailable; wired ns-3 runtime is not radio validation.
+-- EALR 0.1.0: repository bootstrap configured
+-- ns-3 support: available
+-- 5G-LENA NR support: not found (install a 5G-LENA-enabled ns-3 package for NR device setup)
+-- Configuring done (18.7s)
+-- Generating done (0.9s)
+-- Build files have been written to: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --build C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3 -j 4
+[1/66] Building CXX object CMakeFiles/ealr_core.dir/src/framework.cpp.obj
+[2/66] Building CXX object CMakeFiles/ealr_core.dir/src/config/warehouse_configuration.cpp.obj
+[3/66] Building CXX object CMakeFiles/ealr_core.dir/src/config/configuration.cpp.obj
+[4/66] Building CXX object CMakeFiles/ealr_core.dir/src/metrics/fabric_metrics.cpp.obj
+[5/66] Building CXX object CMakeFiles/ealr_core.dir/src/config/fabric_configuration.cpp.obj
+[6/66] Building CXX object CMakeFiles/ealr_core.dir/src/network/device_policy.cpp.obj
+[7/66] Building CXX object CMakeFiles/ealr_core.dir/src/metrics/metrics_collector.cpp.obj
+[8/66] Building CXX object CMakeFiles/ealr_core.dir/src/safety/temperature_safety_controller.cpp.obj
+[9/66] Building CXX object CMakeFiles/ealr_core.dir/src/robot/robot.cpp.obj
+[10/66] Building CXX object CMakeFiles/ealr_core.dir/src/routing/routing_types.cpp.obj
+[11/66] Building CXX object CMakeFiles/ealr_boost_json.dir/boost_json_source.cpp.obj
+[12/66] Building CXX object CMakeFiles/ealr_core.dir/src/routing/dijkstra_routing.cpp.obj
+[13/66] Building CXX object CMakeFiles/ealr_core.dir/src/simulation/fabric_simulator.cpp.obj
+[14/66] Linking CXX static library libealr_boost_json.a
+[15/66] Building CXX object CMakeFiles/ealr_core.dir/src/routing/ecmp_routing.cpp.obj
+[16/66] Building CXX object CMakeFiles/ealr_core.dir/src/routing/greedy_routing.cpp.obj
+[17/66] Building CXX object CMakeFiles/ealr_core.dir/src/routing/ealr_routing.cpp.obj
+[18/66] Building CXX object CMakeFiles/ealr_ns3.dir/src/metrics/ns3_flow_monitor_collector.cpp.obj
+[19/66] Linking CXX static library libealr_core.a
+[20/66] Building CXX object CMakeFiles/ealr-fabric.dir/src/app/ealr_fabric_main.cpp.obj
+[21/66] Building CXX object CMakeFiles/ealr_ns3.dir/src/simulation/ns3_packet_smoke.cpp.obj
+[22/66] Building CXX object tests/CMakeFiles/ealr_framework_smoke.dir/framework_smoke.cpp.obj
+[23/66] Building CXX object CMakeFiles/ealr-ns3-smoke.dir/src/app/ealr_ns3_smoke_main.cpp.obj
+[24/66] Building CXX object CMakeFiles/ealr-ns3-fabric.dir/src/app/ealr_ns3_fabric_main.cpp.obj
+[25/66] Building CXX object tests/CMakeFiles/ealr_configuration_tests.dir/configuration_tests.cpp.obj
+[26/66] Building CXX object tests/CMakeFiles/ealr_robot_tests.dir/robot_tests.cpp.obj
+[27/66] Building CXX object tests/CMakeFiles/ealr_warehouse_configuration_tests.dir/warehouse_configuration_tests.cpp.obj
+[28/66] Building CXX object tests/CMakeFiles/ealr_temperature_safety_controller_tests.dir/temperature_safety_controller_tests.cpp.obj
+[29/66] Building CXX object tests/CMakeFiles/ealr_routing_interface_tests.dir/routing_interface_tests.cpp.obj
+[30/66] Building CXX object tests/CMakeFiles/ealr_dijkstra_tests.dir/dijkstra_tests.cpp.obj
+[31/66] Building CXX object tests/CMakeFiles/ealr_greedy_tests.dir/greedy_tests.cpp.obj
+[32/66] Building CXX object tests/CMakeFiles/ealr_core_regression_tests.dir/core_regression_tests.cpp.obj
+[33/66] Building CXX object tests/CMakeFiles/ealr_metrics_tests.dir/metrics_tests.cpp.obj
+[34/66] Building CXX object tests/CMakeFiles/ealr_ealr_tests.dir/ealr_tests.cpp.obj
+[35/66] Building CXX object tests/CMakeFiles/ealr_fabric_metrics_tests.dir/fabric_metrics_tests.cpp.obj
+[36/66] Building CXX object tests/CMakeFiles/ealr_fabric_configuration_tests.dir/fabric_configuration_tests.cpp.obj
+[37/66] Building CXX object tests/CMakeFiles/ealr_fabric_simulation_tests.dir/fabric_simulation_tests.cpp.obj
+[38/66] Building CXX object CMakeFiles/ealr_ns3.dir/src/simulation/ns3_fabric.cpp.obj
+[39/66] Building CXX object tests/CMakeFiles/ealr_ecmp_tests.dir/ecmp_tests.cpp.obj
+[40/66] Linking CXX static library libealr_ns3.a
+[41/66] Building CXX object tests/CMakeFiles/ealr_ns3_packet_tests.dir/ns3_packet_tests.cpp.obj
+[42/66] Building CXX object tests/CMakeFiles/ealr_protected_queue_tests.dir/protected_queue_tests.cpp.obj
+[43/66] Linking CXX executable ealr-fabric.exe
+[44/66] Linking CXX executable ealr-ns3-smoke.exe
+[45/66] Linking CXX executable ealr-ns3-fabric.exe
+[46/66] Linking CXX executable tests\ealr_framework_smoke.exe
+[47/66] Linking CXX executable tests\ealr_configuration_tests.exe
+[48/66] Linking CXX executable tests\ealr_warehouse_configuration_tests.exe
+[49/66] Linking CXX executable tests\ealr_temperature_safety_controller_tests.exe
+[50/66] Linking CXX executable tests\ealr_robot_tests.exe
+[51/66] Linking CXX executable tests\ealr_routing_interface_tests.exe
+[52/66] Building CXX object tests/CMakeFiles/ealr_ns3_fabric_tests.dir/ns3_fabric_tests.cpp.obj
+[53/66] Building CXX object tests/CMakeFiles/ealr_flow_monitor_tests.dir/flow_monitor_tests.cpp.obj
+[54/66] Linking CXX executable tests\ealr_dijkstra_tests.exe
+[55/66] Linking CXX executable tests\ealr_greedy_tests.exe
+[56/66] Linking CXX executable tests\ealr_ealr_tests.exe
+[57/66] Linking CXX executable tests\ealr_metrics_tests.exe
+[58/66] Linking CXX executable tests\ealr_core_regression_tests.exe
+[59/66] Linking CXX executable tests\ealr_fabric_configuration_tests.exe
+[60/66] Linking CXX executable tests\ealr_fabric_metrics_tests.exe
+[61/66] Linking CXX executable tests\ealr_fabric_simulation_tests.exe
+[62/66] Linking CXX executable tests\ealr_ecmp_tests.exe
+[63/66] Linking CXX executable tests\ealr_ns3_packet_tests.exe
+[64/66] Linking CXX executable tests\ealr_flow_monitor_tests.exe
+[65/66] Linking CXX executable tests\ealr_protected_queue_tests.exe
+[66/66] Linking CXX executable tests\ealr_ns3_fabric_tests.exe
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\ctest.EXE --test-dir C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3 --output-on-failure
+Internal ctest changing into directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3
+Test project C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/ns3 warehouse clean 03477011/build/verified-ns3
+      Start  1: ealr_framework_smoke
+ 1/24 Test  #1: ealr_framework_smoke .......................   Passed    1.51 sec
+      Start  2: ealr_configuration_tests
+ 2/24 Test  #2: ealr_configuration_tests ...................   Passed    1.70 sec
+      Start  3: ealr_warehouse_configuration_tests
+ 3/24 Test  #3: ealr_warehouse_configuration_tests .........   Passed    2.51 sec
+      Start  4: ealr_temperature_safety_controller_tests
+ 4/24 Test  #4: ealr_temperature_safety_controller_tests ...   Passed    1.47 sec
+      Start  5: ealr_robot_tests
+ 5/24 Test  #5: ealr_robot_tests ...........................   Passed    1.59 sec
+      Start  6: ealr_routing_interface_tests
+ 6/24 Test  #6: ealr_routing_interface_tests ...............   Passed    1.57 sec
+      Start  7: ealr_dijkstra_tests
+ 7/24 Test  #7: ealr_dijkstra_tests ........................   Passed    1.77 sec
+      Start  8: ealr_greedy_tests
+ 8/24 Test  #8: ealr_greedy_tests ..........................   Passed  728.14 sec
+      Start  9: ealr_ealr_tests
+ 9/24 Test  #9: ealr_ealr_tests ............................   Passed    3.74 sec
+      Start 10: ealr_metrics_tests
+10/24 Test #10: ealr_metrics_tests .........................   Passed    2.29 sec
+      Start 11: ealr_core_regression_tests
+11/24 Test #11: ealr_core_regression_tests .................   Passed    1.60 sec
+      Start 12: ealr_fabric_configuration_tests
+12/24 Test #12: ealr_fabric_configuration_tests ............   Passed    1.84 sec
+      Start 13: ealr_fabric_simulation_tests
+13/24 Test #13: ealr_fabric_simulation_tests ...............   Passed    2.07 sec
+      Start 14: ealr_fabric_metrics_tests
+14/24 Test #14: ealr_fabric_metrics_tests ..................   Passed    1.60 sec
+      Start 15: ealr_ecmp_tests
+15/24 Test #15: ealr_ecmp_tests ............................   Passed    2.35 sec
+      Start 16: ealr_protected_queue_tests
+16/24 Test #16: ealr_protected_queue_tests .................   Passed    2.08 sec
+      Start 17: ealr_verification_tests
+17/24 Test #17: ealr_verification_tests ....................   Passed    0.47 sec
+      Start 18: ealr_warehouse_study_tests
+18/24 Test #18: ealr_warehouse_study_tests .................   Passed    0.37 sec
+      Start 19: ealr_plotting_tests
+19/24 Test #19: ealr_plotting_tests ........................   Passed    0.17 sec
+      Start 20: ealr_fabric_cli_tests
+20/24 Test #20: ealr_fabric_cli_tests ......................   Passed    4.89 sec
+      Start 21: ealr_ns3_fabric_tests
+21/24 Test #21: ealr_ns3_fabric_tests ......................   Passed    2.24 sec
+      Start 22: ealr_ns3_fabric_cli_tests
+22/24 Test #22: ealr_ns3_fabric_cli_tests ..................   Passed    3.05 sec
+      Start 23: ealr_ns3_packet_tests
+23/24 Test #23: ealr_ns3_packet_tests ......................   Passed    1.61 sec
+      Start 24: ealr_flow_monitor_tests
+24/24 Test #24: ealr_flow_monitor_tests ....................   Passed    1.55 sec
+
+100% tests passed, 0 tests failed out of 24
+
+Total Test time (real) = 772.26 sec
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\inputs\communications.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\communications
+Actual ns-3 stationary wired fabric: 3/3 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011\\results\\ns3-warehouse-20261031T185300Z-b07383e3\\communications"
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\inputs\fifo-overload.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\fifo-overload
+Actual ns-3 stationary wired fabric: 2/3 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011\\results\\ns3-warehouse-20261031T185300Z-b07383e3\\fifo-overload"
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\inputs\cutoff.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\cutoff
+Actual ns-3 stationary wired fabric: 0/3 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011\\results\\ns3-warehouse-20261031T185300Z-b07383e3\\cutoff"
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\inputs\disconnected.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\disconnected
+Actual ns-3 stationary wired fabric: 0/3 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011\\results\\ns3-warehouse-20261031T185300Z-b07383e3\\disconnected"
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\inputs\full-duplex.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\full-duplex
+Actual ns-3 stationary wired fabric: 4/6 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011\\results\\ns3-warehouse-20261031T185300Z-b07383e3\\full-duplex"
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\inputs\size-sensitive.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\size-sensitive
+Actual ns-3 stationary wired fabric: 2/2 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011\\results\\ns3-warehouse-20261031T185300Z-b07383e3\\size-sensitive"
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\inputs\endpoint-transit.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\endpoint-transit
+Actual ns-3 stationary wired fabric: 2/2 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011\\results\\ns3-warehouse-20261031T185300Z-b07383e3\\endpoint-transit"
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\inputs\communications.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3\replay
+Actual ns-3 stationary wired fabric: 3/3 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\ns3 warehouse clean 03477011\\results\\ns3-warehouse-20261031T185300Z-b07383e3\\replay"
+PASS: all 7 deterministic ns-3 warehouse cases, independent raw audit and replay. OUTPUT: C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\ns3 warehouse clean 03477011\results\ns3-warehouse-20261031T185300Z-b07383e3

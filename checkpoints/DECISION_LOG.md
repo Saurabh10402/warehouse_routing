@@ -52,3 +52,15 @@
     subcase PASS diagnostics. Keep failed harness attempts and successful rerun evidence.
 25. Recovery sources must run without Git or parent-repository provenance. Windows extraction
     checks do not replace actual Mac/Ubuntu validation. The whole product remains unfinished.
+
+26. Implement schema-v2 ns-3 as a separate strict wired backend. Use real UDP/IP forwarding,
+    constant positions and observed physical receive paths; never relabel core traces.
+27. Model wired fabric nodes as IP routers with stable /32 node addresses and /30 links.
+    Install size-aware Dijkstra tables using actual payload+UDP/IPv4/PPP wire size; this is
+    central static forwarding, not Ethernet switching or routing-protocol convergence.
+28. Use one finite native FIFO per direction without a default hidden QueueDisc. Retain raw
+    attempt/enqueue/tx/rx/drop traces and verify conservation/order independently.
+29. All offered packets remain in deadline denominators. Separate pre-IP no-route, observed
+    queue loss and cutoff censoring. Name FlowMonitor reconciliation unreceived-at-cutoff.
+30. Reject unsupported native features before simulation/output; preserve the full core study.
+    Seven deterministic native acceptance cases are not a multiple-seed stochastic study.

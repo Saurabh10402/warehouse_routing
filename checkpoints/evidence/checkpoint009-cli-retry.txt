@@ -1,0 +1,9 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\ctest.EXE --test-dir C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\build\verified-ns3 -R ealr_ns3_fabric_cli_tests --output-on-failure
+Internal ctest changing into directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/build/verified-ns3
+Test project C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/build/verified-ns3
+    Start 22: ealr_ns3_fabric_cli_tests
+1/1 Test #22: ealr_ns3_fabric_cli_tests ........   Passed    3.59 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   3.66 sec

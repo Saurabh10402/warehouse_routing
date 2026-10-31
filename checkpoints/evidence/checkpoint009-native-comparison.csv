@@ -1,0 +1,8 @@
+case,offered,delivered,deadline_misses,queue_drops,no_route,cutoff
+communications,3,3,0,0,0,0
+fifo-overload,3,2,3,1,0,0
+cutoff,3,0,3,1,0,2
+disconnected,3,0,3,0,3,0
+full-duplex,6,4,6,2,0,0
+size-sensitive,2,2,0,0,0,0
+endpoint-transit,2,2,0,0,0,0

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "suite": "ns3-wired-warehouse",
+  "runs": 7,
+  "artifact_checks": "PASS",
+  "replay": "PASS",
+  "stochastic_evaluation": false,
+  "scope": "Deterministic wired FIFO/Dijkstra acceptance cases; not a stochastic seed study or NR measurements"
+}

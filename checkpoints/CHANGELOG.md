@@ -44,3 +44,11 @@ Wired build/install + 150 upstream suites; 22 linked project tests; final extrac
 and 180/180 delivery; 132 exact warehouse regressions/replay/55 charts PASS. Preserved failures
 and fixed invocation/report parsing without suppressing tests/warnings. Full schema-v2 ns-3,
 NR and target-host validation remain pending.
+
+## checkpoint_009
+Implemented an initial stationary schema-v2 native wired IPv4/UDP FIFO/Dijkstra backend,
+strict feature/numerical bounds, actual packet/queue/position traces and independent raw
+artifact auditing. Main and fresh source: 24 tests and seven deterministic cases/replay PASS;
+35 measurement artifacts byte-identical. Core 20 tests and 132 exact regression runs/replay/55
+charts PASS. Preserved interrupted timeout diagnostics and adverse loss/deadline outcomes.
+Native strict priority/ECMP/dynamic failures/NR and actual Mac/Ubuntu tests remain pending.

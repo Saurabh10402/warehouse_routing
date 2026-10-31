@@ -1,22 +1,20 @@
-# Test status — checkpoint_008
+# Test status - checkpoint_009
 
-| Check | Result | Evidence under checkpoints/evidence |
+| Check | Actual result | Evidence under checkpoints/evidence |
 |---|---|---|
-| Core bootstrap | 20/20 PASS | checkpoint008-bootstrap-tests.txt |
-| Final code in isolated source extraction | 20/20 PASS, 180/180 packets | checkpoint008-extracted-tests.txt; clean-source-first-run-final.txt |
-| Full warehouse regression | 132 exact inputs/traces, replay and 55 charts PASS | checkpoint008-warehouse-status.json; preserved batch |
-| ns-3 wired dependency | Release build/install and 150/150 UNIT QUICK PASS | checkpoint008-ns3-build/install/upstream-tests.txt; setup.json |
-| Project linked to ns-3 | 22/22 CTest PASS | checkpoint008-ns3-project-tests.txt |
-| Actual two-hop UDP / replay | 3/3, 384 IP bytes, 4.416 ms, stationary; exact replay | checkpoint008-ns3-smoke.json/status.json; preserved batch |
-| Required dependency and explicit-prefix isolation | Correct failure PASS | ns3-required-missing.txt; ns3-explicit-prefix-isolation.txt |
-| Existing output preservation | Correct refusal, bytes unchanged PASS | ns3-existing-output-guard.txt |
-| ns-3 schema-v2/QoS, NR, Wi-Fi/NetAnim | NOT VALIDATED | Preserved external failure and integration contract |
-| Mac / Ubuntu execution | NOT RUN | Windows host only; prepared first-run guide |
+| Linked native project | 24/24 CTest PASS | checkpoint009-ns3-tests.txt |
+| Fresh project source/build | 24/24 CTest PASS | checkpoint009-fresh-ns3-tests.txt; fresh-ns3-build.txt |
+| Native schema-v2 acceptance | All seven deterministic cases, audit and replay PASS | checkpoint009-ns3-status.json; native-comparison.csv |
+| Across source roots | All 35 measurement files byte-identical | checkpoint009-fresh-comparison.json; fresh-source.json |
+| Core bootstrap | 20/20 CTest PASS | checkpoint009-bootstrap-tests.txt |
+| Full core regression | 132 exact inputs/traces, replay and 55 charts PASS | checkpoint009-core-status.json |
+| CLI/unsupported/corrupt evidence checks | PASS in linked/fresh CTest | Native CLI tests; no required guards disabled |
+| Initial interrupted CLI invocation | Timeout retained; unchanged retry PASS in 3.66 s | checkpoint009-ns3-timeout.txt; cli-retry.txt |
+| Native strict priority/ECMP/failures/NR | NOT IMPLEMENTED/VALIDATED | Capability rejection and next-step contract |
+| Mac / Ubuntu execution | NOT RUN | Windows-only fresh-build evidence |
 
-The 132-run regression uses a2bf99f; later changes only fix installer/test orchestration and
-documentation. Final extracted-source and linked-project checks cover 47088f1 code. Initial
-syntax/include, upstream-invocation, report-parser and overnight timeout diagnostics are
-preserved. Final passes used no warning suppression, skipped required suite or increased
-timeout. The 150 upstream suites are UNIT QUICK in Release, not all system/extensive tests.
-Generated results retain their original hashes and provenance. Stress deadline misses remain
-measured failures; validation success is not a performance guarantee.
+Tested implementation is 49d4f45. Later edits are documentation/checkpoint evidence only.
+Dependency source/runtime unchanged from checkpoint_008: 150 upstream UNIT QUICK suites
+previously passed; system/extensive suites were not run. No warning or required test was
+suppressed. Native and core model results remain separate. Validation passes preserve adverse
+queue/deadline outcomes; they do not imply that the fixtures or a real deployment meet all targets.
