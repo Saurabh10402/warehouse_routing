@@ -3,11 +3,26 @@
 import argparse
 import hashlib
 import json
+import shutil
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DIRECTORIES = ('src', 'include', 'cmake', 'configs', 'tests', 'scripts', 'docs')
+
+
+def git_commit():
+    """Extracted recovery sources can run without Git; source manifests remain authoritative."""
+    git = shutil.which('git')
+    if git:
+        top = subprocess.run([git, 'rev-parse', '--show-toplevel'], cwd=ROOT, text=True, capture_output=True)
+        if top.returncode != 0 or Path(top.stdout.strip()).resolve() != ROOT.resolve():
+            return 'unavailable (source archive)'
+        result = subprocess.run([git, 'rev-parse', 'HEAD'], cwd=ROOT, text=True, capture_output=True)
+        if result.returncode == 0:
+            return result.stdout.strip()
+    return 'unavailable (source archive)'
 
 def source_files():
     files = [ROOT / name for name in ('CMakeLists.txt', 'CMakePresets.json', 'README.md', '.gitignore', 'AGENTS.md') if (ROOT/name).is_file()]

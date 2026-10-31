@@ -10,7 +10,12 @@ project(
 include(GNUInstallDirs)
 
 option(EALR_ENABLE_NS3 "Enable ns-3 and 5G-LENA integration when the packages are available" ON)
+option(EALR_REQUIRE_NS3 "Fail configuration if the requested ns-3 runtime is unavailable" OFF)
+set(EALR_NS3_PREFIX "" CACHE PATH "Restrict ns-3 discovery to this explicit installed prefix")
 option(EALR_BUILD_TESTS "Build EALR tests" ON)
+if(EALR_REQUIRE_NS3 AND NOT EALR_ENABLE_NS3)
+    message(FATAL_ERROR "EALR_REQUIRE_NS3 requires EALR_ENABLE_NS3=ON")
+endif()
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(CompilerWarnings)
@@ -70,14 +75,14 @@ endif()
 if(EALR_ENABLE_NS3 AND EALR_NS3_AVAILABLE)
     add_library(ealr_ns3
         STATIC
-            src/simulation/ns3_private_5g_scenario.cpp
             src/metrics/ns3_flow_monitor_collector.cpp
-            src/visualization/netanim_visualization.cpp
+            src/simulation/ns3_packet_smoke.cpp
     )
     add_library(EALR::ns3 ALIAS ealr_ns3)
     target_link_libraries(ealr_ns3
         PUBLIC EALR::core
-        PUBLIC ns3::core ns3::network ns3::mobility ns3::netanim ns3::flow-monitor
+        PUBLIC ns3::core ns3::network ns3::mobility ns3::flow-monitor
+        PUBLIC ns3::internet ns3::applications ns3::point-to-point
     )
     target_include_directories(ealr_ns3 PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
     # Match the external package's public-header requirements without changing the core.
@@ -88,10 +93,17 @@ if(EALR_ENABLE_NS3 AND EALR_NS3_AVAILABLE)
     set(EALR_NS3_CXX_STANDARD "${_ealr_ns3_standard}" CACHE STRING "C++ standard required by the installed ns-3 headers")
     target_compile_features(ealr_ns3 PUBLIC cxx_std_${EALR_NS3_CXX_STANDARD})
 
-    add_executable(ealr-ns3-scenario src/app/ealr_ns3_main.cpp)
-    target_link_libraries(ealr-ns3-scenario PRIVATE EALR::ns3)
+    add_executable(ealr-ns3-smoke src/app/ealr_ns3_smoke_main.cpp)
+    target_link_libraries(ealr-ns3-smoke PRIVATE EALR::ns3)
 
-    if(EALR_5G_LENA_AVAILABLE)
+    if(EALR_NETANIM_AVAILABLE)
+        target_sources(ealr_ns3 PRIVATE src/simulation/ns3_private_5g_scenario.cpp src/visualization/netanim_visualization.cpp)
+        target_link_libraries(ealr_ns3 PUBLIC ns3::netanim)
+        add_executable(ealr-ns3-scenario src/app/ealr_ns3_main.cpp)
+        target_link_libraries(ealr-ns3-scenario PRIVATE EALR::ns3)
+    endif()
+
+    if(EALR_5G_LENA_AVAILABLE AND EALR_NETANIM_AVAILABLE)
         target_sources(ealr_ns3 PRIVATE src/simulation/nr_access_network.cpp)
         target_link_libraries(ealr_ns3 PRIVATE ns3::nr)
         target_compile_definitions(ealr_ns3 PRIVATE EALR_HAS_5G_LENA=1)

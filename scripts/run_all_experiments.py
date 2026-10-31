@@ -7,13 +7,12 @@ import hashlib
 import importlib.util
 import json
 import statistics
-import subprocess
 import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from checkpoint import manifest
+from checkpoint import manifest, git_commit
 from generate_examples import warehouse
 from verify import ROOT, execute, verify
 from warehouse_study import POLICIES, scenarios as warehouse_scenarios, scope_metrics
@@ -120,8 +119,7 @@ def main():
     stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8]
     output=args.output_root.resolve()/('experiments-'+stamp);output.mkdir(parents=True,exist_ok=False)
     (output/'inputs').mkdir();source=manifest()
-    git=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,text=True,capture_output=True)
-    provenance=dict(schema_version=1,utc=datetime.now(timezone.utc).isoformat(),source=source,git_commit=git.stdout.strip(),
+    provenance=dict(schema_version=1,utc=datetime.now(timezone.utc).isoformat(),source=source,git_commit=git_commit(),
                     executable_sha256=hashlib.sha256(executable.read_bytes()).hexdigest(),model='stationary abstract full-duplex links; not ns-3 or NR',
                     command=sys.argv,python=sys.version,suite=args.suite,
                     seed_policy='identical inputs and phase seeds across forwarding/scheduling policies')
