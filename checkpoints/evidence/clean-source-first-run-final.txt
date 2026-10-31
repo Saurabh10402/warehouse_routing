@@ -1,0 +1,65 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --preset bootstrap -B C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\build\verified-bootstrap -DPython3_EXECUTABLE=C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -DEALR_REQUIRE_NS3=OFF -DEALR_NS3_PREFIX= -DEALR_BOOST_SOURCE=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\boost_1_85_0
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  EALR_BUILD_TESTS="ON"
+  EALR_ENABLE_NS3="OFF"
+
+-- EALR 0.1.0: repository bootstrap configured
+-- ns-3 support: disabled
+-- 5G-LENA NR support: disabled
+-- Configuring done (5.4s)
+-- Generating done (0.6s)
+-- Build files have been written to: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/first run source e6f32ab0/build/verified-bootstrap
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --build C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\build\verified-bootstrap -j 4
+ninja: no work to do.
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\ctest.EXE --test-dir C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\build\verified-bootstrap --output-on-failure
+Internal ctest changing into directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/first run source e6f32ab0/build/verified-bootstrap
+Test project C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/first run source e6f32ab0/build/verified-bootstrap
+      Start  1: ealr_framework_smoke
+ 1/20 Test  #1: ealr_framework_smoke .......................   Passed    0.22 sec
+      Start  2: ealr_configuration_tests
+ 2/20 Test  #2: ealr_configuration_tests ...................   Passed    0.18 sec
+      Start  3: ealr_warehouse_configuration_tests
+ 3/20 Test  #3: ealr_warehouse_configuration_tests .........   Passed    0.23 sec
+      Start  4: ealr_temperature_safety_controller_tests
+ 4/20 Test  #4: ealr_temperature_safety_controller_tests ...   Passed    0.26 sec
+      Start  5: ealr_robot_tests
+ 5/20 Test  #5: ealr_robot_tests ...........................   Passed    0.20 sec
+      Start  6: ealr_routing_interface_tests
+ 6/20 Test  #6: ealr_routing_interface_tests ...............   Passed    2.32 sec
+      Start  7: ealr_dijkstra_tests
+ 7/20 Test  #7: ealr_dijkstra_tests ........................   Passed    0.26 sec
+      Start  8: ealr_greedy_tests
+ 8/20 Test  #8: ealr_greedy_tests ..........................   Passed    0.31 sec
+      Start  9: ealr_ealr_tests
+ 9/20 Test  #9: ealr_ealr_tests ............................   Passed    0.44 sec
+      Start 10: ealr_metrics_tests
+10/20 Test #10: ealr_metrics_tests .........................   Passed    0.27 sec
+      Start 11: ealr_core_regression_tests
+11/20 Test #11: ealr_core_regression_tests .................   Passed    0.26 sec
+      Start 12: ealr_fabric_configuration_tests
+12/20 Test #12: ealr_fabric_configuration_tests ............   Passed    5.29 sec
+      Start 13: ealr_fabric_simulation_tests
+13/20 Test #13: ealr_fabric_simulation_tests ...............   Passed    3.29 sec
+      Start 14: ealr_fabric_metrics_tests
+14/20 Test #14: ealr_fabric_metrics_tests ..................   Passed    2.50 sec
+      Start 15: ealr_ecmp_tests
+15/20 Test #15: ealr_ecmp_tests ............................   Passed    4.51 sec
+      Start 16: ealr_protected_queue_tests
+16/20 Test #16: ealr_protected_queue_tests .................   Passed    1.93 sec
+      Start 17: ealr_verification_tests
+17/20 Test #17: ealr_verification_tests ....................   Passed    3.65 sec
+      Start 18: ealr_warehouse_study_tests
+18/20 Test #18: ealr_warehouse_study_tests .................   Passed    2.34 sec
+      Start 19: ealr_plotting_tests
+19/20 Test #19: ealr_plotting_tests ........................   Passed    2.18 sec
+      Start 20: ealr_fabric_cli_tests
+20/20 Test #20: ealr_fabric_cli_tests ......................   Passed   60.85 sec
+
+100% tests passed, 0 tests failed out of 20
+
+Total Test time (real) =  93.16 sec
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\build\verified-bootstrap\ealr-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\configs\warehouse_communications.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\results\first-run-20261031T101929Z-5481bba4\example
+Core abstract-link simulation: 180/180 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\first run source e6f32ab0\\results\\first-run-20261031T101929Z-5481bba4\\example"
+PASS: first-run warehouse fixture, 180/180 delivered, zero deadline misses. OUTPUT: C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\results\first-run-20261031T101929Z-5481bba4

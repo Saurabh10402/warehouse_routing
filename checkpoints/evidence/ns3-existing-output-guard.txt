@@ -1,0 +1,2 @@
+ns-3 smoke failed: Choose a new output directory; existing results are never overwritten
+PASS: existing report unchanged; exit 1

@@ -30,6 +30,13 @@ and the cost to lower-priority traffic. Run `python scripts/run_all_experiments.
 
 ## Start or resume
 
+For a fresh extraction, start with the [first-run guide](docs/first-run.md). It gives the
+Mac M4/Ubuntu 24.04 setup commands, a small checked example, expected outputs and log paths.
+`python scripts/first_run.py` validates the independent core; `python scripts/run_ns3_smoke.py`
+separately requires a real installed ns-3 wired runtime. Neither implies NR validation.
+See [runtime validation](docs/runtime-validation.md) for the executed Windows tests and
+remaining schema-v2/NR and Mac/Ubuntu boundaries.
+
 Read `checkpoints/CURRENT_STATUS.md`, `checkpoints/PROJECT_STATE.json`, `checkpoints/NEXT_STEPS.md`, and the latest
 session summary. Verify the recorded manifest with:
 

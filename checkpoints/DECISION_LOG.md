@@ -42,3 +42,13 @@
     Source-time endpoint envelopes are not downstream arrival or deadline guarantees.
 21. Zero mixed-load P0 misses at a tested capacity do not establish burst/flood safety or
     acceptable lower-class service. Keep defaults unchanged and preserve both regressions.
+
+22. Make NetAnim optional for the wired packet runtime. Its Wi-Fi dependency failure remains
+    unresolved and recorded; do not claim excluding it repairs or validates radio modules.
+23. Explicit ns-3 verification must fail on missing/wrong prefixes. A core-only success cannot
+    fulfill that request. Verify actual packets and analytical delay/loss independently.
+24. Pin and verify external source; retain warnings-as-errors and all discovered upstream
+    UNIT QUICK suites. Run one suite per process and match full completion reports, not noisy
+    subcase PASS diagnostics. Keep failed harness attempts and successful rerun evidence.
+25. Recovery sources must run without Git or parent-repository provenance. Windows extraction
+    checks do not replace actual Mac/Ubuntu validation. The whole product remains unfinished.

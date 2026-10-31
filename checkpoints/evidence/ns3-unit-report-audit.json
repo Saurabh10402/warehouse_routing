@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "discovered": 150,
+  "completed": 150,
+  "log": ".tools\\ns3-setup-20261031T100932Z-b80f4d14-unit-tests.log",
+  "note": "All suites passed; original installer rejected noisy subcase PASS lines. Final full installer rerun required."
+}

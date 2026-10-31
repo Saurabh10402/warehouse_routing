@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "version": "3.46.1",
+  "archive_sha256": "fd3255df035a52008638fb5d81f77685260fd607be107eaf8e5116bcf1fd2c03",
+  "url": "https://www.nsnam.org/releases/ns-3.46.1.tar.bz2",
+  "modules": "core,network,mobility,flow-monitor,applications,internet,point-to-point",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "architecture": "AMD64",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "tests": "upstream UNIT QUICK",
+  "passed_suites": 150,
+  "test_log": "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.tools\\ns3-setup-20261031T101736Z-1621e863-unit-tests.log",
+  "warnings_as_errors": true,
+  "log": "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.tools\\ns3-setup-20261031T101736Z-1621e863.log",
+  "scope": "wired prerequisites only; Wi-Fi/NetAnim/NR not built"
+}

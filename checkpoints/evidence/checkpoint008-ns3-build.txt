@@ -1,0 +1,664 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE -S C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1 -B C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-build -G Ninja -DCMAKE_BUILD_TYPE=Release -DPython3_EXECUTABLE=C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -DNS3_ENABLED_MODULES=core,network,mobility,flow-monitor,applications,internet,point-to-point -DNS3_TESTS=ON -DNS3_EXAMPLES=OFF -DNS3_PYTHON_BINDINGS=OFF -DNS3_WARNINGS=ON -DNS3_WARNINGS_AS_ERRORS=ON -DNS3_OUTPUT_DIRECTORY=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired -DCMAKE_INSTALL_PREFIX=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-install -DCMAKE_INSTALL_LIBDIR=lib
+no such file or directory
+-- Creating user-defined output directory "C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired". In case it fails, try changing the value of NS3_OUTPUT_DIRECTORY or check the directory permissions.
+CMake Warning at build-support/custom-modules/ns3-output-directory.cmake:35 (message):
+  Python3 executable was not found and write permissions won't be checked.
+  Build may break for file permission issues.
+Call Stack (most recent call first):
+  build-support/custom-modules/ns3-output-directory.cmake:66 (make_directory)
+  build-support/macros-and-definitions.cmake:35 (include)
+  CMakeLists.txt:116 (include)
+
+
+CMake Warning at build-support/custom-modules/ns3-output-directory.cmake:35 (message):
+  Python3 executable was not found and write permissions won't be checked.
+  Build may break for file permission issues.
+Call Stack (most recent call first):
+  build-support/custom-modules/ns3-output-directory.cmake:92 (make_directory)
+  build-support/macros-and-definitions.cmake:35 (include)
+  CMakeLists.txt:116 (include)
+
+
+CMake Warning at build-support/custom-modules/ns3-output-directory.cmake:35 (message):
+  Python3 executable was not found and write permissions won't be checked.
+  Build may break for file permission issues.
+Call Stack (most recent call first):
+  build-support/custom-modules/ns3-output-directory.cmake:93 (make_directory)
+  build-support/macros-and-definitions.cmake:35 (include)
+  CMakeLists.txt:116 (include)
+
+
+CMake Warning at build-support/custom-modules/ns3-output-directory.cmake:35 (message):
+  Python3 executable was not found and write permissions won't be checked.
+  Build may break for file permission issues.
+Call Stack (most recent call first):
+  build-support/custom-modules/ns3-output-directory.cmake:94 (make_directory)
+  build-support/macros-and-definitions.cmake:35 (include)
+  CMakeLists.txt:116 (include)
+
+
+-- CCache is enabled.
+-- Proceeding without cmake-format
+-- Found Python3: C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe (found version "3.12.14") found components: Interpreter
+-- Python: development libraries were not found
+-- Boost was not found
+-- docs: doxygen documentation not enabled due to missing dependencies: dot;dia;python3
+-- Failed to locate sphinx-build executable (missing: SPHINX_EXECUTABLE) 
+-- docs: sphinx documentation not enabled due to missing dependencies: Sphinx;epstopdf;pdflatex;latexmk;dvipng;dia
+-- Platform doesn't support TAP and EMU features. Continuing without them.
+-- Processing src/applications
+-- Processing src/core
+-- Boost Units are an optional feature of length.cc. Ubuntu ships it within the libboost-dev package. You may need to clean up the CMake cache after installing it to pass this check.
+-- Processing src/flow-monitor
+-- Processing src/internet
+-- Processing src/mobility
+-- Processing src/network
+-- Processing src/point-to-point
+-- Processing src/bridge
+-- Processing src/stats
+-- Processing src/traffic-control
+-- Processing src/antenna
+-- Standard library Bessel function has been found
+-- ---- Summary of ns-3 settings:
+Build profile                 : release
+Build directory               : C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns-3.46.1/build-wired
+Build with runtime asserts    : OFF (not requested)
+Build with runtime logging    : OFF (not requested)
+Build version embedding       : OFF (not requested)
+BRITE Integration             : OFF (missing dependency)
+DES Metrics event collection  : OFF (not requested)
+DPDK NetDevice                : OFF (not requested)
+Emulation FdNetDevice         : OFF (not requested)
+Examples                      : OFF (not requested)
+File descriptor NetDevice     : OFF (missing dependency)
+GNU Scientific Library (GSL)  : OFF (GSL was not found)
+GtkConfigStore                : OFF (Harfbuzz is required by GTK3 and was not found)
+LibXml2 support               : OFF (LibXML2 was not found)
+MPI Support                   : OFF (not requested)
+ns-3 Click Integration        : OFF (missing dependency)
+ns-3 OpenFlow Integration     : OFF (missing dependency)
+Netmap emulation FdNetDevice  : OFF (not requested)
+PyViz visualizer              : OFF (Python Bindings are disabled)
+Python Bindings               : OFF (not requested)
+SQLite support                : OFF (missing dependency)
+Eigen3 support                : OFF (Eigen was not found)
+Tap Bridge                    : OFF (not requested)
+Tap FdNetDevice               : OFF (not requested)
+Tests                         : ON
+
+
+Modules configured to be built:
+antenna                   applications              bridge                    
+core                      flow-monitor              internet                  
+mobility                  network                   point-to-point            
+stats                     test                      traffic-control           
+
+
+Modules that cannot be built:
+mpi                       
+
+
+-- Configuring done (3.7s)
+-- Generating done (1.2s)
+-- Build files have been written to: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-build
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --build C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-build -j 4
+[0/2] Re-checking globbed directories...
+[1/560] Building CXX object src/core/CMakeFiles/core.dir/model/int64x64-128.cc.obj
+[2/560] Building CXX object src/core/CMakeFiles/core.dir/helper/random-variable-stream-helper.cc.obj
+[3/560] Building CXX object src/core/CMakeFiles/core.dir/helper/csv-reader.cc.obj
+[4/560] Building CXX object src/core/CMakeFiles/core.dir/helper/event-garbage-collector.cc.obj
+[5/560] Building CXX object src/core/CMakeFiles/core.dir/model/scheduler.cc.obj
+[6/560] Building CXX object src/core/CMakeFiles/core.dir/model/event-id.cc.obj
+[7/560] Building CXX object src/core/CMakeFiles/core.dir/model/win32-fd-reader.cc.obj
+[8/560] Building CXX object src/core/CMakeFiles/core.dir/model/list-scheduler.cc.obj
+[9/560] Building CXX object src/core/CMakeFiles/core.dir/model/time.cc.obj
+[10/560] Building CXX object src/core/CMakeFiles/core.dir/model/map-scheduler.cc.obj
+[11/560] Building CXX object src/core/CMakeFiles/core.dir/model/heap-scheduler.cc.obj
+[12/560] Building CXX object src/core/CMakeFiles/core.dir/model/calendar-scheduler.cc.obj
+[13/560] Building CXX object src/core/CMakeFiles/core.dir/model/event-impl.cc.obj
+[14/560] Building CXX object src/core/CMakeFiles/core.dir/model/priority-queue-scheduler.cc.obj
+[15/560] Building CXX object src/core/CMakeFiles/core.dir/model/simulator-impl.cc.obj
+[16/560] Building CXX object src/core/CMakeFiles/core.dir/model/timer.cc.obj
+[17/560] Building CXX object src/core/CMakeFiles/core.dir/model/simulator.cc.obj
+[18/560] Building CXX object src/core/CMakeFiles/core.dir/model/default-simulator-impl.cc.obj
+[19/560] Building CXX object src/core/CMakeFiles/core.dir/model/environment-variable.cc.obj
+[20/560] Building CXX object src/core/CMakeFiles/core.dir/model/breakpoint.cc.obj
+[21/560] Building CXX object src/core/CMakeFiles/core.dir/model/synchronizer.cc.obj
+[22/560] Building CXX object src/core/CMakeFiles/core.dir/model/watchdog.cc.obj
+[23/560] Building CXX object src/core/CMakeFiles/core.dir/model/attribute-construction-list.cc.obj
+[24/560] Building CXX object src/core/CMakeFiles/core.dir/model/type-id.cc.obj
+[25/560] Building CXX object src/core/CMakeFiles/core.dir/model/object.cc.obj
+[26/560] Building CXX object src/core/CMakeFiles/core.dir/model/log.cc.obj
+[27/560] Building CXX object src/core/CMakeFiles/core.dir/model/random-variable-stream.cc.obj
+[28/560] Building CXX object src/core/CMakeFiles/core.dir/model/rng-stream.cc.obj
+[29/560] Building CXX object src/core/CMakeFiles/core.dir/model/rng-seed-manager.cc.obj
+[30/560] Building CXX object src/core/CMakeFiles/core.dir/model/attribute.cc.obj
+[31/560] Building CXX object src/core/CMakeFiles/core.dir/model/boolean.cc.obj
+[32/560] Building CXX object src/core/CMakeFiles/core.dir/model/integer.cc.obj
+[33/560] Building CXX object src/core/CMakeFiles/core.dir/model/object-base.cc.obj
+[34/560] Building CXX object src/core/CMakeFiles/core.dir/model/uinteger.cc.obj
+[35/560] Building CXX object src/core/CMakeFiles/core.dir/model/double.cc.obj
+[36/560] Building CXX object src/core/CMakeFiles/core.dir/model/string.cc.obj
+[37/560] Building CXX object src/core/CMakeFiles/core.dir/model/pointer.cc.obj
+[38/560] Building CXX object src/core/CMakeFiles/core.dir/model/test.cc.obj
+[39/560] Building CXX object src/core/CMakeFiles/core.dir/model/object-ptr-container.cc.obj
+[40/560] Building CXX object src/core/CMakeFiles/core.dir/model/object-factory.cc.obj
+[41/560] Building CXX object src/core/CMakeFiles/core.dir/model/trace-source-accessor.cc.obj
+[42/560] Building CXX object src/core/CMakeFiles/core.dir/model/int64x64.cc.obj
+[43/560] Building CXX object src/core/CMakeFiles/core.dir/model/callback.cc.obj
+[44/560] Building CXX object src/core/CMakeFiles/core.dir/model/config.cc.obj
+[45/560] Building CXX object src/core/CMakeFiles/core.dir/model/vector.cc.obj
+[46/560] Building CXX object src/core/CMakeFiles/core.dir/model/names.cc.obj
+[47/560] Building CXX object src/core/CMakeFiles/core.dir/model/fatal-impl.cc.obj
+[48/560] Building CXX object src/core/CMakeFiles/core.dir/model/global-value.cc.obj
+[49/560] Building CXX object src/core/CMakeFiles/core.dir/model/command-line.cc.obj
+[50/560] Building CXX object src/core/CMakeFiles/core.dir/model/hash-function.cc.obj
+[51/560] Building CXX object src/core/CMakeFiles/core.dir/model/hash-murmur3.cc.obj
+[52/560] Building CXX object src/core/CMakeFiles/core.dir/model/hash-fnv.cc.obj
+[53/560] Building CXX object src/core/CMakeFiles/core.dir/model/system-path.cc.obj
+[54/560] Building CXX object src/core/CMakeFiles/core.dir/model/hash.cc.obj
+[55/560] Building CXX object src/core/CMakeFiles/core.dir/model/ascii-file.cc.obj
+[56/560] Building CXX object src/core/CMakeFiles/core.dir/model/node-printer.cc.obj
+[57/560] Building CXX object src/core/CMakeFiles/core.dir/model/time-printer.cc.obj
+[58/560] Building CXX object src/core/CMakeFiles/core.dir/model/des-metrics.cc.obj
+[59/560] Building CXX object src/core/CMakeFiles/core.dir/model/show-progress.cc.obj
+[60/560] Building CXX object src/core/CMakeFiles/core.dir/model/system-wall-clock-ms.cc.obj
+[61/560] Building CXX object src/core/CMakeFiles/core.dir/model/system-wall-clock-timestamp.cc.obj
+[62/560] Building CXX object src/core/CMakeFiles/core.dir/model/length.cc.obj
+[63/560] Building CXX object src/core/CMakeFiles/core.dir/model/matrix-array.cc.obj
+[64/560] Building CXX object src/core/CMakeFiles/core.dir/model/demangle.cc.obj
+[65/560] Building CXX object src/core/CMakeFiles/core.dir/model/trickle-timer.cc.obj
+[66/560] Building CXX object src/core/CMakeFiles/core.dir/model/wall-clock-synchronizer.cc.obj
+[67/560] Building CXX object src/core/CMakeFiles/core.dir/model/realtime-simulator-impl.cc.obj
+[68/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-core.dll
+[69/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/boolean-probe.cc.obj
+[70/560] Building CXX object src/stats/CMakeFiles/stats.dir/helper/file-helper.cc.obj
+[71/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/basic-data-calculators.cc.obj
+[72/560] Building CXX object src/stats/CMakeFiles/stats.dir/helper/gnuplot-helper.cc.obj
+[73/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/data-collection-object.cc.obj
+[74/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/data-calculator.cc.obj
+[75/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/data-collector.cc.obj
+[76/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/data-output-interface.cc.obj
+[77/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/get-wildcard-matches.cc.obj
+[78/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/file-aggregator.cc.obj
+[79/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/double-probe.cc.obj
+[80/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/gnuplot-aggregator.cc.obj
+[81/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/gnuplot.cc.obj
+[82/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/histogram.cc.obj
+[83/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/probe.cc.obj
+[84/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/omnet-data-output.cc.obj
+[85/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/time-data-calculators.cc.obj
+[86/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/time-probe.cc.obj
+[87/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/time-series-adaptor.cc.obj
+[88/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/uinteger-16-probe.cc.obj
+[89/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/uinteger-32-probe.cc.obj
+[90/560] Building CXX object src/network/CMakeFiles/network.dir/helper/application-container.cc.obj
+[91/560] Building CXX object src/stats/CMakeFiles/stats.dir/model/uinteger-8-probe.cc.obj
+[92/560] Building CXX object src/network/CMakeFiles/network.dir/helper/delay-jitter-estimation.cc.obj
+[93/560] Building CXX object src/network/CMakeFiles/network.dir/helper/application-helper.cc.obj
+[94/560] Building CXX object src/network/CMakeFiles/network.dir/helper/packet-socket-helper.cc.obj
+[95/560] Building CXX object src/network/CMakeFiles/network.dir/helper/net-device-container.cc.obj
+[96/560] Building CXX object src/network/CMakeFiles/network.dir/helper/node-container.cc.obj
+[97/560] Building CXX object src/network/CMakeFiles/network.dir/helper/simple-net-device-helper.cc.obj
+[98/560] Building CXX object src/network/CMakeFiles/network.dir/model/address.cc.obj
+[99/560] Building CXX object src/network/CMakeFiles/network.dir/model/application.cc.obj
+[100/560] Building CXX object src/network/CMakeFiles/network.dir/helper/trace-helper.cc.obj
+[101/560] Building CXX object src/network/CMakeFiles/network.dir/model/buffer.cc.obj
+[102/560] Building CXX object src/network/CMakeFiles/network.dir/model/byte-tag-list.cc.obj
+[103/560] Building CXX object src/network/CMakeFiles/network.dir/model/channel-list.cc.obj
+[104/560] Building CXX object src/network/CMakeFiles/network.dir/model/channel.cc.obj
+[105/560] Building CXX object src/network/CMakeFiles/network.dir/model/chunk.cc.obj
+[106/560] Building CXX object src/network/CMakeFiles/network.dir/model/header.cc.obj
+[107/560] Building CXX object src/network/CMakeFiles/network.dir/model/net-device.cc.obj
+[108/560] Building CXX object src/network/CMakeFiles/network.dir/model/nix-vector.cc.obj
+[109/560] Building CXX object src/network/CMakeFiles/network.dir/model/node-list.cc.obj
+[110/560] Building CXX object src/network/CMakeFiles/network.dir/model/packet-tag-list.cc.obj
+[111/560] Building CXX object src/network/CMakeFiles/network.dir/model/packet-metadata.cc.obj
+[112/560] Building CXX object src/network/CMakeFiles/network.dir/model/node.cc.obj
+[113/560] Building CXX object src/network/CMakeFiles/network.dir/model/packet.cc.obj
+[114/560] Building CXX object src/network/CMakeFiles/network.dir/model/socket-factory.cc.obj
+[115/560] Building CXX object src/network/CMakeFiles/network.dir/model/tag-buffer.cc.obj
+[116/560] Building CXX object src/network/CMakeFiles/network.dir/model/socket.cc.obj
+[117/560] Building CXX object src/network/CMakeFiles/network.dir/model/tag.cc.obj
+[118/560] Building CXX object src/network/CMakeFiles/network.dir/model/trailer.cc.obj
+[119/560] Building CXX object src/network/CMakeFiles/network.dir/utils/crc32.cc.obj
+[120/560] Building CXX object src/network/CMakeFiles/network.dir/utils/address-utils.cc.obj
+[121/560] Building CXX object src/network/CMakeFiles/network.dir/utils/bit-deserializer.cc.obj
+[122/560] Building CXX object src/network/CMakeFiles/network.dir/utils/bit-serializer.cc.obj
+[123/560] Building CXX object src/network/CMakeFiles/network.dir/utils/data-rate.cc.obj
+[124/560] Building CXX object src/network/CMakeFiles/network.dir/utils/drop-tail-queue.cc.obj
+[125/560] Building CXX object src/network/CMakeFiles/network.dir/utils/error-channel.cc.obj
+[126/560] Building CXX object src/network/CMakeFiles/network.dir/utils/dynamic-queue-limits.cc.obj
+[127/560] Building CXX object src/network/CMakeFiles/network.dir/utils/ethernet-header.cc.obj
+[128/560] Building CXX object src/network/CMakeFiles/network.dir/utils/error-model.cc.obj
+[129/560] Building CXX object src/network/CMakeFiles/network.dir/utils/ethernet-trailer.cc.obj
+[130/560] Building CXX object src/network/CMakeFiles/network.dir/utils/flow-id-tag.cc.obj
+[131/560] Building CXX object src/network/CMakeFiles/network.dir/utils/inet-socket-address.cc.obj
+[132/560] Building CXX object src/network/CMakeFiles/network.dir/utils/inet6-socket-address.cc.obj
+[133/560] Building CXX object src/network/CMakeFiles/network.dir/utils/llc-snap-header.cc.obj
+[134/560] Building CXX object src/network/CMakeFiles/network.dir/utils/mac16-address.cc.obj
+[135/560] Building CXX object src/network/CMakeFiles/network.dir/utils/ipv4-address.cc.obj
+[136/560] Building CXX object src/network/CMakeFiles/network.dir/utils/ipv6-address.cc.obj
+[137/560] Building CXX object src/network/CMakeFiles/network.dir/utils/mac48-address.cc.obj
+[138/560] Building CXX object src/network/CMakeFiles/network.dir/utils/mac64-address.cc.obj
+[139/560] Building CXX object src/network/CMakeFiles/network.dir/utils/mac8-address.cc.obj
+[140/560] Building CXX object src/network/CMakeFiles/network.dir/utils/net-device-queue-interface.cc.obj
+[141/560] Building CXX object src/network/CMakeFiles/network.dir/utils/output-stream-wrapper.cc.obj
+[142/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packet-burst.cc.obj
+[143/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packet-data-calculators.cc.obj
+[144/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packet-socket-address.cc.obj
+[145/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packet-socket-factory.cc.obj
+[146/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packet-probe.cc.obj
+[147/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packet-socket-client.cc.obj
+[148/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packet-socket-server.cc.obj
+[149/560] Building CXX object src/network/CMakeFiles/network.dir/utils/pcap-file-wrapper.cc.obj
+[150/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packet-socket.cc.obj
+[151/560] Building CXX object src/network/CMakeFiles/network.dir/utils/packetbb.cc.obj
+[152/560] Building CXX object src/network/CMakeFiles/network.dir/utils/pcap-file.cc.obj
+[153/560] Building CXX object src/network/CMakeFiles/network.dir/utils/queue-item.cc.obj
+[154/560] Building CXX object src/network/CMakeFiles/network.dir/utils/queue-limits.cc.obj
+[155/560] Building CXX object src/network/CMakeFiles/network.dir/utils/queue-size.cc.obj
+[156/560] Building CXX object src/network/CMakeFiles/network.dir/utils/radiotap-header.cc.obj
+[157/560] Building CXX object src/network/CMakeFiles/network.dir/utils/simple-channel.cc.obj
+[158/560] Building CXX object src/network/CMakeFiles/network.dir/utils/queue.cc.obj
+[159/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-stats.dll
+[160/560] Building CXX object src/network/CMakeFiles/network.dir/utils/sll-header.cc.obj
+[161/560] Building CXX object src/network/CMakeFiles/network.dir/utils/simple-net-device.cc.obj
+[162/560] Building CXX object src/network/CMakeFiles/network.dir/utils/timestamp-tag.cc.obj
+[163/560] Building CXX object src/bridge/CMakeFiles/bridge.dir/model/bridge-channel.cc.obj
+[164/560] Building CXX object src/bridge/CMakeFiles/bridge.dir/helper/bridge-helper.cc.obj
+[165/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-network.dll
+[166/560] Building CXX object src/bridge/CMakeFiles/bridge.dir/model/bridge-net-device.cc.obj
+[167/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/helper/queue-disc-container.cc.obj
+[168/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/helper/traffic-control-helper.cc.obj
+[169/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/cobalt-queue-disc.cc.obj
+[170/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/fifo-queue-disc.cc.obj
+[171/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/codel-queue-disc.cc.obj
+[172/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/fq-codel-queue-disc.cc.obj
+[173/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/fq-cobalt-queue-disc.cc.obj
+[174/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/mq-queue-disc.cc.obj
+[175/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/fq-pie-queue-disc.cc.obj
+[176/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/packet-filter.cc.obj
+[177/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/pfifo-fast-queue-disc.cc.obj
+[178/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/prio-queue-disc.cc.obj
+[179/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/pie-queue-disc.cc.obj
+[180/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/red-queue-disc.cc.obj
+[181/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/tbf-queue-disc.cc.obj
+[182/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/queue-disc.cc.obj
+[183/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control.dir/model/traffic-control-layer.cc.obj
+[184/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv4-address-helper.cc.obj
+[185/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv4-global-routing-helper.cc.obj
+[186/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/internet-trace-helper.cc.obj
+[187/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv4-interface-container.cc.obj
+[188/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv4-list-routing-helper.cc.obj
+[189/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv4-routing-helper.cc.obj
+[190/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/internet-stack-helper.cc.obj
+[191/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv4-static-routing-helper.cc.obj
+[192/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv6-interface-container.cc.obj
+[193/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv6-address-helper.cc.obj
+[194/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv6-list-routing-helper.cc.obj
+[195/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv6-routing-helper.cc.obj
+[196/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ipv6-static-routing-helper.cc.obj
+[197/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/rip-helper.cc.obj
+[198/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/neighbor-cache-helper.cc.obj
+[199/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/arp-header.cc.obj
+[200/560] Building CXX object src/internet/CMakeFiles/internet.dir/helper/ripng-helper.cc.obj
+[201/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/arp-cache.cc.obj
+[202/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/arp-queue-disc-item.cc.obj
+[203/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/candidate-queue.cc.obj
+[204/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/arp-l3-protocol.cc.obj
+[205/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/global-route-manager-impl.cc.obj
+[206/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/global-route-manager.cc.obj
+[207/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/global-router-interface.cc.obj
+[208/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/icmpv4-l4-protocol.cc.obj
+[209/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/icmpv4.cc.obj
+[210/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/icmpv6-header.cc.obj
+[211/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ip-l4-protocol.cc.obj
+[212/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-address-generator.cc.obj
+[213/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-end-point-demux.cc.obj
+[214/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-end-point.cc.obj
+[215/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-global-routing.cc.obj
+[216/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/icmpv6-l4-protocol.cc.obj
+[217/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-interface-address.cc.obj
+[218/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-header.cc.obj
+[219/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-packet-filter.cc.obj
+[220/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-list-routing.cc.obj
+[221/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-interface.cc.obj
+[222/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-packet-info-tag.cc.obj
+[223/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-queue-disc-item.cc.obj
+[224/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-l3-protocol.cc.obj
+[225/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-packet-probe.cc.obj
+[226/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-raw-socket-factory-impl.cc.obj
+[227/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-raw-socket-factory.cc.obj
+[228/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-route.cc.obj
+[229/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-routing-protocol.cc.obj
+[230/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-raw-socket-impl.cc.obj
+[231/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-routing-table-entry.cc.obj
+[232/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4.cc.obj
+[233/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv4-static-routing.cc.obj
+[234/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-address-generator.cc.obj
+[235/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-autoconfigured-prefix.cc.obj
+[236/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-end-point-demux.cc.obj
+[237/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-end-point.cc.obj
+[238/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-extension-demux.cc.obj
+[239/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-extension-header.cc.obj
+[240/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-header.cc.obj
+[241/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-interface-address.cc.obj
+[242/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-extension.cc.obj
+[243/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-list-routing.cc.obj
+[244/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-interface.cc.obj
+[245/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-option-demux.cc.obj
+[246/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-option-header.cc.obj
+[247/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-option.cc.obj
+[248/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-packet-filter.cc.obj
+[249/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-packet-info-tag.cc.obj
+[250/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-pmtu-cache.cc.obj
+[251/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-l3-protocol.cc.obj
+[252/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-packet-probe.cc.obj
+[253/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-queue-disc-item.cc.obj
+[254/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-raw-socket-factory-impl.cc.obj
+[255/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-raw-socket-factory.cc.obj
+[256/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-routing-table-entry.cc.obj
+[257/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-route.cc.obj
+[258/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-routing-protocol.cc.obj
+[259/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-raw-socket-impl.cc.obj
+[260/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6.cc.obj
+[261/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ipv6-static-routing.cc.obj
+[262/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/loopback-net-device.cc.obj
+[263/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/rip-header.cc.obj
+[264/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ndisc-cache.cc.obj
+[265/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ripng-header.cc.obj
+[266/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/rtt-estimator.cc.obj
+[267/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/rip.cc.obj
+[268/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/ripng.cc.obj
+[269/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-bic.cc.obj
+[270/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-congestion-ops.cc.obj
+[271/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-bbr.cc.obj
+[272/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-cubic.cc.obj
+[273/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-header.cc.obj
+[274/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-dctcp.cc.obj
+[275/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-highspeed.cc.obj
+[276/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-htcp.cc.obj
+[277/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-illinois.cc.obj
+[278/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-hybla.cc.obj
+[279/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-linux-reno.cc.obj
+[280/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-lp.cc.obj
+[281/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-ledbat.cc.obj
+[282/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-l4-protocol.cc.obj
+[283/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-option-sack-permitted.cc.obj
+[284/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-option-rfc793.cc.obj
+[285/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-option-sack.cc.obj
+[286/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-option-ts.cc.obj
+[287/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-option-winscale.cc.obj
+[288/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-option.cc.obj
+[289/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-prr-recovery.cc.obj
+[290/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-recovery-ops.cc.obj
+[291/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-rate-ops.cc.obj
+[292/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-rx-buffer.cc.obj
+[293/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-scalable.cc.obj
+[294/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-socket-factory-impl.cc.obj
+[295/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-socket-factory.cc.obj
+[296/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-socket.cc.obj
+[297/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-tx-item.cc.obj
+[298/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-socket-state.cc.obj
+[299/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-tx-buffer.cc.obj
+[300/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-vegas.cc.obj
+[301/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-veno.cc.obj
+[302/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-westwood-plus.cc.obj
+[303/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/udp-header.cc.obj
+[304/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-yeah.cc.obj
+[305/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/udp-socket-factory-impl.cc.obj
+[306/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/udp-socket-factory.cc.obj
+[307/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/udp-l4-protocol.cc.obj
+[308/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/tcp-socket-base.cc.obj
+[309/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-bridge.dll
+[310/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-traffic-control.dll
+[311/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/udp-socket.cc.obj
+[312/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/angles.cc.obj
+[313/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/circular-aperture-antenna-model.cc.obj
+[314/560] Building CXX object src/internet/CMakeFiles/internet.dir/model/udp-socket-impl.cc.obj
+[315/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/antenna-model.cc.obj
+[316/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/cosine-antenna-model.cc.obj
+[317/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/isotropic-antenna-model.cc.obj
+[318/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/parabolic-antenna-model.cc.obj
+[319/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/phased-array-model.cc.obj
+[320/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/three-gpp-antenna-model.cc.obj
+[321/560] Building CXX object src/applications/CMakeFiles/applications.dir/helper/bulk-send-helper.cc.obj
+[322/560] Building CXX object src/antenna/CMakeFiles/antenna.dir/model/uniform-planar-array.cc.obj
+[323/560] Building CXX object src/applications/CMakeFiles/applications.dir/helper/packet-sink-helper.cc.obj
+[324/560] Building CXX object src/applications/CMakeFiles/applications.dir/helper/on-off-helper.cc.obj
+[325/560] Building CXX object src/applications/CMakeFiles/applications.dir/helper/three-gpp-http-helper.cc.obj
+[326/560] Building CXX object src/applications/CMakeFiles/applications.dir/helper/udp-client-server-helper.cc.obj
+[327/560] Building CXX object src/applications/CMakeFiles/applications.dir/helper/udp-echo-helper.cc.obj
+[328/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/application-packet-probe.cc.obj
+[329/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/packet-loss-counter.cc.obj
+[330/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/bulk-send-application.cc.obj
+[331/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/onoff-application.cc.obj
+[332/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/seq-ts-echo-header.cc.obj
+[333/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/seq-ts-header.cc.obj
+[334/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/packet-sink.cc.obj
+[335/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/seq-ts-size-header.cc.obj
+[336/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/sink-application.cc.obj
+[337/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/source-application.cc.obj
+[338/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/three-gpp-http-header.cc.obj
+[339/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/three-gpp-http-variables.cc.obj
+[340/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/three-gpp-http-client.cc.obj
+[341/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/udp-client.cc.obj
+[342/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/three-gpp-http-server.cc.obj
+[343/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/udp-echo-client.cc.obj
+[344/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/udp-echo-server.cc.obj
+[345/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/udp-server.cc.obj
+[346/560] Building CXX object src/applications/CMakeFiles/applications.dir/model/udp-trace-client.cc.obj
+[347/560] Building CXX object src/flow-monitor/CMakeFiles/flow-monitor.dir/model/flow-classifier.cc.obj
+[348/560] Building CXX object src/flow-monitor/CMakeFiles/flow-monitor.dir/helper/flow-monitor-helper.cc.obj
+[349/560] Building CXX object src/flow-monitor/CMakeFiles/flow-monitor.dir/model/flow-probe.cc.obj
+[350/560] Building CXX object src/flow-monitor/CMakeFiles/flow-monitor.dir/model/flow-monitor.cc.obj
+[351/560] Building CXX object src/flow-monitor/CMakeFiles/flow-monitor.dir/model/ipv4-flow-classifier.cc.obj
+[352/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-internet.dll
+[353/560] Building CXX object src/flow-monitor/CMakeFiles/flow-monitor.dir/model/ipv4-flow-probe.cc.obj
+[354/560] Building CXX object src/flow-monitor/CMakeFiles/flow-monitor.dir/model/ipv6-flow-classifier.cc.obj
+[355/560] Building CXX object src/flow-monitor/CMakeFiles/flow-monitor.dir/model/ipv6-flow-probe.cc.obj
+[356/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/helper/group-mobility-helper.cc.obj
+[357/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/box.cc.obj
+[358/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/helper/mobility-helper.cc.obj
+[359/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/helper/ns2-mobility-helper.cc.obj
+[360/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/constant-position-mobility-model.cc.obj
+[361/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/constant-acceleration-mobility-model.cc.obj
+[362/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/constant-velocity-helper.cc.obj
+[363/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/constant-velocity-mobility-model.cc.obj
+[364/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/geocentric-constant-position-mobility-model.cc.obj
+[365/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/gauss-markov-mobility-model.cc.obj
+[366/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/geographic-positions.cc.obj
+[367/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/hierarchical-mobility-model.cc.obj
+[368/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/mobility-model.cc.obj
+[369/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/position-allocator.cc.obj
+[370/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/random-direction-2d-mobility-model.cc.obj
+[371/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/random-walk-2d-mobility-model.cc.obj
+[372/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/random-waypoint-mobility-model.cc.obj
+[373/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/rectangle.cc.obj
+[374/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/steady-state-random-waypoint-mobility-model.cc.obj
+[375/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/waypoint.cc.obj
+[376/560] Building CXX object src/mobility/CMakeFiles/mobility.dir/model/waypoint-mobility-model.cc.obj
+[377/560] Building CXX object src/point-to-point/CMakeFiles/point-to-point.dir/model/ppp-header.cc.obj
+[378/560] Building CXX object src/point-to-point/CMakeFiles/point-to-point.dir/model/point-to-point-channel.cc.obj
+[379/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-antenna.dll
+[380/560] Building CXX object src/point-to-point/CMakeFiles/point-to-point.dir/helper/point-to-point-helper.cc.obj
+[381/560] Building CXX object scratch/nested-subdir/CMakeFiles/scratch-nested-subdir-lib.dir/lib/scratch-nested-subdir-library-source.cc.obj
+[382/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-applications.dll
+[383/560] Building CXX object src/point-to-point/CMakeFiles/point-to-point.dir/model/point-to-point-net-device.cc.obj
+[384/560] Building CXX object src/applications/CMakeFiles/applications-test.dir/test/udp-client-server-test.cc.obj
+[385/560] Building CXX object src/applications/CMakeFiles/applications-test.dir/test/bulk-send-application-test-suite.cc.obj
+[386/560] Building CXX object src/applications/CMakeFiles/applications-test.dir/test/three-gpp-http-client-server-test.cc.obj
+[387/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/build-profile-test-suite.cc.obj
+[388/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/attribute-container-test-suite.cc.obj
+[389/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/command-line-test-suite.cc.obj
+[390/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/environment-variable-test-suite.cc.obj
+[391/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/config-test-suite.cc.obj
+[392/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/global-value-test-suite.cc.obj
+[393/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/event-garbage-collector-test-suite.cc.obj
+[394/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/attribute-test-suite.cc.obj
+[395/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/hash-test-suite.cc.obj
+[396/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/callback-test-suite.cc.obj
+[397/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/int64x64-test-suite.cc.obj
+[398/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/length-test-suite.cc.obj
+[399/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/many-uniform-random-variables-one-get-value-call-test-suite.cc.obj
+[400/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/names-test-suite.cc.obj
+[401/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/object-test-suite.cc.obj
+[402/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/one-uniform-random-variable-many-get-value-calls-test-suite.cc.obj
+[403/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/sample-test-suite.cc.obj
+[404/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/pair-value-test-suite.cc.obj
+[405/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/ptr-test-suite.cc.obj
+[406/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/splitstring-test-suite.cc.obj
+[407/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/threaded-test-suite.cc.obj
+[408/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/simulator-test-suite.cc.obj
+[409/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/time-test-suite.cc.obj
+[410/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/timer-test-suite.cc.obj
+[411/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/traced-callback-test-suite.cc.obj
+[412/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/type-traits-test-suite.cc.obj
+[413/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/trickle-timer-test-suite.cc.obj
+[414/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/type-id-test-suite.cc.obj
+[415/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/watchdog-test-suite.cc.obj
+[416/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/tuple-value-test-suite.cc.obj
+[417/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-flow-monitor.dll
+[418/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/val-array-test-suite.cc.obj
+[419/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/internet-stack-helper-test-suite.cc.obj
+[420/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/global-route-manager-impl-test-suite.cc.obj
+[421/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/icmp-test.cc.obj
+[422/560] Building CXX object src/core/CMakeFiles/core-test.dir/test/matrix-array-test-suite.cc.obj
+[423/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-address-generator-test-suite.cc.obj
+[424/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-address-helper-test-suite.cc.obj
+[425/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-deduplication-test.cc.obj
+[426/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-forwarding-test.cc.obj
+[427/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-list-routing-test-suite.cc.obj
+[428/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-fragmentation-test.cc.obj
+[429/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-header-test.cc.obj
+[430/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-global-routing-test-suite.cc.obj
+[431/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-packet-info-tag-test-suite.cc.obj
+[432/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-static-routing-test-suite.cc.obj
+[433/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-rip-test.cc.obj
+[434/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-test.cc.obj
+[435/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv4-raw-test.cc.obj
+[436/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-address-duplication-test.cc.obj
+[437/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-address-generator-test-suite.cc.obj
+[438/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-address-helper-test-suite.cc.obj
+[439/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-dual-stack-test-suite.cc.obj
+[440/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-extension-header-test-suite.cc.obj
+[441/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-list-routing-test-suite.cc.obj
+[442/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-forwarding-test.cc.obj
+[443/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-packet-info-tag-test-suite.cc.obj
+[444/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-fragmentation-test.cc.obj
+[445/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-ripng-test.cc.obj
+[446/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-test.cc.obj
+[447/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/ipv6-raw-test.cc.obj
+[448/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/rtt-test.cc.obj
+[449/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/neighbor-cache-test.cc.obj
+[450/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-bbr-test.cc.obj
+[451/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-advertised-window-test.cc.obj
+[452/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-bic-test.cc.obj
+[453/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-classic-recovery-test.cc.obj
+[454/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-bytes-in-flight-test.cc.obj
+[455/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-close-test.cc.obj
+[456/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-cong-avoid-test.cc.obj
+[457/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-datasentcb-test.cc.obj
+[458/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-dctcp-test.cc.obj
+[459/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-ecn-test.cc.obj
+[460/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-error-model.cc.obj
+[461/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-endpoint-bug2211.cc.obj
+[462/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-fast-retr-test.cc.obj
+[463/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-header-test.cc.obj
+[464/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-highspeed-test.cc.obj
+[465/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-htcp-test.cc.obj
+[466/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-general-test.cc.obj
+[467/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-hybla-test.cc.obj
+[468/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-illinois-test.cc.obj
+[469/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-ledbat-test.cc.obj
+[470/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-linux-reno-test.cc.obj
+[471/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-loss-test.cc.obj
+[472/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-lp-test.cc.obj
+[473/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-option-test.cc.obj
+[474/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-pacing-test.cc.obj
+[475/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-pkts-acked-test.cc.obj
+[476/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-prr-recovery-test.cc.obj
+[477/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-rtt-estimation.cc.obj
+[478/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-rate-ops-test.cc.obj
+[479/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-rto-test.cc.obj
+[480/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-rx-buffer-test.cc.obj
+[481/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-sack-permitted-test.cc.obj
+[482/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-scalable-test.cc.obj
+[483/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-slow-start-test.cc.obj
+[484/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-timestamp-test.cc.obj
+[485/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-syn-connection-failed-test.cc.obj
+[486/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-test.cc.obj
+[487/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-tx-buffer-test.cc.obj
+[488/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-vegas-test.cc.obj
+[489/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-veno-test.cc.obj
+[490/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-wscaling-test.cc.obj
+[491/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-yeah-test.cc.obj
+[492/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-mobility.dll
+[493/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/box-line-intersection-test.cc.obj
+[494/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/geo-to-cartesian-test.cc.obj
+[495/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/tcp-zero-window-test.cc.obj
+[496/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/geocentric-topocentric-conversion-test.cc.obj
+[497/560] Building CXX object src/internet/CMakeFiles/internet-test.dir/test/udp-test.cc.obj
+[498/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/mobility-trace-test-suite.cc.obj
+[499/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/mobility-test-suite.cc.obj
+[500/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/rand-cart-around-geo-test.cc.obj
+[501/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/rectangle-closest-border-test.cc.obj
+[502/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/ns2-mobility-helper-test-suite.cc.obj
+[503/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/steady-state-random-waypoint-mobility-model-test.cc.obj
+[504/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/bit-serializer-test.cc.obj
+[505/560] Building CXX object src/mobility/CMakeFiles/mobility-test.dir/test/waypoint-mobility-model-test.cc.obj
+[506/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/drop-tail-queue-test-suite.cc.obj
+[507/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/buffer-test.cc.obj
+[508/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/lollipop-counter-test.cc.obj
+[509/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/ipv6-address-test-suite.cc.obj
+[510/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/error-model-test-suite.cc.obj
+[511/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/packet-metadata-test.cc.obj
+[512/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/packet-socket-apps-test-suite.cc.obj
+[513/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/packetbb-test-suite.cc.obj
+[514/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/packet-test-suite.cc.obj
+[515/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/sequence-number-test-suite.cc.obj
+[516/560] Linking CXX shared library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libns3.46.1-point-to-point.dll
+[517/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/pcap-file-test-suite.cc.obj
+[518/560] Building CXX object src/point-to-point/CMakeFiles/point-to-point-test.dir/test/point-to-point-test.cc.obj
+[519/560] Building CXX object src/network/CMakeFiles/network-test.dir/test/test-data-rate.cc.obj
+[520/560] Building CXX object src/stats/CMakeFiles/stats-test.dir/test/average-test-suite.cc.obj
+[521/560] Building CXX object src/stats/CMakeFiles/stats-test.dir/test/histogram-test-suite.cc.obj
+[522/560] Building CXX object src/stats/CMakeFiles/stats-test.dir/test/basic-data-calculators-test-suite.cc.obj
+[523/560] Building CXX object src/stats/CMakeFiles/stats-test.dir/test/double-probe-test-suite.cc.obj
+[524/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/adaptive-red-queue-disc-test-suite.cc.obj
+[525/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/fifo-queue-disc-test-suite.cc.obj
+[526/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/cobalt-queue-disc-test-suite.cc.obj
+[527/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/codel-queue-disc-test-suite.cc.obj
+[528/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/prio-queue-disc-test-suite.cc.obj
+[529/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/pie-queue-disc-test-suite.cc.obj
+[530/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/queue-disc-traces-test-suite.cc.obj
+[531/560] Building CXX object src/antenna/CMakeFiles/antenna-test.dir/test/test-circular-aperture-antenna.cc.obj
+[532/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/red-queue-disc-test-suite.cc.obj
+[533/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/tbf-queue-disc-test-suite.cc.obj
+[534/560] Building CXX object src/traffic-control/CMakeFiles/traffic-control-test.dir/test/tc-flow-control-test-suite.cc.obj
+[535/560] Building CXX object src/antenna/CMakeFiles/antenna-test.dir/test/test-isotropic-antenna.cc.obj
+[536/560] Building CXX object src/antenna/CMakeFiles/antenna-test.dir/test/test-degrees-radians.cc.obj
+[537/560] Building CXX object src/antenna/CMakeFiles/antenna-test.dir/test/test-cosine-antenna.cc.obj
+[538/560] Building CXX object src/antenna/CMakeFiles/antenna-test.dir/test/test-angles.cc.obj
+[539/560] Building CXX object src/antenna/CMakeFiles/antenna-test.dir/test/test-parabolic-antenna.cc.obj
+[540/560] Building CXX object src/antenna/CMakeFiles/antenna-test.dir/test/test-adjacency-matrix.cc.obj
+[541/560] Building CXX object src/antenna/CMakeFiles/antenna-test.dir/test/test-uniform-planar-array.cc.obj
+[542/560] Building CXX object scratch/CMakeFiles/scratch_scratch-simulator.dir/scratch-simulator.cc.obj
+[543/560] Building CXX object scratch/CMakeFiles/scratch_subdir_scratch-subdir.dir/subdir/scratch-subdir-additional-header.cc.obj
+[544/560] Linking CXX static library C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\lib\libscratch-nested-subdir-lib.a
+[545/560] Building CXX object utils/CMakeFiles/test-runner.dir/test-runner.cc.obj
+[546/560] Building CXX object scratch/CMakeFiles/scratch_subdir_scratch-subdir.dir/subdir/scratch-subdir.cc.obj
+[547/560] Building CXX object scratch/nested-subdir/CMakeFiles/scratch_nested-subdir_scratch-nested-subdir-executable.dir/scratch-nested-subdir-executable.cc.obj
+[548/560] Building CXX object utils/CMakeFiles/bench-scheduler.dir/bench-scheduler.cc.obj
+[549/560] Building CXX object utils/CMakeFiles/bench-packets.dir/bench-packets.cc.obj
+[550/560] Linking CXX executable C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\scratch\subdir\ns3.46.1-scratch-subdir.exe
+[551/560] Linking CXX executable C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\scratch\ns3.46.1-scratch-simulator.exe
+[552/560] Linking CXX executable C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\scratch\nested-subdir\ns3.46.1-scratch-nested-subdir-executable.exe
+[553/560] Linking CXX executable C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\utils\ns3.46.1-bench-scheduler.exe
+[554/560] Linking CXX executable C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\utils\ns3.46.1-bench-packets.exe
+[555/560] Building CXX object utils/CMakeFiles/perf-io.dir/perf/perf-io.cc.obj
+[556/560] Linking CXX executable C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\utils\perf\ns3.46.1-perf-io.exe
+[557/560] Linking CXX executable C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\utils\ns3.46.1-test-runner.exe
+[558/560] Building CXX object utils/CMakeFiles/print-introspected-doxygen.dir/print-introspected-doxygen.cc.obj
+[559/560] Linking CXX executable C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\utils\ns3.46.1-print-introspected-doxygen.exe

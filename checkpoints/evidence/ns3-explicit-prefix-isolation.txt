@@ -1,0 +1,23 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --preset default -B C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\build\verify-explicit-empty -DEALR_REQUIRE_NS3=ON -DEALR_NS3_PREFIX=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\explicit-empty-ns3 -DCMAKE_PREFIX_PATH=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-install -DEALR_BOOST_SOURCE=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\boost_1_85_0
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  EALR_BUILD_TESTS="ON"
+  EALR_ENABLE_NS3="ON"
+
+-- The CXX compiler identification is GNU 14.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/mingw64/bin/c++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring incomplete, errors occurred!
+CMake Error at cmake/EalrDependencies.cmake:48 (message):
+  Requested ns-3 runtime unavailable:
+  core/network/mobility/flow-monitor/internet/applications/point-to-point
+  targets required.  Build the wired dependencies with scripts/setup_ns3.py
+  and supply --ns3-prefix to scripts/verify.py.
+Call Stack (most recent call first):
+  CMakeLists.txt:72 (ealr_find_ns3)
+
+

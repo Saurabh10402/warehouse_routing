@@ -1,19 +1,22 @@
-# Test status — checkpoint_007
+# Test status — checkpoint_008
 
-| Check | Result | Evidence |
+| Check | Result | Evidence under checkpoints/evidence |
 |---|---|---|
-| Bootstrap / default core CTest | 19/19 PASS each | checkpoint007-bootstrap/default-tests.txt |
-| Capacity/admission study | 288 PASS, seeds 4/5/6 | checkpoint007-capacity-status.json |
-| Protected regression | 144 exact inputs and packet traces PASS | checkpoint007-protected-status.json |
-| Warehouse regression | 132 exact inputs and packet traces PASS | checkpoint007-baseline-status.json |
-| Operating table raw audit | 96 rows / all 288 traces PASS | checkpoint007-table-audit.json |
-| Replay / charts | PASS all three, 60/40/55 PNGs | Batch outputs; flood-c5 scope figure visually inspected |
-| Stationarity, queue conservation, loss denominators, paired offered traffic | PASS all runs | Runner artifact validation |
-| ns-3 / NR runtime | BLOCKED / NOT RUN | Previous compiler failure unchanged |
-| Linux / Mac execution | NOT RUN | Windows host only |
+| Core bootstrap | 20/20 PASS | checkpoint008-bootstrap-tests.txt |
+| Final code in isolated source extraction | 20/20 PASS, 180/180 packets | checkpoint008-extracted-tests.txt; clean-source-first-run-final.txt |
+| Full warehouse regression | 132 exact inputs/traces, replay and 55 charts PASS | checkpoint008-warehouse-status.json; preserved batch |
+| ns-3 wired dependency | Release build/install and 150/150 UNIT QUICK PASS | checkpoint008-ns3-build/install/upstream-tests.txt; setup.json |
+| Project linked to ns-3 | 22/22 CTest PASS | checkpoint008-ns3-project-tests.txt |
+| Actual two-hop UDP / replay | 3/3, 384 IP bytes, 4.416 ms, stationary; exact replay | checkpoint008-ns3-smoke.json/status.json; preserved batch |
+| Required dependency and explicit-prefix isolation | Correct failure PASS | ns3-required-missing.txt; ns3-explicit-prefix-isolation.txt |
+| Existing output preservation | Correct refusal, bytes unchanged PASS | ns3-existing-output-guard.txt |
+| ns-3 schema-v2/QoS, NR, Wi-Fi/NetAnim | NOT VALIDATED | Preserved external failure and integration contract |
+| Mac / Ubuntu execution | NOT RUN | Windows host only; prepared first-run guide |
 
-Evidence files are under checkpoints/evidence. Initial sandbox temp-file permission failures
-are not simulator failures; authorized rerun passed without test/warning suppression.
-The stale build LastTestsFailed.log may retain the initial sandbox failures: the saved final
-LastTest.log records 19 Test Passed entries for each preset. Experimental deadline failures
-remain in results and do not become performance guarantees merely because validation passes.
+The 132-run regression uses a2bf99f; later changes only fix installer/test orchestration and
+documentation. Final extracted-source and linked-project checks cover 47088f1 code. Initial
+syntax/include, upstream-invocation, report-parser and overnight timeout diagnostics are
+preserved. Final passes used no warning suppression, skipped required suite or increased
+timeout. The 150 upstream suites are UNIT QUICK in Release, not all system/extensive tests.
+Generated results retain their original hashes and provenance. Stress deadline misses remain
+measured failures; validation success is not a performance guarantee.

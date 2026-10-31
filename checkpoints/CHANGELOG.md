@@ -36,3 +36,11 @@ Added explicit unpoliced reservation control and a preregistered 288-run capacit
 study with new seeds. Both presets 19/19 PASS; 144 protected and 132 warehouse exact regressions
 PASS. Independent 96-row raw table audit, replay and 60/40/55 charts PASS. Retained adverse
 burst/flood and lower-class results; no default retuned. ns-3/NR remains unfinished.
+
+## checkpoint_008
+Pinned local wired ns-3 installer, strict dependency/prefix checks, optional NetAnim separation,
+actual UDP delay/loss fixtures, archive-safe first-run/provenance, and Mac/Ubuntu setup guide.
+Wired build/install + 150 upstream suites; 22 linked project tests; final extracted 20 tests
+and 180/180 delivery; 132 exact warehouse regressions/replay/55 charts PASS. Preserved failures
+and fixed invocation/report parsing without suppressing tests/warnings. Full schema-v2 ns-3,
+NR and target-host validation remain pending.

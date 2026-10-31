@@ -1,0 +1,124 @@
+Source-only extraction with spaces in path, no .git, no prior build cache.
+Uses separately supplied compiler and Boost prerequisites; not a Mac/Ubuntu execution.
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --preset bootstrap -B C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\build\verified-bootstrap -DPython3_EXECUTABLE=C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -DEALR_REQUIRE_NS3=OFF -DEALR_BOOST_SOURCE=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\boost_1_85_0
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  EALR_BUILD_TESTS="ON"
+  EALR_ENABLE_NS3="OFF"
+
+-- The CXX compiler identification is GNU 14.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/mingw64/bin/c++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- EALR 0.1.0: repository bootstrap configured
+-- ns-3 support: disabled
+-- 5G-LENA NR support: disabled
+-- Configuring done (7.9s)
+-- Generating done (0.8s)
+-- Build files have been written to: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/first run source e6f32ab0/build/verified-bootstrap
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --build C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\build\verified-bootstrap -j 4
+[1/52] Building CXX object CMakeFiles/ealr_core.dir/src/framework.cpp.obj
+[2/52] Building CXX object CMakeFiles/ealr_core.dir/src/config/warehouse_configuration.cpp.obj
+[3/52] Building CXX object CMakeFiles/ealr_core.dir/src/config/configuration.cpp.obj
+[4/52] Building CXX object CMakeFiles/ealr_core.dir/src/metrics/fabric_metrics.cpp.obj
+[5/52] Building CXX object CMakeFiles/ealr_core.dir/src/config/fabric_configuration.cpp.obj
+[6/52] Building CXX object CMakeFiles/ealr_core.dir/src/network/device_policy.cpp.obj
+[7/52] Building CXX object CMakeFiles/ealr_core.dir/src/metrics/metrics_collector.cpp.obj
+[8/52] Building CXX object CMakeFiles/ealr_core.dir/src/safety/temperature_safety_controller.cpp.obj
+[9/52] Building CXX object CMakeFiles/ealr_core.dir/src/robot/robot.cpp.obj
+[10/52] Building CXX object CMakeFiles/ealr_core.dir/src/routing/routing_types.cpp.obj
+[11/52] Building CXX object CMakeFiles/ealr_boost_json.dir/boost_json_source.cpp.obj
+[12/52] Building CXX object CMakeFiles/ealr_core.dir/src/routing/dijkstra_routing.cpp.obj
+[13/52] Building CXX object CMakeFiles/ealr_core.dir/src/simulation/fabric_simulator.cpp.obj
+[14/52] Linking CXX static library libealr_boost_json.a
+[15/52] Building CXX object CMakeFiles/ealr_core.dir/src/routing/ecmp_routing.cpp.obj
+[16/52] Building CXX object tests/CMakeFiles/ealr_framework_smoke.dir/framework_smoke.cpp.obj
+[17/52] Building CXX object CMakeFiles/ealr_core.dir/src/routing/greedy_routing.cpp.obj
+[18/52] Building CXX object CMakeFiles/ealr-fabric.dir/src/app/ealr_fabric_main.cpp.obj
+[19/52] Building CXX object CMakeFiles/ealr_core.dir/src/routing/ealr_routing.cpp.obj
+[20/52] Building CXX object tests/CMakeFiles/ealr_configuration_tests.dir/configuration_tests.cpp.obj
+[21/52] Building CXX object tests/CMakeFiles/ealr_warehouse_configuration_tests.dir/warehouse_configuration_tests.cpp.obj
+[22/52] Linking CXX static library libealr_core.a
+[23/52] Building CXX object tests/CMakeFiles/ealr_temperature_safety_controller_tests.dir/temperature_safety_controller_tests.cpp.obj
+[24/52] Building CXX object tests/CMakeFiles/ealr_robot_tests.dir/robot_tests.cpp.obj
+[25/52] Building CXX object tests/CMakeFiles/ealr_routing_interface_tests.dir/routing_interface_tests.cpp.obj
+[26/52] Building CXX object tests/CMakeFiles/ealr_dijkstra_tests.dir/dijkstra_tests.cpp.obj
+[27/52] Building CXX object tests/CMakeFiles/ealr_greedy_tests.dir/greedy_tests.cpp.obj
+[28/52] Building CXX object tests/CMakeFiles/ealr_ealr_tests.dir/ealr_tests.cpp.obj
+[29/52] Building CXX object tests/CMakeFiles/ealr_metrics_tests.dir/metrics_tests.cpp.obj
+[30/52] Building CXX object tests/CMakeFiles/ealr_core_regression_tests.dir/core_regression_tests.cpp.obj
+[31/52] Building CXX object tests/CMakeFiles/ealr_fabric_metrics_tests.dir/fabric_metrics_tests.cpp.obj
+[32/52] Building CXX object tests/CMakeFiles/ealr_fabric_configuration_tests.dir/fabric_configuration_tests.cpp.obj
+[33/52] Building CXX object tests/CMakeFiles/ealr_fabric_simulation_tests.dir/fabric_simulation_tests.cpp.obj
+[34/52] Linking CXX executable tests\ealr_framework_smoke.exe
+[35/52] Linking CXX executable ealr-fabric.exe
+[36/52] Building CXX object tests/CMakeFiles/ealr_ecmp_tests.dir/ecmp_tests.cpp.obj
+[37/52] Linking CXX executable tests\ealr_configuration_tests.exe
+[38/52] Linking CXX executable tests\ealr_temperature_safety_controller_tests.exe
+[39/52] Linking CXX executable tests\ealr_warehouse_configuration_tests.exe
+[40/52] Linking CXX executable tests\ealr_robot_tests.exe
+[41/52] Linking CXX executable tests\ealr_routing_interface_tests.exe
+[42/52] Linking CXX executable tests\ealr_dijkstra_tests.exe
+[43/52] Linking CXX executable tests\ealr_greedy_tests.exe
+[44/52] Linking CXX executable tests\ealr_ealr_tests.exe
+[45/52] Linking CXX executable tests\ealr_metrics_tests.exe
+[46/52] Linking CXX executable tests\ealr_core_regression_tests.exe
+[47/52] Building CXX object tests/CMakeFiles/ealr_protected_queue_tests.dir/protected_queue_tests.cpp.obj
+[48/52] Linking CXX executable tests\ealr_fabric_configuration_tests.exe
+[49/52] Linking CXX executable tests\ealr_fabric_metrics_tests.exe
+[50/52] Linking CXX executable tests\ealr_fabric_simulation_tests.exe
+[51/52] Linking CXX executable tests\ealr_ecmp_tests.exe
+[52/52] Linking CXX executable tests\ealr_protected_queue_tests.exe
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\ctest.EXE --test-dir C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\build\verified-bootstrap --output-on-failure
+Internal ctest changing into directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/first run source e6f32ab0/build/verified-bootstrap
+Test project C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.recovery/first run source e6f32ab0/build/verified-bootstrap
+      Start  1: ealr_framework_smoke
+ 1/20 Test  #1: ealr_framework_smoke .......................   Passed    1.64 sec
+      Start  2: ealr_configuration_tests
+ 2/20 Test  #2: ealr_configuration_tests ...................   Passed    2.07 sec
+      Start  3: ealr_warehouse_configuration_tests
+ 3/20 Test  #3: ealr_warehouse_configuration_tests .........   Passed    1.96 sec
+      Start  4: ealr_temperature_safety_controller_tests
+ 4/20 Test  #4: ealr_temperature_safety_controller_tests ...   Passed    1.70 sec
+      Start  5: ealr_robot_tests
+ 5/20 Test  #5: ealr_robot_tests ...........................   Passed    1.66 sec
+      Start  6: ealr_routing_interface_tests
+ 6/20 Test  #6: ealr_routing_interface_tests ...............   Passed    1.57 sec
+      Start  7: ealr_dijkstra_tests
+ 7/20 Test  #7: ealr_dijkstra_tests ........................   Passed    2.04 sec
+      Start  8: ealr_greedy_tests
+ 8/20 Test  #8: ealr_greedy_tests ..........................   Passed    2.07 sec
+      Start  9: ealr_ealr_tests
+ 9/20 Test  #9: ealr_ealr_tests ............................   Passed    1.65 sec
+      Start 10: ealr_metrics_tests
+10/20 Test #10: ealr_metrics_tests .........................   Passed    1.65 sec
+      Start 11: ealr_core_regression_tests
+11/20 Test #11: ealr_core_regression_tests .................   Passed    1.69 sec
+      Start 12: ealr_fabric_configuration_tests
+12/20 Test #12: ealr_fabric_configuration_tests ............   Passed    2.30 sec
+      Start 13: ealr_fabric_simulation_tests
+13/20 Test #13: ealr_fabric_simulation_tests ...............   Passed    2.80 sec
+      Start 14: ealr_fabric_metrics_tests
+14/20 Test #14: ealr_fabric_metrics_tests ..................   Passed    1.83 sec
+      Start 15: ealr_ecmp_tests
+15/20 Test #15: ealr_ecmp_tests ............................   Passed    3.89 sec
+      Start 16: ealr_protected_queue_tests
+16/20 Test #16: ealr_protected_queue_tests .................   Passed    3.02 sec
+      Start 17: ealr_verification_tests
+17/20 Test #17: ealr_verification_tests ....................   Passed    0.88 sec
+      Start 18: ealr_warehouse_study_tests
+18/20 Test #18: ealr_warehouse_study_tests .................   Passed    0.72 sec
+      Start 19: ealr_plotting_tests
+19/20 Test #19: ealr_plotting_tests ........................   Passed    0.38 sec
+      Start 20: ealr_fabric_cli_tests
+20/20 Test #20: ealr_fabric_cli_tests ......................   Passed    8.59 sec
+
+100% tests passed, 0 tests failed out of 20
+
+Total Test time (real) =  44.25 sec
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\build\verified-bootstrap\ealr-fabric.exe --config C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\configs\warehouse_communications.json --output C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\results\first-run-20261030T212707Z-82a07192\example
+Core abstract-link simulation: 180/180 delivered; output "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\.recovery\\first run source e6f32ab0\\results\\first-run-20261030T212707Z-82a07192\\example"
+PASS: first-run warehouse fixture, 180/180 delivered, zero deadline misses. OUTPUT: C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.recovery\first run source e6f32ab0\results\first-run-20261030T212707Z-82a07192

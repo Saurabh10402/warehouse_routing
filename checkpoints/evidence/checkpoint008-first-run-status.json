@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "suite": "first-run",
+  "runs": 1,
+  "checks": "180/180 delivery, zero deadline misses, raw artifact validation",
+  "scope": "stationary abstract links; not ns-3 or NR"
+}

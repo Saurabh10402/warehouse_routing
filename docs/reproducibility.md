@@ -1,5 +1,8 @@
 # Build, reproduce, and recover
 
+For the ordered first-time setup, expected outputs and troubleshooting, use
+[the first-run guide](first-run.md). The recipes below retain the underlying developer commands.
+
 ## Core prerequisites
 
 C++17 compiler, CMake >=3.22, Ninja, Boost.JSON and Python >=3.10 for the runner.
@@ -16,8 +19,8 @@ python3 scripts/run_all_experiments.py
 macOS (requires Xcode command-line tools/Homebrew; not executed here):
 
 ```sh
-brew install cmake ninja boost python
-python3 -m venv .venv
+brew install cmake ninja boost python@3.12
+python3.12 -m venv .venv
 . .venv/bin/activate
 python -m pip install -r scripts/requirements.txt
 python scripts/run_all_experiments.py
@@ -113,6 +116,15 @@ error bars. A single sample has no estimated variability. Raw per-priority obser
 available even when an aggregate plot hides class differences.
 
 ## Optional ns-3
+
+The wired prerequisite workflow is `python scripts/setup_ns3.py` (Python 3.12+), then
+`python scripts/run_ns3_smoke.py`. It isolates NetAnim as optional, installs only under
+`.tools/ns3-wired-install`, and checks routed UDP delivery/delay and loss. See the current
+checkpoint for actual executed status. Schema-v2 warehouse/NR integration is separate.
+
+`scripts/verify.py --ns3-prefix PREFIX` implies the default preset and requires the specified
+package. It fails on missing targets instead of silently validating core-only code; an
+explicit prefix cannot be satisfied by an unrelated globally installed ns-3 package.
 
 The default preset emits an explicit warning when required modules are unavailable. A successful
 core-only default build is not evidence that ns-3/NR was tested. See `docs/ns3-integration.md`

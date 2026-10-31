@@ -81,6 +81,9 @@ and installs only beneath `.tools/ns3-wired-install`. This is a substantial firs
 With limited VM memory, use `--jobs 2`. Rerunning reuses the local source/build; do not delete
 previous result directories. `--offline` requires the pinned archive already in `.tools`.
 Only two documentation symlink aliases are omitted during Windows-compatible extraction.
+Upstream suites run separately, as required by this ns-3 release. Some suites print nothing
+until they finish: `threaded-simulator` took about 275 seconds on the Windows validation host.
+The setup log names the current suite; a quiet interval alone is not a failure.
 
 The second command requires real ns-3; it cannot silently fall back to the independent core.
 It runs project tests, then a two-hop routed UDP fixture and deterministic replay. Expected:

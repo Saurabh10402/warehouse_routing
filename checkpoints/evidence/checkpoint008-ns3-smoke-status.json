@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "suite": "ns3-wired-smoke",
+  "runs": 1,
+  "replay": "PASS",
+  "checks": "analytical UDP delivery/delay, constant positions, one/two-hop loss tests",
+  "scope": "Prerequisite runtime validation only; schema-v2/NR integration pending"
+}

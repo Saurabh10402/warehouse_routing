@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_007",
-  "utc": "2026-10-30T21:01:01.210326+00:00",
-  "phase": "capacity-admission-sensitivity-validated",
-  "source_state": "manifests/checkpoint_007.json",
+  "checkpoint": "checkpoint_008",
+  "utc": "2026-10-31T10:28:00.776454+00:00",
+  "phase": "wired-ns3-runtime-and-first-run-validated",
+  "source_state": "manifests/checkpoint_008.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -36,18 +36,22 @@
     "declared 288-run capacity/rate/burst sweep using new seeds 4/5/6",
     "96-row operating-limit table with every class and rejection cause",
     "endpoint source-time P0 traffic envelopes",
-    "144-run byte-identical protected regression"
+    "144-run byte-identical protected regression",
+    "pinned wired ns-3 local installer with source integrity and exact upstream suite reports",
+    "strict required ns-3 prefix and optional NetAnim dependency separation",
+    "real one/two-hop IPv4/UDP analytical delivery/delay/loss tests and replay",
+    "first-run core workflow with archive-safe provenance and retained logs"
   ],
   "pending": [
     "warehouse traffic/loss/availability calibration",
-    "ns-3 build/runtime repair and schema-v2/NR integration",
+    "schema-v2 ns-3 forwarding/QoS and compatible NR user-plane integration",
     "cross-platform execution",
     "final research/deployment claim validation",
     "per-port downstream arrival bounds, uplink/reservation-size sensitivity and calibrated admission policy"
   ],
   "known_defects": [],
-  "build_status": "PASS GCC 14.2.0 Boost 1.85 portable Debug, bootstrap and default core-only",
-  "test_status": "19/19 CTest PASS both core presets; 288 capacity runs and independent 96-row raw audit; 144 protected and 132 warehouse exact regressions; replays and 60/40/55 charts PASS",
+  "build_status": "PASS Windows GCC 14.2 / Boost 1.85; core Debug; wired ns-3.46.1 Release; linked project Debug",
+  "test_status": "150/150 upstream UNIT QUICK; 22/22 linked project CTest; final extracted source 20/20 and 180/180 first run; 132 exact warehouse regressions/replay/55 charts; real UDP 3/3, 4.416 ms and exact replay",
   "experiment_identifiers": [
     "experiments-20261029T210304Z-82f715a2",
     "experiments-20261029T212427Z-4a13d923",
@@ -58,19 +62,23 @@
     "experiments-20261030T173542Z-c74e4faf",
     "experiments-20261030T175442Z-cb0b1ccc",
     "experiments-20261030T175551Z-a5db7fd7",
-    "experiments-20261030T180019Z-2441a69a"
+    "experiments-20261030T180019Z-2441a69a",
+    "experiments-20261031T094745Z-723bc3c8",
+    "first-run-20261031T101929Z-5481bba4",
+    "ns3-smoke-20261031T102542Z-fd5d9232"
   ],
   "dependencies": {
-    "ns3": "3.46.1 external Release build FAILED in Wi-Fi with -Werror=maybe-uninitialized; three adapter syntax checks PASS; link/runtime BLOCKED",
+    "ns3": "3.46.1 wired Release built/installed with warnings-as-errors; 150 UNIT QUICK and 22 linked project tests PASS. Optional full Wi-Fi/NetAnim build failure remains unresolved.",
     "5g_lena": "not installed",
     "portable_toolchain": "GCC 14.2.0, Boost 1.85 SHA256 verified"
   },
   "blockers": [
-    "External ns-3.46.1 Wi-Fi compile failure with GCC 14.2.0, preserved diagnostics",
-    "NR module absent and unverified"
+    "NR module absent and unverified",
+    "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
+    "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Resolve the recorded ns-3 compiler failure with diagnostics intact; validate a minimal real packet runtime before schema-v2/QoS/NR integration; keep abstract-link results frozen",
-  "tested_code_commit": "8fe3f315881f197b3af4a7d381913b04602e117b",
+  "next_action": "Implement the first stationary wired schema-v2 ns-3 slice from docs/ns3-warehouse-contract.md: real same-zone/cross-zone/edge-service packets with supported-field validation and observed paths before expanding QoS/NR.",
+  "tested_code_commit": "47088f105b46f7b38d3d4eae8727f15ac3a0ea86",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
   "research_direction": "Powered stationary fabric; priority scheduling and resilience. EALR preserved as legacy, excluded from primary matrix.",
@@ -83,10 +91,13 @@
     "Illustrative workloads and three seeds are not deployment guarantees",
     "No tested capacity/admission setting eliminates P0 misses in burst/flood cases",
     "Unpoliced P0 can starve lower classes; zero mixed-load P0 misses are finite-run observations",
-    "Endpoint envelopes bound source generation, not post-queue downstream arrivals"
+    "Endpoint envelopes bound source generation, not post-queue downstream arrivals",
+    "ns-3 measurements cover small wired packet fixtures, not the schema-v2 warehouse or NR",
+    "Release ns-3 UNIT QUICK tests only; system/extensive suites were not run",
+    "Mac/Ubuntu installation recipes are prepared but not executed on those platforms"
   ],
-  "baseline_regression_experiment": "experiments-20261030T180019Z-2441a69a",
-  "baseline_comparison_reference": "experiments-20261030T173542Z-c74e4faf",
+  "baseline_regression_experiment": "experiments-20261031T094745Z-723bc3c8",
+  "baseline_comparison_reference": "experiments-20261030T180019Z-2441a69a",
   "protected_regression_experiment": "experiments-20261030T175551Z-a5db7fd7",
   "handoff_requirements": {
     "user_constraint": "User cannot run or debug the project now; Mac access and future agent access may be unavailable. Minimize manual debugging at handoff.",
@@ -103,6 +114,8 @@
       "Distinguish actually executed target-platform tests from documented but unexecuted commands.",
       "Resolve and validate real ns-3/schema-v2/NR integration before describing the whole requested product as finished."
     ],
-    "current_readiness": "Core validated on Windows; final Mac/Ubuntu and ns-3/NR handoff not yet validated."
-  }
+    "current_readiness": "Windows core and real wired packet prerequisites validated; final schema-v2 ns-3/QoS/NR and Mac/Ubuntu execution still required. Whole requested product not complete."
+  },
+  "ns3_smoke_experiment": "ns3-smoke-20261031T102542Z-fd5d9232",
+  "first_run_experiment": "first-run-20261031T101929Z-5481bba4"
 }

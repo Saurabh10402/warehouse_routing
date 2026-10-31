@@ -1,0 +1,22 @@
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  EALR_BUILD_TESTS="ON"
+  EALR_ENABLE_NS3="ON"
+
+-- The CXX compiler identification is GNU 14.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/mingw64/bin/c++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Error at cmake/EalrDependencies.cmake:42 (message):
+  Requested ns-3 runtime unavailable:
+  core/network/mobility/flow-monitor/internet/applications/point-to-point
+  targets required.  Build the wired dependencies with scripts/setup_ns3.py
+  and supply --ns3-prefix to scripts/verify.py.
+Call Stack (most recent call first):
+  CMakeLists.txt:71 (ealr_find_ns3)
+
+
+-- Configuring incomplete, errors occurred!

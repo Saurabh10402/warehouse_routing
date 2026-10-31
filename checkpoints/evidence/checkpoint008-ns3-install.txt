@@ -1,0 +1,570 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE -S C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1 -B C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-build -G Ninja -DCMAKE_BUILD_TYPE=Release -DPython3_EXECUTABLE=C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -DNS3_ENABLED_MODULES=core,network,mobility,flow-monitor,applications,internet,point-to-point -DNS3_TESTS=ON -DNS3_EXAMPLES=OFF -DNS3_PYTHON_BINDINGS=OFF -DNS3_WARNINGS=ON -DNS3_WARNINGS_AS_ERRORS=ON -DNS3_OUTPUT_DIRECTORY=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired -DCMAKE_INSTALL_PREFIX=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-install -DCMAKE_INSTALL_LIBDIR=lib
+no such file or directory
+-- Creating user-defined output directory "C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired". In case it fails, try changing the value of NS3_OUTPUT_DIRECTORY or check the directory permissions.
+CMake Warning at build-support/custom-modules/ns3-output-directory.cmake:35 (message):
+  Python3 executable was not found and write permissions won't be checked.
+  Build may break for file permission issues.
+Call Stack (most recent call first):
+  build-support/custom-modules/ns3-output-directory.cmake:66 (make_directory)
+  build-support/macros-and-definitions.cmake:35 (include)
+  CMakeLists.txt:116 (include)
+
+
+CMake Warning at build-support/custom-modules/ns3-output-directory.cmake:35 (message):
+  Python3 executable was not found and write permissions won't be checked.
+  Build may break for file permission issues.
+Call Stack (most recent call first):
+  build-support/custom-modules/ns3-output-directory.cmake:92 (make_directory)
+  build-support/macros-and-definitions.cmake:35 (include)
+  CMakeLists.txt:116 (include)
+
+
+CMake Warning at build-support/custom-modules/ns3-output-directory.cmake:35 (message):
+  Python3 executable was not found and write permissions won't be checked.
+  Build may break for file permission issues.
+Call Stack (most recent call first):
+  build-support/custom-modules/ns3-output-directory.cmake:93 (make_directory)
+  build-support/macros-and-definitions.cmake:35 (include)
+  CMakeLists.txt:116 (include)
+
+
+CMake Warning at build-support/custom-modules/ns3-output-directory.cmake:35 (message):
+  Python3 executable was not found and write permissions won't be checked.
+  Build may break for file permission issues.
+Call Stack (most recent call first):
+  build-support/custom-modules/ns3-output-directory.cmake:94 (make_directory)
+  build-support/macros-and-definitions.cmake:35 (include)
+  CMakeLists.txt:116 (include)
+
+
+-- CCache is enabled.
+-- Proceeding without cmake-format
+-- Python: development libraries were not found
+-- Boost was not found
+-- docs: doxygen documentation not enabled due to missing dependencies: dot;dia;python3
+-- Failed to locate sphinx-build executable (missing: SPHINX_EXECUTABLE) 
+-- docs: sphinx documentation not enabled due to missing dependencies: Sphinx;epstopdf;pdflatex;latexmk;dvipng;dia
+-- Platform doesn't support TAP and EMU features. Continuing without them.
+-- Processing src/applications
+-- Processing src/core
+-- Boost Units are an optional feature of length.cc. Ubuntu ships it within the libboost-dev package. You may need to clean up the CMake cache after installing it to pass this check.
+-- Processing src/flow-monitor
+-- Processing src/internet
+-- Processing src/mobility
+-- Processing src/network
+-- Processing src/point-to-point
+-- Processing src/bridge
+-- Processing src/stats
+-- Processing src/traffic-control
+-- Processing src/antenna
+-- Standard library Bessel function has been found
+-- ---- Summary of ns-3 settings:
+Build profile                 : release
+Build directory               : C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns-3.46.1/build-wired
+Build with runtime asserts    : OFF (not requested)
+Build with runtime logging    : OFF (not requested)
+Build version embedding       : OFF (not requested)
+BRITE Integration             : OFF (missing dependency)
+DES Metrics event collection  : OFF (not requested)
+DPDK NetDevice                : OFF (not requested)
+Emulation FdNetDevice         : OFF (not requested)
+Examples                      : OFF (not requested)
+File descriptor NetDevice     : OFF (missing dependency)
+GNU Scientific Library (GSL)  : OFF (GSL was not found)
+GtkConfigStore                : OFF (Harfbuzz is required by GTK3 and was not found)
+LibXml2 support               : OFF (LibXML2 was not found)
+MPI Support                   : OFF (not requested)
+ns-3 Click Integration        : OFF (missing dependency)
+ns-3 OpenFlow Integration     : OFF (missing dependency)
+Netmap emulation FdNetDevice  : OFF (not requested)
+PyViz visualizer              : OFF (Python Bindings are disabled)
+Python Bindings               : OFF (not requested)
+SQLite support                : OFF (missing dependency)
+Eigen3 support                : OFF (Eigen was not found)
+Tap Bridge                    : OFF (not requested)
+Tap FdNetDevice               : OFF (not requested)
+Tests                         : ON
+
+
+Modules configured to be built:
+antenna                   applications              bridge                    
+core                      flow-monitor              internet                  
+mobility                  network                   point-to-point            
+stats                     test                      traffic-control           
+
+
+Modules that cannot be built:
+mpi                       
+
+
+-- Configuring done (8.1s)
+-- Generating done (2.3s)
+-- Build files have been written to: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-build
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --build C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-build -j 4
+[0/2] Re-checking globbed directories...
+ninja: no work to do.
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --install C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns3-wired-build
+-- Install configuration: "Release"
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-applications.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-applications.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/bulk-send-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/on-off-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-sink-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/three-gpp-http-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-client-server-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-echo-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/application-packet-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/bulk-send-application.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/onoff-application.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-loss-counter.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-sink.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/seq-ts-echo-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/seq-ts-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/seq-ts-size-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/sink-application.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/source-application.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/three-gpp-http-client.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/three-gpp-http-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/three-gpp-http-server.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/three-gpp-http-variables.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-client.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-echo-client.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-echo-server.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-server.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-trace-client.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/applications-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-core.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-core.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/core-config.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/int64x64-128.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/csv-reader.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/event-garbage-collector.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/random-variable-stream-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/abort.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ascii-file.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ascii-test.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/assert.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/attribute-accessor-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/attribute-construction-list.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/attribute-container.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/attribute-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/attribute.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/boolean.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/breakpoint.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/build-profile.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/calendar-scheduler.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/callback.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/command-line.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/config.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/default-deleter.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/default-simulator-impl.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/demangle.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/deprecated.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/des-metrics.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/double.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/enum.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/event-id.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/event-impl.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/fatal-error.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/fatal-impl.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/fd-reader.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/environment-variable.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/global-value.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/hash-fnv.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/hash-function.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/hash-murmur3.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/hash.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/heap-scheduler.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/int64x64-double.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/int64x64.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/integer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/length.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/list-scheduler.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/log-macros-disabled.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/log-macros-enabled.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/log.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/make-event.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/map-scheduler.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/math.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/names.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/node-printer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/nstime.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/object-base.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/object-factory.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/object-map.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/object-ptr-container.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/object-vector.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/object.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/pair.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/pointer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/priority-queue-scheduler.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ptr.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/random-variable-stream.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/rng-seed-manager.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/rng-stream.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/scheduler.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/show-progress.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/shuffle.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/simple-ref-count.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/simulation-singleton.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/simulator-impl.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/simulator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/singleton.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/string.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/synchronizer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/system-path.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/system-wall-clock-ms.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/system-wall-clock-timestamp.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/test.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/time-printer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/timer-impl.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/timer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/trace-source-accessor.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/traced-callback.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/traced-value.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/trickle-timer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tuple.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/type-id.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/type-name.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/type-traits.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/uinteger.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/uniform-random-bit-generator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/valgrind.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/vector.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/warnings.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/watchdog.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/realtime-simulator-impl.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/wall-clock-synchronizer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/val-array.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/matrix-array.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/core-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/core-export.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-flow-monitor.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-flow-monitor.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/flow-monitor-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/flow-classifier.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/flow-monitor.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/flow-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-flow-classifier.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-flow-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-flow-classifier.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-flow-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/flow-monitor-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-internet.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-internet.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/win32-internet.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/internet-stack-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/internet-trace-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-address-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-global-routing-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-interface-container.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-list-routing-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-routing-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-static-routing-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-address-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-interface-container.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-list-routing-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-routing-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-static-routing-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/neighbor-cache-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/rip-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ripng-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/arp-cache.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/arp-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/arp-l3-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/arp-queue-disc-item.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/candidate-queue.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/global-route-manager-impl.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/global-route-manager.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/global-router-interface.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/icmpv4-l4-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/icmpv4.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/icmpv6-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/icmpv6-l4-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ip-l4-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-address-generator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-end-point-demux.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-end-point.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-global-routing.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-interface-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-interface.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-l3-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-list-routing.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-packet-filter.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-packet-info-tag.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-packet-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-queue-disc-item.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-raw-socket-factory.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-raw-socket-impl.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-route.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-routing-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-routing-table-entry.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-static-routing.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-address-generator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-end-point-demux.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-end-point.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-extension-demux.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-extension-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-extension.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-interface-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-interface.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-l3-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-list-routing.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-option-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-option.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-packet-filter.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-packet-info-tag.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-packet-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-pmtu-cache.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-queue-disc-item.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-raw-socket-factory.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-route.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-routing-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-routing-table-entry.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-static-routing.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/loopback-net-device.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ndisc-cache.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/rip-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/rip.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ripng-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ripng.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/rtt-estimator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-bbr.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-bic.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-congestion-ops.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-cubic.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-dctcp.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-highspeed.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-htcp.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-hybla.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-illinois.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-l4-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-ledbat.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-linux-reno.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-lp.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-option-rfc793.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-option-sack-permitted.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-option-sack.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-option-ts.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-option-winscale.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-option.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-prr-recovery.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-rate-ops.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-recovery-ops.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-rx-buffer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-scalable.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-socket-base.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-socket-factory.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-socket-state.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-socket.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-tx-buffer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-tx-item.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-vegas.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-veno.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-westwood-plus.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tcp-yeah.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-l4-protocol.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-socket-factory.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/udp-socket.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/windowed-filter.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/internet-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/internet-export.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-mobility.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-mobility.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/group-mobility-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mobility-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ns2-mobility-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/box.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/constant-acceleration-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/constant-position-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/constant-velocity-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/constant-velocity-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/gauss-markov-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/geocentric-constant-position-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/geographic-positions.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/hierarchical-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/position-allocator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/random-direction-2d-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/random-walk-2d-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/random-waypoint-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/rectangle.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/steady-state-random-waypoint-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/waypoint-mobility-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/waypoint.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mobility-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mobility-export.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-network.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-network.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/application-container.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/application-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/delay-jitter-estimation.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/net-device-container.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/node-container.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-socket-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/simple-net-device-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/trace-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/application.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/buffer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/byte-tag-list.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/channel-list.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/channel.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/chunk.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/net-device.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/nix-vector.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/node-list.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/node.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-metadata.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-tag-list.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/socket-factory.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/socket.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tag-buffer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tag.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/trailer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/address-utils.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/bit-deserializer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/bit-serializer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/crc32.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/data-rate.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/drop-tail-queue.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/dynamic-queue-limits.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/error-channel.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/error-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ethernet-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ethernet-trailer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/flow-id-tag.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/generic-phy.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/header-serialization-test.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/inet-socket-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/inet6-socket-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv4-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ipv6-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/llc-snap-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/lollipop-counter.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mac16-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mac48-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mac64-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mac8-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/net-device-queue-interface.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/output-stream-wrapper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-burst.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-data-calculators.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-socket-address.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-socket-client.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-socket-factory.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-socket-server.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-socket.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packetbb.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/pcap-file-wrapper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/pcap-file.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/pcap-test.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/queue-fwd.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/queue-item.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/queue-limits.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/queue-size.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/queue.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/radiotap-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/sequence-number.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/simple-channel.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/simple-net-device.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/sll-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/timestamp-tag.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/network-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-point-to-point.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-point-to-point.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/point-to-point-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/point-to-point-channel.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/point-to-point-net-device.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/ppp-header.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/point-to-point-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-bridge.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-bridge.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/bridge-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/bridge-channel.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/bridge-net-device.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/bridge-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-stats.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-stats.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/file-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/gnuplot-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/average.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/basic-data-calculators.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/boolean-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/data-calculator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/data-collection-object.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/data-collector.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/data-output-interface.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/double-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/file-aggregator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/get-wildcard-matches.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/gnuplot-aggregator.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/gnuplot.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/histogram.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/omnet-data-output.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/stats.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/time-data-calculators.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/time-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/time-series-adaptor.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/uinteger-16-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/uinteger-32-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/uinteger-8-probe.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/stats-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-traffic-control.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-traffic-control.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/queue-disc-container.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/traffic-control-helper.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/cobalt-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/codel-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/fifo-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/fq-cobalt-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/fq-codel-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/fq-pie-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/mq-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/packet-filter.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/pfifo-fast-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/pie-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/prio-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/red-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/tbf-queue-disc.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/traffic-control-layer.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/traffic-control-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-antenna.dll.a
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/libns3.46.1-antenna.dll
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/circular-aperture-antenna-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/angles.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/antenna-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/cosine-antenna-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/isotropic-antenna-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/parabolic-antenna-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/phased-array-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/three-gpp-antenna-model.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/uniform-planar-array.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/symmetric-adjacency-matrix.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/include/ns3/antenna-module.h
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-antenna.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-traffic-control.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-stats.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-bridge.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-point-to-point.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-network.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-mobility.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-internet.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-flow-monitor.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-core.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/pkgconfig/ns3-applications.pc
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/cmake/ns3/ns3Targets.cmake
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/cmake/ns3/ns3Targets-release.cmake
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/cmake/ns3/ns3Config.cmake
+-- Installing: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/.tools/ns3-wired-install/lib/cmake/ns3/ns3ConfigVersion.cmake

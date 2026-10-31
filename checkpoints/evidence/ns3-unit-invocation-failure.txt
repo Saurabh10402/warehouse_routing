@@ -1,0 +1,2 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\ns-3.46.1\build-wired\utils\ns3.46.1-test-runner.exe --test-type=unit --fullness=QUICK
+Error:  tests should be launched separately (one at a time)

@@ -1,25 +1,31 @@
-# checkpoint_007 — capacity/admission sweep validated
+# checkpoint_008 — real wired ns-3 runtime and first-run workflow validated
 
-Completed the declared 288-run study: three workloads, four attachment capacities,
-eight ECMP queue settings, new seeds 4/5/6. Read docs/capacity-study.md and
-docs/capacity-results.md. No parameters were retuned after execution.
+The independent stationary warehouse core remains the primary model. Actual ns-3 wired
+prerequisites now build, install and exchange measured packets. Read docs/runtime-validation.md,
+docs/first-run.md and docs/ns3-integration.md. This is not full schema-v2/NR integration.
 
-- Tested source: 8fe3f315881f197b3af4a7d381913b04602e117b. Subsequent source edits are docs only.
-- Manifest: manifests/checkpoint_007.json.
-- Both core build presets: 19/19 CTest PASS.
-- Capacity batch: experiments-20261030T175442Z-cb0b1ccc — 288 PASS, replay, 60 charts.
-- Protected regression: experiments-20261030T175551Z-a5db7fd7 — 144 exact inputs/traces PASS, replay, 40 charts.
-- Warehouse regression: experiments-20261030T180019Z-2441a69a — 132 exact inputs/traces PASS, replay, 55 charts.
-- Independent raw-packet recomputation: all 96 operating-limit rows PASS.
+- Tested code: 47088f1 (after a2bf99f implementation and 39ff2af installer fix).
+- Source manifest: manifests/checkpoint_008.json; previous manifests/results retained.
+- ns-3.46.1 Release / GCC 14.2: 150/150 upstream UNIT QUICK suites PASS, warnings-as-errors ON.
+- Linked project build: 22/22 CTest PASS, including actual one/two-hop UDP delay and loss.
+- ns3-smoke-20261031T102542Z-fd5d9232: 3/3 packets, 4.416 ms, stationary, exact replay.
+- Final extracted code: 20/20 tests and 180/180 first run, no Git/cache dependency.
+  Batch first-run-20261031T101929Z-5481bba4; copied unchanged from isolated extraction.
+- Warehouse regression experiments-20261031T094745Z-723bc3c8: 132 identical inputs/traces
+  versus experiments-20261030T180019Z-2441a69a; replay and 55 charts PASS.
+- Required dependency/prefix isolation and existing-output preservation checks PASS.
 
-At 1 Mbps mixed load, unpoliced reservation reduces P0 misses from strict's 15.278% to
-1.944%. At 2 Mbps it has zero P0 misses in these seeds but 23.556% P3 misses. No tested
-setting eliminates P0 misses in burst/flood workloads. At 5 Mbps flood, unpoliced P0
-misses are 1.285%, versus 46.688% with rate20; unpoliced P3 delivery is only 79.5%.
-Neither is promoted to a production default. All loss causes remain in denominators.
+Upstream suites must run separately. Fixed the invocation and summary parser; retained every
+failed attempt. The slow threaded suite passed naturally (275 s first run, 179 s final run).
+Final installer completed successfully; no test or warning was suppressed. The previous
+Wi-Fi/NetAnim diagnostic is still unresolved; separating optional modules is not its repair.
 
-Next: repair the recorded ns-3 build and validate a minimal actual packet runtime before
-schema-v2/QoS/NR integration. Calibration and cross-platform execution remain unfinished.
-No new ns-3 build attempt occurred during this milestone; previous external failure remains.
-Recovery packages preserve each completed batch separately under recovery_packages/;
-receipt-checkpoint_007.json records exact archive hashes. Keep previous archives/manifests.
+Next exact action: implement the first wired schema-v2 ns-3 slice described in
+docs/ns3-warehouse-contract.md, with real same-zone/cross-zone/edge-service packets and
+observed paths. Then add explicitly tested QoS/failures and compatible NR user-plane paths.
+Mac M4 and Ubuntu 24.04 ARM64 commands are prepared but not executed. Calibration remains
+open; neither abstract results nor this fixture guarantee deadlines or radio performance.
+
+Recovery packages preserve the real ns-3 fixture, final extracted first run and 132-run
+regression separately with source/checkpoints/Git history. See recovery_packages/
+receipt-checkpoint_008.json after packaging. Keep previous archives and original.zip.

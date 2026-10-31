@@ -1,0 +1,1 @@
+{"status":"PASS","model":"ns-3 wired IPv4/UDP two-hop smoke; not warehouse or NR","hops":2,"transmitted_packets":3,"received_packets":3,"lost_packets":0,"application_received_packets":3,"udp_payload_bytes_per_packet":100,"ip_received_bytes":384,"mean_delay_ms":4.4159999999999995E0,"stationary":true}

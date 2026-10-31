@@ -1,24 +1,27 @@
-# Resume after checkpoint_007
+# Resume after checkpoint_008
 
-1. Read CURRENT_STATUS, PROJECT_STATE, sessions/session_004.md, docs/capacity-results.md
-   and docs/ns3-integration.md. Inspect Git status and verify checkpoint_007.
-2. Next executable milestone: inspect preserved ns-3 compiler diagnostics, determine a
-   supported repair without suppressing warnings/tests, and validate a minimal packet
-   example. A minimal runtime alone is not schema-v2 or NR integration.
-3. Implement actual topology/traffic/QoS forwarding in the ns-3 adapter with packet-level
-   tests before connecting NR and explicit user-plane paths. Preserve core comparisons.
-4. Obtain real layout, access technology, flow periods/bursts, acceptable loss and network
-   versus application deadline boundaries before claiming deployment suitability.
-5. Further queue study must declare changes first: downstream/per-port arrival envelopes,
-   port-specific budgets, reservation sizes and uplink capacities remain open. No tested
-   setting eliminated burst/flood misses; do not silently select unpoliced or rate20 defaults.
-6. Reproduce the core on Linux/Mac. Record actual tests, raw data and source provenance.
+1. Read CURRENT_STATUS, PROJECT_STATE, sessions/session_005.md and docs/runtime-validation.md.
+   Inspect Git status; verify `python scripts/checkpoint.py checkpoint_008 --verify`.
+2. Implement the first supported wired schema-v2 ns-3 slice from docs/ns3-warehouse-contract.md.
+   Reuse validated configuration; use stationary nodes and actual packet observations for
+   same-zone, cross-zone and edge-service paths. Reject unsupported features explicitly.
+   Keep core outputs/model labels and all known-good comparisons unchanged.
+3. Extend finite queue accounting/FIFO/priority and per-flow ECMP with packet-level tests;
+   specify payload versus on-wire bytes, loss/deadline denominators and routing semantics.
+4. Add failures/recovery/backup services, then protected queues and local safety fan-out.
+   Do not substitute immediate core topology knowledge for measured protocol convergence.
+5. Select and pin a compatible ns-3/5G-LENA pair separately. Validate EPC/UPF and receiver
+   traffic before radio comparisons. Old Wi-Fi/NetAnim compiler diagnostic remains recorded.
+6. Execute clean builds on MacBook Air M4 and Ubuntu 24.04 ARM64/UTM when those hosts exist.
+   docs/first-run.md is the prepared workflow, not evidence those commands ran there.
+7. Calibrate actual warehouse traffic, access technology and deadline/loss boundaries before
+   deployment claims. Preserve the capacity study's adverse burst/flood/lower-class results.
 
-Completed commands (full matrices, not quick mode):
-- python scripts/run_all_experiments.py --suite capacity-admission
-- python scripts/run_all_experiments.py --suite protected-qos --preset default --baseline results/experiments-20261030T173430Z-db8fbaf2
-- python scripts/run_all_experiments.py --suite warehouse --preset default --baseline results/experiments-20261030T173542Z-c74e4faf
+Completed this milestone:
+- `python scripts/setup_ns3.py --offline --jobs 4`: wired build/install, 150 upstream suites PASS.
+- `python scripts/run_ns3_smoke.py`: strict linked build, 22 project tests, UDP runtime/replay PASS.
+- `python scripts/first_run.py` in isolated source path: 20 tests, 180/180 delivery PASS.
+- `python scripts/run_all_experiments.py --suite warehouse --preset bootstrap --baseline results/experiments-20261030T180019Z-2441a69a`: full 132-run exact regression PASS.
 
-Three separate recovery packages preserve the new 288-run batch and the 144/132 exact
-regression batches, each with source/checkpoints/Git history. See the checkpoint_007 receipt
-in recovery_packages. Original archives, old manifests and previous results are retained.
+Results and source have separate recovery packages; inspect receipt-checkpoint_008.json.
+No random movement, assumed ten equal zones or radio claims belong in the primary core runner.
