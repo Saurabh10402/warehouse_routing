@@ -33,7 +33,7 @@ def main():
         for name, config in declared:
             (batch/'inputs'/(name+'.json')).write_text(json.dumps(config,indent=2)+'\n',encoding='utf-8')
         (batch/'declaration.json').write_text(json.dumps(dict(cases=[n for n,c in declared],
-            controls=12,matrix_runs=36,resilience_controls=48,seeds=[1,2,3],seed_scope='ECMP hash sensitivity only; deterministic offered traffic'),indent=2)+'\n')
+            controls=12,matrix_runs=36,resilience_controls=52,seeds=[1,2,3],seed_scope='ECMP hash sensitivity only; deterministic offered traffic'),indent=2)+'\n')
         libraries = {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (prefix/'lib').glob('*')
                      if p.is_file() and (p.suffix in ['.dll','.dylib'] or '.so' in p.name)}
         if not libraries: raise SystemExit('Missing library hashes; refusing incomplete provenance')
@@ -93,7 +93,7 @@ def main():
         with (batch/'scope_priority_comparison.csv').open('w',newline='',encoding='utf-8') as stream:
             writer = csv.DictWriter(stream,fieldnames=list(class_reports[0])); writer.writeheader(); writer.writerows(class_reports)
         state.passed(dict(suite='ns3-wired-warehouse',runs=len(reports),
-            artifact_checks='PASS',replay='PASS (every case)',controls=12,matrix_runs=36,resilience_controls=48,hash_seeds=[1,2,3],
+            artifact_checks='PASS',replay='PASS (every case)',controls=12,matrix_runs=36,resilience_controls=52,hash_seeds=[1,2,3],
             fifo_baseline='PASS (seven cases, all pre-existing fields)' if args.baseline else 'not requested',
             matched_policy_arrivals='PASS',scheduler_independent_routes='PASS',stochastic_evaluation=False,scope=provenance['scope'],case_timeout_seconds=args.case_timeout))
     print('PASS: all '+str(len(reports))+' deterministic ns-3 warehouse cases, independent raw audit and replay. OUTPUT: '+str(batch))

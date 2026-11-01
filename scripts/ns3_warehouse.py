@@ -76,9 +76,14 @@ def resilience_cases(base,pair):
     same=copy.deepcopy(base);same['events']=[event('node','spine',0,False),event('node','spine',100,True)]
     leaf=copy.deepcopy(base);leaf['events']=[event('node','leafA',0,False),event('node','leafA',60,True)]
     simultaneous=copy.deepcopy(fast);simultaneous['events']=[event('link','ab',0,False),event('link','ab',0,True),event('node','b',10,False),event('node','b',10,True)]
+    loop=copy.deepcopy(fast);loop['simulation'].update(durationMs=260,drainMs=10)
+    loop['nodes']=[dict(id=n,role=role,access='wired',x=i,y=0,**({'zone':'A'} if role=='endpoint' else {})) for i,(n,role) in enumerate([('s','endpoint'),('a','relay'),('b','relay'),('d','edge')])]
+    loop['links']=[dict(id=a+b,**{'from':a,'to':b},capacityMbps=8,delayMs=.87,queuePackets=8,available=a+b!='ad') for a,b in [('s','a'),('a','b'),('a','d'),('b','d')]]
+    loop['traffic']=[dict(fast['traffic'][0],source='s',destinations=['d'],stopMs=1)]
+    loop['events']=[event('link',target,t,up) for t in range(2,257) for target,up in [('ad',t%2==0),('bd',t%2!=0)]]
     fixtures=[('link-alternate',link),('node-alternate',node),('service-failback',backup),('all-services-down',unavailable),
               ('source-outage',source),('initial-unavailable',initial),('queued-recovery',queued),('receive-boundary',boundary),
-              ('inflight-route-loss',inflight),('same-zone-survival',same),('leaf-outage',leaf),('simultaneous-events',simultaneous)]
+              ('inflight-route-loss',inflight),('same-zone-survival',same),('leaf-outage',leaf),('simultaneous-events',simultaneous),('ttl-loop',loop)]
     runs=[]
     for name,base_config in fixtures:
         for routing in ['dijkstra','ecmp']:
@@ -180,9 +185,9 @@ def ecmp_path(config, flow, flow_index, forwarding_source=None):
 
 
 def availability_states(config):
-    current=copy.deepcopy(config); states=[(-1,current)]
+    current=dict(config,nodes=copy.deepcopy(config['nodes']),links=copy.deepcopy(config['links'])); states=[(-1,current)]
     for index,event in sorted(enumerate(config.get('events',[])),key=lambda item:(int(math.floor(item[1]['timeMs']*1e6+.5)),item[0])):
-        current=copy.deepcopy(current)
+        current=dict(current,nodes=copy.deepcopy(current['nodes']),links=copy.deepcopy(current['links']))
         collection=current['nodes'] if event['type']=='node' else current['links']
         next(item for item in collection if item['id']==event['target'])['available']=event['available']
         states.append((int(math.floor(event['timeMs']*1e6+.5)),current))
@@ -353,7 +358,8 @@ def validate_output(output, config):
         packet=by_id[packet_id];time=float(drop['time_ms']);reason=int(drop['reason'])
         require(packet['status']=='ip_drop' and drop['node']==paths[packet_id][-1] and abs(time-float(packet['finished_ms']))<1e-9,'IP drop observation')
         flow=flows[packet['flow']]
-        if reason==1: require(len(paths[packet_id])==256,'TTL drop before exhausting hop bound')
+        if int(drop['ttl'])<=1:
+            require(reason==5 and int(drop['ttl'])==1 and len(paths[packet_id])==256,'forwarding hop-limit guard')
         else:
             require(reason in [2,5] and not installed_path(state_at(time),dict(flow,destinations=[packet['destination']]),flow_indices[flow['id']],drop['node']),'IP drop without lost reachability')
         require(packet_id not in in_flight and not any(packet_id in q for q in waiting.values()),'IP drop still in native queue/channel')

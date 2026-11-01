@@ -143,7 +143,9 @@ public:
         auto route = header.GetProtocol() == 17 && packet->GetSize() >= 8 &&
                      ipv4->IsForwarding(static_cast<unsigned>(interface))
             ? packetRoute(packet, header) : nullptr;
-        if (route) forward(route, packet, header);
+        // Bound transient loops without generating unsupported ICMP control traffic.
+        // The IPv4 error callback emits an observable DROP_ROUTE_ERROR with TTL=1.
+        if (route && header.GetTtl() > 1) forward(route, packet, header);
         else error(packet, header, ns3::Socket::ERROR_NOROUTETOHOST);
         return true;
     }
@@ -257,14 +259,14 @@ struct Observer {
 void tracePacket(Observer* observer, std::size_t direction, unsigned kind, ns3::Ptr<const ns3::Packet> packet) {
     observer->trace(direction, kind, packet);
 }
-void traceIpDrop(Observer* observer, std::size_t node, const ns3::Ipv4Header&,
+void traceIpDrop(Observer* observer, std::size_t node, const ns3::Ipv4Header& header,
                  ns3::Ptr<const ns3::Packet> packet, ns3::Ipv4L3Protocol::DropReason reason,
                  ns3::Ptr<ns3::Ipv4>, std::uint32_t) {
     ObservationTag tag; if (!packet->PeekPacketTag(tag)) return;
     auto& record = observer->result.packets.at(static_cast<std::size_t>(tag.id));
     require(record.status == "pending", "duplicate native IPv4 drop");
     record.status = "ip_drop"; record.finishedMs = nowMs();
-    observer->result.ipDrops.push_back({record.id, observer->config.nodes.at(node).id, nowMs(), static_cast<unsigned>(reason)});
+    observer->result.ipDrops.push_back({record.id, observer->config.nodes.at(node).id, nowMs(), static_cast<unsigned>(reason), header.GetTtl()});
 }
 std::string pathText(const std::vector<std::string>& path) {
     std::string text;
@@ -527,8 +529,8 @@ void writeNs3FabricResults(const Configuration& c, const Ns3FabricResult& r, con
     std::ofstream availability(output / "availability.csv"), ipDrops(output / "ip_drops.csv");
     availability << std::setprecision(17) << "type,target,time_ms,available\n";
     for (const auto& e : r.availability) availability << e.type << ',' << e.target << ',' << e.timeMs << ',' << e.available << '\n';
-    ipDrops << std::setprecision(17) << "packet,node,time_ms,reason\n";
-    for (const auto& d : r.ipDrops) ipDrops << d.packet << ',' << d.node << ',' << d.timeMs << ',' << d.reason << '\n';
+    ipDrops << std::setprecision(17) << "packet,node,time_ms,reason,ttl\n";
+    for (const auto& d : r.ipDrops) ipDrops << d.packet << ',' << d.node << ',' << d.timeMs << ',' << d.reason << ',' << d.ttl << '\n';
     availability.close(); ipDrops.close(); require(bool(availability) && bool(ipDrops), "could not write availability/IP drop observations");
     boost::json::object summary{{"model", "ns-3 stationary wired IPv4/UDP schema-v2 subset; not Ethernet switching or radio"},
         {"scheduler", c.scheduler}, {"routing", c.routing.algorithm == "dijkstra" ? "static size-aware Dijkstra; propagation plus payload/UDP/IPv4/PPP serialization" : "static five-tuple ECMP; propagation plus payload/UDP/IPv4/PPP serialization"},

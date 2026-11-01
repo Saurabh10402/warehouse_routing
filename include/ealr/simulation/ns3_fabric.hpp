@@ -14,7 +14,7 @@ struct Ns3IpDropRecord {
     std::size_t packet = 0;
     std::string node;
     double timeMs = 0;
-    unsigned reason = 0;
+    unsigned reason = 0, ttl = 0;
 };
 struct Ns3AvailabilityRecord {
     std::string type, target;

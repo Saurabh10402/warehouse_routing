@@ -21,7 +21,7 @@ running. A queued/in-flight frame can therefore arrive after recovery and be acc
 its next hop receives while unavailable, it is lost. At a live intermediate router it uses
 the current table; losing reachability there produces an observed IPv4 drop. Changes can
 make actual paths differ from the route planned at generation. All attempts are audited
-against contemporaneous topology; native TTL remains the final bound on transient loops.
+against contemporaneous topology; forwarding TTL guard bounds transient loops (described below).
 
 Offered application generation remains scheduled even when the source is unavailable;
 record source_unavailable before IP transmission. Otherwise choose the first currently
@@ -45,10 +45,19 @@ Use both Dijkstra/ECMP and FIFO/strictPriority where applicable. Preserve the ol
 every replay, independent packet/header/service audit and full 132-run core regression.
 No default workload or queue is tuned to conceal losses.
 
-The final declared new matrix is 12 fixtures x Dijkstra/ECMP x FIFO/strictPriority = 48
+The final declared new matrix is 13 fixtures x Dijkstra/ECMP x FIFO/strictPriority = 52
 resilience controls, each seed 1. Fixtures: link-alternate, node-alternate, service-failback,
 all-services-down, source-outage, initial-unavailable, queued-recovery, receive-boundary,
-inflight-route-loss, same-zone-survival, leaf-outage, simultaneous-events. Together with the
-original 48 static cases, the runner executes 96 cases and 96 replays. Exact generated inputs
+inflight-route-loss, same-zone-survival, leaf-outage, simultaneous-events, ttl-loop. Together with the
+original 48 static cases, the runner executes 100 cases and 100 replays. Exact generated inputs
 are frozen before the first run. See scripts/ns3_warehouse.py for the declared fixture data.
 These are deterministic acceptance controls, not statistical availability/reliability trials.
+
+Before final validation, add the ttl-loop stress control: 510 availability events alternate
+the reachable exit of two relays, forcing one packet to traverse 255 physical hops. A live
+router with TTL=1 invokes the native IPv4 route-error callback before forwarding; ip_drops.csv
+records actual reason 5 and TTL 1. This bounds forwarding without generating unsupported ICMP
+control packets. Destination-local delivery with TTL=1 remains valid. This explicit guard is
+not a claim that a deployed router suppresses ICMP. The independent audit checks the exact
+255-hop count, TTL, loss accounting and absence of a delivery. Original 96-case results are
+retained as an intermediate validation milestone; the final suite has 100 cases.

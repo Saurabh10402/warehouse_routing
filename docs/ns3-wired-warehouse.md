@@ -65,7 +65,7 @@ python scripts/run_ns3_warehouse.py
 ```
 
 This requires real ns-3, configures/builds/tests the project, runs the 12 original
-acceptance controls plus the 36-run forwarding/scheduling matrix and 48 resilience controls,
+acceptance controls plus the 36-run forwarding/scheduling matrix and 52 resilience controls,
 independently audits every
 exported packet/queue/node/header trace, and replays every case byte-for-byte. The original
 seven controls are preserved. Seeds 1/2/3 vary the ECMP hash only: this is deterministic hash

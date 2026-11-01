@@ -54,7 +54,7 @@ class NativeCliTests(unittest.TestCase):
 
     def test_resilience_artifacts_and_forged_events_or_backup_choice(self):
         selected=['resilience-receive-boundary-dijkstra-fifo','resilience-service-failback-ecmp-strictPriority',
-                  'resilience-inflight-route-loss-dijkstra-fifo']
+                  'resilience-inflight-route-loss-dijkstra-fifo','resilience-ttl-loop-ecmp-strictPriority']
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)
             for name,config in cases():
@@ -62,6 +62,9 @@ class NativeCliTests(unittest.TestCase):
                 path=root/(name+'.json');output=root/name;path.write_text(json.dumps(config))
                 run=subprocess.run([EXE,'--config',path,'--output',output],capture_output=True,text=True)
                 self.assertEqual(run.returncode,0,run.stderr);validate_output(output,config)
+                if 'ttl-loop' in name:
+                    with (output/'ip_drops.csv').open(newline='') as stream: drops=list(csv.DictReader(stream))
+                    self.assertEqual(len(drops),1);self.assertEqual(drops[0]['ttl'],'1');self.assertEqual(drops[0]['reason'],'5')
                 artifact='packets.csv' if 'service-failback' in name else 'availability.csv'
                 with (output/artifact).open(newline='') as stream:records=list(csv.DictReader(stream))
                 if artifact=='packets.csv':records[1]['destination']='b'
