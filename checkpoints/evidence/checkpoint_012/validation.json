@@ -1,0 +1,44 @@
+{
+  "tested_commit": "93516df",
+  "native_batch": "ns3-warehouse-20261101T155343Z-9c1d253c",
+  "native_status": {
+    "status": "PASS",
+    "completed_processes": 200,
+    "suite": "ns3-wired-warehouse",
+    "runs": 100,
+    "artifact_checks": "PASS",
+    "replay": "PASS (every case)",
+    "controls": 12,
+    "matrix_runs": 36,
+    "resilience_controls": 52,
+    "hash_seeds": [
+      1,
+      2,
+      3
+    ],
+    "fifo_baseline": "PASS (seven cases, all pre-existing fields)",
+    "matched_policy_arrivals": "PASS",
+    "scheduler_independent_routes": "PASS",
+    "stochastic_evaluation": false,
+    "scope": "Wired policy and immediate centralized availability/backup controls plus three-seed static hash sensitivity; not convergence/stochastic replication or NR measurements",
+    "case_timeout_seconds": 60.0
+  },
+  "core_batch": "experiments-20261101T154333Z-7a7bd456",
+  "core_status": {
+    "status": "PASS",
+    "suite": "warehouse",
+    "runs": 132,
+    "artifact_checks": "PASS",
+    "replay": "PASS",
+    "plots": "PASS",
+    "baseline_comparison": "PASS"
+  },
+  "unchanged_static_measurement_files": 240,
+  "fresh_build": "PASS",
+  "prepared_source_matches_current": true,
+  "native_ctest": "25/25 PASS",
+  "core_ctest": "21/21 PASS",
+  "successful_reaped_processes": 200,
+  "fresh_batch": "ns3-warehouse-20261101T201540Z-3d3ee628",
+  "identical_fresh_measurements": 700
+}

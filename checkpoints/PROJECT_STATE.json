@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_011",
+  "checkpoint": "checkpoint_012",
   "utc": "2026-11-01T15:27:15.735617+00:00",
-  "phase": "bounded-native-execution-validated",
-  "source_state": "manifests/checkpoint_011.json",
+  "phase": "native-immediate-resilience-validated",
+  "source_state": "manifests/checkpoint_012.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -55,19 +55,20 @@
     "bounded native subprocess execution with direct file-backed logs and separate cleanup deadline",
     "atomic process receipts and batch RUNNING/TIMEOUT/FAILED/INTERRUPTED/PASS states",
     "source/input/executable/library provenance saved before native experiment execution",
-    "real hung-child, failed-exit, failed-launch, interrupted-batch and post-exit validation failure tests"
+    "real hung-child, failed-exit, failed-launch, interrupted-batch and post-exit validation failure tests",
+    "Native receive-time availability gates, immediate route rebuilding, ordered backup services and TTL loop guard"
   ],
   "pending": [
     "warehouse traffic/loss/availability calibration",
-    "native ns-3 dynamic failures/backup services, protected queues and compatible NR user-plane integration",
+    "native ns-3 nonzero detection timing, protected queues and compatible NR user-plane integration",
     "cross-platform execution",
     "final research/deployment claim validation",
     "per-port downstream arrival bounds, uplink/reservation-size sensitivity and calibrated admission policy",
     "underlying cause of prior intermittent Windows exit stall; case waiting now bounded"
   ],
   "known_defects": [],
-  "build_status": "PASS current native/core builds on Windows; simulator binaries unchanged. Independent fresh source build remains checkpoint_010 evidence.",
-  "test_status": "25/25 native and 21/21 core tests; 48 native cases/every replay PASS; 96 successful supervised processes; 240 measurements byte-identical to checkpoint_010. Core 132-run/fresh source evidence remains historical checkpoint_010.",
+  "build_status": "PASS Windows main and fresh source builds",
+  "test_status": "25/25 native, 21/21 core; 100 native cases/replays; 132 core regression; fresh 700 files identical",
   "experiment_identifiers": [
     "experiments-20261029T210304Z-82f715a2",
     "experiments-20261029T212427Z-4a13d923",
@@ -88,10 +89,13 @@
     "ns3-warehouse-20261031T215600Z-dd1a4b9a",
     "ns3-warehouse-20261031T215445Z-85e4fb40",
     "experiments-20261031T215045Z-6af82532",
-    "ns3-warehouse-20261101T152405Z-ac57d7cc"
+    "ns3-warehouse-20261101T152405Z-ac57d7cc",
+    "ns3-warehouse-20261101T155343Z-9c1d253c",
+    "ns3-warehouse-20261101T201540Z-3d3ee628",
+    "experiments-20261101T154333Z-7a7bd456"
   ],
   "dependencies": {
-    "ns3": "Verified wired 3.46.1 Release unchanged; 150 historical UNIT QUICK suites. Current 25 project tests and 48 supervised native cases/replays PASS; no NR claim.",
+    "ns3": "Verified wired 3.46.1 Release; current main/fresh 25 tests and 100 cases with every replay PASS. Historical 150 UNIT QUICK suites; no NR claim.",
     "5g_lena": "not installed",
     "portable_toolchain": "GCC 14.2.0, Boost 1.85 SHA256 verified"
   },
@@ -100,8 +104,8 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Declare and implement native link/node failure detection/recovery, packet fate and backup-service reachability with controlled cases.",
-  "tested_code_commit": "1f12fdddafa3fe771d44f5acc20f1efa4b78c633",
+  "next_action": "Declare and validate nonzero failure detection/reconfiguration timing.",
+  "tested_code_commit": "93516df",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
   "research_direction": "Powered stationary fabric; priority scheduling and resilience. EALR preserved as legacy, excluded from primary matrix.",
@@ -120,7 +124,7 @@
     "Native wired model uses IP routers, virtual node /32 addresses and static size-aware forwarding, not Ethernet switching or an IGP",
     "Native cutoff packets are censored and included as deadline misses; FlowMonitor unreceived-at-cutoff is not proven permanent loss",
     "Native 12 controls + 36 policy runs cover static wired behavior; three seeds vary ECMP hash only, not stochastic arrivals or radio",
-    "Native protected queues/events/energy/radio/backup/jitter/fragmentation remain unsupported",
+    "Native protected queues/safety events/energy/radio/jitter/fragmentation remain unsupported",
     "One Windows native child delayed exit after writing results; exact retry/full retry/fresh workflow passed, cause unestablished; interrupted raw batch retained",
     "Native case timeout supervises one process only; build/setup/CTest unchanged. It mitigates waiting but does not diagnose prior Windows exit stall."
   ],
@@ -142,11 +146,11 @@
       "Distinguish actually executed target-platform tests from documented but unexecuted commands.",
       "Resolve and validate real ns-3/schema-v2/NR integration before describing the whole requested product as finished."
     ],
-    "current_readiness": "Core and static native FIFO/priority Dijkstra/ECMP validated, with bounded/logged native cases and preserved early provenance. Native failures/services/protected queues/NR, calibration and actual target-host builds remain required. Prior Windows exit cause remains unknown."
+    "current_readiness": "Core and native immediate availability/backup behavior validated on Windows, including fresh source reproduction. Nonzero detection timing, native protected queues/safety, NR, calibration and actual target-host builds remain required."
   },
   "ns3_smoke_experiment": "ns3-smoke-20261031T102542Z-fd5d9232",
   "first_run_experiment": "first-run-20261031T101929Z-5481bba4",
-  "ns3_warehouse_experiment": "ns3-warehouse-20261101T152405Z-ac57d7cc",
-  "fresh_ns3_experiment": "ns3-warehouse-20261031T215445Z-85e4fb40",
-  "tested_native_model_commit": "3e97cd064d8e8fe102b928b7fb03a147cb9b1611"
+  "ns3_warehouse_experiment": "ns3-warehouse-20261101T155343Z-9c1d253c",
+  "fresh_ns3_experiment": "ns3-warehouse-20261101T201540Z-3d3ee628",
+  "tested_native_model_commit": "93516df"
 }
