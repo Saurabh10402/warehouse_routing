@@ -21,7 +21,9 @@ def export(batch, output):
               hashes={name:hashlib.sha256((batch/name).read_bytes()).hexdigest() for name in ['config.json','run/packets.csv','run/hops.csv']})
     template=Path(__file__).with_name('warehouse_viewer.html').read_text(encoding='utf-8')
     payload=json.dumps(data,separators=(',',':')).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
-    with output.open('x',encoding='utf-8') as f:f.write(template.replace('/*WAREHOUSE_DATA*/',payload))
+    marker='/*WAREHOUSE_DATA*/null'
+    if template.count(marker)!=1:raise ValueError('Viewer template must contain exactly one data marker')
+    with output.open('x',encoding='utf-8') as f:f.write(template.replace(marker,payload))
     return report
 
 

@@ -25,7 +25,7 @@ def git_commit():
     return 'unavailable (source archive)'
 
 def source_files():
-    files = [ROOT / name for name in ('CMakeLists.txt', 'CMakePresets.json', 'README.md', '.gitignore', 'AGENTS.md') if (ROOT/name).is_file()]
+    files = [ROOT / name for name in ('CMakeLists.txt', 'CMakePresets.json', 'README.md', '.gitignore', 'AGENTS.md', 'OPEN_WAREHOUSE.html') if (ROOT/name).is_file()]
     for directory in DIRECTORIES:
         files.extend(p for p in (ROOT / directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
     return sorted(files)

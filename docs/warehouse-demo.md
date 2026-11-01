@@ -35,7 +35,7 @@ Windows native batch `layout-20261101T203251Z-838ca5b1` passed independent audit
 
 ## Offline topology and packet-path viewer
 
-Open `results/viewer-checkpoint015/warehouse-viewer.html` in a browser. The file embeds the audited 500-device topology and packet records; no server, Internet connection or ns-3 installation is needed to view it. The simulation itself still needs its documented dependencies.
+Open `OPEN_WAREHOUSE.html` in the project root and click **Open the working topology viewer**. Alternatively, open `results/viewer-checkpoint015/warehouse-viewer.html` directly. The file in `scripts/warehouse_viewer.html` is only a source template. The file embeds the audited 500-device topology and packet records; no server, Internet connection or ns-3 installation is needed to view it. The simulation itself still needs its documented dependencies.
 
 Select a traffic flow and recorded packet. Green links show its observed path; Next hop/Previous hop step through that path. Show full path restores the complete route. Show all robots hides or reveals inactive endpoints without removing them from the simulation. Click a node for identity and configured coordinates. Receive timestamps are taken from native hop traces. The arrangement is schematic, not a warehouse floor plan, and stepping is not time-scaled animation.
 

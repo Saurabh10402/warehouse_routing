@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_015",
-  "utc": "2026-11-01T20:53:58.878932+00:00",
-  "phase": "offline-path-viewer-validated",
-  "source_state": "manifests/checkpoint_015.json",
+  "checkpoint": "checkpoint_016",
+  "utc": "2026-11-01T20:59:08.292713+00:00",
+  "phase": "viewer-entry-point-repaired",
+  "source_state": "manifests/checkpoint_016.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
