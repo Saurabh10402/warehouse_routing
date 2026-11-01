@@ -1,3 +1,9 @@
+# checkpoint_013 - delayed-control contract declared
+
+Source manifest: manifests/checkpoint_013.json. This milestone adds a design contract only. No simulator behavior changed or new experiments ran. Native implementation and measured validation remain checkpoint 012 below.
+
+Read docs/ns3-detection-contract.md for three-state semantics, exact event ordering and 32 declared new acceptance cases. Next: implement parser/backend/audit together and execute its completion gate.
+
 # checkpoint_012 - native resilience validated
 
 Source manifest: manifests/checkpoint_012.json.

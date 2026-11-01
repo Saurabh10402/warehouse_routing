@@ -92,3 +92,7 @@ Availability is checked when a frame reaches the receiving device. Queues contin
 Clean-source batch `ns3-warehouse-20261101T201540Z-3d3ee628` passed 25/25 tests and all 100 cases/replays. All 700 measurement files and both comparison tables match the main batch byte-for-byte. Nonzero detection timing, native protected queues/safety, NR and actual Mac M4/Ubuntu ARM64 execution remain pending. These controlled results do not guarantee deployment deadlines or hardware failure behavior.
 
 Next exact action: declare separate physical and detected availability with nonzero detection/reconfiguration timing, then add controlled native tests before broader evaluation.
+
+
+## checkpoint_013: delayed-control contract
+Declared three-state delayed availability semantics and 32 deterministic controls in docs/ns3-detection-contract.md. No runtime change or new measurement. Captured detected snapshots prevent newer knowledge leaking into earlier installations; physical receive gates remain immediate. Implementation and validation are the next milestone.

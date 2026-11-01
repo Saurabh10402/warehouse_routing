@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_012",
-  "utc": "2026-11-01T15:27:15.735617+00:00",
-  "phase": "native-immediate-resilience-validated",
-  "source_state": "manifests/checkpoint_012.json",
+  "checkpoint": "checkpoint_013",
+  "utc": "2026-11-01T20:22:39.783830+00:00",
+  "phase": "delayed-control-contract-declared",
+  "source_state": "manifests/checkpoint_013.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -104,7 +104,7 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Declare and validate nonzero failure detection/reconfiguration timing.",
+  "next_action": "Implement docs/ns3-detection-contract.md parser, native state separation, trace and independent audit; delayed control remains unimplemented.",
   "tested_code_commit": "93516df",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
