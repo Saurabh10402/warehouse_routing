@@ -72,6 +72,7 @@ add_dependencies(ealr_tests ealr_protected_queue_tests)
 
 find_package(Python3 COMPONENTS Interpreter QUIET)
 if(Python3_Interpreter_FOUND)
+    add_test(NAME ealr_process_control_tests COMMAND "${Python3_EXECUTABLE}" "${PROJECT_SOURCE_DIR}/tests/process_control_tests.py")
     add_test(NAME ealr_verification_tests COMMAND "${Python3_EXECUTABLE}" "${PROJECT_SOURCE_DIR}/tests/verification_tests.py")
     add_test(NAME ealr_warehouse_study_tests COMMAND "${Python3_EXECUTABLE}" "${PROJECT_SOURCE_DIR}/tests/warehouse_study_tests.py")
     add_test(NAME ealr_plotting_tests COMMAND "${Python3_EXECUTABLE}" "${PROJECT_SOURCE_DIR}/tests/plotting_tests.py")

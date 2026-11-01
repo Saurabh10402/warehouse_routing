@@ -69,6 +69,21 @@ exported packet/queue/node/header trace, and replays every case byte-for-byte. T
 seven controls are preserved. Seeds 1/2/3 vary the ECMP hash only: this is deterministic hash
 sensitivity, not stochastic replication. Scope/class tables retain all offered packets.
 
+The runner supervises each native case and replay with a 60-second process timeout.
+`--case-timeout SECONDS` accepts a finite positive value and records it in provenance.
+This limit applies to native case processes after launch, not dependency setup, compilation
+or CTest. On timeout it kills that single native child and allows five seconds to reap it;
+an unreaped PID/cleanup error is recorded explicitly. Native executables spawn no child tree.
+There is no automatic retry or conversion of partial files into successful results.
+
+Each process writes directly to `processes/NAME.log`, with a corresponding JSON receipt.
+This avoids waiting on a stdout pipe after results have already been written. Input/source/
+executable/library provenance is saved before any experiment starts. `RUN_STATUS.json` is
+RUNNING during execution, TIMEOUT/FAILED/INTERRUPTED on handled failures, and PASS only after
+all raw audits, comparisons and replays. A hard termination can leave RUNNING; it is not PASS.
+Logs and partial result directories remain available after a failure. Only rerun deliberately
+into a new batch after reviewing the diagnostic; do not treat a larger timeout as validation.
+
 The command prints a new `results/ns3-warehouse-...` directory. Each case includes its exact
 input plus `packets.csv`, `hops.csv`, `queues.csv`, `nodes.csv` and `summary.json`. The batch
 preserves input/source/executable/ns-3 library hashes and the dependency setup receipt.
