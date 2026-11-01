@@ -1,23 +1,9 @@
-# checkpoint_013 - delayed-control contract declared
+# checkpoint_014 - configurable warehouse demonstration
 
-Source manifest: manifests/checkpoint_013.json. This milestone adds a design contract only. No simulator behavior changed or new experiments ran. Native implementation and measured validation remain checkpoint 012 below.
+User narrowed two-day delivery to a working wired routing simulation. Eight-zone reference: 482 robots + 8 switches + 8 local edge servers + 2 shared spines = 500 devices, 506 links. Edit configs/warehouse_layout.json; its zone array and explicit counts control generation. Run python scripts/run_warehouse_layout.py. See docs/warehouse-demo.md.
 
-Read docs/ns3-detection-contract.md for three-state semantics, exact event ordering and 32 declared new acceptance cases. Next: implement parser/backend/audit together and execute its completion gate.
+Native batch layout-20261101T203251Z-838ca5b1: 120/120 packets delivered, zero observed deadline misses; independent audit and all seven replay artifacts PASS. This is 24 representative flows, not all robots transmitting or a multi-seed evaluation. First process elapsed 107 seconds on this Windows host; target-platform speed is unknown. Alternate two-zone/11-device layout layout-20261101T203641Z-425a1ee4: 30/30 delivered, independent audit and replay PASS. Core 21/21 and native 25/25 verification tests PASS; three generator tests PASS. Existing C++ backend unchanged. Full historical study was not rerun for this generator/launcher change.
 
-# checkpoint_012 - native resilience validated
+The final launcher adds generic scope metadata and runtime library/platform/input provenance after the first 500-device run; final launcher was exercised on the alternate layout. Original raw batches retain exact tested-source provenance. Documentation was completed afterward. No old manifest or result was replaced.
 
-Source manifest: manifests/checkpoint_012.json.
-
-# Native wired resilience results
-
-Implementation: 1c4944d and 93516df. Final batch: `ns3-warehouse-20261101T155343Z-9c1d253c`. All 100 cases passed independent artifact audits and deterministic replay (200 completed processes). Native verification passed 25/25 tests. The original 48 static cases retain all 240 original measurement files byte-for-byte against checkpoint 011.
-
-The suite adds 13 controlled resilience fixtures across Dijkstra/ECMP and FIFO/strict-priority: alternate links and nodes, preferred-service failback, all services unavailable, source outage, initial unavailability, queued recovery, receive-time boundaries, in-flight route loss, same-zone survival, leaf outage, simultaneous events, and repeated route changes exhausting the hop limit. The static matrix uses three ECMP hash seeds; resilience controls are deterministic, not stochastic reliability trials.
-
-The 132-run core regression `experiments-20261101T154333Z-7a7bd456` passed baseline comparison, replay and plots; core verification passed 21/21 tests. Core abstraction results are separate from native wired measurements.
-
-Availability is checked when a frame reaches the receiving device. Queues continue serializing during outages. Route tables rebuild with zero simulated detection/reconfiguration delay. Newly generated packets choose the first reachable configured service; in-flight packets retain their target. No retransmission or application-state replication is modeled. The loop guard records native route-error reason 5 at TTL 1, avoiding unsupported ICMP traffic.
-
-Clean-source batch `ns3-warehouse-20261101T201540Z-3d3ee628` passed 25/25 tests and all 100 cases/replays. All 700 measurement files and both comparison tables match the main batch byte-for-byte. Nonzero detection timing, native protected queues/safety, NR and actual Mac M4/Ubuntu ARM64 execution remain pending. These controlled results do not guarantee deployment deadlines or hardware failure behavior.
-
-Next exact action: declare separate physical and detected availability with nonzero detection/reconfiguration timing, then add controlled native tests before broader evaluation.
+Delayed detection, native protected queues/safety and NR are deferred by the user's delivery scope. Existing immediate outage behavior remains. Actual Mac/Ubuntu ARM64 execution remains untested. Next: prepare a presentation-ready topology/path view and streamlined handoff for this validated wired demo; define additional traffic only if needed for submission. Source manifest: manifests/checkpoint_014.json.

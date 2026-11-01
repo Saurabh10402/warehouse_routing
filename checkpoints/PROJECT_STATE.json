@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_013",
-  "utc": "2026-11-01T20:22:39.783830+00:00",
-  "phase": "delayed-control-contract-declared",
-  "source_state": "manifests/checkpoint_013.json",
+  "checkpoint": "checkpoint_014",
+  "utc": "2026-11-01T20:38:06.568923+00:00",
+  "phase": "configurable-wired-demo-validated",
+  "source_state": "manifests/checkpoint_014.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -56,7 +56,8 @@
     "atomic process receipts and batch RUNNING/TIMEOUT/FAILED/INTERRUPTED/PASS states",
     "source/input/executable/library provenance saved before native experiment execution",
     "real hung-child, failed-exit, failed-launch, interrupted-batch and post-exit validation failure tests",
-    "Native receive-time availability gates, immediate route rebuilding, ordered backup services and TTL loop guard"
+    "Native receive-time availability gates, immediate route rebuilding, ordered backup services and TTL loop guard",
+    "Editable per-zone device counts and independently audited 500-device native demo/replay"
   ],
   "pending": [
     "warehouse traffic/loss/availability calibration",
@@ -92,7 +93,9 @@
     "ns3-warehouse-20261101T152405Z-ac57d7cc",
     "ns3-warehouse-20261101T155343Z-9c1d253c",
     "ns3-warehouse-20261101T201540Z-3d3ee628",
-    "experiments-20261101T154333Z-7a7bd456"
+    "experiments-20261101T154333Z-7a7bd456",
+    "layout-20261101T203251Z-838ca5b1",
+    "layout-20261101T203641Z-425a1ee4"
   ],
   "dependencies": {
     "ns3": "Verified wired 3.46.1 Release; current main/fresh 25 tests and 100 cases with every replay PASS. Historical 150 UNIT QUICK suites; no NR claim.",
@@ -104,7 +107,7 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Implement docs/ns3-detection-contract.md parser, native state separation, trace and independent audit; delayed control remains unimplemented.",
+  "next_action": "Prepare topology/path presentation and final wired-demo handoff; advanced research deferred.",
   "tested_code_commit": "93516df",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
@@ -152,5 +155,10 @@
   "first_run_experiment": "first-run-20261031T101929Z-5481bba4",
   "ns3_warehouse_experiment": "ns3-warehouse-20261101T155343Z-9c1d253c",
   "fresh_ns3_experiment": "ns3-warehouse-20261101T201540Z-3d3ee628",
-  "tested_native_model_commit": "93516df"
+  "tested_native_model_commit": "93516df",
+  "delivery_scope": "User requests configurable wired routing demonstration within two days.",
+  "demo_experiments": [
+    "layout-20261101T203251Z-838ca5b1",
+    "layout-20261101T203641Z-425a1ee4"
+  ]
 }

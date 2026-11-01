@@ -1,0 +1,13 @@
+{
+  "sharedSpines": 2,
+  "zones": [
+    {"id": "A", "robots": 59, "switches": 1, "edgeServers": 1},
+    {"id": "B", "robots": 61, "switches": 1, "edgeServers": 1},
+    {"id": "C", "robots": 58, "switches": 1, "edgeServers": 1},
+    {"id": "D", "robots": 62, "switches": 1, "edgeServers": 1},
+    {"id": "E", "robots": 60, "switches": 1, "edgeServers": 1},
+    {"id": "F", "robots": 63, "switches": 1, "edgeServers": 1},
+    {"id": "G", "robots": 59, "switches": 1, "edgeServers": 1},
+    {"id": "H", "robots": 60, "switches": 1, "edgeServers": 1}
+  ]
+}

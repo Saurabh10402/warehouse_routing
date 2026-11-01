@@ -1,0 +1,8431 @@
+{
+  "schemaVersion": 2,
+  "name": "Configurable stationary wired warehouse",
+  "topology": {
+    "kind": "graph"
+  },
+  "simulation": {
+    "durationMs": 100,
+    "drainMs": 100,
+    "seed": 1,
+    "scheduler": "strictPriority"
+  },
+  "routing": {
+    "algorithm": "ecmp"
+  },
+  "deadlinesMs": [
+    10,
+    20,
+    40,
+    100
+  ],
+  "zones": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "nodes": [
+    {
+      "id": "shared-spine-0",
+      "role": "spine",
+      "zone": "",
+      "access": "wired",
+      "x": 0,
+      "y": 200
+    },
+    {
+      "id": "shared-spine-1",
+      "role": "spine",
+      "zone": "",
+      "access": "wired",
+      "x": 30,
+      "y": 200
+    },
+    {
+      "id": "zone-A-switch-0",
+      "role": "leaf",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 100
+    },
+    {
+      "id": "zone-A-robot-0",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-1",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 1,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-2",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 2,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-3",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 3,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-4",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 4,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-5",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 5,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-6",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 6,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-7",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 7,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-8",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 8,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-9",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 9,
+      "y": 0
+    },
+    {
+      "id": "zone-A-robot-10",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-11",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 1,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-12",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 2,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-13",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 3,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-14",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 4,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-15",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 5,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-16",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 6,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-17",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 7,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-18",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 8,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-19",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 9,
+      "y": 3
+    },
+    {
+      "id": "zone-A-robot-20",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-21",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 1,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-22",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 2,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-23",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 3,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-24",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 4,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-25",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 5,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-26",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 6,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-27",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 7,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-28",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 8,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-29",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 9,
+      "y": 6
+    },
+    {
+      "id": "zone-A-robot-30",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-31",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 1,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-32",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 2,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-33",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 3,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-34",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 4,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-35",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 5,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-36",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 6,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-37",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 7,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-38",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 8,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-39",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 9,
+      "y": 9
+    },
+    {
+      "id": "zone-A-robot-40",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-41",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 1,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-42",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 2,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-43",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 3,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-44",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 4,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-45",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 5,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-46",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 6,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-47",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 7,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-48",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 8,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-49",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 9,
+      "y": 12
+    },
+    {
+      "id": "zone-A-robot-50",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 15
+    },
+    {
+      "id": "zone-A-robot-51",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 1,
+      "y": 15
+    },
+    {
+      "id": "zone-A-robot-52",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 2,
+      "y": 15
+    },
+    {
+      "id": "zone-A-robot-53",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 3,
+      "y": 15
+    },
+    {
+      "id": "zone-A-robot-54",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 4,
+      "y": 15
+    },
+    {
+      "id": "zone-A-robot-55",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 5,
+      "y": 15
+    },
+    {
+      "id": "zone-A-robot-56",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 6,
+      "y": 15
+    },
+    {
+      "id": "zone-A-robot-57",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 7,
+      "y": 15
+    },
+    {
+      "id": "zone-A-robot-58",
+      "role": "endpoint",
+      "zone": "A",
+      "access": "wired",
+      "x": 8,
+      "y": 15
+    },
+    {
+      "id": "zone-A-edge-0",
+      "role": "edge",
+      "zone": "A",
+      "access": "wired",
+      "x": 0,
+      "y": 80
+    },
+    {
+      "id": "zone-B-switch-0",
+      "role": "leaf",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 100
+    },
+    {
+      "id": "zone-B-robot-0",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-1",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 101,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-2",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 102,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-3",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 103,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-4",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 104,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-5",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 105,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-6",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 106,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-7",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 107,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-8",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 108,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-9",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 109,
+      "y": 0
+    },
+    {
+      "id": "zone-B-robot-10",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-11",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 101,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-12",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 102,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-13",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 103,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-14",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 104,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-15",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 105,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-16",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 106,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-17",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 107,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-18",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 108,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-19",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 109,
+      "y": 3
+    },
+    {
+      "id": "zone-B-robot-20",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-21",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 101,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-22",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 102,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-23",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 103,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-24",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 104,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-25",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 105,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-26",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 106,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-27",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 107,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-28",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 108,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-29",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 109,
+      "y": 6
+    },
+    {
+      "id": "zone-B-robot-30",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-31",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 101,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-32",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 102,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-33",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 103,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-34",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 104,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-35",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 105,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-36",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 106,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-37",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 107,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-38",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 108,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-39",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 109,
+      "y": 9
+    },
+    {
+      "id": "zone-B-robot-40",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-41",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 101,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-42",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 102,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-43",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 103,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-44",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 104,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-45",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 105,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-46",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 106,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-47",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 107,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-48",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 108,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-49",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 109,
+      "y": 12
+    },
+    {
+      "id": "zone-B-robot-50",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-51",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 101,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-52",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 102,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-53",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 103,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-54",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 104,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-55",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 105,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-56",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 106,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-57",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 107,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-58",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 108,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-59",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 109,
+      "y": 15
+    },
+    {
+      "id": "zone-B-robot-60",
+      "role": "endpoint",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 18
+    },
+    {
+      "id": "zone-B-edge-0",
+      "role": "edge",
+      "zone": "B",
+      "access": "wired",
+      "x": 100,
+      "y": 80
+    },
+    {
+      "id": "zone-C-switch-0",
+      "role": "leaf",
+      "zone": "C",
+      "access": "wired",
+      "x": 200,
+      "y": 100
+    },
+    {
+      "id": "zone-C-robot-0",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 200,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-1",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 201,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-2",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 202,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-3",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 203,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-4",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 204,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-5",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 205,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-6",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 206,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-7",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 207,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-8",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 208,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-9",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 209,
+      "y": 0
+    },
+    {
+      "id": "zone-C-robot-10",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 200,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-11",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 201,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-12",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 202,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-13",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 203,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-14",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 204,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-15",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 205,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-16",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 206,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-17",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 207,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-18",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 208,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-19",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 209,
+      "y": 3
+    },
+    {
+      "id": "zone-C-robot-20",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 200,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-21",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 201,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-22",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 202,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-23",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 203,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-24",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 204,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-25",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 205,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-26",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 206,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-27",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 207,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-28",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 208,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-29",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 209,
+      "y": 6
+    },
+    {
+      "id": "zone-C-robot-30",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 200,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-31",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 201,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-32",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 202,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-33",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 203,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-34",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 204,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-35",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 205,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-36",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 206,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-37",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 207,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-38",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 208,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-39",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 209,
+      "y": 9
+    },
+    {
+      "id": "zone-C-robot-40",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 200,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-41",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 201,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-42",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 202,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-43",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 203,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-44",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 204,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-45",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 205,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-46",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 206,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-47",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 207,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-48",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 208,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-49",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 209,
+      "y": 12
+    },
+    {
+      "id": "zone-C-robot-50",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 200,
+      "y": 15
+    },
+    {
+      "id": "zone-C-robot-51",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 201,
+      "y": 15
+    },
+    {
+      "id": "zone-C-robot-52",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 202,
+      "y": 15
+    },
+    {
+      "id": "zone-C-robot-53",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 203,
+      "y": 15
+    },
+    {
+      "id": "zone-C-robot-54",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 204,
+      "y": 15
+    },
+    {
+      "id": "zone-C-robot-55",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 205,
+      "y": 15
+    },
+    {
+      "id": "zone-C-robot-56",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 206,
+      "y": 15
+    },
+    {
+      "id": "zone-C-robot-57",
+      "role": "endpoint",
+      "zone": "C",
+      "access": "wired",
+      "x": 207,
+      "y": 15
+    },
+    {
+      "id": "zone-C-edge-0",
+      "role": "edge",
+      "zone": "C",
+      "access": "wired",
+      "x": 200,
+      "y": 80
+    },
+    {
+      "id": "zone-D-switch-0",
+      "role": "leaf",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 100
+    },
+    {
+      "id": "zone-D-robot-0",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-1",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 301,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-2",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 302,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-3",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 303,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-4",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 304,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-5",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 305,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-6",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 306,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-7",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 307,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-8",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 308,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-9",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 309,
+      "y": 0
+    },
+    {
+      "id": "zone-D-robot-10",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-11",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 301,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-12",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 302,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-13",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 303,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-14",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 304,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-15",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 305,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-16",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 306,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-17",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 307,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-18",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 308,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-19",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 309,
+      "y": 3
+    },
+    {
+      "id": "zone-D-robot-20",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-21",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 301,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-22",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 302,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-23",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 303,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-24",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 304,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-25",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 305,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-26",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 306,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-27",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 307,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-28",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 308,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-29",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 309,
+      "y": 6
+    },
+    {
+      "id": "zone-D-robot-30",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-31",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 301,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-32",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 302,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-33",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 303,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-34",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 304,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-35",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 305,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-36",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 306,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-37",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 307,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-38",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 308,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-39",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 309,
+      "y": 9
+    },
+    {
+      "id": "zone-D-robot-40",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-41",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 301,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-42",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 302,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-43",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 303,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-44",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 304,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-45",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 305,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-46",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 306,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-47",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 307,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-48",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 308,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-49",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 309,
+      "y": 12
+    },
+    {
+      "id": "zone-D-robot-50",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-51",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 301,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-52",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 302,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-53",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 303,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-54",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 304,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-55",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 305,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-56",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 306,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-57",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 307,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-58",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 308,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-59",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 309,
+      "y": 15
+    },
+    {
+      "id": "zone-D-robot-60",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 18
+    },
+    {
+      "id": "zone-D-robot-61",
+      "role": "endpoint",
+      "zone": "D",
+      "access": "wired",
+      "x": 301,
+      "y": 18
+    },
+    {
+      "id": "zone-D-edge-0",
+      "role": "edge",
+      "zone": "D",
+      "access": "wired",
+      "x": 300,
+      "y": 80
+    },
+    {
+      "id": "zone-E-switch-0",
+      "role": "leaf",
+      "zone": "E",
+      "access": "wired",
+      "x": 400,
+      "y": 100
+    },
+    {
+      "id": "zone-E-robot-0",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 400,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-1",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 401,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-2",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 402,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-3",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 403,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-4",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 404,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-5",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 405,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-6",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 406,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-7",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 407,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-8",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 408,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-9",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 409,
+      "y": 0
+    },
+    {
+      "id": "zone-E-robot-10",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 400,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-11",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 401,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-12",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 402,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-13",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 403,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-14",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 404,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-15",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 405,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-16",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 406,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-17",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 407,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-18",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 408,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-19",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 409,
+      "y": 3
+    },
+    {
+      "id": "zone-E-robot-20",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 400,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-21",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 401,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-22",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 402,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-23",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 403,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-24",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 404,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-25",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 405,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-26",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 406,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-27",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 407,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-28",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 408,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-29",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 409,
+      "y": 6
+    },
+    {
+      "id": "zone-E-robot-30",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 400,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-31",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 401,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-32",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 402,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-33",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 403,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-34",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 404,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-35",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 405,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-36",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 406,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-37",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 407,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-38",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 408,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-39",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 409,
+      "y": 9
+    },
+    {
+      "id": "zone-E-robot-40",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 400,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-41",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 401,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-42",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 402,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-43",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 403,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-44",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 404,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-45",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 405,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-46",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 406,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-47",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 407,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-48",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 408,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-49",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 409,
+      "y": 12
+    },
+    {
+      "id": "zone-E-robot-50",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 400,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-51",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 401,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-52",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 402,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-53",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 403,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-54",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 404,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-55",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 405,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-56",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 406,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-57",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 407,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-58",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 408,
+      "y": 15
+    },
+    {
+      "id": "zone-E-robot-59",
+      "role": "endpoint",
+      "zone": "E",
+      "access": "wired",
+      "x": 409,
+      "y": 15
+    },
+    {
+      "id": "zone-E-edge-0",
+      "role": "edge",
+      "zone": "E",
+      "access": "wired",
+      "x": 400,
+      "y": 80
+    },
+    {
+      "id": "zone-F-switch-0",
+      "role": "leaf",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 100
+    },
+    {
+      "id": "zone-F-robot-0",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-1",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 501,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-2",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 502,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-3",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 503,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-4",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 504,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-5",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 505,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-6",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 506,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-7",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 507,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-8",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 508,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-9",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 509,
+      "y": 0
+    },
+    {
+      "id": "zone-F-robot-10",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-11",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 501,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-12",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 502,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-13",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 503,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-14",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 504,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-15",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 505,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-16",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 506,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-17",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 507,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-18",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 508,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-19",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 509,
+      "y": 3
+    },
+    {
+      "id": "zone-F-robot-20",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-21",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 501,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-22",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 502,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-23",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 503,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-24",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 504,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-25",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 505,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-26",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 506,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-27",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 507,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-28",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 508,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-29",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 509,
+      "y": 6
+    },
+    {
+      "id": "zone-F-robot-30",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-31",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 501,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-32",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 502,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-33",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 503,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-34",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 504,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-35",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 505,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-36",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 506,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-37",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 507,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-38",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 508,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-39",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 509,
+      "y": 9
+    },
+    {
+      "id": "zone-F-robot-40",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-41",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 501,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-42",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 502,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-43",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 503,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-44",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 504,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-45",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 505,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-46",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 506,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-47",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 507,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-48",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 508,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-49",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 509,
+      "y": 12
+    },
+    {
+      "id": "zone-F-robot-50",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-51",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 501,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-52",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 502,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-53",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 503,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-54",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 504,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-55",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 505,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-56",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 506,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-57",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 507,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-58",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 508,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-59",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 509,
+      "y": 15
+    },
+    {
+      "id": "zone-F-robot-60",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 18
+    },
+    {
+      "id": "zone-F-robot-61",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 501,
+      "y": 18
+    },
+    {
+      "id": "zone-F-robot-62",
+      "role": "endpoint",
+      "zone": "F",
+      "access": "wired",
+      "x": 502,
+      "y": 18
+    },
+    {
+      "id": "zone-F-edge-0",
+      "role": "edge",
+      "zone": "F",
+      "access": "wired",
+      "x": 500,
+      "y": 80
+    },
+    {
+      "id": "zone-G-switch-0",
+      "role": "leaf",
+      "zone": "G",
+      "access": "wired",
+      "x": 600,
+      "y": 100
+    },
+    {
+      "id": "zone-G-robot-0",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 600,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-1",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 601,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-2",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 602,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-3",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 603,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-4",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 604,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-5",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 605,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-6",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 606,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-7",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 607,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-8",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 608,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-9",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 609,
+      "y": 0
+    },
+    {
+      "id": "zone-G-robot-10",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 600,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-11",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 601,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-12",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 602,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-13",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 603,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-14",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 604,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-15",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 605,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-16",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 606,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-17",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 607,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-18",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 608,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-19",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 609,
+      "y": 3
+    },
+    {
+      "id": "zone-G-robot-20",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 600,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-21",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 601,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-22",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 602,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-23",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 603,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-24",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 604,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-25",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 605,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-26",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 606,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-27",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 607,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-28",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 608,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-29",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 609,
+      "y": 6
+    },
+    {
+      "id": "zone-G-robot-30",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 600,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-31",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 601,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-32",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 602,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-33",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 603,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-34",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 604,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-35",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 605,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-36",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 606,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-37",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 607,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-38",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 608,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-39",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 609,
+      "y": 9
+    },
+    {
+      "id": "zone-G-robot-40",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 600,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-41",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 601,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-42",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 602,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-43",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 603,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-44",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 604,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-45",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 605,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-46",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 606,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-47",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 607,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-48",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 608,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-49",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 609,
+      "y": 12
+    },
+    {
+      "id": "zone-G-robot-50",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 600,
+      "y": 15
+    },
+    {
+      "id": "zone-G-robot-51",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 601,
+      "y": 15
+    },
+    {
+      "id": "zone-G-robot-52",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 602,
+      "y": 15
+    },
+    {
+      "id": "zone-G-robot-53",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 603,
+      "y": 15
+    },
+    {
+      "id": "zone-G-robot-54",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 604,
+      "y": 15
+    },
+    {
+      "id": "zone-G-robot-55",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 605,
+      "y": 15
+    },
+    {
+      "id": "zone-G-robot-56",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 606,
+      "y": 15
+    },
+    {
+      "id": "zone-G-robot-57",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 607,
+      "y": 15
+    },
+    {
+      "id": "zone-G-robot-58",
+      "role": "endpoint",
+      "zone": "G",
+      "access": "wired",
+      "x": 608,
+      "y": 15
+    },
+    {
+      "id": "zone-G-edge-0",
+      "role": "edge",
+      "zone": "G",
+      "access": "wired",
+      "x": 600,
+      "y": 80
+    },
+    {
+      "id": "zone-H-switch-0",
+      "role": "leaf",
+      "zone": "H",
+      "access": "wired",
+      "x": 700,
+      "y": 100
+    },
+    {
+      "id": "zone-H-robot-0",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 700,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-1",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 701,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-2",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 702,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-3",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 703,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-4",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 704,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-5",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 705,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-6",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 706,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-7",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 707,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-8",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 708,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-9",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 709,
+      "y": 0
+    },
+    {
+      "id": "zone-H-robot-10",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 700,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-11",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 701,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-12",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 702,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-13",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 703,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-14",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 704,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-15",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 705,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-16",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 706,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-17",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 707,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-18",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 708,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-19",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 709,
+      "y": 3
+    },
+    {
+      "id": "zone-H-robot-20",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 700,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-21",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 701,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-22",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 702,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-23",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 703,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-24",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 704,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-25",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 705,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-26",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 706,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-27",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 707,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-28",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 708,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-29",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 709,
+      "y": 6
+    },
+    {
+      "id": "zone-H-robot-30",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 700,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-31",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 701,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-32",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 702,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-33",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 703,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-34",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 704,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-35",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 705,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-36",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 706,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-37",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 707,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-38",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 708,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-39",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 709,
+      "y": 9
+    },
+    {
+      "id": "zone-H-robot-40",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 700,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-41",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 701,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-42",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 702,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-43",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 703,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-44",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 704,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-45",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 705,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-46",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 706,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-47",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 707,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-48",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 708,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-49",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 709,
+      "y": 12
+    },
+    {
+      "id": "zone-H-robot-50",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 700,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-51",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 701,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-52",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 702,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-53",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 703,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-54",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 704,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-55",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 705,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-56",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 706,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-57",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 707,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-58",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 708,
+      "y": 15
+    },
+    {
+      "id": "zone-H-robot-59",
+      "role": "endpoint",
+      "zone": "H",
+      "access": "wired",
+      "x": 709,
+      "y": 15
+    },
+    {
+      "id": "zone-H-edge-0",
+      "role": "edge",
+      "zone": "H",
+      "access": "wired",
+      "x": 700,
+      "y": 80
+    }
+  ],
+  "links": [
+    {
+      "id": "link0",
+      "from": "zone-A-switch-0",
+      "to": "shared-spine-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link1",
+      "from": "zone-A-switch-0",
+      "to": "shared-spine-1",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link2",
+      "from": "zone-A-robot-0",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link3",
+      "from": "zone-A-robot-1",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link4",
+      "from": "zone-A-robot-2",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link5",
+      "from": "zone-A-robot-3",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link6",
+      "from": "zone-A-robot-4",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link7",
+      "from": "zone-A-robot-5",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link8",
+      "from": "zone-A-robot-6",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link9",
+      "from": "zone-A-robot-7",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link10",
+      "from": "zone-A-robot-8",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link11",
+      "from": "zone-A-robot-9",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link12",
+      "from": "zone-A-robot-10",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link13",
+      "from": "zone-A-robot-11",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link14",
+      "from": "zone-A-robot-12",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link15",
+      "from": "zone-A-robot-13",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link16",
+      "from": "zone-A-robot-14",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link17",
+      "from": "zone-A-robot-15",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link18",
+      "from": "zone-A-robot-16",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link19",
+      "from": "zone-A-robot-17",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link20",
+      "from": "zone-A-robot-18",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link21",
+      "from": "zone-A-robot-19",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link22",
+      "from": "zone-A-robot-20",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link23",
+      "from": "zone-A-robot-21",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link24",
+      "from": "zone-A-robot-22",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link25",
+      "from": "zone-A-robot-23",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link26",
+      "from": "zone-A-robot-24",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link27",
+      "from": "zone-A-robot-25",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link28",
+      "from": "zone-A-robot-26",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link29",
+      "from": "zone-A-robot-27",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link30",
+      "from": "zone-A-robot-28",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link31",
+      "from": "zone-A-robot-29",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link32",
+      "from": "zone-A-robot-30",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link33",
+      "from": "zone-A-robot-31",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link34",
+      "from": "zone-A-robot-32",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link35",
+      "from": "zone-A-robot-33",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link36",
+      "from": "zone-A-robot-34",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link37",
+      "from": "zone-A-robot-35",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link38",
+      "from": "zone-A-robot-36",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link39",
+      "from": "zone-A-robot-37",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link40",
+      "from": "zone-A-robot-38",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link41",
+      "from": "zone-A-robot-39",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link42",
+      "from": "zone-A-robot-40",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link43",
+      "from": "zone-A-robot-41",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link44",
+      "from": "zone-A-robot-42",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link45",
+      "from": "zone-A-robot-43",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link46",
+      "from": "zone-A-robot-44",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link47",
+      "from": "zone-A-robot-45",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link48",
+      "from": "zone-A-robot-46",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link49",
+      "from": "zone-A-robot-47",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link50",
+      "from": "zone-A-robot-48",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link51",
+      "from": "zone-A-robot-49",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link52",
+      "from": "zone-A-robot-50",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link53",
+      "from": "zone-A-robot-51",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link54",
+      "from": "zone-A-robot-52",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link55",
+      "from": "zone-A-robot-53",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link56",
+      "from": "zone-A-robot-54",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link57",
+      "from": "zone-A-robot-55",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link58",
+      "from": "zone-A-robot-56",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link59",
+      "from": "zone-A-robot-57",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link60",
+      "from": "zone-A-robot-58",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link61",
+      "from": "zone-A-edge-0",
+      "to": "zone-A-switch-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link62",
+      "from": "zone-B-switch-0",
+      "to": "shared-spine-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link63",
+      "from": "zone-B-switch-0",
+      "to": "shared-spine-1",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link64",
+      "from": "zone-B-robot-0",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link65",
+      "from": "zone-B-robot-1",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link66",
+      "from": "zone-B-robot-2",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link67",
+      "from": "zone-B-robot-3",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link68",
+      "from": "zone-B-robot-4",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link69",
+      "from": "zone-B-robot-5",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link70",
+      "from": "zone-B-robot-6",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link71",
+      "from": "zone-B-robot-7",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link72",
+      "from": "zone-B-robot-8",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link73",
+      "from": "zone-B-robot-9",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link74",
+      "from": "zone-B-robot-10",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link75",
+      "from": "zone-B-robot-11",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link76",
+      "from": "zone-B-robot-12",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link77",
+      "from": "zone-B-robot-13",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link78",
+      "from": "zone-B-robot-14",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link79",
+      "from": "zone-B-robot-15",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link80",
+      "from": "zone-B-robot-16",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link81",
+      "from": "zone-B-robot-17",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link82",
+      "from": "zone-B-robot-18",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link83",
+      "from": "zone-B-robot-19",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link84",
+      "from": "zone-B-robot-20",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link85",
+      "from": "zone-B-robot-21",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link86",
+      "from": "zone-B-robot-22",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link87",
+      "from": "zone-B-robot-23",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link88",
+      "from": "zone-B-robot-24",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link89",
+      "from": "zone-B-robot-25",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link90",
+      "from": "zone-B-robot-26",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link91",
+      "from": "zone-B-robot-27",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link92",
+      "from": "zone-B-robot-28",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link93",
+      "from": "zone-B-robot-29",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link94",
+      "from": "zone-B-robot-30",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link95",
+      "from": "zone-B-robot-31",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link96",
+      "from": "zone-B-robot-32",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link97",
+      "from": "zone-B-robot-33",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link98",
+      "from": "zone-B-robot-34",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link99",
+      "from": "zone-B-robot-35",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link100",
+      "from": "zone-B-robot-36",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link101",
+      "from": "zone-B-robot-37",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link102",
+      "from": "zone-B-robot-38",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link103",
+      "from": "zone-B-robot-39",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link104",
+      "from": "zone-B-robot-40",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link105",
+      "from": "zone-B-robot-41",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link106",
+      "from": "zone-B-robot-42",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link107",
+      "from": "zone-B-robot-43",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link108",
+      "from": "zone-B-robot-44",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link109",
+      "from": "zone-B-robot-45",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link110",
+      "from": "zone-B-robot-46",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link111",
+      "from": "zone-B-robot-47",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link112",
+      "from": "zone-B-robot-48",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link113",
+      "from": "zone-B-robot-49",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link114",
+      "from": "zone-B-robot-50",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link115",
+      "from": "zone-B-robot-51",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link116",
+      "from": "zone-B-robot-52",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link117",
+      "from": "zone-B-robot-53",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link118",
+      "from": "zone-B-robot-54",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link119",
+      "from": "zone-B-robot-55",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link120",
+      "from": "zone-B-robot-56",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link121",
+      "from": "zone-B-robot-57",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link122",
+      "from": "zone-B-robot-58",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link123",
+      "from": "zone-B-robot-59",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link124",
+      "from": "zone-B-robot-60",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link125",
+      "from": "zone-B-edge-0",
+      "to": "zone-B-switch-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link126",
+      "from": "zone-C-switch-0",
+      "to": "shared-spine-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link127",
+      "from": "zone-C-switch-0",
+      "to": "shared-spine-1",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link128",
+      "from": "zone-C-robot-0",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link129",
+      "from": "zone-C-robot-1",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link130",
+      "from": "zone-C-robot-2",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link131",
+      "from": "zone-C-robot-3",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link132",
+      "from": "zone-C-robot-4",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link133",
+      "from": "zone-C-robot-5",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link134",
+      "from": "zone-C-robot-6",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link135",
+      "from": "zone-C-robot-7",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link136",
+      "from": "zone-C-robot-8",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link137",
+      "from": "zone-C-robot-9",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link138",
+      "from": "zone-C-robot-10",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link139",
+      "from": "zone-C-robot-11",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link140",
+      "from": "zone-C-robot-12",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link141",
+      "from": "zone-C-robot-13",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link142",
+      "from": "zone-C-robot-14",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link143",
+      "from": "zone-C-robot-15",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link144",
+      "from": "zone-C-robot-16",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link145",
+      "from": "zone-C-robot-17",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link146",
+      "from": "zone-C-robot-18",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link147",
+      "from": "zone-C-robot-19",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link148",
+      "from": "zone-C-robot-20",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link149",
+      "from": "zone-C-robot-21",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link150",
+      "from": "zone-C-robot-22",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link151",
+      "from": "zone-C-robot-23",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link152",
+      "from": "zone-C-robot-24",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link153",
+      "from": "zone-C-robot-25",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link154",
+      "from": "zone-C-robot-26",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link155",
+      "from": "zone-C-robot-27",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link156",
+      "from": "zone-C-robot-28",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link157",
+      "from": "zone-C-robot-29",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link158",
+      "from": "zone-C-robot-30",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link159",
+      "from": "zone-C-robot-31",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link160",
+      "from": "zone-C-robot-32",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link161",
+      "from": "zone-C-robot-33",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link162",
+      "from": "zone-C-robot-34",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link163",
+      "from": "zone-C-robot-35",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link164",
+      "from": "zone-C-robot-36",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link165",
+      "from": "zone-C-robot-37",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link166",
+      "from": "zone-C-robot-38",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link167",
+      "from": "zone-C-robot-39",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link168",
+      "from": "zone-C-robot-40",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link169",
+      "from": "zone-C-robot-41",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link170",
+      "from": "zone-C-robot-42",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link171",
+      "from": "zone-C-robot-43",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link172",
+      "from": "zone-C-robot-44",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link173",
+      "from": "zone-C-robot-45",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link174",
+      "from": "zone-C-robot-46",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link175",
+      "from": "zone-C-robot-47",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link176",
+      "from": "zone-C-robot-48",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link177",
+      "from": "zone-C-robot-49",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link178",
+      "from": "zone-C-robot-50",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link179",
+      "from": "zone-C-robot-51",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link180",
+      "from": "zone-C-robot-52",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link181",
+      "from": "zone-C-robot-53",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link182",
+      "from": "zone-C-robot-54",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link183",
+      "from": "zone-C-robot-55",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link184",
+      "from": "zone-C-robot-56",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link185",
+      "from": "zone-C-robot-57",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link186",
+      "from": "zone-C-edge-0",
+      "to": "zone-C-switch-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link187",
+      "from": "zone-D-switch-0",
+      "to": "shared-spine-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link188",
+      "from": "zone-D-switch-0",
+      "to": "shared-spine-1",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link189",
+      "from": "zone-D-robot-0",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link190",
+      "from": "zone-D-robot-1",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link191",
+      "from": "zone-D-robot-2",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link192",
+      "from": "zone-D-robot-3",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link193",
+      "from": "zone-D-robot-4",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link194",
+      "from": "zone-D-robot-5",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link195",
+      "from": "zone-D-robot-6",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link196",
+      "from": "zone-D-robot-7",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link197",
+      "from": "zone-D-robot-8",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link198",
+      "from": "zone-D-robot-9",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link199",
+      "from": "zone-D-robot-10",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link200",
+      "from": "zone-D-robot-11",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link201",
+      "from": "zone-D-robot-12",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link202",
+      "from": "zone-D-robot-13",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link203",
+      "from": "zone-D-robot-14",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link204",
+      "from": "zone-D-robot-15",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link205",
+      "from": "zone-D-robot-16",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link206",
+      "from": "zone-D-robot-17",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link207",
+      "from": "zone-D-robot-18",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link208",
+      "from": "zone-D-robot-19",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link209",
+      "from": "zone-D-robot-20",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link210",
+      "from": "zone-D-robot-21",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link211",
+      "from": "zone-D-robot-22",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link212",
+      "from": "zone-D-robot-23",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link213",
+      "from": "zone-D-robot-24",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link214",
+      "from": "zone-D-robot-25",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link215",
+      "from": "zone-D-robot-26",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link216",
+      "from": "zone-D-robot-27",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link217",
+      "from": "zone-D-robot-28",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link218",
+      "from": "zone-D-robot-29",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link219",
+      "from": "zone-D-robot-30",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link220",
+      "from": "zone-D-robot-31",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link221",
+      "from": "zone-D-robot-32",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link222",
+      "from": "zone-D-robot-33",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link223",
+      "from": "zone-D-robot-34",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link224",
+      "from": "zone-D-robot-35",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link225",
+      "from": "zone-D-robot-36",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link226",
+      "from": "zone-D-robot-37",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link227",
+      "from": "zone-D-robot-38",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link228",
+      "from": "zone-D-robot-39",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link229",
+      "from": "zone-D-robot-40",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link230",
+      "from": "zone-D-robot-41",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link231",
+      "from": "zone-D-robot-42",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link232",
+      "from": "zone-D-robot-43",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link233",
+      "from": "zone-D-robot-44",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link234",
+      "from": "zone-D-robot-45",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link235",
+      "from": "zone-D-robot-46",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link236",
+      "from": "zone-D-robot-47",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link237",
+      "from": "zone-D-robot-48",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link238",
+      "from": "zone-D-robot-49",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link239",
+      "from": "zone-D-robot-50",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link240",
+      "from": "zone-D-robot-51",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link241",
+      "from": "zone-D-robot-52",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link242",
+      "from": "zone-D-robot-53",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link243",
+      "from": "zone-D-robot-54",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link244",
+      "from": "zone-D-robot-55",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link245",
+      "from": "zone-D-robot-56",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link246",
+      "from": "zone-D-robot-57",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link247",
+      "from": "zone-D-robot-58",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link248",
+      "from": "zone-D-robot-59",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link249",
+      "from": "zone-D-robot-60",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link250",
+      "from": "zone-D-robot-61",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link251",
+      "from": "zone-D-edge-0",
+      "to": "zone-D-switch-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link252",
+      "from": "zone-E-switch-0",
+      "to": "shared-spine-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link253",
+      "from": "zone-E-switch-0",
+      "to": "shared-spine-1",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link254",
+      "from": "zone-E-robot-0",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link255",
+      "from": "zone-E-robot-1",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link256",
+      "from": "zone-E-robot-2",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link257",
+      "from": "zone-E-robot-3",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link258",
+      "from": "zone-E-robot-4",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link259",
+      "from": "zone-E-robot-5",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link260",
+      "from": "zone-E-robot-6",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link261",
+      "from": "zone-E-robot-7",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link262",
+      "from": "zone-E-robot-8",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link263",
+      "from": "zone-E-robot-9",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link264",
+      "from": "zone-E-robot-10",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link265",
+      "from": "zone-E-robot-11",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link266",
+      "from": "zone-E-robot-12",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link267",
+      "from": "zone-E-robot-13",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link268",
+      "from": "zone-E-robot-14",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link269",
+      "from": "zone-E-robot-15",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link270",
+      "from": "zone-E-robot-16",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link271",
+      "from": "zone-E-robot-17",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link272",
+      "from": "zone-E-robot-18",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link273",
+      "from": "zone-E-robot-19",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link274",
+      "from": "zone-E-robot-20",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link275",
+      "from": "zone-E-robot-21",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link276",
+      "from": "zone-E-robot-22",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link277",
+      "from": "zone-E-robot-23",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link278",
+      "from": "zone-E-robot-24",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link279",
+      "from": "zone-E-robot-25",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link280",
+      "from": "zone-E-robot-26",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link281",
+      "from": "zone-E-robot-27",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link282",
+      "from": "zone-E-robot-28",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link283",
+      "from": "zone-E-robot-29",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link284",
+      "from": "zone-E-robot-30",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link285",
+      "from": "zone-E-robot-31",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link286",
+      "from": "zone-E-robot-32",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link287",
+      "from": "zone-E-robot-33",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link288",
+      "from": "zone-E-robot-34",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link289",
+      "from": "zone-E-robot-35",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link290",
+      "from": "zone-E-robot-36",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link291",
+      "from": "zone-E-robot-37",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link292",
+      "from": "zone-E-robot-38",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link293",
+      "from": "zone-E-robot-39",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link294",
+      "from": "zone-E-robot-40",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link295",
+      "from": "zone-E-robot-41",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link296",
+      "from": "zone-E-robot-42",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link297",
+      "from": "zone-E-robot-43",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link298",
+      "from": "zone-E-robot-44",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link299",
+      "from": "zone-E-robot-45",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link300",
+      "from": "zone-E-robot-46",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link301",
+      "from": "zone-E-robot-47",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link302",
+      "from": "zone-E-robot-48",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link303",
+      "from": "zone-E-robot-49",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link304",
+      "from": "zone-E-robot-50",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link305",
+      "from": "zone-E-robot-51",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link306",
+      "from": "zone-E-robot-52",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link307",
+      "from": "zone-E-robot-53",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link308",
+      "from": "zone-E-robot-54",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link309",
+      "from": "zone-E-robot-55",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link310",
+      "from": "zone-E-robot-56",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link311",
+      "from": "zone-E-robot-57",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link312",
+      "from": "zone-E-robot-58",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link313",
+      "from": "zone-E-robot-59",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link314",
+      "from": "zone-E-edge-0",
+      "to": "zone-E-switch-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link315",
+      "from": "zone-F-switch-0",
+      "to": "shared-spine-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link316",
+      "from": "zone-F-switch-0",
+      "to": "shared-spine-1",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link317",
+      "from": "zone-F-robot-0",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link318",
+      "from": "zone-F-robot-1",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link319",
+      "from": "zone-F-robot-2",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link320",
+      "from": "zone-F-robot-3",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link321",
+      "from": "zone-F-robot-4",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link322",
+      "from": "zone-F-robot-5",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link323",
+      "from": "zone-F-robot-6",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link324",
+      "from": "zone-F-robot-7",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link325",
+      "from": "zone-F-robot-8",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link326",
+      "from": "zone-F-robot-9",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link327",
+      "from": "zone-F-robot-10",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link328",
+      "from": "zone-F-robot-11",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link329",
+      "from": "zone-F-robot-12",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link330",
+      "from": "zone-F-robot-13",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link331",
+      "from": "zone-F-robot-14",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link332",
+      "from": "zone-F-robot-15",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link333",
+      "from": "zone-F-robot-16",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link334",
+      "from": "zone-F-robot-17",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link335",
+      "from": "zone-F-robot-18",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link336",
+      "from": "zone-F-robot-19",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link337",
+      "from": "zone-F-robot-20",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link338",
+      "from": "zone-F-robot-21",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link339",
+      "from": "zone-F-robot-22",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link340",
+      "from": "zone-F-robot-23",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link341",
+      "from": "zone-F-robot-24",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link342",
+      "from": "zone-F-robot-25",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link343",
+      "from": "zone-F-robot-26",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link344",
+      "from": "zone-F-robot-27",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link345",
+      "from": "zone-F-robot-28",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link346",
+      "from": "zone-F-robot-29",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link347",
+      "from": "zone-F-robot-30",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link348",
+      "from": "zone-F-robot-31",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link349",
+      "from": "zone-F-robot-32",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link350",
+      "from": "zone-F-robot-33",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link351",
+      "from": "zone-F-robot-34",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link352",
+      "from": "zone-F-robot-35",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link353",
+      "from": "zone-F-robot-36",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link354",
+      "from": "zone-F-robot-37",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link355",
+      "from": "zone-F-robot-38",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link356",
+      "from": "zone-F-robot-39",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link357",
+      "from": "zone-F-robot-40",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link358",
+      "from": "zone-F-robot-41",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link359",
+      "from": "zone-F-robot-42",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link360",
+      "from": "zone-F-robot-43",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link361",
+      "from": "zone-F-robot-44",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link362",
+      "from": "zone-F-robot-45",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link363",
+      "from": "zone-F-robot-46",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link364",
+      "from": "zone-F-robot-47",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link365",
+      "from": "zone-F-robot-48",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link366",
+      "from": "zone-F-robot-49",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link367",
+      "from": "zone-F-robot-50",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link368",
+      "from": "zone-F-robot-51",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link369",
+      "from": "zone-F-robot-52",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link370",
+      "from": "zone-F-robot-53",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link371",
+      "from": "zone-F-robot-54",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link372",
+      "from": "zone-F-robot-55",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link373",
+      "from": "zone-F-robot-56",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link374",
+      "from": "zone-F-robot-57",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link375",
+      "from": "zone-F-robot-58",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link376",
+      "from": "zone-F-robot-59",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link377",
+      "from": "zone-F-robot-60",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link378",
+      "from": "zone-F-robot-61",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link379",
+      "from": "zone-F-robot-62",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link380",
+      "from": "zone-F-edge-0",
+      "to": "zone-F-switch-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link381",
+      "from": "zone-G-switch-0",
+      "to": "shared-spine-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link382",
+      "from": "zone-G-switch-0",
+      "to": "shared-spine-1",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link383",
+      "from": "zone-G-robot-0",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link384",
+      "from": "zone-G-robot-1",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link385",
+      "from": "zone-G-robot-2",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link386",
+      "from": "zone-G-robot-3",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link387",
+      "from": "zone-G-robot-4",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link388",
+      "from": "zone-G-robot-5",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link389",
+      "from": "zone-G-robot-6",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link390",
+      "from": "zone-G-robot-7",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link391",
+      "from": "zone-G-robot-8",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link392",
+      "from": "zone-G-robot-9",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link393",
+      "from": "zone-G-robot-10",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link394",
+      "from": "zone-G-robot-11",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link395",
+      "from": "zone-G-robot-12",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link396",
+      "from": "zone-G-robot-13",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link397",
+      "from": "zone-G-robot-14",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link398",
+      "from": "zone-G-robot-15",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link399",
+      "from": "zone-G-robot-16",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link400",
+      "from": "zone-G-robot-17",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link401",
+      "from": "zone-G-robot-18",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link402",
+      "from": "zone-G-robot-19",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link403",
+      "from": "zone-G-robot-20",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link404",
+      "from": "zone-G-robot-21",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link405",
+      "from": "zone-G-robot-22",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link406",
+      "from": "zone-G-robot-23",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link407",
+      "from": "zone-G-robot-24",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link408",
+      "from": "zone-G-robot-25",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link409",
+      "from": "zone-G-robot-26",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link410",
+      "from": "zone-G-robot-27",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link411",
+      "from": "zone-G-robot-28",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link412",
+      "from": "zone-G-robot-29",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link413",
+      "from": "zone-G-robot-30",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link414",
+      "from": "zone-G-robot-31",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link415",
+      "from": "zone-G-robot-32",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link416",
+      "from": "zone-G-robot-33",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link417",
+      "from": "zone-G-robot-34",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link418",
+      "from": "zone-G-robot-35",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link419",
+      "from": "zone-G-robot-36",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link420",
+      "from": "zone-G-robot-37",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link421",
+      "from": "zone-G-robot-38",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link422",
+      "from": "zone-G-robot-39",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link423",
+      "from": "zone-G-robot-40",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link424",
+      "from": "zone-G-robot-41",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link425",
+      "from": "zone-G-robot-42",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link426",
+      "from": "zone-G-robot-43",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link427",
+      "from": "zone-G-robot-44",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link428",
+      "from": "zone-G-robot-45",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link429",
+      "from": "zone-G-robot-46",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link430",
+      "from": "zone-G-robot-47",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link431",
+      "from": "zone-G-robot-48",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link432",
+      "from": "zone-G-robot-49",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link433",
+      "from": "zone-G-robot-50",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link434",
+      "from": "zone-G-robot-51",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link435",
+      "from": "zone-G-robot-52",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link436",
+      "from": "zone-G-robot-53",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link437",
+      "from": "zone-G-robot-54",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link438",
+      "from": "zone-G-robot-55",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link439",
+      "from": "zone-G-robot-56",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link440",
+      "from": "zone-G-robot-57",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link441",
+      "from": "zone-G-robot-58",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link442",
+      "from": "zone-G-edge-0",
+      "to": "zone-G-switch-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link443",
+      "from": "zone-H-switch-0",
+      "to": "shared-spine-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link444",
+      "from": "zone-H-switch-0",
+      "to": "shared-spine-1",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link445",
+      "from": "zone-H-robot-0",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link446",
+      "from": "zone-H-robot-1",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link447",
+      "from": "zone-H-robot-2",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link448",
+      "from": "zone-H-robot-3",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link449",
+      "from": "zone-H-robot-4",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link450",
+      "from": "zone-H-robot-5",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link451",
+      "from": "zone-H-robot-6",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link452",
+      "from": "zone-H-robot-7",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link453",
+      "from": "zone-H-robot-8",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link454",
+      "from": "zone-H-robot-9",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link455",
+      "from": "zone-H-robot-10",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link456",
+      "from": "zone-H-robot-11",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link457",
+      "from": "zone-H-robot-12",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link458",
+      "from": "zone-H-robot-13",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link459",
+      "from": "zone-H-robot-14",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link460",
+      "from": "zone-H-robot-15",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link461",
+      "from": "zone-H-robot-16",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link462",
+      "from": "zone-H-robot-17",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link463",
+      "from": "zone-H-robot-18",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link464",
+      "from": "zone-H-robot-19",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link465",
+      "from": "zone-H-robot-20",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link466",
+      "from": "zone-H-robot-21",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link467",
+      "from": "zone-H-robot-22",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link468",
+      "from": "zone-H-robot-23",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link469",
+      "from": "zone-H-robot-24",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link470",
+      "from": "zone-H-robot-25",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link471",
+      "from": "zone-H-robot-26",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link472",
+      "from": "zone-H-robot-27",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link473",
+      "from": "zone-H-robot-28",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link474",
+      "from": "zone-H-robot-29",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link475",
+      "from": "zone-H-robot-30",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link476",
+      "from": "zone-H-robot-31",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link477",
+      "from": "zone-H-robot-32",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link478",
+      "from": "zone-H-robot-33",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link479",
+      "from": "zone-H-robot-34",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link480",
+      "from": "zone-H-robot-35",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link481",
+      "from": "zone-H-robot-36",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link482",
+      "from": "zone-H-robot-37",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link483",
+      "from": "zone-H-robot-38",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link484",
+      "from": "zone-H-robot-39",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link485",
+      "from": "zone-H-robot-40",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link486",
+      "from": "zone-H-robot-41",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link487",
+      "from": "zone-H-robot-42",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link488",
+      "from": "zone-H-robot-43",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link489",
+      "from": "zone-H-robot-44",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link490",
+      "from": "zone-H-robot-45",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link491",
+      "from": "zone-H-robot-46",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link492",
+      "from": "zone-H-robot-47",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link493",
+      "from": "zone-H-robot-48",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link494",
+      "from": "zone-H-robot-49",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link495",
+      "from": "zone-H-robot-50",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link496",
+      "from": "zone-H-robot-51",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link497",
+      "from": "zone-H-robot-52",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link498",
+      "from": "zone-H-robot-53",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link499",
+      "from": "zone-H-robot-54",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link500",
+      "from": "zone-H-robot-55",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link501",
+      "from": "zone-H-robot-56",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link502",
+      "from": "zone-H-robot-57",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link503",
+      "from": "zone-H-robot-58",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link504",
+      "from": "zone-H-robot-59",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 100,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    },
+    {
+      "id": "link505",
+      "from": "zone-H-edge-0",
+      "to": "zone-H-switch-0",
+      "capacityMbps": 1000,
+      "delayMs": 0.1,
+      "queuePackets": 100
+    }
+  ],
+  "traffic": [
+    {
+      "id": "A-same-zone",
+      "source": "zone-A-robot-0",
+      "destinations": [
+        "zone-A-robot-1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "A-cross-zone",
+      "source": "zone-A-robot-0",
+      "destinations": [
+        "zone-B-robot-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "A-edge-service",
+      "source": "zone-A-robot-0",
+      "destinations": [
+        "zone-A-edge-0",
+        "zone-B-edge-0",
+        "zone-C-edge-0",
+        "zone-D-edge-0",
+        "zone-E-edge-0",
+        "zone-F-edge-0",
+        "zone-G-edge-0",
+        "zone-H-edge-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "B-same-zone",
+      "source": "zone-B-robot-0",
+      "destinations": [
+        "zone-B-robot-1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "B-cross-zone",
+      "source": "zone-B-robot-0",
+      "destinations": [
+        "zone-C-robot-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "B-edge-service",
+      "source": "zone-B-robot-0",
+      "destinations": [
+        "zone-B-edge-0",
+        "zone-A-edge-0",
+        "zone-C-edge-0",
+        "zone-D-edge-0",
+        "zone-E-edge-0",
+        "zone-F-edge-0",
+        "zone-G-edge-0",
+        "zone-H-edge-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "C-same-zone",
+      "source": "zone-C-robot-0",
+      "destinations": [
+        "zone-C-robot-1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "C-cross-zone",
+      "source": "zone-C-robot-0",
+      "destinations": [
+        "zone-D-robot-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "C-edge-service",
+      "source": "zone-C-robot-0",
+      "destinations": [
+        "zone-C-edge-0",
+        "zone-A-edge-0",
+        "zone-B-edge-0",
+        "zone-D-edge-0",
+        "zone-E-edge-0",
+        "zone-F-edge-0",
+        "zone-G-edge-0",
+        "zone-H-edge-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "D-same-zone",
+      "source": "zone-D-robot-0",
+      "destinations": [
+        "zone-D-robot-1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "D-cross-zone",
+      "source": "zone-D-robot-0",
+      "destinations": [
+        "zone-E-robot-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "D-edge-service",
+      "source": "zone-D-robot-0",
+      "destinations": [
+        "zone-D-edge-0",
+        "zone-A-edge-0",
+        "zone-B-edge-0",
+        "zone-C-edge-0",
+        "zone-E-edge-0",
+        "zone-F-edge-0",
+        "zone-G-edge-0",
+        "zone-H-edge-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "E-same-zone",
+      "source": "zone-E-robot-0",
+      "destinations": [
+        "zone-E-robot-1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "E-cross-zone",
+      "source": "zone-E-robot-0",
+      "destinations": [
+        "zone-F-robot-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "E-edge-service",
+      "source": "zone-E-robot-0",
+      "destinations": [
+        "zone-E-edge-0",
+        "zone-A-edge-0",
+        "zone-B-edge-0",
+        "zone-C-edge-0",
+        "zone-D-edge-0",
+        "zone-F-edge-0",
+        "zone-G-edge-0",
+        "zone-H-edge-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "F-same-zone",
+      "source": "zone-F-robot-0",
+      "destinations": [
+        "zone-F-robot-1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "F-cross-zone",
+      "source": "zone-F-robot-0",
+      "destinations": [
+        "zone-G-robot-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "F-edge-service",
+      "source": "zone-F-robot-0",
+      "destinations": [
+        "zone-F-edge-0",
+        "zone-A-edge-0",
+        "zone-B-edge-0",
+        "zone-C-edge-0",
+        "zone-D-edge-0",
+        "zone-E-edge-0",
+        "zone-G-edge-0",
+        "zone-H-edge-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "G-same-zone",
+      "source": "zone-G-robot-0",
+      "destinations": [
+        "zone-G-robot-1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "G-cross-zone",
+      "source": "zone-G-robot-0",
+      "destinations": [
+        "zone-H-robot-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "G-edge-service",
+      "source": "zone-G-robot-0",
+      "destinations": [
+        "zone-G-edge-0",
+        "zone-A-edge-0",
+        "zone-B-edge-0",
+        "zone-C-edge-0",
+        "zone-D-edge-0",
+        "zone-E-edge-0",
+        "zone-F-edge-0",
+        "zone-H-edge-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "H-same-zone",
+      "source": "zone-H-robot-0",
+      "destinations": [
+        "zone-H-robot-1"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "H-cross-zone",
+      "source": "zone-H-robot-0",
+      "destinations": [
+        "zone-A-robot-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    },
+    {
+      "id": "H-edge-service",
+      "source": "zone-H-robot-0",
+      "destinations": [
+        "zone-H-edge-0",
+        "zone-A-edge-0",
+        "zone-B-edge-0",
+        "zone-C-edge-0",
+        "zone-D-edge-0",
+        "zone-E-edge-0",
+        "zone-F-edge-0",
+        "zone-G-edge-0"
+      ],
+      "priority": 1,
+      "bytes": 256,
+      "startMs": 0,
+      "stopMs": 100,
+      "intervalMs": 20
+    }
+  ],
+  "events": []
+}

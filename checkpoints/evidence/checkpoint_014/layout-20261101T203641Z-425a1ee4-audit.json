@@ -1,0 +1,24 @@
+[
+  {
+    "offered": 30,
+    "delivered": 30,
+    "deadline_misses": 0,
+    "queue_drops": 0,
+    "no_route": 0,
+    "cutoff": 0,
+    "source_unavailable": 0,
+    "availability_drops": 0,
+    "ip_drops": 0
+  },
+  {
+    "offered": 30,
+    "delivered": 30,
+    "deadline_misses": 0,
+    "queue_drops": 0,
+    "no_route": 0,
+    "cutoff": 0,
+    "source_unavailable": 0,
+    "availability_drops": 0,
+    "ip_drops": 0
+  }
+]

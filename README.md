@@ -148,3 +148,8 @@ or admission for every packet. Lower-class fairness applies to packets admitted 
 The retained [legacy project documentation](docs/legacy-project.md) describes the original
 robot experiment and its incomplete ns-3 orchestration. It is historical context, not the
 current primary workflow or evidence of verified 5G behavior.
+
+
+## Editable eight-zone demonstration
+
+See [warehouse-demo.md](docs/warehouse-demo.md). Edit device counts in `configs/warehouse_layout.json`, then run `python scripts/run_warehouse_layout.py`. The reference layout contains 500 devices. The demonstration uses representative traffic; full-load and target-platform claims require separate validation.
