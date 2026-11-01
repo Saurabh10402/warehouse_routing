@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "suite": "offline-viewer",
+  "simulation_batch": "layout-20261101T203251Z-838ca5b1",
+  "simulation_rerun": false,
+  "export_audit": "PASS 120/120",
+  "alternate_export": "PASS 30/30",
+  "integrity_tests": "3/3 PASS",
+  "core_tests": "21/21 PASS",
+  "browser_checks": [
+    "same-zone path",
+    "cross-zone spine path",
+    "edge-service path",
+    "packet selection",
+    "hop stepping",
+    "full path reset",
+    "robot toggle",
+    "no JavaScript console errors"
+  ],
+  "direct_file_browser_test": "Blocked by browser tool URL policy; localhost browser rendering and interactions verified",
+  "files": {
+    "preview.jpg": "4147953a449b5f25400ce7fa61368a18c4b13200ded7d16043df9669a721ea76",
+    "small-layout.html": "cad6b34a8cc8e99ba4614379766d5beb5e3c0b9b5a3f32cc643121c3ac9c68a7",
+    "warehouse-final.html": "f3853a63af55cf1eb337e9673e16a467aa9b050ae65c8df352bd614a7c751349",
+    "warehouse-viewer.html": "10f59062baf20be8ac6c5deda0225fec3d311f56ff32b3a8d6b178bf9c43afa3",
+    "warehouse.html": "f3853a63af55cf1eb337e9673e16a467aa9b050ae65c8df352bd614a7c751349"
+  }
+}

@@ -31,3 +31,18 @@ No delayed detection, NR or wireless behavior is claimed. Actual macOS/Ubuntu AR
 ## Executed validation
 
 Windows native batch `layout-20261101T203251Z-838ca5b1` passed independent audit and exact replay: 120/120 delivered, zero observed deadline misses. The first native process took 107 seconds here. A two-zone layout with 11 devices, multiple switches and one zone without a local edge also passed (30/30 delivered), batch `layout-20261101T203641Z-425a1ee4`. These are deterministic demonstration results, not capacity or deadline guarantees.
+
+
+## Offline topology and packet-path viewer
+
+Open `results/viewer-checkpoint015/warehouse-viewer.html` in a browser. The file embeds the audited 500-device topology and packet records; no server, Internet connection or ns-3 installation is needed to view it. The simulation itself still needs its documented dependencies.
+
+Select a traffic flow and recorded packet. Green links show its observed path; Next hop/Previous hop step through that path. Show full path restores the complete route. Show all robots hides or reveals inactive endpoints without removing them from the simulation. Click a node for identity and configured coordinates. Receive timestamps are taken from native hop traces. The arrangement is schematic, not a warehouse floor plan, and stepping is not time-scaled animation.
+
+To generate a new viewer from a completed layout batch:
+
+```sh
+python scripts/visualize_warehouse.py --batch results/YOUR_LAYOUT_BATCH --output warehouse-viewer.html
+```
+
+Use the batch directory printed by `run_warehouse_layout.py`. Export reruns the independent raw audit and refuses incomplete batches, inconsistent traces and existing output files. It supports the layout runner's config.json/run structure; research-suite batch structures require a separate adapter. It displays recorded outcomes only: it cannot simulate a newly selected failure. The next demonstration milestone is an actual spine-outage run, followed by exporting its observations.

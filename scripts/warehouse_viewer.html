@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Warehouse routing explorer</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2f5f8;color:#172b40;font:15px system-ui,sans-serif}header{background:#112b40;color:white;padding:24px 30px}h1{font-size:27px;margin:4px 0}header p{color:#b9cfde;margin:5px 0}.eyebrow{font-size:12px;letter-spacing:2px;color:#69e1c5}main{max-width:1550px;margin:auto;padding:20px}.stats{display:flex;gap:24px;flex-wrap:wrap;padding:15px 0}.stats strong{font-size:24px}.stats span{color:#506578}section{background:white;border:1px solid #d9e2e8;border-radius:12px;padding:18px;margin:12px 0}.controls{display:flex;align-items:end;gap:14px;flex-wrap:wrap}label{display:grid;gap:5px;font-size:13px;font-weight:600}select,button{font:inherit;border:1px solid #a9bac6;border-radius:6px;padding:9px;background:white;color:#172b40}button{cursor:pointer}button:disabled{opacity:.45;cursor:default}button.primary{background:#126955;color:white;border-color:#126955}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #eeaa32;outline-offset:3px}.check{display:flex;align-items:center;padding:10px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px}.diagram{overflow:auto;padding:0}.diagram svg{width:100%;min-width:780px;display:block}.legend{display:flex;flex-wrap:wrap;gap:16px;padding:12px 18px;font-size:12px;color:#506578}.legend b{color:#126955}h2{font-size:17px;margin:0 0 12px}.small{font-size:12px;color:#506578;overflow-wrap:anywhere}.path{padding-left:22px;line-height:1.8;font-size:13px;overflow-wrap:anywhere}.path li.current{background:#ddf7ee;color:#075b43;font-weight:700}dl{display:grid;grid-template-columns:1fr 1fr;font-size:13px;gap:8px}dt{color:#506578}dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}.good{color:#126955}table{width:100%;border-collapse:collapse;font-size:12px}td,th{text-align:left;padding:7px;border-bottom:1px solid #e2e8ec;overflow-wrap:anywhere}footer{padding:12px;font-size:12px;color:#506578}#nodeInfo{min-height:35px}.zone{fill:#f4f8fb;stroke:#d7e2ea}.baseLink{stroke:#a8bbca;stroke-width:1;opacity:.32}.routeLink{stroke:#0a9a78;stroke-width:4;fill:none}.routeNode{stroke:#0a9a78;stroke-width:3}.node{cursor:pointer}.node:hover{stroke:#e28a16;stroke-width:3}svg text{font:16px system-ui;fill:#354f63}svg .zoneName{font-size:17px;font-weight:700}.activeHop{fill:#fff4ce;stroke:#b47500;stroke-width:4}@media(max-width:1050px){.layout{grid-template-columns:1fr}aside{display:grid;grid-template-columns:1fr 1fr;gap:15px}aside section{margin:0}}@media(max-width:600px){main{padding:10px}header{padding:18px}aside{display:block}aside section{margin:12px 0}.controls select{max-width:90vw}.stats{gap:15px}}@media print{header{background:white;color:black}.controls,button{display:none}.layout{display:block}section{break-inside:avoid}.diagram svg{min-width:0}}
+</style></head><body>
+<header><div class="eyebrow">WIRED WAREHOUSE · RECORDED SIMULATION</div><h1>Topology & routing explorer</h1><p>Inspect the path each packet actually followed.</p></header>
+<main><div class="stats" id="stats"></div>
+<section class="controls"><label>Traffic flow<select id="flow"></select></label><label>Recorded packet<select id="packet"></select></label><button id="previous">Previous hop</button><button id="next" class="primary">Next hop</button><button id="full">Show full path</button><label class="check"><input id="robots" type="checkbox" checked>Show all robots</label></section>
+<div class="layout"><section class="diagram"><div class="legend"><span>● Robot</span><span>■ Zone switch</span><span>◆ Edge server</span><span>■ Shared spine</span><b>Green: observed path</b></div><svg id="map" role="img" aria-label="Warehouse topology and selected recorded packet path"></svg><div class="small" style="padding:12px 18px">Schematic arrangement, not physical coordinates. Click a device for its identity. Hidden robots remain in the simulation.</div></section>
+<aside><section><h2>Selected packet</h2><div id="metrics" aria-live="polite"></div><h2 style="margin-top:22px">Observed path</h2><ol id="path" class="path"></ol><p id="step" class="small" aria-live="polite"></p></section><section><h2>Device details</h2><div id="nodeInfo" class="small">Select any device in the diagram.</div><h2 style="margin-top:20px">Recorded receive times</h2><table><thead><tr><th>Receiver</th><th>Time (ms)</th></tr></thead><tbody id="times"></tbody></table></section></aside></div>
+<section><h2>What this run demonstrates</h2><p id="scope"></p><p class="small">The controls inspect saved data; they do not rerun routing or introduce failures. Hop stepping is a presentation aid, not a real-time packet animation. No wireless or 5G behavior is represented.</p><details><summary>Source and integrity</summary><pre id="source" class="small"></pre></details></section></main><footer>Standalone viewer · no internet connection or external libraries required</footer>
+<script>
+'use strict';
+const D=/*WAREHOUSE_DATA*/;
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const nodes=new Map(D.config.nodes.map(n=>[n.id,n])),positions=new Map();
+let selected=D.packets[0],hop=null;
+const el=(tag,attrs={},text='')=>{const n=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text)n.textContent=text;return n};
+const text=(parent,tag,value)=>{let e=document.createElement(tag);e.textContent=value;parent.append(e);return e};
+const short=n=>n.id.replace('zone-'+n.zone+'-','');
+const format=v=>Number(v).toFixed(6).replace(/0+$/,'').replace(/\.$/,'');
+const roles={endpoint:'#668da8',leaf:'#245d8a',edge:'#9460b6',spine:'#dd9132',access:'#527b77',relay:'#7e7770'};
+const stats=[['zones',D.config.zones.length],['devices',D.config.nodes.length],['links',D.config.links.length],['packets delivered',D.report.delivered+'/'+D.report.offered]];
+for(const [label,value]of stats){let item=document.createElement('div');text(item,'strong',value);text(item,'span',' '+label);$('stats').append(item)}
+$('scope').textContent=`${D.config.traffic.length} configured flows across ${D.config.nodes.filter(n=>n.role==='endpoint').length} robots. This batch contains ${D.report.offered} offered packets and ${D.report.deadline_misses} deadline misses. Only the configured sources transmit; device count is not simultaneous traffic load.`;
+$('source').textContent=D.batch+'\n'+JSON.stringify(D.hashes,null,2);
+for(const id of [...new Set(D.packets.map(p=>p.flow))]){const o=document.createElement('option');o.value=id;o.textContent=id;$('flow').append(o)}
+function packets(){const list=D.packets.filter(p=>p.flow===$('flow').value);$('packet').replaceChildren();for(const p of list){let o=document.createElement('option');o.value=p.id;o.textContent=`#${p.id} · ${format(p.created_ms)} ms · ${p.status}`;$('packet').append(o)}selected=list[0];hop=null;draw()}
+function draw(){
+ const svg=$('map');svg.replaceChildren();positions.clear();const path=selected.observed_path?selected.observed_path.split('>'):[];
+ const zones=[...D.config.zones];if(D.config.nodes.some(n=>n.zone&&!zones.includes(n.zone)))throw Error('Unknown node zone');
+ const cols=Math.min(4,Math.max(1,zones.length)),width=cols*300,height=150+Math.ceil(zones.length/cols)*285;
+ svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+ const common=D.config.nodes.filter(n=>!n.zone);common.forEach((n,i)=>positions.set(n.id,[(i+1)*width/(common.length+1),65]));
+ zones.forEach((z,i)=>{const x=i%cols*300+10,y=145+Math.floor(i/cols)*285;svg.append(el('rect',{x,y,width:280,height:270,rx:12,class:'zone'}));svg.append(el('text',{x:x+14,y:y+25,class:'zoneName'},'Zone '+z));
+ const local=D.config.nodes.filter(n=>n.zone===z),bots=local.filter(n=>n.role==='endpoint'),infra=local.filter(n=>n.role!=='endpoint');
+ svg.append(el('text',{x:x+14,y:y+44},`${bots.length} robots · ${infra.length} infrastructure devices`));
+ infra.forEach((n,j)=>positions.set(n.id,[x+35+(j%4)*65,y+72+Math.floor(j/4)*22]));
+ bots.forEach((n,j)=>positions.set(n.id,[x+20+(j%10)*26,y+130+Math.floor(j/10)*Math.min(18,120/Math.max(1,Math.ceil(bots.length/10)-1))]));});
+ const visible=n=>n.role!=='endpoint'||$('robots').checked||path.includes(n.id);
+ for(const l of D.config.links){if(!visible(nodes.get(l.from))||!visible(nodes.get(l.to)))continue;const a=positions.get(l.from),b=positions.get(l.to);svg.append(el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],class:'baseLink'}))}
+ const last=hop===null?path.length-1:hop;
+ for(let i=1;i<=last;i++){const a=positions.get(path[i-1]),b=positions.get(path[i]);svg.append(el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],class:'routeLink'}))}
+ for(const n of D.config.nodes){if(!visible(n))continue;const [x,y]=positions.get(n.id),cls='node'+(path.includes(n.id)?' routeNode':'')+(hop!==null&&path[hop]===n.id?' activeHop':'');let shape;
+ if(n.role==='endpoint')shape=el('circle',{cx:x,cy:y,r:5,class:cls,fill:roles[n.role]});else if(n.role==='edge')shape=el('polygon',{points:`${x},${y-9} ${x+9},${y} ${x},${y+9} ${x-9},${y}`,class:cls,fill:roles[n.role]});else shape=el('rect',{x:x-9,y:y-8,width:18,height:16,rx:3,class:cls,fill:roles[n.role]||'#667'});
+ shape.append(el('title',{},n.id+' · '+n.role));shape.addEventListener('click',()=>{$('nodeInfo').textContent=n.id+' · '+n.role+' · '+(n.zone?'Zone '+n.zone:'Shared infrastructure')+' · configured position ('+n.x+', '+n.y+')'});svg.append(shape);
+ if(n.role!=='endpoint')svg.append(el('text',{x:x+13,y:y+4,'font-size':'14'},short(n)));}
+ $('metrics').replaceChildren();let dl=document.createElement('dl');for(const [k,v]of [['Status',selected.status],['Packet',selected.id],['Created',format(selected.created_ms)+' ms'],['Finished',selected.finished_ms?format(selected.finished_ms)+' ms':'—'],['Latency',selected.status==='delivered'?format(Number(selected.finished_ms)-Number(selected.created_ms))+' ms':'Not delivered'],['Deadline',selected.deadline_ms+' ms'],['Priority','P'+selected.priority]]){text(dl,'dt',k);text(dl,'dd',v)}$('metrics').append(dl);
+ $('path').replaceChildren();path.forEach((id,i)=>{let li=text($('path'),'li',id);if(i===hop)li.className='current'});
+ $('step').textContent=hop===null?'Full observed path':`Step ${hop+1} of ${path.length}: ${path[hop]}`;
+ $('previous').disabled=hop===null||hop===0;$('next').disabled=!path.length||(hop!==null&&hop===path.length-1);
+ $('times').replaceChildren();for(const h of D.hops.filter(h=>h.packet===selected.id)){let tr=document.createElement('tr');text(tr,'td',h.to);text(tr,'td',format(h.time_ms));$('times').append(tr)}
+}
+$('flow').addEventListener('change',packets);$('packet').addEventListener('change',()=>{selected=D.packets.find(p=>p.id===$('packet').value);hop=null;draw()});$('robots').addEventListener('change',draw);
+$('next').addEventListener('click',()=>{hop=hop===null?0:hop+1;draw()});$('previous').addEventListener('click',()=>{hop--;draw()});$('full').addEventListener('click',()=>{hop=null;draw()});packets();
+</script></body></html>

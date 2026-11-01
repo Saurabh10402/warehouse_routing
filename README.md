@@ -153,3 +153,5 @@ current primary workflow or evidence of verified 5G behavior.
 ## Editable eight-zone demonstration
 
 See [warehouse-demo.md](docs/warehouse-demo.md). Edit device counts in `configs/warehouse_layout.json`, then run `python scripts/run_warehouse_layout.py`. The reference layout contains 500 devices. The demonstration uses representative traffic; full-load and target-platform claims require separate validation.
+
+Offline topology/path viewing: see the viewer section in [warehouse-demo.md](docs/warehouse-demo.md). `scripts/visualize_warehouse.py` exports a completed layout batch to one self-contained HTML file.

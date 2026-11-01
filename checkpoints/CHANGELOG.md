@@ -95,3 +95,14 @@ Native batch layout-20261101T203251Z-838ca5b1: 120/120 packets delivered, zero o
 The final launcher adds generic scope metadata and runtime library/platform/input provenance after the first 500-device run; final launcher was exercised on the alternate layout. Original raw batches retain exact tested-source provenance. Documentation was completed afterward. No old manifest or result was replaced.
 
 Delayed detection, native protected queues/safety and NR are deferred by the user's delivery scope. Existing immediate outage behavior remains. Actual Mac/Ubuntu ARM64 execution remains untested. Next: prepare a presentation-ready topology/path view and streamlined handoff for this validated wired demo; define additional traffic only if needed for submission. Source manifest: manifests/checkpoint_014.json.
+
+
+# checkpoint_015 - offline topology and observed-path viewer
+
+Added scripts/visualize_warehouse.py and scripts/warehouse_viewer.html. Standalone output: results/viewer-checkpoint015/warehouse-viewer.html, preview.jpg. Viewer embeds the existing audited 500-device run, 506 links, 24 flows and 120 delivered packet records. It does not rerun routing. Flow/packet selection, observed-path highlighting, hop stepping, receive timestamps and robot visibility controls are implemented. Graph is explicitly schematic; hop stepping is not real-time animation.
+
+Read checkpoint 014 state and session; Git clean and named manifest PASS before changes. No C++ or simulator configuration changes. Export independently re-audits source traces and embeds their hashes. Both 500-device and alternate 11-device exports passed. Three exporter acceptance tests passed: script-text escaping/offline packaging/no overwrite, incomplete batch rejection and tampered packet rejection. scripts/verify.py: 21/21 core tests PASS. Full experiment studies were not rerun; historical simulation evidence is unchanged.
+
+Browser checks over localhost passed for same/cross/edge paths, packet changes, stepping/reset and robot visibility. No JavaScript console errors observed. Final screenshot retained. Direct file URL verification was blocked by the browser tool's protocol policy; no workaround attempted. HTML has embedded data/styles/script and no external dependencies. Actual Mac/Ubuntu execution remains untested.
+
+Source manifest: manifests/checkpoint_015.json. Next exact action: create and validate an actual spine-failure/recovery demonstration with the 500-device configuration; inspect preserved same-zone traffic and alternate-spine paths, then export those results. Do not fabricate failure behavior in the viewer. Preserve existing raw batches and recovery packages. Advanced NR/delayed-control work remains deferred for the two-day delivery scope.

@@ -1,0 +1,9 @@
+# checkpoint_015 - offline topology and observed-path viewer
+
+Added scripts/visualize_warehouse.py and scripts/warehouse_viewer.html. Standalone output: results/viewer-checkpoint015/warehouse-viewer.html, preview.jpg. Viewer embeds the existing audited 500-device run, 506 links, 24 flows and 120 delivered packet records. It does not rerun routing. Flow/packet selection, observed-path highlighting, hop stepping, receive timestamps and robot visibility controls are implemented. Graph is explicitly schematic; hop stepping is not real-time animation.
+
+Read checkpoint 014 state and session; Git clean and named manifest PASS before changes. No C++ or simulator configuration changes. Export independently re-audits source traces and embeds their hashes. Both 500-device and alternate 11-device exports passed. Three exporter acceptance tests passed: script-text escaping/offline packaging/no overwrite, incomplete batch rejection and tampered packet rejection. scripts/verify.py: 21/21 core tests PASS. Full experiment studies were not rerun; historical simulation evidence is unchanged.
+
+Browser checks over localhost passed for same/cross/edge paths, packet changes, stepping/reset and robot visibility. No JavaScript console errors observed. Final screenshot retained. Direct file URL verification was blocked by the browser tool's protocol policy; no workaround attempted. HTML has embedded data/styles/script and no external dependencies. Actual Mac/Ubuntu execution remains untested.
+
+Source manifest: manifests/checkpoint_015.json. Next exact action: create and validate an actual spine-failure/recovery demonstration with the 500-device configuration; inspect preserved same-zone traffic and alternate-spine paths, then export those results. Do not fabricate failure behavior in the viewer. Preserve existing raw batches and recovery packages. Advanced NR/delayed-control work remains deferred for the two-day delivery scope.

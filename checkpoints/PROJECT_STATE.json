@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_014",
-  "utc": "2026-11-01T20:38:06.568923+00:00",
-  "phase": "configurable-wired-demo-validated",
-  "source_state": "manifests/checkpoint_014.json",
+  "checkpoint": "checkpoint_015",
+  "utc": "2026-11-01T20:53:58.878932+00:00",
+  "phase": "offline-path-viewer-validated",
+  "source_state": "manifests/checkpoint_015.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -57,7 +57,8 @@
     "source/input/executable/library provenance saved before native experiment execution",
     "real hung-child, failed-exit, failed-launch, interrupted-batch and post-exit validation failure tests",
     "Native receive-time availability gates, immediate route rebuilding, ordered backup services and TTL loop guard",
-    "Editable per-zone device counts and independently audited 500-device native demo/replay"
+    "Editable per-zone device counts and independently audited 500-device native demo/replay",
+    "Standalone offline topology and recorded packet-path viewer with independent export audit"
   ],
   "pending": [
     "warehouse traffic/loss/availability calibration",
@@ -107,7 +108,7 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Prepare topology/path presentation and final wired-demo handoff; advanced research deferred.",
+  "next_action": "Validate a real 500-device spine outage/recovery demonstration and export its observed paths.",
   "tested_code_commit": "93516df",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",

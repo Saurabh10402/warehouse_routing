@@ -1,3 +1,3 @@
-# Delivery next steps
+# Next delivery step
 
-Prepare a presentation-ready topology/path view and streamlined handoff for the configurable wired demo in docs/warehouse-demo.md. Preserve the tested 500-device configuration and raw outputs. Agree workload scope before adding full-load traffic. Prior delayed-control/NR research is deferred by user instruction. Actual target-platform validation remains open.
+Run and validate a controlled spine-failure/recovery scenario on the 500-device layout. Preserve same-zone communication and verify actual alternate-spine paths before exporting its viewer. Then finalize launch/setup and submission handoff. Do not extend NR/delayed-control scope before delivery.
