@@ -6,7 +6,9 @@ The primary stationary experiment executable is `ealr-fabric`; its outputs remai
 abstract-link measurements. `ealr-ns3-smoke` is a separate real wired IPv4/UDP prerequisite
 fixture. The new `ealr-ns3-fabric` consumes a strict stationary wired schema-v2 subset with
 FIFO/strict-priority queues and size-aware Dijkstra/ECMP forwarding; see [its contract and workflow](ns3-wired-warehouse.md).
-Native failure/protected-queue/radio support remains outside that subset.
+Native node/link availability and ordered service failover use immediate centralized knowledge
+and receive-time outage gates; see [the declaration](ns3-resilience-study.md). Protected queues
+and radio remain outside that subset.
 The preserved legacy robot/NetAnim adapter has a different configuration and scope.
 
 On 31 October 2026, the wired ns-3.46.1 Release build and all 150 upstream UNIT QUICK

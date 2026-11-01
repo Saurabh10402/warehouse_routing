@@ -8,6 +8,18 @@ struct Ns3PacketRecord {
     std::string status = "pending";
     double createdMs = 0, finishedMs = 0;
     std::vector<std::string> observedPath, expectedPath;
+    std::string destination;
+};
+struct Ns3IpDropRecord {
+    std::size_t packet = 0;
+    std::string node;
+    double timeMs = 0;
+    unsigned reason = 0;
+};
+struct Ns3AvailabilityRecord {
+    std::string type, target;
+    double timeMs = 0;
+    bool available = false;
 };
 struct Ns3HopRecord {
     std::size_t packet = 0;
@@ -25,6 +37,8 @@ struct Ns3FabricResult {
     std::vector<Ns3PacketRecord> packets;
     std::vector<Ns3HopRecord> hops;
     std::vector<Ns3QueueRecord> queues;
+    std::vector<Ns3IpDropRecord> ipDrops;
+    std::vector<Ns3AvailabilityRecord> availability;
     std::vector<std::array<double, 3>> finalPositions;
     std::uint64_t ipTransmitted = 0, ipReceived = 0, ipUnreceivedAtCutoff = 0, ipReceivedBytes = 0;
     bool stationary = false;

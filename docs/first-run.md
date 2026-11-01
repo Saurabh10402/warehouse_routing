@@ -105,13 +105,13 @@ After the small wired runtime check, run the supported schema-v2 warehouse accep
 python scripts/run_ns3_warehouse.py
 ```
 
-This runs 12 native wired controls and 36 policy comparisons (three scenarios, three ECMP
+This runs 12 original native controls, 48 resilience controls and 36 policy comparisons (three scenarios, three ECMP
 hash seeds, four policies), auditing packet paths, headers, queues, deadlines, positions and
 every replay. It uses declared supported inputs with identical offered traffic across policies. See the
 [native wired warehouse guide](ns3-wired-warehouse.md) for limits and expected outputs.
 Each native case/replay has a 60-second timeout; logs and process receipts live under
 `processes/` in its result batch. A TIMEOUT/FAILED/RUNNING status is not successful validation.
-Native failures, protected queues, NR and target-host execution remain pending.
+Nonzero native detection/convergence delay, protected queues, NR and target-host execution remain pending.
 See [the native policy declaration](ns3-policy-study.md) for interpretation and limits.
 
 ## If a command fails

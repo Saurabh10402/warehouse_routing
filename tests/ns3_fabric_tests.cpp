@@ -122,15 +122,45 @@ int main() {
         diamond.nodes[2].role = "relay"; diamond.nodes[2].zone.clear(); diamond.links[0].delayMs = 10;
         for (const auto& packet : simulateNs3Fabric(diamond).packets)
             check(packet.observedPath == std::vector<std::string>({"a","fast","b"}), "ECMP excludes more expensive branches");
+        auto outage = pair(); outage.durationMs = 300;
+        outage.events = {{"link","ab","",100,20,false},{"link","ab","",200,20,true}};
+        auto crossing = simulateNs3Fabric(outage);
+        check(crossing.packets[0].status == "availability_drop" && crossing.packets[1].status == "delivered" &&
+              crossing.packets[2].status == "queue_overflow", "Receive-time outage gate preserves queued frame after recovery");
+        check(crossing.packets[0].finishedMs == 132 && crossing.packets[1].finishedMs == 262 && crossing.availability.size() == 2,
+              "Native outage loss and post-recovery queue delay observations");
+        auto down = pair(); down.nodes[0].available = false;
+        down.events = {{"node","a","",2,20,true}}; auto sourceOut = simulateNs3Fabric(down);
+        check(sourceOut.packets[0].status == "source_unavailable" && sourceOut.packets[1].status == "source_unavailable" &&
+              sourceOut.packets[2].status == "delivered" && sourceOut.ipTransmitted == 1, "Source outage/recovery precedes equal-time generation");
+        down = pair(); down.links[0].available = false;
+        check(simulateNs3Fabric(down).ipTransmitted == 0, "Initially unavailable link excludes all offered traffic from IP");
+        auto services = pair(); services.durationMs = 60; services.drainMs = 100;
+        services.links[0].capacityMbps = 5; services.links[0].queuePackets = 8;
+        services.nodes.push_back({"backup","edge","","wired"});
+        services.links.push_back({"abackup","a","backup",5,2,8,true});
+        services.traffic[0].destinations.push_back("backup"); services.traffic[0].stopMs = 51; services.traffic[0].intervalMs = 10;
+        services.events = {{"node","b","",5,20,false},{"node","b","",25,20,true}};
+        auto failback = simulateNs3Fabric(services);
+        check(failback.ipReceived == 6 && failback.packets[0].destination == "b" && failback.packets[1].destination == "backup" &&
+              failback.packets[2].destination == "backup" && failback.packets[3].destination == "b", "Ordered backup selection and failback per new packet");
+        services.events.push_back({"node","backup","",5,20,false});
+        auto allDown = simulateNs3Fabric(services);
+        check(allDown.packets[1].status == "no_route" && allDown.packets[2].status == "no_route", "All service candidates unreachable");
+        auto chain = pair(); chain.durationMs = 60; chain.drainMs = 100;
+        chain.nodes.push_back({"relay","relay","","wired"});
+        chain.links = {{"ar","a","relay",5,10,8,true},{"rb","relay","b",5,2,8,true}};
+        chain.traffic[0].stopMs = 51; chain.traffic[0].intervalMs = 10;
+        chain.events = {{"link","rb","",5,20,false},{"link","rb","",15,20,true}};
+        auto routeLost = simulateNs3Fabric(chain);
+        check(routeLost.packets[0].status == "ip_drop" && routeLost.ipDrops.size() == 1 &&
+              routeLost.packets[1].status == "no_route" && routeLost.packets[2].status == "delivered", "In-flight route loss observed at IPv4, then recovery");
         rejected(c, [](auto& x) { x.scheduler = "protectedPriority"; x.protectedQueues.reservedEmergencyPackets = 1; }, "protected queues");
         rejected(c, [](auto& x) { x.routing.algorithm = "greedy"; }, "legacy routing");
-        rejected(c, [](auto& x) { x.events.push_back({"node", "spine", "", 5, 20, false}); }, "events");
+        rejected(c, [](auto& x) { x.events.push_back({"cloud", "", "", 5, 20, false}); }, "events");
         rejected(c, [](auto& x) { x.topology = "graph"; x.nodes[0].access = "wifi"; }, "Wi-Fi/NR");
-        rejected(c, [](auto& x) { x.nodes[0].available = false; }, "unavailable");
         rejected(c, [](auto& x) { x.nodes[0].energyConstrained = true; }, "energy-constrained");
-        rejected(c, [](auto& x) { x.links[0].available = false; }, "unavailable");
         rejected(c, [](auto& x) { x.links[0].capacityMbps = .0000015; }, "whole number");
-        rejected(c, [](auto& x) { x.traffic[0].destinations.push_back("edge"); }, "backup");
         rejected(c, [](auto& x) { x.traffic[0].phaseJitterMs = 1; }, "jitter");
         rejected(c, [](auto& x) { x.traffic[0].bytes = 1473; }, "fragmentation");
         rejected(c, [](auto& x) { x.seed = 0; }, "seed");

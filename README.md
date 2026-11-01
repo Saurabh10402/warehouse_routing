@@ -37,7 +37,8 @@ separately requires a real installed ns-3 wired runtime. Neither implies NR vali
 See [runtime validation](docs/runtime-validation.md) for the executed Windows tests and
 remaining schema-v2/NR and Mac/Ubuntu boundaries.
 The initial [native wired warehouse backend](docs/ns3-wired-warehouse.md) now accepts a strict
-static schema-v2 FIFO/strictPriority and Dijkstra/ECMP subset. See the
+schema-v2 FIFO/strictPriority and Dijkstra/ECMP subset with immediate availability events
+and ordered service failover. See the [resilience model](docs/ns3-resilience-study.md). See the
 [native policy validation report](docs/ns3-policy-results.md). The
 [bounded-run validation](docs/ns3-run-control.md) covers timeout handling and retained logs. Run `python scripts/run_ns3_warehouse.py` for its deterministic
 packet/queue/path acceptance cases; it has separate outputs and does not replace the core study.

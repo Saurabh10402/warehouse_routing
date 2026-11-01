@@ -9,7 +9,7 @@ from collections import Counter, defaultdict, deque
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ARTIFACTS = ('packets.csv', 'hops.csv', 'queues.csv', 'nodes.csv', 'summary.json')
+ARTIFACTS = ('packets.csv', 'hops.csv', 'queues.csv', 'nodes.csv', 'summary.json', 'availability.csv', 'ip_drops.csv')
 
 
 def cases():
@@ -48,7 +48,45 @@ def cases():
     excluded = copy.deepcopy(transit); excluded['routing']['algorithm']='ecmp'
     controls += [('priority-order',priority),('priority-full',full),('priority-starvation',starved),
                  ('ecmp-size-sensitive',expensive),('ecmp-endpoint-transit',excluded)]
-    return controls + policy_cases(base)
+    return controls + policy_cases(base) + resilience_cases(base,pair)
+
+
+def resilience_cases(base,pair):
+    def event(kind,target,time,up): return dict(type=kind,target=target,timeMs=time,available=up)
+    fast=copy.deepcopy(pair);fast['links'][0].update(capacityMbps=5,queuePackets=8)
+    fast['simulation'].update(durationMs=60,drainMs=100)
+    fast['traffic'][0].update(startMs=0,stopMs=51,intervalMs=10)
+    diamond=copy.deepcopy(fast)
+    diamond['nodes'] += [dict(id=n,role='relay',access='wired',x=2,y=i) for i,n in enumerate(['x','y'])]
+    diamond['links']=[dict(id=a+b,**{'from':a,'to':b},capacityMbps=5,delayMs=2,queuePackets=8) for a,b in [('a','x'),('x','b'),('a','y'),('y','b')]]
+    link=copy.deepcopy(diamond);link['events']=[event('link','xb',5,False),event('link','xb',25,True)]
+    node=copy.deepcopy(diamond);node['events']=[event('node','x',5,False),event('node','x',25,True)]
+    backup=copy.deepcopy(fast);backup['nodes'].append(dict(id='backup',role='edge',access='wired',x=5,y=5))
+    backup['links'].append(dict(backup['links'][0],id='abackup',to='backup'))
+    backup['traffic'][0]['destinations']=['b','backup'];backup['events']=[event('node','b',5,False),event('node','b',25,True)]
+    unavailable=copy.deepcopy(backup);unavailable['events'] += [event('node','backup',5,False),event('node','backup',25,True)]
+    source=copy.deepcopy(fast);source['events']=[event('node','a',5,False),event('node','a',25,True)]
+    initial=copy.deepcopy(backup);initial['nodes'][1]['available']=False;initial['events']=[event('node','b',25,True)]
+    queued=copy.deepcopy(pair);queued['simulation'].update(durationMs=300,drainMs=500)
+    queued['events']=[event('link','ab',100,False),event('link','ab',200,True)]
+    boundary=copy.deepcopy(fast);boundary['traffic'][0].update(stopMs=6,intervalMs=1)
+    boundary['events']=[event('link','ab',2.208,False),event('link','ab',4,True)]
+    inflight=copy.deepcopy(diamond);inflight['links']=inflight['links'][:2];inflight['links'][0]['delayMs']=10
+    inflight['events']=[event('link','xb',5,False),event('link','xb',15,True)]
+    same=copy.deepcopy(base);same['events']=[event('node','spine',0,False),event('node','spine',100,True)]
+    leaf=copy.deepcopy(base);leaf['events']=[event('node','leafA',0,False),event('node','leafA',60,True)]
+    simultaneous=copy.deepcopy(fast);simultaneous['events']=[event('link','ab',0,False),event('link','ab',0,True),event('node','b',10,False),event('node','b',10,True)]
+    fixtures=[('link-alternate',link),('node-alternate',node),('service-failback',backup),('all-services-down',unavailable),
+              ('source-outage',source),('initial-unavailable',initial),('queued-recovery',queued),('receive-boundary',boundary),
+              ('inflight-route-loss',inflight),('same-zone-survival',same),('leaf-outage',leaf),('simultaneous-events',simultaneous)]
+    runs=[]
+    for name,base_config in fixtures:
+        for routing in ['dijkstra','ecmp']:
+            for scheduler in ['fifo','strictPriority']:
+                config=copy.deepcopy(base_config);config['name']='Native immediate availability control: '+name
+                config['routing']['algorithm']=routing;config['simulation']['scheduler']=scheduler
+                runs.append((f'resilience-{name}-{routing}-{scheduler}',config))
+    return runs
 
 
 def policy_cases(base):
@@ -92,9 +130,11 @@ def minimum_delay(config, source, target, payload):
     nodes = {n['id']: n for n in config['nodes']}
     adjacency = defaultdict(list)
     for link in config['links']:
+        if not link.get('available',True) or not nodes[link['from']].get('available',True) or not nodes[link['to']].get('available',True): continue
         weight = link['delayMs'] + (payload+30)*8/(link['capacityMbps']*1000)
         adjacency[link['from']].append((link['to'], weight))
         adjacency[link['to']].append((link['from'], weight))
+    if not nodes[source].get('available',True) or not nodes[target].get('available',True): return math.inf
     distances = {source: 0}; frontier = [(0, source)]
     while frontier:
         cost, node = heapq.heappop(frontier)
@@ -109,19 +149,20 @@ def minimum_delay(config, source, target, payload):
     return math.inf
 
 
-def ecmp_path(config, flow, flow_index):
+def ecmp_path(config, flow, flow_index, forwarding_source=None):
     """Independent reverse-distance eligibility plus specified wire-tuple hash."""
     nodes = {n['id']:n for n in config['nodes']}
     indices = {n['id']:i for i,n in enumerate(config['nodes'])}
-    source, target = flow['source'], flow['destinations'][0]
+    source, target = forwarding_source or flow['source'], flow['destinations'][0]
     adjacency = defaultdict(list)
     for link in config['links']:
+        if not link.get('available',True) or not nodes[link['from']].get('available',True) or not nodes[link['to']].get('available',True): continue
         cost = link['delayMs']+(flow['bytes']+30)*8/(link['capacityMbps']*1000)
         for a,b in [(link['from'],link['to']),(link['to'],link['from'])]: adjacency[a].append((b,cost))
     distance = {n:minimum_delay(config,n,target,flow['bytes']) if nodes[n]['role']!='endpoint' or n in [source,target] else math.inf for n in nodes}
     if math.isinf(distance[source]): return []
     mask = (1<<64)-1; value = 14695981039346656037
-    fields = [(0xac100001+indices[source],4),(0xac100001+indices[target],4),(17,1),(20000+flow_index,2),(10000+flow_index,2),(config['simulation']['seed'],4)]
+    fields = [(0xac100001+indices[flow['source']],4),(0xac100001+indices[target],4),(17,1),(20000+flow_index,2),(10000+flow_index,2),(config['simulation']['seed'],4)]
     for field, width in fields:
         for byte in field.to_bytes(width,'big'): value = ((value^byte)*1099511628211)&mask
     path = [source]
@@ -135,6 +176,56 @@ def ecmp_path(config, flow, flow_index):
         h ^= h>>31
         path.append(eligible[h%len(eligible)])
         require(len(path)<=len(nodes), 'ECMP reference loop')
+    return path
+
+
+def availability_states(config):
+    current=copy.deepcopy(config); states=[(-1,current)]
+    for index,event in sorted(enumerate(config.get('events',[])),key=lambda item:(int(math.floor(item[1]['timeMs']*1e6+.5)),item[0])):
+        current=copy.deepcopy(current)
+        collection=current['nodes'] if event['type']=='node' else current['links']
+        next(item for item in collection if item['id']==event['target'])['available']=event['available']
+        states.append((int(math.floor(event['timeMs']*1e6+.5)),current))
+    def at(time):
+        tick=int(math.floor(time*1e6+.5))
+        return next(state for start,state in reversed(states) if start<=tick)
+    return at
+
+
+def installed_path(config,flow,index,source=None):
+    if config['routing']['algorithm']=='ecmp': return ecmp_path(config,flow,index,source)
+    source=source or flow['source']; target=flow['destinations'][0]
+    nodes={n['id']:n for n in config['nodes']}; indices={n['id']:i for i,n in enumerate(config['nodes'])}
+    if not nodes[source].get('available',True) or not nodes[target].get('available',True): return []
+    adjacency=defaultdict(list)
+    for link in config['links']:
+        if not link.get('available',True) or not nodes[link['from']].get('available',True) or not nodes[link['to']].get('available',True): continue
+        cost=link['delayMs']+(flow['bytes']+30)*8/(link['capacityMbps']*1000)
+        for a,b in [(link['from'],link['to']),(link['to'],link['from'])]:adjacency[a].append((b,cost))
+    distances={source:0}; previous={}; frontier=[(0,indices[source],source)]
+    while frontier:
+        cost,_,node=heapq.heappop(frontier)
+        if cost>distances[node]:continue
+        if node==target:
+            path=[target]
+            while path[-1]!=source:path.append(previous[path[-1]])
+            return path[::-1]
+        if node!=source and nodes[node]['role']=='endpoint':continue
+        for following,weight in sorted(adjacency[node],key=lambda e:indices[e[0]]):
+            candidate=cost+weight
+            if candidate<distances.get(following,math.inf):
+                distances[following]=candidate;previous[following]=node
+                heapq.heappush(frontier,(candidate,indices[following],following))
+    return []
+
+
+def table_walk(config,flow,index):
+    path=[flow['source']]
+    while path[-1]!=flow['destinations'][0]:
+        route=installed_path(config,flow,index,path[-1])
+        if not route:return []
+        require(len(route)>1,'table walk stopped before destination')
+        path.append(route[1]);require(len(path)<=len(config['nodes']),'table walk loop')
     return path
 
 
@@ -160,41 +251,56 @@ def validate_output(output, config):
     require(len(packets) == len(offered), 'offered packet denominator')
     flow_indices = {f['id']:i for i,f in enumerate(config['traffic'])}
     node_indices = {n['id']:i for i,n in enumerate(config['nodes'])}
-    planned = {f['id']:ecmp_path(config, f, i) for i,f in enumerate(config['traffic'])} if config['routing']['algorithm']=='ecmp' else {}
+    state_at=availability_states(config)
+    event_rows=rows(output/'availability.csv'); ip_drops=rows(output/'ip_drops.csv')
+    declared=sorted(enumerate(config.get('events',[])),key=lambda item:(int(math.floor(item[1]['timeMs']*1e6+.5)),item[0]))
+    require(len(event_rows)==len(declared),'availability event count')
+    for actual,(_,expected) in zip(event_rows,declared):
+        require(actual['type']==expected['type'] and actual['target']==expected['target'] and int(actual['available'])==expected['available'] and abs(float(actual['time_ms'])-expected['timeMs'])<=1e-6,'availability event trace')
+    if declared: require(summary['failure_detection_ms']==0,'unexpected failure detection model')
     by_id = {}; statuses = Counter(); missed = 0; received_bytes = 0
     cutoff = config['simulation']['durationMs']+config['simulation'].get('drainMs', 100)
     require(summary['cutoff_ms'] == cutoff, 'measurement cutoff')
     for i, (packet, (flow, generated)) in enumerate(zip(packets, offered)):
         require(int(packet['id']) == i and packet['flow'] == flow['id'], 'packet identity/order')
-        require(packet['source'] == flow['source'] and packet['destination'] == flow['destinations'][0], 'packet endpoints')
+        require(packet['source'] == flow['source'] and packet['destination'] in flow['destinations'], 'packet endpoints')
         require(int(packet['priority']) == flow['priority'] and int(packet['payload_bytes']) == flow['bytes'], 'packet class/size')
         created, finished = float(packet['created_ms']), float(packet['finished_ms'])
         require(math.isfinite(created) and math.isfinite(finished) and abs(created-generated) <= 1e-6 and created <= finished <= cutoff+1e-6, 'packet timestamps')
-        status = packet['status']; require(status in {'delivered','no_route','queue_overflow','cutoff'}, 'unknown packet outcome')
+        status = packet['status']; require(status in {'delivered','no_route','source_unavailable','queue_overflow','availability_drop','ip_drop','cutoff'}, 'unknown packet outcome')
         statuses[status] += 1; by_id[i] = packet
         deadline = config.get('deadlinesMs', [10,20,40,100])[flow['priority']]
         met = status == 'delivered' and finished-created <= deadline+1e-9
         require(float(packet['deadline_ms']) == deadline and int(packet['deadline_met']) == int(met), 'deadline accounting')
         missed += not met
         path = packet['observed_path'].split('>')
-        require(path[0] == flow['source'] and len(path) == len(set(path)), 'observed source/path loop')
+        require(path[0] == flow['source'] and (bool(declared) or len(path) == len(set(path))) and len(path)<=256, 'observed source/path loop')
         require(all(nodes[n]['role'] != 'endpoint' for n in path[1:-1]), 'endpoint used as transit')
-        if planned:
-            require(packet['expected_path'] == '>'.join(planned[flow['id']]), 'ECMP transport hash/eligible next hop')
-        minimum = minimum_delay(config, flow['source'], flow['destinations'][0], flow['bytes'])
-        if status == 'no_route': require(math.isinf(minimum) and path == [flow['source']], 'incorrect no-route result')
+        state=state_at(created); live_nodes={n['id']:n for n in state['nodes']}
+        expected_destination=flow['destinations'][0]; expected_path=[]
+        if live_nodes[flow['source']].get('available',True):
+            for candidate in flow['destinations']:
+                route=table_walk(state,dict(flow,destinations=[candidate]),flow_indices[flow['id']])
+                if route: expected_destination=candidate;expected_path=route;break
+        require(packet['destination']==expected_destination,'ordered backup selection')
+        require(packet['expected_path']=='>'.join(expected_path),'ECMP transport hash/eligible next hop or Dijkstra plan')
+        require((status=='source_unavailable') == (not live_nodes[flow['source']].get('available',True)),'source outage accounting')
+        if status=='source_unavailable':require(path==[flow['source']] and finished==created,'source-local rejection')
+        if status=='no_route':require(not expected_path and path==[flow['source']] and finished==created,'incorrect no-route result')
+        if status not in ['source_unavailable','no_route']:require(bool(expected_path),'sent without a planned route')
+        minimum = minimum_delay(state, flow['source'], packet['destination'], flow['bytes'])
         if status == 'delivered':
-            require(path[-1] == flow['destinations'][0] and packet['observed_path'] == packet['expected_path'], 'delivered path')
+            require(path[-1] == packet['destination'] and (bool(declared) or packet['observed_path'] == packet['expected_path']), 'delivered path')
             cost = 0
             for a, b in zip(path, path[1:]):
                 candidates = [link for link in links.values() if {link['from'],link['to']} == {a,b}]
                 require(len(candidates) == 1, 'path uses missing/ambiguous link')
                 link = candidates[0]; cost += link['delayMs']+(flow['bytes']+30)*8/(link['capacityMbps']*1000)
-            require(abs(cost-minimum) <= 1e-8, 'route is not minimum free-flow wire delay')
+            require(bool(declared) or abs(cost-minimum) <= 1e-8, 'route is not minimum free-flow wire delay')
             require(finished-created >= cost-1e-5, 'delivery faster than physical minimum')
             received_bytes += flow['bytes']+28
     waiting = defaultdict(deque); counts = defaultdict(Counter); peaks = Counter(); paths = {i:[p['source']] for i,p in by_id.items()}
-    in_flight = {}; last_time = -1.; drop_ids = set(); attempted = set(); tx_free = defaultdict(float); last_receive = {}
+    in_flight = {}; last_time = -1.; drop_ids = set(); attempted = set(); tx_free = defaultdict(float); last_receive = {}; availability_ids=set()
     for hop in hops:
         packet_id = int(hop['packet']); require(packet_id in by_id, 'unknown packet in hop trace')
         packet = by_id[packet_id]; link = links[hop['link']]
@@ -206,12 +312,14 @@ def validate_output(output, config):
         flow = flows[packet['flow']]; f = flow_indices[flow['id']]
         require(int(hop['source_port']) == 20000+f and int(hop['destination_port']) == 10000+f, 'UDP transport identity')
         require(hop['source_ipv4'] == str(ipaddress.IPv4Address(0xac100001+node_indices[flow['source']])) and
-                hop['destination_ipv4'] == str(ipaddress.IPv4Address(0xac100001+node_indices[flow['destinations'][0]])), 'IPv4 transport identity')
+                hop['destination_ipv4'] == str(ipaddress.IPv4Address(0xac100001+node_indices[packet['destination']])), 'IPv4 transport identity')
         require(int(hop['ip_tos']) == [224,160,96,0][flow['priority']], 'wire DSCP priority mapping')
         counts[key][event] += 1
         if event == 'attempt':
             require(packet_id not in drop_ids and packet_id not in in_flight and paths[packet_id][-1] == hop['from'], 'attempt from wrong node/state')
-            require((packet_id,key) not in attempted, 'duplicate per-hop attempt'); attempted.add((packet_id,key))
+            require(bool(declared) or (packet_id,key) not in attempted, 'duplicate per-hop attempt'); attempted.add((packet_id,key))
+            current_path=installed_path(state_at(time),dict(flow,destinations=[packet['destination']]),f,hop['from'])
+            require(len(current_path)>1 and current_path[1]==hop['to'],'attempt violates current forwarding table')
         elif event == 'enqueue':
             require((packet_id,key) in attempted and len(waiting[key]) < link.get('queuePackets',100), 'queue admission exceeds capacity')
             waiting[key].append(packet_id); peaks[key] = max(peaks[key],len(waiting[key]))
@@ -222,26 +330,43 @@ def validate_output(output, config):
             require(time >= tx_free[key]-2e-6, 'overlapping transmissions on one directional port')
             tx_free[key] = time+int(hop['wire_bytes'])*8/(link['capacityMbps']*1000)
             waiting[key].remove(packet_id); in_flight[packet_id] = (key,time)
-        elif event == 'rx':
+        elif event in ['rx','availability_drop']:
             require(packet_id in in_flight, 'receive without physical transmission')
             sent_key, sent_time = in_flight.pop(packet_id)
             require(sent_key == key, 'receive uses a different link/direction')
             physical = link['delayMs']+int(hop['wire_bytes'])*8/(link['capacityMbps']*1000)
             require(abs(time-sent_time-physical) <= 2e-6, 'physical hop delay/serialization')
-            paths[packet_id].append(hop['to'])
-            last_receive[packet_id] = time
+            state=state_at(time); live_nodes={n['id']:n for n in state['nodes']}; live_link=next(l for l in state['links'] if l['id']==hop['link'])
+            up=live_link.get('available',True) and live_nodes[hop['from']].get('available',True) and live_nodes[hop['to']].get('available',True)
+            require((event=='rx')==up,'receive-time availability gate')
+            if event=='rx': paths[packet_id].append(hop['to']);last_receive[packet_id]=time
+            else:
+                require(packet_id not in availability_ids and packet['status']=='availability_drop' and abs(time-float(packet['finished_ms']))<1e-9,'availability loss accounting')
+                availability_ids.add(packet_id)
         elif event == 'drop':
             require((packet_id,key) in attempted and len(waiting[key]) == link.get('queuePackets',100), 'drop without full queue')
             require(packet_id not in drop_ids and packet['status'] == 'queue_overflow', 'drop outcome mismatch'); drop_ids.add(packet_id)
         else: raise ValueError('Unknown native trace event: '+event)
+    ip_drop_ids=set()
+    for drop in ip_drops:
+        packet_id=int(drop['packet']);require(packet_id in by_id and packet_id not in ip_drop_ids,'IP drop identity')
+        packet=by_id[packet_id];time=float(drop['time_ms']);reason=int(drop['reason'])
+        require(packet['status']=='ip_drop' and drop['node']==paths[packet_id][-1] and abs(time-float(packet['finished_ms']))<1e-9,'IP drop observation')
+        flow=flows[packet['flow']]
+        if reason==1: require(len(paths[packet_id])==256,'TTL drop before exhausting hop bound')
+        else:
+            require(reason in [2,5] and not installed_path(state_at(time),dict(flow,destinations=[packet['destination']]),flow_indices[flow['id']],drop['node']),'IP drop without lost reachability')
+        require(packet_id not in in_flight and not any(packet_id in q for q in waiting.values()),'IP drop still in native queue/channel')
+        ip_drop_ids.add(packet_id)
     for packet_id, packet in by_id.items():
         require('>'.join(paths[packet_id]) == packet['observed_path'], 'path does not match raw receive events')
+        require((packet_id in availability_ids)==(packet['status']=='availability_drop') and (packet_id in ip_drop_ids)==(packet['status']=='ip_drop'),'native loss classification')
         require((packet_id in drop_ids) == (packet['status'] == 'queue_overflow'), 'drop accounting')
         queued = any(packet_id in queue for queue in waiting.values())
         if packet['status'] == 'cutoff': require(packet_id in in_flight or queued, 'censored packet has no outstanding native transmission/queue entry')
         if packet['status'] == 'delivered':
             require(packet_id not in in_flight and not queued and abs(last_receive.get(packet_id,-1)-float(packet['finished_ms'])) < 1e-9, 'receiver and final native hop disagree')
-        if packet['status'] == 'no_route': require(not any(p == packet_id for p,key in attempted), 'unroutable packet reached a device queue')
+        if packet['status'] in ['no_route','source_unavailable']: require(not any(p == packet_id for p,key in attempted), 'unroutable packet reached a device queue')
     expected_keys = {(link['id'],a,b) for link in links.values() for a,b in [(link['from'],link['to']),(link['to'],link['from'])]}
     require(len(queues) == len(expected_keys) and {(q['link'],q['from'],q['to']) for q in queues} == expected_keys, 'directional queue inventory')
     for q in queues:
@@ -252,7 +377,8 @@ def validate_output(output, config):
         require(int(q['waiting_at_cutoff']) == len(waiting[key]) and int(q['peak_waiting']) == peaks[key], 'queue occupancy')
     require(summary['offered_packets'] == len(packets) and summary['delivered_packets'] == statuses['delivered'] and summary['deadline_missed_packets'] == missed, 'summary application counts')
     require(summary['packet_statuses'] == dict(statuses), 'summary outcome counts')
-    require(summary['ip_transmitted_packets'] == len(packets)-statuses['no_route'] and summary['ip_received_packets'] == statuses['delivered'] and summary['ip_received_bytes'] == received_bytes, 'IP/application cross-check')
-    require(summary['ip_unreceived_at_cutoff'] == len(packets)-statuses['no_route']-statuses['delivered'], 'IP cutoff accounting')
+    require(summary['ip_transmitted_packets'] == len(packets)-statuses['no_route']-statuses['source_unavailable'] and summary['ip_received_packets'] == statuses['delivered'] and summary['ip_received_bytes'] == received_bytes, 'IP/application cross-check')
+    require(summary['ip_unreceived_at_cutoff'] == len(packets)-statuses['no_route']-statuses['source_unavailable']-statuses['delivered'], 'IP cutoff accounting')
     return dict(offered=len(packets), delivered=statuses['delivered'], deadline_misses=missed,
-                queue_drops=statuses['queue_overflow'], no_route=statuses['no_route'], cutoff=statuses['cutoff'])
+                queue_drops=statuses['queue_overflow'], no_route=statuses['no_route'], cutoff=statuses['cutoff'],
+                source_unavailable=statuses['source_unavailable'],availability_drops=statuses['availability_drop'],ip_drops=statuses['ip_drop'])

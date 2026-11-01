@@ -1,4 +1,4 @@
-# Native wired warehouse backend: static schema-v2 policies
+# Native wired warehouse backend: schema-v2 policies and availability
 
 `ealr-ns3-fabric` consumes the existing schema-v2 configuration and sends actual IPv4/UDP
 packets through ns-3 point-to-point devices. Nodes remain stationary. Zone sizes and zone
@@ -9,8 +9,9 @@ the source-extraction comparison; the statements below define the implemented mo
 
 ## Supported behavior and model boundary
 
-This slice supports available, continuously powered wired nodes, static topology, one
-destination per flow, deterministic periodic UDP traffic, finite FIFO or strict-priority queues and Dijkstra or per-flow ECMP forwarding.
+This slice supports stationary powered wired nodes, configured node/link availability
+events, ordered service candidates, deterministic periodic UDP traffic, finite FIFO or
+strict-priority queues and Dijkstra or per-flow ECMP forwarding.
 See [the declared native comparison](ns3-policy-study.md) for queue and transport semantics.
 The wired leaf/spine nodes are modeled as IP routers, not transparent Ethernet switches.
 No radio, NR user plane, routing-protocol convergence or physical warehouse calibration is
@@ -42,15 +43,15 @@ the instantaneous enqueue before immediate service on an idle device.
 
 ## Strict unsupported-input checks
 
-The backend rejects Greedy/EALR, protected priority scheduling, all configured
-events, unavailable nodes/links, energy-constrained nodes, Wi-Fi/NR access, backup destinations,
+The backend rejects Greedy/EALR, protected priority scheduling, safety/cloud/temperature/reset
+events, energy-constrained nodes, Wi-Fi/NR access,
 self-destination flows, nonzero phase jitter, and payloads above 1472 bytes (IPv4 fragmentation).
-Safety policy fields are validated by the common schema but are inactive with no events;
+Safety policy fields are validated by the common schema but are inactive in the native backend;
 temperature/reset/cloud events are rejected. Unsupported inputs fail before simulation/output.
 The primary warehouse configuration uses unsupported policies; it is never silently converted.
 
 Initial explicit resource limits: 4096 nodes, 4096 flows, 16384 links, one million offered
-packets; seed 1..1,000,000,000; duration at least 1 ns and total duration+drain at most 1e9 ms.
+packets, 1000 node/link events, 16 destination candidates per flow; seed 1..1,000,000,000; duration at least 1 ns and total duration+drain at most 1e9 ms.
 Routes must fit the configured IPv4 TTL of 255. These bounds do not establish performance
 at those scales. Route-table construction and detailed traces are intended for controlled
 acceptance cases first.
@@ -63,8 +64,9 @@ After completing the prerequisites in [the first-run guide](first-run.md):
 python scripts/run_ns3_warehouse.py
 ```
 
-This requires real ns-3, configures/builds/tests the project, runs all 12 declared
-acceptance controls plus the 36-run forwarding/scheduling matrix, independently audits every
+This requires real ns-3, configures/builds/tests the project, runs the 12 original
+acceptance controls plus the 36-run forwarding/scheduling matrix and 48 resilience controls,
+independently audits every
 exported packet/queue/node/header trace, and replays every case byte-for-byte. The original
 seven controls are preserved. Seeds 1/2/3 vary the ECMP hash only: this is deterministic hash
 sensitivity, not stochastic replication. Scope/class tables retain all offered packets.
@@ -85,9 +87,11 @@ Logs and partial result directories remain available after a failure. Only rerun
 into a new batch after reviewing the diagnostic; do not treat a larger timeout as validation.
 
 The command prints a new `results/ns3-warehouse-...` directory. Each case includes its exact
-input plus `packets.csv`, `hops.csv`, `queues.csv`, `nodes.csv` and `summary.json`. The batch
+input plus `packets.csv`, `hops.csv`, `queues.csv`, `nodes.csv`, `availability.csv`, `ip_drops.csv`
+and `summary.json`. The new event/IP-drop files are independently audited, including for
+static controls where they contain only headers. The batch
 preserves input/source/executable/ns-3 library hashes and the dependency setup receipt.
-`RUN_STATUS.json` is written only after all checks and replay pass. A later run creates a new
+`RUN_STATUS.json` reaches PASS only after all checks and replay pass. A later run creates a new
 directory; existing results are not overwritten.
 
 For one supported input, use the built `ealr-ns3-fabric --config ... --output NEW_DIRECTORY`
@@ -106,7 +110,7 @@ and unloaded application delays are:
 ## Loss and deadline interpretation
 
 All offered packets remain in the deadline denominator. Delivered packets can still miss
-their configured deadline. `no_route` is a static-table reachability rejection before IP transmission;
+their configured deadline. `no_route` is a current-table reachability rejection before IP transmission;
 `queue_overflow` is a native device drop. `cutoff` means still queued/in flight at the
 duration+drain boundary and is censored, not proof of permanent loss.
 
@@ -119,6 +123,22 @@ The raw audit reconstructs physical paths and delays, directional queue policy/o
 minimum route cost, stationarity, offered traffic and deadline outcomes. It also detects
 deliberately corrupted summary counts and wire-byte records in the CLI tests.
 
-Next extensions are explicit failures/services, protected queues and radio access. Keep the
+Next extensions are nonzero failure-detection/reconfiguration delay, protected queues,
+local safety fan-out and radio access. Keep the
 [integration contract](ns3-warehouse-contract.md) and recorded checkpoint limitations visible.
 Mac M4 and Ubuntu ARM64 execution remain separate uncompleted validation gates.
+
+## Availability and backup-service boundary
+
+See [the resilience declaration](ns3-resilience-study.md) before interpreting outage results.
+Events update centralized routing tables immediately (zero detection/convergence delay).
+Native receive-error gates discard a frame if its link or either incident node is unavailable
+at reception. Existing queues keep serializing; no flush, migration, power-cycle or retry is
+modeled. Events precede equal-time packet callbacks. Configured positions remain fixed.
+
+New packets choose the first reachable service candidate and pin that destination. Existing
+packets retain their IP/UDP identity; backup selection does not replicate application state.
+`source_unavailable` rejects an offered packet before IP; `availability_drop` is a native
+PhyRxDrop; `ip_drop` is an actual IPv4 drop after in-flight reachability loss or TTL exhaustion.
+All remain deadline misses. Generation-time `expected_path` may differ from actual receive
+paths after events; each actual forwarding attempt is checked against the current table.

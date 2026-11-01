@@ -52,12 +52,30 @@ class NativeCliTests(unittest.TestCase):
                     writer=csv.DictWriter(stream,fieldnames=list(records[0]));writer.writeheader();writer.writerows(records)
                 with self.assertRaisesRegex(ValueError,'wire DSCP|ECMP transport hash'): validate_output(output,config)
 
+    def test_resilience_artifacts_and_forged_events_or_backup_choice(self):
+        selected=['resilience-receive-boundary-dijkstra-fifo','resilience-service-failback-ecmp-strictPriority',
+                  'resilience-inflight-route-loss-dijkstra-fifo']
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            for name,config in cases():
+                if name not in selected:continue
+                path=root/(name+'.json');output=root/name;path.write_text(json.dumps(config))
+                run=subprocess.run([EXE,'--config',path,'--output',output],capture_output=True,text=True)
+                self.assertEqual(run.returncode,0,run.stderr);validate_output(output,config)
+                artifact='packets.csv' if 'service-failback' in name else 'availability.csv'
+                with (output/artifact).open(newline='') as stream:records=list(csv.DictReader(stream))
+                if artifact=='packets.csv':records[1]['destination']='b'
+                else:records[0]['available']=str(1-int(records[0]['available']))
+                with (output/artifact).open('w',newline='') as stream:
+                    writer=csv.DictWriter(stream,fieldnames=list(records[0]));writer.writeheader();writer.writerows(records)
+                with self.assertRaisesRegex(ValueError,'ordered backup selection|availability event trace'):validate_output(output,config)
+
     def test_unsupported_settings_fail_without_output(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             for name, change in [('protected',lambda c:c['simulation'].update(scheduler='protectedPriority',protectedQueues=dict(reservedEmergencyPackets=1))),
                                  ('legacy',lambda c:c['routing'].update(algorithm='greedy')),
-                                 ('events',lambda c:c.update(events=[dict(type='link',target='leafA--spine',timeMs=5,available=False)]))]:
+                                 ('events',lambda c:c.update(events=[dict(type='cloud',timeMs=5,available=False)]))]:
                 config = copy.deepcopy(cases()[0][1]); change(config); path = root/(name+'.json')
                 path.write_text(json.dumps(config)); output = root/name
                 run = subprocess.run([EXE,'--config',path,'--output',output],capture_output=True,text=True)
