@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "reference": "checkpoint_010",
+  "unchanged_files": 83,
+  "scope": "All src/include/configs plus root CMake files unchanged; this milestone changes Python supervision, its tests and documentation only. Prior core 132-run and fresh C++ results remain historical, not newly executed."
+}

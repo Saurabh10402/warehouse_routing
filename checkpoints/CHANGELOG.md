@@ -58,3 +58,9 @@ Native DSCP shared priority queues, explicit transport ECMP, raw headers, indepe
 12 controls and declared 36-run matrix. Main/fresh 24 tests and 48 cases/replays PASS; 240
 identical artifacts. Core 20 tests/132 exact regressions/55 charts PASS. Retained adverse P0/P3
 tradeoffs and an interrupted Windows exit delay; bounded supervision is the next task.
+
+## checkpoint_011
+Bound native cases/replays, retain direct-file logs and atomic receipts/status, save provenance
+before experiments, reject premature PASS. Real process-failure tests pass; native 25/core 21
+tests and 48 native cases/replays PASS. All 240 measurements and executable/library hashes
+match checkpoint_010. No simulator/model changes; prior exit cause remains unknown.

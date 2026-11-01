@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "experiment": "ns3-warehouse-20261101T152405Z-ac57d7cc",
+  "reference": "ns3-warehouse-20261031T215600Z-dd1a4b9a",
+  "measurement_artifacts": 240,
+  "inputs": 48,
+  "tables": "byte-identical",
+  "executable_and_libraries": "identical hashes",
+  "supervised_processes": 96,
+  "all_reaped": true,
+  "max_process_seconds": 0.7809999999881256,
+  "scope": "All native measurements preserved through new supervisor; no new C++/configuration/model changes"
+}

@@ -81,3 +81,7 @@ and safety fan-out remain unsupported. NR requires compatible pinned ns-3/5G-LEN
 UPF user-plane tests. Mac/Ubuntu builds, workload calibration and final product readiness
 remain open. Diagnose the exit-delay behavior or add bounded, logged subprocess supervision
 before calling the unattended workflow fully reliable.
+
+Checkpoint_011 update: [bounded native process supervision](ns3-run-control.md) is now
+implemented and tested, preserving all 240 native measurements. The underlying earlier
+Windows exit delay remains unexplained; this update does not claim a root-cause repair.

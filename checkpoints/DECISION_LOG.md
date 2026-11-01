@@ -69,3 +69,10 @@
 32. Native ECMP uses actual explicit IP/UDP transport identity and seed, never observer tags.
 33. Three native seeds are hash sensitivity only. Preserve losses and lower-class tradeoffs.
 34. Successful retries do not establish the cause or repair of intermittent process-exit delays.
+
+35. Supervise each native case with a configurable positive finite timeout (default 60 s),
+    direct-file logs and separate five-second cleanup bound; no hidden automatic retry.
+36. Persist provenance before execution. Only completed audits/replays can set batch PASS;
+    process EXITED is insufficient. Partial outputs and TIMEOUT/FAILED/RUNNING remain distinct.
+37. Preserve historical core/fresh-build evidence without relabeling it as newly executed when
+    only Python supervision changes; verify unchanged simulator/executable hashes explicitly.
