@@ -3,6 +3,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 from pathlib import Path
 from ns3_warehouse import validate_output
 
@@ -20,6 +21,8 @@ def export(batch, output):
     data=dict(config=config,packets=packets,hops=[h for h in rows('hops.csv') if h['event']=='rx'],report=report,batch=batch.name,
               hashes={name:hashlib.sha256((batch/name).read_bytes()).hexdigest() for name in ['config.json','run/packets.csv','run/hops.csv']})
     template=Path(__file__).with_name('warehouse_viewer.html').read_text(encoding='utf-8')
+    # The source-only help link is relative to scripts/, not to exported result folders.
+    template=re.sub(r'<section id="templateNote".*?</section>', '', template, count=1, flags=re.S)
     payload=json.dumps(data,separators=(',',':')).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
     marker='/*WAREHOUSE_DATA*/null'
     if template.count(marker)!=1:raise ValueError('Viewer template must contain exactly one data marker')

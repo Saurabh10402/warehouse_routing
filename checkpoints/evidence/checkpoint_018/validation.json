@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "suite": "delivery-viewer-export",
+  "baseline_audit": "120/120 delivered",
+  "outage_audit": "120/120 delivered",
+  "browser": "Both delivery-menu links opened populated viewers over localhost; no console errors",
+  "core_tests": "21/21 PASS",
+  "exporter_tests": "3/3 PASS",
+  "delivery_verifier_tests": "3/3 PASS",
+  "files": {
+    "baseline.html": "7f2871e9e51a2d43a44533d02a791b7aabae83c90bcd723c188520dfbd7d3e2b",
+    "spine-failure.html": "ace4f9b71fda704ae3b4c26263b99c6e552670213c369c16589d8e406f29ce48"
+  }
+}

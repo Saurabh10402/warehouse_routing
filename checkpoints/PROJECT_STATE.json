@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_017",
-  "utc": "2026-11-02T07:02:58.918126+00:00",
-  "phase": "spine-failure-demo-validated",
-  "source_state": "manifests/checkpoint_017.json",
+  "checkpoint": "checkpoint_018",
+  "utc": "2026-11-02T07:22:58.823864+00:00",
+  "phase": "consolidated-wired-delivery",
+  "source_state": "manifests/checkpoint_018.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -109,7 +109,7 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Consolidate delivery package, validate extraction/links and prepare demonstration walkthrough.",
+  "next_action": "Consult delivery verification receipt; rehearse walkthrough and validate on target host when available.",
   "tested_code_commit": "93516df",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
@@ -151,7 +151,7 @@
       "Distinguish actually executed target-platform tests from documented but unexecuted commands.",
       "Resolve and validate real ns-3/schema-v2/NR integration before describing the whole requested product as finished."
     ],
-    "current_readiness": "Core and native immediate availability/backup behavior validated on Windows, including fresh source reproduction. Nonzero detection timing, native protected queues/safety, NR, calibration and actual target-host builds remain required."
+    "current_readiness": "Wired simulation validated on Windows; offline demonstration delivery prepared with verification receipt. Mac/Ubuntu runtime execution remains untested. Prior NR/advanced research completion requirements deferred by user scope."
   },
   "ns3_smoke_experiment": "ns3-smoke-20261031T102542Z-fd5d9232",
   "first_run_experiment": "first-run-20261031T101929Z-5481bba4",
@@ -163,5 +163,6 @@
     "layout-20261101T203251Z-838ca5b1",
     "layout-20261101T203641Z-425a1ee4",
     "layout-20261102T065135Z-da39e8c6"
-  ]
+  ],
+  "delivery_receipt": "recovery_packages/receipt-checkpoint_018-delivery.json"
 }

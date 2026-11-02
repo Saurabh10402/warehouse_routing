@@ -128,3 +128,16 @@ Validation: native CTest 25/25, core CTest 21/21, exporter integrity tests 3/3 a
 Limits: representative traffic, deterministic replay, immediate centralized route updates, packets spaced away from event boundaries. Not measured control-protocol convergence, full-load reliability, radio/NR or actual Mac/Ubuntu execution. Prior native event-boundary controls remain separate evidence. No user changes or old results removed.
 
 Next exact action: produce the consolidated delivery package with both viewers, raw evidence, pinned dependencies/setup instructions, clear launcher and short submission walkthrough. Validate extraction and links; keep target-platform execution unclaimed until actually run. Advanced research remains deferred under the two-day delivery scope.
+
+
+# checkpoint_018 - consolidated wired demonstration delivery
+
+Entry point: OPEN_WAREHOUSE.html. START_HERE.md contains extraction/opening steps, a three-minute presentation walkthrough, configuration editing, reproducible run commands, setup prerequisites, integrity verification and honest limitations. Two newly audited exports live in results/delivery-viewers-018: baseline.html and spine-failure.html. The menu links both; original viewers and raw results remain intact. Exported viewers omit the source-only template help link to prevent a broken relative link in relocated outputs.
+
+Read checkpoint017/current state/latest session and verified its manifest before edits. No simulator or topology changes. Re-audited both 120-packet native runs during export; did not rerun simulations. Browser opened both populated delivery viewers via menu links; no console errors. Core verification 21/21, exporter acceptance 3/3 and delivery verifier 3/3 PASS. Tests reject content corruption, missing local links, external dependencies and escaping paths.
+
+scripts/package_delivery.py bundles current source/checkpoints, baseline and outage raw/replay data, the alternate layout evidence, both viewer generations and a Git bundle. It verifies CRC, extracts into a new path with spaces, checks all file hashes, checks local links reachable from the delivery menu, executes the extracted verifier/checkpoint tools and verifies Git bundle HEAD. The final archive identity, SHA256 and actual extraction checks are recorded separately in recovery_packages/receipt-checkpoint_018-delivery.json. That receipt is required evidence of successful final packaging; no partial archive is a validated delivery.
+
+Scope: working wired simulation and saved offline demonstrations. Device counts configurable; 24 representative flows, immediate centralized route updates. No guarantee of full-load reliability, hardware convergence, NR or radio behavior. Mac M4/Ubuntu ARM64 instructions remain unexecuted; no target-host binary or toolchain is bundled. Viewing needs only a browser; rebuilding needs documented prerequisites. Original broader research requirements are deferred by the user's two-day scope.
+
+Source manifest: manifests/checkpoint_018.json. Next: use the verified delivery receipt, rehearse the included walkthrough, and perform target-host setup/run validation when that host becomes available. Do not add research features before submission.

@@ -17,7 +17,7 @@
 (()=>{
 const D=/*WAREHOUSE_DATA*/null;
 if(!D)return;
-document.getElementById('templateNote').hidden=true;
+document.getElementById('templateNote')?.remove();
 document.querySelector('main').hidden=false;
 const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
 const nodes=new Map(D.config.nodes.map(n=>[n.id,n])),positions=new Map();
