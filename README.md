@@ -1,5 +1,25 @@
 # WIPRO warehouse networking research prototype
 
+## Current working demonstration
+
+The latest validated demonstration has **8 configurable zones, 500 total devices and
+482 robots**, with native wired ns-3 routing, all-robot traffic, Dijkstra/ECMP comparison,
+spine rerouting, and zone-switch failure/recovery. See [the current checkpoint](checkpoints/CURRENT_STATUS.md)
+and [the local-use guide](START_HERE.md).
+
+For the ready-to-open visualization and saved results, use the verified delivery ZIP
+attached to [GitHub Releases](https://github.com/Saurabh10402/warehouse_routing/releases).
+Extract the complete ZIP, then open `OPEN_WAREHOUSE.html`. On Windows use a short extraction
+folder such as `C:\Warehouse`. The viewer works offline; its controls inspect recorded
+simulation data. The source template in `scripts/` is not a populated viewer.
+
+**A source clone alone does not include generated result folders.** Download the delivery
+ZIP for the saved demonstrations, or install the documented prerequisites and regenerate
+results. Build trees, toolchains and generated raw outputs are deliberately excluded from
+Git; release archives carry the separate recovery data. Windows native execution has been
+validated. Mac/Ubuntu execution remains untested, and there is no radio/NR or hardware
+convergence claim. The sections below describe the broader preserved research work.
+
 A configurable **stationary warehouse network** with priority-aware packet forwarding,
 same-zone/cross-zone communication, local safety events, failures, and reproducible metrics.
 The reference leaf-spine design is supported; the physical warehouse layout is not finalized.

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_022",
-  "utc": "2026-11-02T17:23:28.010311+00:00",
-  "phase": "zone-switch-failure-demo",
-  "source_state": "manifests/checkpoint_022.json",
+  "checkpoint": "checkpoint_023",
+  "utc": "2026-11-02T18:39:06.493972+00:00",
+  "phase": "github-publication-prepared",
+  "source_state": "manifests/checkpoint_023.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -120,7 +120,7 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Rehearse complete offline delivery and extraction/start guide before optional additional features.",
+  "next_action": "Publish source and checkpoint022 delivery to supplied GitHub repository, then prepare comprehensive illustrated report.",
   "tested_code_commit": "fb60dad",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
@@ -180,5 +180,6 @@
   ],
   "delivery_receipt": "recovery_packages/receipt-checkpoint_022-delivery.json",
   "routing_comparison_experiment": "routing-20261102T152642Z-82d74709",
-  "zone_outage_experiment": "layout-20261102T171806Z-fe0a210a"
+  "zone_outage_experiment": "layout-20261102T171806Z-fe0a210a",
+  "repository_url": "https://github.com/Saurabh10402/warehouse_routing"
 }
