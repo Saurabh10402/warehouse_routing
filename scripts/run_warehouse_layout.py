@@ -1,5 +1,6 @@
 """Generate, build, run and independently audit the editable warehouse demonstration."""
 import argparse
+import csv
 import hashlib
 import json
 import platform
@@ -14,13 +15,49 @@ from ns3_warehouse import validate_output, ARTIFACTS
 from process_control import BatchGuard, run_native, positive_seconds
 
 
+def spine_outage(config):
+    """Declared demonstration: second shared spine down at 30 ms, up at 70 ms."""
+    spines=[n['id'] for n in config['nodes'] if n['role']=='spine']
+    if len(spines)<2: raise ValueError('Spine outage demo needs at least two shared spines')
+    target=spines[1]
+    config['events']=[dict(type='node',target=target,timeMs=30,available=False),
+                      dict(type='node',target=target,timeMs=70,available=True)]
+    return target
+
+
+def outage_report(directory, target):
+    with (directory/'packets.csv').open(newline='',encoding='utf-8') as f: packets=list(csv.DictReader(f))
+    phases={name:[] for name in ['before','outage','recovered']}
+    for p in packets:
+        t=float(p['created_ms']);phase='before' if t<30 else ('outage' if t<70 else 'recovered')
+        phases[phase].append(p)
+        if p['status']!='delivered':raise ValueError('Outage demonstration unexpectedly lost a packet')
+        if phase=='outage' and target in p['observed_path'].split('>'):raise ValueError('Down spine appeared in an outage packet path')
+    affected=[]
+    for flow in sorted({p['flow'] for p in packets}):
+        groups=[[p for p in phases[phase] if p['flow']==flow] for phase in phases]
+        if not all(groups):raise ValueError('Missing before/outage/recovery samples')
+        before,during,after=[g[0]['observed_path'].split('>') for g in groups]
+        if target in before:
+            if not any(n.startswith('shared-spine-') for n in during):raise ValueError('Missing alternate spine')
+            if before!=after:raise ValueError('Recovered route differs from original stable ECMP route')
+            affected.append(dict(flow=flow,before=before,outage=during,recovered=after))
+    if not affected:raise ValueError('No offered flow used the failed spine; this is not a rerouting demonstration')
+    return dict(failed_spine=target,down_ms=30,up_ms=70,affected_flows=affected,
+                local_peer_packets_without_spines=sum(p['flow'].endswith('-same-zone') and 'shared-spine-' not in p['observed_path'] for p in packets),
+                phases={phase:dict(offered=len(rows),delivered=sum(p['status']=='delivered' for p in rows)) for phase,rows in phases.items()},
+                scope='Immediate centralized route updates; spaced packets avoid the event boundaries; not convergence or full-load validation')
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--layout',type=Path,default=ROOT/'configs/warehouse_layout.json')
     p.add_argument('--ns3-prefix',type=Path,default=ROOT/'.tools/ns3-wired-install')
     p.add_argument('--case-timeout',type=positive_seconds,default=600)
+    p.add_argument('--spine-outage',action='store_true',help='Second shared spine fails at 30 ms and recovers at 70 ms')
     a=p.parse_args()
     spec=json.loads(a.layout.read_text(encoding='utf-8')); config=expand(spec)
+    target=spine_outage(config) if a.spine_outage else None
     build,env=verify('default',ns3_prefix=a.ns3_prefix,require_ns3=True)
     exe=build/('ealr-ns3-fabric.exe' if sys.platform=='win32' else 'ealr-ns3-fabric')
     batch=ROOT/'results'/('layout-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8])
@@ -38,6 +75,8 @@ def main():
             state.active(name)
             run_native([exe,'--config',batch/'config.json','--output',batch/name],env,batch/'processes'/(name+'.log'),batch/'processes'/(name+'.json'),a.case_timeout,ROOT)
             state.completed(); reports.append(validate_output(batch/name,config))
+            if target:
+                (batch/(name+'-outage.json')).write_text(json.dumps(outage_report(batch/name,target),indent=2)+'\n')
         for name in ARTIFACTS:
             if (batch/'run'/name).read_bytes()!=(batch/'replay'/name).read_bytes(): raise RuntimeError('Replay mismatch: '+name)
         (batch/'audit.json').write_text(json.dumps(reports,indent=2)+'\n')

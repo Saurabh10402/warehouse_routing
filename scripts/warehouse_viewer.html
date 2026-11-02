@@ -10,6 +10,7 @@
 <section class="controls"><label>Traffic flow<select id="flow"></select></label><label>Recorded packet<select id="packet"></select></label><button id="previous">Previous hop</button><button id="next" class="primary">Next hop</button><button id="full">Show full path</button><label class="check"><input id="robots" type="checkbox" checked>Show all robots</label></section>
 <div class="layout"><section class="diagram"><div class="legend"><span>● Robot</span><span>■ Zone switch</span><span>◆ Edge server</span><span>■ Shared spine</span><b>Green: observed path</b></div><svg id="map" role="img" aria-label="Warehouse topology and selected recorded packet path"></svg><div class="small" style="padding:12px 18px">Schematic arrangement, not physical coordinates. Click a device for its identity. Hidden robots remain in the simulation.</div></section>
 <aside><section><h2>Selected packet</h2><div id="metrics" aria-live="polite"></div><h2 style="margin-top:22px">Observed path</h2><ol id="path" class="path"></ol><p id="step" class="small" aria-live="polite"></p></section><section><h2>Device details</h2><div id="nodeInfo" class="small">Select any device in the diagram.</div><h2 style="margin-top:20px">Recorded receive times</h2><table><thead><tr><th>Receiver</th><th>Time (ms)</th></tr></thead><tbody id="times"></tbody></table></section></aside></div>
+<section><h2>Availability events</h2><p id="availability" aria-live="polite"></p><ul id="events"></ul><p class="small">Device availability is shown at the selected packet's generation time. Route updates in this model are immediate and centralized.</p></section>
 <section><h2>What this run demonstrates</h2><p id="scope"></p><p class="small">The controls inspect saved data; they do not rerun routing or introduce failures. Hop stepping is a presentation aid, not a real-time packet animation. No wireless or 5G behavior is represented.</p><details><summary>Source and integrity</summary><pre id="source" class="small"></pre></details></section></main><footer>Standalone viewer · no internet connection or external libraries required</footer>
 <script>
 'use strict';
@@ -30,10 +31,14 @@ const stats=[['zones',D.config.zones.length],['devices',D.config.nodes.length],[
 for(const [label,value]of stats){let item=document.createElement('div');text(item,'strong',value);text(item,'span',' '+label);$('stats').append(item)}
 $('scope').textContent=`${D.config.traffic.length} configured flows across ${D.config.nodes.filter(n=>n.role==='endpoint').length} robots. This batch contains ${D.report.offered} offered packets and ${D.report.deadline_misses} deadline misses. Only the configured sources transmit; device count is not simultaneous traffic load.`;
 $('source').textContent=D.batch+'\n'+JSON.stringify(D.hashes,null,2);
+for(const e of D.config.events||[])text($('events'),'li',`${e.timeMs} ms: ${e.target} ${e.available?'recovers':'fails'}`);
 for(const id of [...new Set(D.packets.map(p=>p.flow))]){const o=document.createElement('option');o.value=id;o.textContent=id;$('flow').append(o)}
 function packets(){const list=D.packets.filter(p=>p.flow===$('flow').value);$('packet').replaceChildren();for(const p of list){let o=document.createElement('option');o.value=p.id;o.textContent=`#${p.id} · ${format(p.created_ms)} ms · ${p.status}`;$('packet').append(o)}selected=list[0];hop=null;draw()}
 function draw(){
  const svg=$('map');svg.replaceChildren();positions.clear();const path=selected.observed_path?selected.observed_path.split('>'):[];
+ const down=new Set(D.config.nodes.filter(n=>n.available===false).map(n=>n.id));
+ for(const e of [...(D.config.events||[])].sort((a,b)=>a.timeMs-b.timeMs))if(e.type==='node'&&e.timeMs<=Number(selected.created_ms)){if(e.available)down.delete(e.target);else down.add(e.target)}
+ $('availability').textContent=`At ${format(selected.created_ms)} ms: ${down.size?'unavailable devices: '+[...down].join(', '):'all devices available'}.`;
  const zones=[...D.config.zones];if(D.config.nodes.some(n=>n.zone&&!zones.includes(n.zone)))throw Error('Unknown node zone');
  const cols=Math.min(4,Math.max(1,zones.length)),width=cols*300,height=150+Math.ceil(zones.length/cols)*285;
  svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
@@ -49,7 +54,8 @@ function draw(){
  for(let i=1;i<=last;i++){const a=positions.get(path[i-1]),b=positions.get(path[i]);svg.append(el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],class:'routeLink'}))}
  for(const n of D.config.nodes){if(!visible(n))continue;const [x,y]=positions.get(n.id),cls='node'+(path.includes(n.id)?' routeNode':'')+(hop!==null&&path[hop]===n.id?' activeHop':'');let shape;
  if(n.role==='endpoint')shape=el('circle',{cx:x,cy:y,r:5,class:cls,fill:roles[n.role]});else if(n.role==='edge')shape=el('polygon',{points:`${x},${y-9} ${x+9},${y} ${x},${y+9} ${x-9},${y}`,class:cls,fill:roles[n.role]});else shape=el('rect',{x:x-9,y:y-8,width:18,height:16,rx:3,class:cls,fill:roles[n.role]||'#667'});
- shape.append(el('title',{},n.id+' · '+n.role));shape.addEventListener('click',()=>{$('nodeInfo').textContent=n.id+' · '+n.role+' · '+(n.zone?'Zone '+n.zone:'Shared infrastructure')+' · configured position ('+n.x+', '+n.y+')'});svg.append(shape);
+ if(down.has(n.id)){shape.setAttribute('fill','#bd3434');shape.setAttribute('stroke','#bd3434');svg.append(el('text',{x:x-10,y:y-17},'DOWN'));}
+ shape.append(el('title',{},n.id+' · '+n.role+(down.has(n.id)?' · unavailable at generation':'')));shape.addEventListener('click',()=>{$('nodeInfo').textContent=n.id+' · '+n.role+' · '+(n.zone?'Zone '+n.zone:'Shared infrastructure')+' · configured position ('+n.x+', '+n.y+')'});svg.append(shape);
  if(n.role!=='endpoint')svg.append(el('text',{x:x+13,y:y+4,'font-size':'14'},short(n)));}
  $('metrics').replaceChildren();let dl=document.createElement('dl');for(const [k,v]of [['Status',selected.status],['Packet',selected.id],['Created',format(selected.created_ms)+' ms'],['Finished',selected.finished_ms?format(selected.finished_ms)+' ms':'—'],['Latency',selected.status==='delivered'?format(Number(selected.finished_ms)-Number(selected.created_ms))+' ms':'Not delivered'],['Deadline',selected.deadline_ms+' ms'],['Priority','P'+selected.priority]]){text(dl,'dt',k);text(dl,'dd',v)}$('metrics').append(dl);
  $('path').replaceChildren();path.forEach((id,i)=>{let li=text($('path'),'li',id);if(i===hop)li.className='current'});

@@ -1,0 +1,167 @@
+{
+  "failed_spine": "shared-spine-1",
+  "down_ms": 30,
+  "up_ms": 70,
+  "affected_flows": [
+    {
+      "flow": "A-cross-zone",
+      "before": [
+        "zone-A-robot-0",
+        "zone-A-switch-0",
+        "shared-spine-1",
+        "zone-B-switch-0",
+        "zone-B-robot-0"
+      ],
+      "outage": [
+        "zone-A-robot-0",
+        "zone-A-switch-0",
+        "shared-spine-0",
+        "zone-B-switch-0",
+        "zone-B-robot-0"
+      ],
+      "recovered": [
+        "zone-A-robot-0",
+        "zone-A-switch-0",
+        "shared-spine-1",
+        "zone-B-switch-0",
+        "zone-B-robot-0"
+      ]
+    },
+    {
+      "flow": "B-cross-zone",
+      "before": [
+        "zone-B-robot-0",
+        "zone-B-switch-0",
+        "shared-spine-1",
+        "zone-C-switch-0",
+        "zone-C-robot-0"
+      ],
+      "outage": [
+        "zone-B-robot-0",
+        "zone-B-switch-0",
+        "shared-spine-0",
+        "zone-C-switch-0",
+        "zone-C-robot-0"
+      ],
+      "recovered": [
+        "zone-B-robot-0",
+        "zone-B-switch-0",
+        "shared-spine-1",
+        "zone-C-switch-0",
+        "zone-C-robot-0"
+      ]
+    },
+    {
+      "flow": "C-cross-zone",
+      "before": [
+        "zone-C-robot-0",
+        "zone-C-switch-0",
+        "shared-spine-1",
+        "zone-D-switch-0",
+        "zone-D-robot-0"
+      ],
+      "outage": [
+        "zone-C-robot-0",
+        "zone-C-switch-0",
+        "shared-spine-0",
+        "zone-D-switch-0",
+        "zone-D-robot-0"
+      ],
+      "recovered": [
+        "zone-C-robot-0",
+        "zone-C-switch-0",
+        "shared-spine-1",
+        "zone-D-switch-0",
+        "zone-D-robot-0"
+      ]
+    },
+    {
+      "flow": "D-cross-zone",
+      "before": [
+        "zone-D-robot-0",
+        "zone-D-switch-0",
+        "shared-spine-1",
+        "zone-E-switch-0",
+        "zone-E-robot-0"
+      ],
+      "outage": [
+        "zone-D-robot-0",
+        "zone-D-switch-0",
+        "shared-spine-0",
+        "zone-E-switch-0",
+        "zone-E-robot-0"
+      ],
+      "recovered": [
+        "zone-D-robot-0",
+        "zone-D-switch-0",
+        "shared-spine-1",
+        "zone-E-switch-0",
+        "zone-E-robot-0"
+      ]
+    },
+    {
+      "flow": "E-cross-zone",
+      "before": [
+        "zone-E-robot-0",
+        "zone-E-switch-0",
+        "shared-spine-1",
+        "zone-F-switch-0",
+        "zone-F-robot-0"
+      ],
+      "outage": [
+        "zone-E-robot-0",
+        "zone-E-switch-0",
+        "shared-spine-0",
+        "zone-F-switch-0",
+        "zone-F-robot-0"
+      ],
+      "recovered": [
+        "zone-E-robot-0",
+        "zone-E-switch-0",
+        "shared-spine-1",
+        "zone-F-switch-0",
+        "zone-F-robot-0"
+      ]
+    },
+    {
+      "flow": "F-cross-zone",
+      "before": [
+        "zone-F-robot-0",
+        "zone-F-switch-0",
+        "shared-spine-1",
+        "zone-G-switch-0",
+        "zone-G-robot-0"
+      ],
+      "outage": [
+        "zone-F-robot-0",
+        "zone-F-switch-0",
+        "shared-spine-0",
+        "zone-G-switch-0",
+        "zone-G-robot-0"
+      ],
+      "recovered": [
+        "zone-F-robot-0",
+        "zone-F-switch-0",
+        "shared-spine-1",
+        "zone-G-switch-0",
+        "zone-G-robot-0"
+      ]
+    }
+  ],
+  "local_peer_packets_without_spines": 40,
+  "phases": {
+    "before": {
+      "offered": 48,
+      "delivered": 48
+    },
+    "outage": {
+      "offered": 48,
+      "delivered": 48
+    },
+    "recovered": {
+      "offered": 24,
+      "delivered": 24
+    }
+  },
+  "scope": "Immediate centralized route updates; spaced packets avoid the event boundaries; not convergence or full-load validation"
+}

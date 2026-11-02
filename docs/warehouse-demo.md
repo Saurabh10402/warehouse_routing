@@ -46,3 +46,19 @@ python scripts/visualize_warehouse.py --batch results/YOUR_LAYOUT_BATCH --output
 ```
 
 Use the batch directory printed by `run_warehouse_layout.py`. Export reruns the independent raw audit and refuses incomplete batches, inconsistent traces and existing output files. It supports the layout runner's config.json/run structure; research-suite batch structures require a separate adapter. It displays recorded outcomes only: it cannot simulate a newly selected failure. The next demonstration milestone is an actual spine-outage run, followed by exporting its observations.
+
+
+## Spine failure and recovery demonstration
+
+```sh
+python scripts/run_warehouse_layout.py --spine-outage
+```
+
+This keeps the configured layout and traffic, takes the second shared spine down at 30 ms and restores it at 70 ms. At least two spines are required. The runner independently audits both executions, requires observed alternate-spine routing, compares replay artifacts and writes `run-outage.json` and `replay-outage.json`. A layout whose offered flows never use that spine is rejected as an uninformative rerouting demonstration.
+
+After a successful run, export its viewer using the command above. Select a cross-zone flow and compare packets generated at 20, 40 and 80 ms. The availability section lists the event times; the failed node is red and marked DOWN for packets generated during the outage. It returns to normal for recovered samples. The display uses recorded paths; it does not invent a route when you click.
+
+This is a deterministic demonstration with immediate centralized failure knowledge and route updates. Packets are spaced away from failure/recovery boundaries. Success does not establish a hardware convergence time or loss-free behavior for packets already in flight at failure. Those boundary cases are covered separately by the earlier native controls, not by this presentation workload.
+
+
+Validated outage batch: `layout-20261102T065135Z-da39e8c6`. All 120 packets arrived (48 before, 48 during and 24 after recovery); six cross-zone flows changed spine and all 40 local-peer packets remained within their zones. Independent audit and exact replay passed. Open the failure demo from OPEN_WAREHOUSE.html, select A-cross-zone and compare #6 at 20 ms, #7 at 40 ms and #9 at 80 ms.
