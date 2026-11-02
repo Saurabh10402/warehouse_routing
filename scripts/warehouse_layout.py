@@ -1,6 +1,7 @@
 """Expand editable device counts into a stationary wired schema-v2 configuration."""
 import argparse
 import json
+import math
 import re
 from pathlib import Path
 
@@ -13,7 +14,21 @@ def expand(spec):
         if type(value) is not int or not minimum <= value <= 4096:
             raise ValueError(name+' must be an integer between '+str(minimum)+' and 4096')
         return value
-    keys(spec, ['sharedSpines', 'zones'])
+    keys(spec, ['sharedSpines', 'zones', 'traffic'])
+    traffic=spec.get('traffic',{})
+    keys(traffic,['mode','scope','intervalMs','bytes','priority','serviceCandidates'])
+    mode=traffic.get('mode','representative');scope=traffic.get('scope','mixed')
+    if mode not in ['representative','allRobots']:raise ValueError('traffic.mode must be representative or allRobots')
+    if scope not in ['mixed','same-zone','cross-zone','edge-service']:raise ValueError('Invalid traffic.scope')
+    interval=traffic.get('intervalMs',20)
+    if type(interval) not in (int,float) or not math.isfinite(interval) or not 0.001<=interval<=100:
+        raise ValueError('traffic.intervalMs must be finite and between 0.001 and 100')
+    size=count(traffic.get('bytes',256),'traffic.bytes',1)
+    if size>1472:raise ValueError('traffic.bytes must not exceed the unfragmented UDP limit 1472')
+    priority=count(traffic.get('priority',1),'traffic.priority')
+    if priority>3:raise ValueError('traffic.priority must be 0..3')
+    candidates=count(traffic.get('serviceCandidates',16 if mode=='representative' else 1),'serviceCandidates',1)
+    if candidates>16:raise ValueError('serviceCandidates must not exceed 16')
     spines = count(spec['sharedSpines'], 'sharedSpines', 1)
     zones = spec['zones']
     if not isinstance(zones, list) or not zones:
@@ -51,18 +66,26 @@ def expand(spec):
             for i,id in enumerate(names):
                 node(id,role,z['id'],zi*100+i%10,(i//10)*3 if role=='endpoint' else 80)
                 link(id,leaves[i%len(leaves)],100 if role=='endpoint' else 1000)
-    # Representative traffic exercises all three scopes without implying every robot transmits.
+    # Preserve the original representative workload exactly when traffic is omitted.
     for zi,z in enumerate(zones):
         peers=robots[z['id']]
         if not peers: continue
-        targets=[]
-        if len(peers)>1: targets.append(('same-zone',[peers[1]]))
         other=next((robots[zones[(zi+j)%len(zones)]['id']] for j in range(1,len(zones)) if robots[zones[(zi+j)%len(zones)]['id']]),[])
-        if other: targets.append(('cross-zone',[other[0]]))
         services=edges[z['id']]+[id for zone in zones if zone['id']!=z['id'] for id in edges[zone['id']]]
-        if services: targets.append(('edge-service',services[:16]))
-        for scope,dest in targets:
-            c['traffic'].append(dict(id=z['id']+'-'+scope,source=peers[0],destinations=dest,priority=1,bytes=256,startMs=0,stopMs=100,intervalMs=20))
+        for i,source in enumerate(peers if mode=='allRobots' else peers[:1]):
+            targets=[]
+            if len(peers)>1: targets.append(('same-zone',[peers[(i+1)%len(peers)]]))
+            if other: targets.append(('cross-zone',[other[i%len(other)]]))
+            if services: targets.append(('edge-service',services[:candidates]))
+            if scope!='mixed':targets=[t for t in targets if t[0]==scope]
+            if mode=='allRobots':
+                if not targets:raise ValueError('No eligible '+scope+' destination for '+source)
+                targets=[targets[i%len(targets)] if scope=='mixed' else targets[0]]
+            for kind,dest in targets:
+                name=z['id']+'-'+kind if mode=='representative' else source+'-'+kind
+                c['traffic'].append(dict(id=name,source=source,destinations=dest,priority=priority,bytes=size,startMs=0,stopMs=100,intervalMs=interval))
+    if len(c['traffic'])>4096 or len(c['traffic'])*math.ceil(100/interval)>1000000:
+        raise ValueError('Workload exceeds native flow/packet limits')
     return c
 
 
@@ -75,4 +98,4 @@ if __name__ == '__main__':
         c=expand(json.loads(a.layout.read_text(encoding='utf-8')))
         with a.output.open('x',encoding='utf-8') as f: json.dump(c,f,indent=2); f.write('\n')
     except (ValueError,KeyError,OSError,TypeError) as e: p.exit(2,str(e)+'\n')
-    print(f"Generated {len(c['zones'])} zones, {len(c['nodes'])} devices, {len(c['links'])} links, {len(c['traffic'])} representative flows: {a.output}")
+    print(f"Generated {len(c['zones'])} zones, {len(c['nodes'])} devices, {len(c['links'])} links, {len(c['traffic'])} flows: {a.output}")

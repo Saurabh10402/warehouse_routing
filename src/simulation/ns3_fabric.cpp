@@ -377,6 +377,9 @@ Ns3FabricResult simulateNs3Fabric(const Configuration& c) {
         for (std::size_t f = 0; f < c.traffic.size(); ++f) for (const auto& destination : c.traffic[f].destinations)
         for (std::size_t source = 0; source < c.nodes.size(); ++source) {
             const auto& flow = c.traffic[f]; const auto target = ids.at(destination);
+            // Endpoints cannot be transit routers. Only this flow's originating
+            // endpoint needs an output route; destination delivery is local.
+            if (c.nodes[source].role == "endpoint" && source != ids.at(flow.source)) continue;
             const auto payload = flow.bytes;
             const auto key = flowKey(routing[ids.at(flow.source)]->address.Get(), routing[target]->address.Get(),
                                      static_cast<unsigned>(20000+f), static_cast<unsigned>(10000+f));

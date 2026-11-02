@@ -62,3 +62,26 @@ This is a deterministic demonstration with immediate centralized failure knowled
 
 
 Validated outage batch: `layout-20261102T065135Z-da39e8c6`. All 120 packets arrived (48 before, 48 during and 24 after recovery); six cross-zone flows changed spine and all 40 local-peer packets remained within their zones. Independent audit and exact replay passed. Open the failure demo from OPEN_WAREHOUSE.html, select A-cross-zone and compare #6 at 20 ms, #7 at 40 ms and #9 at 80 ms.
+
+
+## Optional traffic from every robot
+
+The original delivered example stays unchanged. Use the separate `configs/warehouse_layout_all_robots.json` profile:
+
+```sh
+python scripts/run_warehouse_layout.py --layout configs/warehouse_layout_all_robots.json
+```
+
+Its optional `traffic` object is:
+
+```json
+{"mode":"allRobots", "scope":"mixed", "intervalMs":20, "bytes":256, "priority":1, "serviceCandidates":1}
+```
+
+`representative` remains the default when this object is absent. `allRobots` creates exactly one flow from each robot. `mixed` rotates through eligible same-zone, cross-zone and edge-service destinations in deterministic robot order; it does not create all three flows from every robot. Choose `same-zone`, `cross-zone` or `edge-service` to restrict the destination scope. A robot without an eligible destination in allRobots mode is an error, not silently omitted.
+
+The 500-device profile has 482 robot sources: 163 local-peer flows, 161 cross-zone flows and 158 service flows. Each offers five 256-byte UDP payloads at 0, 20, 40, 60 and 80 ms: 2,410 offered packets. All robots offer packets on those same timestamps. This is functional all-source coverage, not a saturated-capacity test. Native packet and queue audits still determine actual delivery and losses.
+
+`priority` accepts 0 through 3. `bytes` accepts 1 through 1472 for unfragmented UDP. `intervalMs` is finite, between 0.001 and 100; native flow/packet limits also apply. `serviceCandidates` accepts 1 through 16. All-robot mode defaults to one service candidate to keep route initialization bounded; explicitly select two or more if testing service backups. The representative default retains its prior ordered candidate list.
+
+The runtime now omits unused per-flow route entries on endpoints other than the originating endpoint. Endpoints never relay traffic; destination-local delivery is unchanged. This optimization is subject to full native regression and comparison against preserved measurements, not a change to the routing algorithm or simulated link timing.
