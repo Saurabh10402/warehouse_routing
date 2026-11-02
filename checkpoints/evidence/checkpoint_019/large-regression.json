@@ -1,0 +1,70 @@
+[
+  {
+    "case": "baseline",
+    "baseline": "layout-20261101T203251Z-838ca5b1",
+    "identical_files": 7,
+    "report": {
+      "offered": 120,
+      "delivered": 120,
+      "deadline_misses": 0,
+      "queue_drops": 0,
+      "no_route": 0,
+      "cutoff": 0,
+      "source_unavailable": 0,
+      "availability_drops": 0,
+      "ip_drops": 0
+    },
+    "process": {
+      "status": "EXITED",
+      "command": [
+        "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\build\\verified-ns3\\ealr-ns3-fabric.exe",
+        "--config",
+        "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\results\\route-entry-regression-20261102T120420Z-681299aa\\baseline\\config.json",
+        "--output",
+        "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\results\\route-entry-regression-20261102T120420Z-681299aa\\baseline\\run"
+      ],
+      "log": "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\results\\route-entry-regression-20261102T120420Z-681299aa\\processes\\baseline.log",
+      "timeout_seconds": 600.0,
+      "utc": "2026-11-02T12:04:20.763217+00:00",
+      "pid": 19568,
+      "returncode": 0,
+      "reason": "process exited successfully",
+      "reaped": true,
+      "elapsed_seconds": 6.312999999994645
+    }
+  },
+  {
+    "case": "outage",
+    "baseline": "layout-20261102T065135Z-da39e8c6",
+    "identical_files": 7,
+    "report": {
+      "offered": 120,
+      "delivered": 120,
+      "deadline_misses": 0,
+      "queue_drops": 0,
+      "no_route": 0,
+      "cutoff": 0,
+      "source_unavailable": 0,
+      "availability_drops": 0,
+      "ip_drops": 0
+    },
+    "process": {
+      "status": "EXITED",
+      "command": [
+        "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\build\\verified-ns3\\ealr-ns3-fabric.exe",
+        "--config",
+        "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\results\\route-entry-regression-20261102T120420Z-681299aa\\outage\\config.json",
+        "--output",
+        "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\results\\route-entry-regression-20261102T120420Z-681299aa\\outage\\run"
+      ],
+      "log": "C:\\Users\\ermec\\Downloads\\Routing-WIPRO-20261029T174553Z-1-001\\Routing-WIPRO\\results\\route-entry-regression-20261102T120420Z-681299aa\\processes\\outage.log",
+      "timeout_seconds": 600.0,
+      "utc": "2026-11-02T12:04:45.169679+00:00",
+      "pid": 21672,
+      "returncode": 0,
+      "reason": "process exited successfully",
+      "reaped": true,
+      "elapsed_seconds": 14.73399999999674
+    }
+  }
+]

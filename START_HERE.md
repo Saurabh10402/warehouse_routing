@@ -28,6 +28,14 @@ The failure occurs at 30 ms and recovery at 70 ms. Six cross-zone flows rerouted
 
 ## Change device counts and run a new simulation
 
+The additional **traffic from all 482 robots** viewer shows a separate, validated workload: every robot sends five packets, for 2,410 packets total. All delivered in this test. One flow per robot rotates among local-peer, cross-zone and service traffic; this is not a saturated-load or deployment reliability guarantee. To reproduce it after setup:
+
+```sh
+python scripts/run_warehouse_layout.py --layout configs/warehouse_layout_all_robots.json
+```
+
+That JSON's optional `traffic` object controls mode, scope, packet interval, payload size, priority and number of service candidates. See docs/warehouse-demo.md for the exact fields and bounds. The original configs/warehouse_layout.json remains unchanged and still generates 24 representative flows.
+
 Edit **configs/warehouse_layout.json**. Each zone specifies its ID, robots, switches and edge servers. Adding/removing zone entries changes the zone count. `sharedSpines` controls the common backbone. The reference robot counts are 59, 61, 58, 62, 60, 63, 59 and 60; they remain fixed between runs for reproducibility.
 
 First install the prerequisites following **docs/first-run.md** for your operating system. Native execution requires Python 3.12+, a compatible C++ toolchain, CMake/Ninja, Boost.JSON and the project's pinned wired ns-3.46.1 installation. Toolchains and build directories are deliberately excluded from this ZIP. First-time setup requires downloads and a substantial build; it is separate from opening the viewers.

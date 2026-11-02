@@ -1,0 +1,14 @@
+{
+  "batch": "layout-20261102T121400Z-1b3f3906",
+  "main_run_match": "7/7 artifacts and input exact",
+  "offered": 2410,
+  "delivered": 2410,
+  "active_sources": 482,
+  "packets_per_source": 5,
+  "mean_latency_ms": 0.31799067219917054,
+  "max_latency_ms": 0.48008000000000095,
+  "processes": {
+    "run": 43.60899999999674,
+    "replay": 35.26600000000326
+  }
+}

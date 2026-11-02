@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "completed_processes": 200,
+  "suite": "ns3-wired-warehouse",
+  "runs": 100,
+  "artifact_checks": "PASS",
+  "replay": "PASS (every case)",
+  "controls": 12,
+  "matrix_runs": 36,
+  "resilience_controls": 52,
+  "hash_seeds": [
+    1,
+    2,
+    3
+  ],
+  "fifo_baseline": "PASS (seven cases, all pre-existing fields)",
+  "matched_policy_arrivals": "PASS",
+  "scheduler_independent_routes": "PASS",
+  "stochastic_evaluation": false,
+  "scope": "Wired policy and immediate centralized availability/backup controls plus three-seed static hash sensitivity; not convergence/stochastic replication or NR measurements",
+  "case_timeout_seconds": 60.0
+}

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_018",
-  "utc": "2026-11-02T07:22:58.823864+00:00",
-  "phase": "consolidated-wired-delivery",
-  "source_state": "manifests/checkpoint_018.json",
+  "checkpoint": "checkpoint_019",
+  "utc": "2026-11-02T12:26:53.690032+00:00",
+  "phase": "all-robot-wired-delivery",
+  "source_state": "manifests/checkpoint_019.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -59,7 +59,9 @@
     "Native receive-time availability gates, immediate route rebuilding, ordered backup services and TTL loop guard",
     "Editable per-zone device counts and independently audited 500-device native demo/replay",
     "Standalone offline topology and recorded packet-path viewer with independent export audit",
-    "500-device spine failure/recovery demonstration with audited rerouting and offline availability view"
+    "500-device spine failure/recovery demonstration with audited rerouting and offline availability view",
+    "Configurable all-robot traffic; 482 active sources and 2410 audited deliveries with exact replay",
+    "Unused endpoint route-entry elimination and invocation-local reference-distance cache, raw regressions identical"
   ],
   "pending": [
     "warehouse traffic/loss/availability calibration",
@@ -97,7 +99,12 @@
     "ns3-warehouse-20261101T201540Z-3d3ee628",
     "experiments-20261101T154333Z-7a7bd456",
     "layout-20261101T203251Z-838ca5b1",
-    "layout-20261101T203641Z-425a1ee4"
+    "layout-20261101T203641Z-425a1ee4",
+    "ns3-warehouse-20261102T121634Z-4c776a9c",
+    "experiments-20261102T120006Z-a802bc3c",
+    "layout-20261102T121400Z-1b3f3906",
+    "layout-20261102T120343Z-c17f3ded",
+    "route-entry-regression-20261102T120420Z-681299aa"
   ],
   "dependencies": {
     "ns3": "Verified wired 3.46.1 Release; current main/fresh 25 tests and 100 cases with every replay PASS. Historical 150 UNIT QUICK suites; no NR claim.",
@@ -109,8 +116,8 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Consult delivery verification receipt; rehearse walkthrough and validate on target host when available.",
-  "tested_code_commit": "93516df",
+  "next_action": "Controlled Dijkstra versus ECMP comparison with identical all-robot traffic; preserve verified delivery.",
+  "tested_code_commit": "fb60dad",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
   "research_direction": "Powered stationary fabric; priority scheduling and resilience. EALR preserved as legacy, excluded from primary matrix.",
@@ -155,14 +162,15 @@
   },
   "ns3_smoke_experiment": "ns3-smoke-20261031T102542Z-fd5d9232",
   "first_run_experiment": "first-run-20261031T101929Z-5481bba4",
-  "ns3_warehouse_experiment": "ns3-warehouse-20261101T155343Z-9c1d253c",
+  "ns3_warehouse_experiment": "ns3-warehouse-20261102T121634Z-4c776a9c",
   "fresh_ns3_experiment": "ns3-warehouse-20261101T201540Z-3d3ee628",
-  "tested_native_model_commit": "93516df",
-  "delivery_scope": "User requests configurable wired routing demonstration within two days.",
+  "tested_native_model_commit": "c5c6887",
+  "delivery_scope": "User authorized one additional day; configurable all-robot wired demo first.",
   "demo_experiments": [
     "layout-20261101T203251Z-838ca5b1",
     "layout-20261101T203641Z-425a1ee4",
-    "layout-20261102T065135Z-da39e8c6"
+    "layout-20261102T065135Z-da39e8c6",
+    "layout-20261102T121400Z-1b3f3906"
   ],
-  "delivery_receipt": "recovery_packages/receipt-checkpoint_018-delivery.json"
+  "delivery_receipt": "recovery_packages/receipt-checkpoint_019-delivery.json"
 }
