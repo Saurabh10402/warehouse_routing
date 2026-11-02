@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_019",
+  "checkpoint": "checkpoint_020",
   "utc": "2026-11-02T12:26:53.690032+00:00",
   "phase": "all-robot-wired-delivery",
-  "source_state": "manifests/checkpoint_019.json",
+  "source_state": "manifests/checkpoint_020.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -172,5 +172,5 @@
     "layout-20261102T065135Z-da39e8c6",
     "layout-20261102T121400Z-1b3f3906"
   ],
-  "delivery_receipt": "recovery_packages/receipt-checkpoint_019-delivery.json"
+  "delivery_receipt": "recovery_packages/receipt-checkpoint_020-delivery.json"
 }

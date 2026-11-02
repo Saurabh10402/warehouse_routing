@@ -35,7 +35,7 @@ def main():
     with zipfile.ZipFile(archive,'x',compression=zipfile.ZIP_DEFLATED) as z:
         for p in files:z.write(p,p.relative_to(ROOT).as_posix())
         z.writestr('DELIVERY_MANIFEST.json',json.dumps(dict(checkpoint=state['checkpoint'],files=hashes),indent=2))
-    extracted=ROOT/'.recovery'/('delivery extraction '+stamp);extracted.mkdir(parents=True)
+    extracted=ROOT/'.recovery'/('d '+stamp[-8:]);extracted.mkdir(parents=True)
     with zipfile.ZipFile(archive) as z:
         if z.testzip() is not None:raise ValueError('Archive CRC failure')
         for info in z.infolist():

@@ -25,3 +25,5 @@ Runtime improvements omit unused non-origin endpoint route entries and cache pur
 Source commits c5c6887 and fb60dad. Source manifest: manifests/checkpoint_019.json. Final package identity and extraction verification belong in recovery_packages/receipt-checkpoint_019-delivery.json. Previous ZIP and manifests remain intact. Main/fresh native process times are observations under differing host load, not controlled speed benchmarks.
 
 Limitations: synchronized illustrative light workload; no saturation capacity guarantee, no radio/NR, no hardware convergence model. Mac M4/Ubuntu ARM64 execution remains untested. Next action: controlled Dijkstra-versus-ECMP comparison using identical all-robot arrivals and explicit measured outcomes, while retaining this working delivery.
+
+Packaging follow-up checkpoint020: expanded regression archive hit Windows path length on extraction. Shortened verification directory and documented a short extraction root. Previous failed archive/extraction retained; final receipt020 is authoritative. No simulator changes.

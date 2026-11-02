@@ -72,3 +72,5 @@ python scripts/verify_delivery.py
 Expected: PASS for all file hashes and local menu/viewer links. Intentional edits cause hash mismatches; keep the original ZIP as your recovery copy. The package includes source checkpoints, raw baseline/outage/replay results and a Git bundle under recovery_packages. Historical provenance may contain the original Windows paths as evidence; these are not executable dependencies for the viewers or current scripts.
 
 If the menu cannot find a viewer, extract the complete ZIP again into a new folder. If a simulation fails, preserve the printed batch, RUN_STATUS.json and logs; do not label partial output successful. For setup troubleshooting and verification boundaries, read docs/first-run.md and docs/warehouse-demo.md.
+
+On Windows, extract the ZIP into a short folder such as `C:\Warehouse` to keep the full regression-data paths below Windows path-length limits. Keep the extracted folder structure intact.
