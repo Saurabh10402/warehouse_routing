@@ -154,7 +154,7 @@ def minimum_delay(config, source, target, payload):
     return math.inf
 
 
-def ecmp_path(config, flow, flow_index, forwarding_source=None):
+def ecmp_path(config, flow, flow_index, forwarding_source=None, distance_fn=minimum_delay):
     """Independent reverse-distance eligibility plus specified wire-tuple hash."""
     nodes = {n['id']:n for n in config['nodes']}
     indices = {n['id']:i for i,n in enumerate(config['nodes'])}
@@ -164,7 +164,7 @@ def ecmp_path(config, flow, flow_index, forwarding_source=None):
         if not link.get('available',True) or not nodes[link['from']].get('available',True) or not nodes[link['to']].get('available',True): continue
         cost = link['delayMs']+(flow['bytes']+30)*8/(link['capacityMbps']*1000)
         for a,b in [(link['from'],link['to']),(link['to'],link['from'])]: adjacency[a].append((b,cost))
-    distance = {n:minimum_delay(config,n,target,flow['bytes']) if nodes[n]['role']!='endpoint' or n in [source,target] else math.inf for n in nodes}
+    distance = {n:distance_fn(config,n,target,flow['bytes']) if nodes[n]['role']!='endpoint' or n in [source,target] else math.inf for n in nodes}
     if math.isinf(distance[source]): return []
     mask = (1<<64)-1; value = 14695981039346656037
     fields = [(0xac100001+indices[flow['source']],4),(0xac100001+indices[target],4),(17,1),(20000+flow_index,2),(10000+flow_index,2),(config['simulation']['seed'],4)]
@@ -197,8 +197,8 @@ def availability_states(config):
     return at
 
 
-def installed_path(config,flow,index,source=None):
-    if config['routing']['algorithm']=='ecmp': return ecmp_path(config,flow,index,source)
+def installed_path(config,flow,index,source=None,distance_fn=minimum_delay):
+    if config['routing']['algorithm']=='ecmp': return ecmp_path(config,flow,index,source,distance_fn)
     source=source or flow['source']; target=flow['destinations'][0]
     nodes={n['id']:n for n in config['nodes']}; indices={n['id']:i for i,n in enumerate(config['nodes'])}
     if not nodes[source].get('available',True) or not nodes[target].get('available',True): return []
@@ -224,10 +224,10 @@ def installed_path(config,flow,index,source=None):
     return []
 
 
-def table_walk(config,flow,index):
+def table_walk(config,flow,index,distance_fn=minimum_delay):
     path=[flow['source']]
     while path[-1]!=flow['destinations'][0]:
-        route=installed_path(config,flow,index,path[-1])
+        route=installed_path(config,flow,index,path[-1],distance_fn)
         if not route:return []
         require(len(route)>1,'table walk stopped before destination')
         path.append(route[1]);require(len(path)<=len(config['nodes']),'table walk loop')
@@ -257,6 +257,13 @@ def validate_output(output, config):
     flow_indices = {f['id']:i for i,f in enumerate(config['traffic'])}
     node_indices = {n['id']:i for i,n in enumerate(config['nodes'])}
     state_at=availability_states(config)
+    # Snapshots remain alive and immutable throughout this audit. Cache only pure
+    # distances, scoped to this invocation; never cache observed outcomes or checks.
+    distance_cache={}
+    def reference_distance(state,source,target,payload):
+        key=(id(state),source,target,payload)
+        if key not in distance_cache:distance_cache[key]=minimum_delay(state,source,target,payload)
+        return distance_cache[key]
     event_rows=rows(output/'availability.csv'); ip_drops=rows(output/'ip_drops.csv')
     declared=sorted(enumerate(config.get('events',[])),key=lambda item:(int(math.floor(item[1]['timeMs']*1e6+.5)),item[0]))
     require(len(event_rows)==len(declared),'availability event count')
@@ -285,7 +292,7 @@ def validate_output(output, config):
         expected_destination=flow['destinations'][0]; expected_path=[]
         if live_nodes[flow['source']].get('available',True):
             for candidate in flow['destinations']:
-                route=table_walk(state,dict(flow,destinations=[candidate]),flow_indices[flow['id']])
+                route=table_walk(state,dict(flow,destinations=[candidate]),flow_indices[flow['id']],reference_distance)
                 if route: expected_destination=candidate;expected_path=route;break
         require(packet['destination']==expected_destination,'ordered backup selection')
         require(packet['expected_path']=='>'.join(expected_path),'ECMP transport hash/eligible next hop or Dijkstra plan')
@@ -293,7 +300,7 @@ def validate_output(output, config):
         if status=='source_unavailable':require(path==[flow['source']] and finished==created,'source-local rejection')
         if status=='no_route':require(not expected_path and path==[flow['source']] and finished==created,'incorrect no-route result')
         if status not in ['source_unavailable','no_route']:require(bool(expected_path),'sent without a planned route')
-        minimum = minimum_delay(state, flow['source'], packet['destination'], flow['bytes'])
+        minimum = reference_distance(state, flow['source'], packet['destination'], flow['bytes'])
         if status == 'delivered':
             require(path[-1] == packet['destination'] and (bool(declared) or packet['observed_path'] == packet['expected_path']), 'delivered path')
             cost = 0
@@ -323,7 +330,7 @@ def validate_output(output, config):
         if event == 'attempt':
             require(packet_id not in drop_ids and packet_id not in in_flight and paths[packet_id][-1] == hop['from'], 'attempt from wrong node/state')
             require(bool(declared) or (packet_id,key) not in attempted, 'duplicate per-hop attempt'); attempted.add((packet_id,key))
-            current_path=installed_path(state_at(time),dict(flow,destinations=[packet['destination']]),f,hop['from'])
+            current_path=installed_path(state_at(time),dict(flow,destinations=[packet['destination']]),f,hop['from'],reference_distance)
             require(len(current_path)>1 and current_path[1]==hop['to'],'attempt violates current forwarding table')
         elif event == 'enqueue':
             require((packet_id,key) in attempted and len(waiting[key]) < link.get('queuePackets',100), 'queue admission exceeds capacity')
@@ -361,7 +368,7 @@ def validate_output(output, config):
         if int(drop['ttl'])<=1:
             require(reason==5 and int(drop['ttl'])==1 and len(paths[packet_id])==256,'forwarding hop-limit guard')
         else:
-            require(reason in [2,5] and not installed_path(state_at(time),dict(flow,destinations=[packet['destination']]),flow_indices[flow['id']],drop['node']),'IP drop without lost reachability')
+            require(reason in [2,5] and not installed_path(state_at(time),dict(flow,destinations=[packet['destination']]),flow_indices[flow['id']],drop['node'],reference_distance),'IP drop without lost reachability')
         require(packet_id not in in_flight and not any(packet_id in q for q in waiting.values()),'IP drop still in native queue/channel')
         ip_drop_ids.add(packet_id)
     for packet_id, packet in by_id.items():

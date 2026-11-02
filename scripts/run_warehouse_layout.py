@@ -61,7 +61,7 @@ def main():
     build,env=verify('default',ns3_prefix=a.ns3_prefix,require_ns3=True)
     exe=build/('ealr-ns3-fabric.exe' if sys.platform=='win32' else 'ealr-ns3-fabric')
     batch=ROOT/'results'/('layout-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8])
-    batch.mkdir(); (batch/'processes').mkdir()
+    batch.mkdir(parents=True,exist_ok=False); (batch/'processes').mkdir()
     with BatchGuard(batch/'RUN_STATUS.json') as state:
         for name,data in [('layout.json',spec),('config.json',config),('provenance.json',dict(source=manifest(),git_commit=git_commit(),executable_sha256=hashlib.sha256(exe.read_bytes()).hexdigest(),scope='Wired configured traffic; deterministic demonstration, not a capacity guarantee or multi-seed evaluation',traffic_mode=spec.get('traffic',{}).get('mode','representative'),active_sources=len({f['source'] for f in config['traffic']}),devices=len(config['nodes']),flows=len(config['traffic'])))]:
             (batch/name).write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8')
