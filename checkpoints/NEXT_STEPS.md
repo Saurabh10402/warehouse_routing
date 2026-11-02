@@ -1,7 +1,5 @@
-# Next milestone
+# Delivery readiness
 
-Use recovery_packages/receipt-checkpoint_021-delivery.json for the updated verified ZIP. Open OPEN_WAREHOUSE.html and choose Compare Dijkstra and ECMP routing. Four cases and every replay passed; ECMP balanced cross-zone flows with slightly lower observed delay under this light workload.
+Use receipt-checkpoint_022-delivery.json for the latest verified ZIP. Rehearse the menu: baseline, all robots, Dijkstra/ECMP comparison, spine rerouting and zone-switch isolation/recovery. Follow START_HERE.md and docs/zone-outage.md. Keep older known-good packages.
 
-Next: a controlled zone-switch outage/recovery demonstration to expose single-zone attachment failure while other zones continue communicating. Preserve raw traces and independent audits; do not infer hardware convergence. Keep the completed all-robot comparison and prior ZIPs intact. Do not alter protected-queue parameters without reading their declared contracts and limitations.
-
-Target-host Mac M4 / Ubuntu ARM64 setup and execution still require access to that host. No capacity, radio or guaranteed-deadline claim.
+Next work should prioritize a final extraction/start-guide walkthrough and concise presentation narrative. Optional additional failure scenarios should not displace handoff reliability. No target-host runtime claim until Mac M4 / Ubuntu ARM64 execution is actually performed. Existing full regression studies remain separate from these illustrative native demos.

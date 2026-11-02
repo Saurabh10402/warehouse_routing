@@ -1,0 +1,7 @@
+{
+  "native_tests": 25,
+  "core_tests": 21,
+  "layout_tests": 6,
+  "zone_tests": 2,
+  "browser": "loss/recovery/unaffected cases verified via localhost"
+}

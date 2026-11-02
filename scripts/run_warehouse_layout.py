@@ -13,6 +13,7 @@ from verify import ROOT, verify
 from warehouse_layout import expand
 from ns3_warehouse import validate_output, ARTIFACTS
 from process_control import BatchGuard, run_native, positive_seconds
+from zone_outage import configure as configure_zone_outage, report as zone_outage_report
 
 
 def spine_outage(config):
@@ -54,10 +55,13 @@ def main():
     p.add_argument('--layout',type=Path,default=ROOT/'configs/warehouse_layout.json')
     p.add_argument('--ns3-prefix',type=Path,default=ROOT/'.tools/ns3-wired-install')
     p.add_argument('--case-timeout',type=positive_seconds,default=600)
-    p.add_argument('--spine-outage',action='store_true',help='Second shared spine fails at 30 ms and recovers at 70 ms')
+    outages=p.add_mutually_exclusive_group()
+    outages.add_argument('--spine-outage',action='store_true',help='Second shared spine fails at 30 ms and recovers at 70 ms')
+    outages.add_argument('--zone-outage',metavar='ZONE',help='Isolate a single-switch zone at 30 ms; restore it at 70 ms')
     a=p.parse_args()
     spec=json.loads(a.layout.read_text(encoding='utf-8')); config=expand(spec)
     target=spine_outage(config) if a.spine_outage else None
+    if a.zone_outage:configure_zone_outage(config,a.zone_outage)
     build,env=verify('default',ns3_prefix=a.ns3_prefix,require_ns3=True)
     exe=build/('ealr-ns3-fabric.exe' if sys.platform=='win32' else 'ealr-ns3-fabric')
     batch=ROOT/'results'/('layout-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8])
@@ -77,6 +81,8 @@ def main():
             state.completed(); reports.append(validate_output(batch/name,config))
             if target:
                 (batch/(name+'-outage.json')).write_text(json.dumps(outage_report(batch/name,target),indent=2)+'\n')
+            if a.zone_outage:
+                (batch/(name+'-zone-outage.json')).write_text(json.dumps(zone_outage_report(batch/name,config,a.zone_outage),indent=2)+'\n')
         for name in ARTIFACTS:
             if (batch/'run'/name).read_bytes()!=(batch/'replay'/name).read_bytes(): raise RuntimeError('Replay mismatch: '+name)
         (batch/'audit.json').write_text(json.dumps(reports,indent=2)+'\n')

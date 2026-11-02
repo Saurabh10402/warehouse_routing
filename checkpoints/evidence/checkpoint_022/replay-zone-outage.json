@@ -1,0 +1,143 @@
+{
+  "zone": "A",
+  "down_ms": 30,
+  "up_ms": 70,
+  "affected_flows": [
+    "zone-A-robot-0-same-zone",
+    "zone-A-robot-1-cross-zone",
+    "zone-A-robot-10-cross-zone",
+    "zone-A-robot-11-edge-service",
+    "zone-A-robot-12-same-zone",
+    "zone-A-robot-13-cross-zone",
+    "zone-A-robot-14-edge-service",
+    "zone-A-robot-15-same-zone",
+    "zone-A-robot-16-cross-zone",
+    "zone-A-robot-17-edge-service",
+    "zone-A-robot-18-same-zone",
+    "zone-A-robot-19-cross-zone",
+    "zone-A-robot-2-edge-service",
+    "zone-A-robot-20-edge-service",
+    "zone-A-robot-21-same-zone",
+    "zone-A-robot-22-cross-zone",
+    "zone-A-robot-23-edge-service",
+    "zone-A-robot-24-same-zone",
+    "zone-A-robot-25-cross-zone",
+    "zone-A-robot-26-edge-service",
+    "zone-A-robot-27-same-zone",
+    "zone-A-robot-28-cross-zone",
+    "zone-A-robot-29-edge-service",
+    "zone-A-robot-3-same-zone",
+    "zone-A-robot-30-same-zone",
+    "zone-A-robot-31-cross-zone",
+    "zone-A-robot-32-edge-service",
+    "zone-A-robot-33-same-zone",
+    "zone-A-robot-34-cross-zone",
+    "zone-A-robot-35-edge-service",
+    "zone-A-robot-36-same-zone",
+    "zone-A-robot-37-cross-zone",
+    "zone-A-robot-38-edge-service",
+    "zone-A-robot-39-same-zone",
+    "zone-A-robot-4-cross-zone",
+    "zone-A-robot-40-cross-zone",
+    "zone-A-robot-41-edge-service",
+    "zone-A-robot-42-same-zone",
+    "zone-A-robot-43-cross-zone",
+    "zone-A-robot-44-edge-service",
+    "zone-A-robot-45-same-zone",
+    "zone-A-robot-46-cross-zone",
+    "zone-A-robot-47-edge-service",
+    "zone-A-robot-48-same-zone",
+    "zone-A-robot-49-cross-zone",
+    "zone-A-robot-5-edge-service",
+    "zone-A-robot-50-edge-service",
+    "zone-A-robot-51-same-zone",
+    "zone-A-robot-52-cross-zone",
+    "zone-A-robot-53-edge-service",
+    "zone-A-robot-54-same-zone",
+    "zone-A-robot-55-cross-zone",
+    "zone-A-robot-56-edge-service",
+    "zone-A-robot-57-same-zone",
+    "zone-A-robot-58-cross-zone",
+    "zone-A-robot-6-same-zone",
+    "zone-A-robot-7-cross-zone",
+    "zone-A-robot-8-edge-service",
+    "zone-A-robot-9-same-zone",
+    "zone-H-robot-1-cross-zone",
+    "zone-H-robot-10-cross-zone",
+    "zone-H-robot-13-cross-zone",
+    "zone-H-robot-16-cross-zone",
+    "zone-H-robot-19-cross-zone",
+    "zone-H-robot-22-cross-zone",
+    "zone-H-robot-25-cross-zone",
+    "zone-H-robot-28-cross-zone",
+    "zone-H-robot-31-cross-zone",
+    "zone-H-robot-34-cross-zone",
+    "zone-H-robot-37-cross-zone",
+    "zone-H-robot-4-cross-zone",
+    "zone-H-robot-40-cross-zone",
+    "zone-H-robot-43-cross-zone",
+    "zone-H-robot-46-cross-zone",
+    "zone-H-robot-49-cross-zone",
+    "zone-H-robot-52-cross-zone",
+    "zone-H-robot-55-cross-zone",
+    "zone-H-robot-58-cross-zone",
+    "zone-H-robot-7-cross-zone"
+  ],
+  "phases": {
+    "before": {
+      "affected": {
+        "offered": 158,
+        "delivered": 158,
+        "deadline_misses": 0,
+        "statuses": {
+          "delivered": 158
+        }
+      },
+      "unaffected": {
+        "offered": 806,
+        "delivered": 806,
+        "deadline_misses": 0,
+        "statuses": {
+          "delivered": 806
+        }
+      }
+    },
+    "outage": {
+      "affected": {
+        "offered": 158,
+        "delivered": 0,
+        "deadline_misses": 158,
+        "statuses": {
+          "no_route": 158
+        }
+      },
+      "unaffected": {
+        "offered": 806,
+        "delivered": 806,
+        "deadline_misses": 0,
+        "statuses": {
+          "delivered": 806
+        }
+      }
+    },
+    "recovered": {
+      "affected": {
+        "offered": 79,
+        "delivered": 79,
+        "deadline_misses": 0,
+        "statuses": {
+          "delivered": 79
+        }
+      },
+      "unaffected": {
+        "offered": 403,
+        "delivered": 403,
+        "deadline_misses": 0,
+        "statuses": {
+          "delivered": 403
+        }
+      }
+    }
+  },
+  "scope": "Single-switch zone isolation; immediate centralized updates; spaced samples, not hardware convergence. Lost packets remain in offered/deadline denominators."
+}

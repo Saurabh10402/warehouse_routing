@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "completed_processes": 2,
+  "suite": "editable-layout",
+  "runs": 1,
+  "replay": "PASS",
+  "artifact_checks": "PASS",
+  "devices": 500,
+  "zones": 8
+}

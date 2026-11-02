@@ -77,6 +77,8 @@ On Windows, extract the ZIP into a short folder such as `C:\Warehouse` to keep t
 
 ## Compare routing
 
+For a failure demonstration, choose **Open zone-switch failure and recovery** in the menu. On the first flow compare packets #1, #2 and #4 to see normal service, lost connectivity and recovery. The 158 losses are intentional measured outcomes, not a broken viewer. See docs/zone-outage.md for unaffected-zone examples and reproduction commands.
+
 Choose **Compare Dijkstra and ECMP routing** in OPEN_WAREHOUSE.html. The saved report compares one Dijkstra case against three ECMP hash seeds, with identical arrivals and strict-priority scheduling. Each case delivered all 2,410 packets in this illustrative workload; ECMP used both spines. This does not establish a capacity or deadline guarantee.
 
 To reproduce the comparison after installing the documented native prerequisites:
