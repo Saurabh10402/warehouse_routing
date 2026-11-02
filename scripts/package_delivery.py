@@ -14,7 +14,8 @@ BATCHES=['layout-20261101T203251Z-838ca5b1','layout-20261101T203641Z-425a1ee4',
          'layout-20261102T065135Z-da39e8c6','viewer-checkpoint015','delivery-viewers-018',
          'layout-20261102T121400Z-1b3f3906','layout-20261102T120343Z-c17f3ded',
          'ns3-warehouse-20261102T121634Z-4c776a9c','experiments-20261102T120006Z-a802bc3c',
-         'route-entry-regression-20261102T120420Z-681299aa']
+         'route-entry-regression-20261102T120420Z-681299aa',
+         'routing-20261102T152642Z-82d74709']
 
 
 def main():

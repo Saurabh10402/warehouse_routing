@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_020",
-  "utc": "2026-11-02T12:26:53.690032+00:00",
-  "phase": "all-robot-wired-delivery",
-  "source_state": "manifests/checkpoint_020.json",
+  "checkpoint": "checkpoint_021",
+  "utc": "2026-11-02T17:13:11.802225+00:00",
+  "phase": "all-robot-routing-comparison",
+  "source_state": "manifests/checkpoint_021.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -61,7 +61,8 @@
     "Standalone offline topology and recorded packet-path viewer with independent export audit",
     "500-device spine failure/recovery demonstration with audited rerouting and offline availability view",
     "Configurable all-robot traffic; 482 active sources and 2410 audited deliveries with exact replay",
-    "Unused endpoint route-entry elimination and invocation-local reference-distance cache, raw regressions identical"
+    "Unused endpoint route-entry elimination and invocation-local reference-distance cache, raw regressions identical",
+    "Audited identical-arrival 482-source Dijkstra / three-seed ECMP comparison with offline report"
   ],
   "pending": [
     "warehouse traffic/loss/availability calibration",
@@ -104,7 +105,8 @@
     "experiments-20261102T120006Z-a802bc3c",
     "layout-20261102T121400Z-1b3f3906",
     "layout-20261102T120343Z-c17f3ded",
-    "route-entry-regression-20261102T120420Z-681299aa"
+    "route-entry-regression-20261102T120420Z-681299aa",
+    "routing-20261102T152642Z-82d74709"
   ],
   "dependencies": {
     "ns3": "Verified wired 3.46.1 Release; current main/fresh 25 tests and 100 cases with every replay PASS. Historical 150 UNIT QUICK suites; no NR claim.",
@@ -116,7 +118,7 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Controlled Dijkstra versus ECMP comparison with identical all-robot traffic; preserve verified delivery.",
+  "next_action": "Demonstrate zone-switch failure and recovery with audited raw paths; retain working delivery.",
   "tested_code_commit": "fb60dad",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
@@ -170,7 +172,9 @@
     "layout-20261101T203251Z-838ca5b1",
     "layout-20261101T203641Z-425a1ee4",
     "layout-20261102T065135Z-da39e8c6",
-    "layout-20261102T121400Z-1b3f3906"
+    "layout-20261102T121400Z-1b3f3906",
+    "routing-20261102T152642Z-82d74709"
   ],
-  "delivery_receipt": "recovery_packages/receipt-checkpoint_020-delivery.json"
+  "delivery_receipt": "recovery_packages/receipt-checkpoint_021-delivery.json",
+  "routing_comparison_experiment": "routing-20261102T152642Z-82d74709"
 }

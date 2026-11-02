@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "completed_processes": 8,
+  "suite": "all-robot-routing-comparison",
+  "runs": 4,
+  "replay": "PASS every case",
+  "artifact_checks": "PASS",
+  "matched_arrivals": "PASS",
+  "hash_seeds": [
+    1,
+    2,
+    3
+  ],
+  "stochastic_evaluation": false
+}

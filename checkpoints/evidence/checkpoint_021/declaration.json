@@ -1,0 +1,22 @@
+{
+  "cases": [
+    "dijkstra-s1",
+    "ecmp-s1",
+    "ecmp-s2",
+    "ecmp-s3"
+  ],
+  "ecmp_hash_seeds": [
+    1,
+    2,
+    3
+  ],
+  "controls": "Only routing algorithm and ECMP hash seed vary; topology, scheduling and arrivals identical",
+  "metrics": [
+    "delivery",
+    "deadline misses",
+    "delivered mean/p95/max latency",
+    "per-scope outcomes",
+    "observed spine packet and flow counts"
+  ],
+  "scope": "Deterministic light functional workload; no saturation, stochastic replication or radio claim"
+}

@@ -74,3 +74,15 @@ Expected: PASS for all file hashes and local menu/viewer links. Intentional edit
 If the menu cannot find a viewer, extract the complete ZIP again into a new folder. If a simulation fails, preserve the printed batch, RUN_STATUS.json and logs; do not label partial output successful. For setup troubleshooting and verification boundaries, read docs/first-run.md and docs/warehouse-demo.md.
 
 On Windows, extract the ZIP into a short folder such as `C:\Warehouse` to keep the full regression-data paths below Windows path-length limits. Keep the extracted folder structure intact.
+
+## Compare routing
+
+Choose **Compare Dijkstra and ECMP routing** in OPEN_WAREHOUSE.html. The saved report compares one Dijkstra case against three ECMP hash seeds, with identical arrivals and strict-priority scheduling. Each case delivered all 2,410 packets in this illustrative workload; ECMP used both spines. This does not establish a capacity or deadline guarantee.
+
+To reproduce the comparison after installing the documented native prerequisites:
+
+```sh
+python scripts/compare_warehouse_routing.py
+```
+
+Use `--layout path/to/layout.json` for another layout. The runner builds/tests the native backend and independently audits every case and replay. Its new results folder contains `comparison.html`, `comparison.json`, input configurations, raw traces and provenance. See docs/routing-comparison.md for the measured results and scope.

@@ -1,0 +1,270 @@
+[
+  {
+    "case": "dijkstra-s1",
+    "all": {
+      "offered": 2410,
+      "delivered": 2410,
+      "deadline_misses": 0,
+      "mean_ms": 0.32169799170124525,
+      "p95_ms": 0.489231999999987,
+      "max_ms": 0.49609600000000853,
+      "spine_packets": {
+        "shared-spine-0": 805,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 161,
+        "shared-spine-1": 0
+      }
+    },
+    "same-zone": {
+      "offered": 815,
+      "delivered": 815,
+      "deadline_misses": 0,
+      "mean_ms": 0.24576000000000123,
+      "p95_ms": 0.2457600000000042,
+      "max_ms": 0.2457600000000042,
+      "spine_packets": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      }
+    },
+    "cross-zone": {
+      "offered": 805,
+      "delivered": 805,
+      "deadline_misses": 0,
+      "mean_ms": 0.4722354285714286,
+      "p95_ms": 0.4938079999999978,
+      "max_ms": 0.49609600000000853,
+      "spine_packets": {
+        "shared-spine-0": 805,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 161,
+        "shared-spine-1": 0
+      }
+    },
+    "edge-service": {
+      "offered": 790,
+      "delivered": 790,
+      "deadline_misses": 0,
+      "mean_ms": 0.24664334177215197,
+      "p95_ms": 0.26635200000000125,
+      "max_ms": 0.27092800000001205,
+      "spine_packets": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      }
+    }
+  },
+  {
+    "case": "ecmp-s1",
+    "all": {
+      "offered": 2410,
+      "delivered": 2410,
+      "deadline_misses": 0,
+      "mean_ms": 0.31799067219917054,
+      "p95_ms": 0.4686400000000006,
+      "max_ms": 0.48008000000000095,
+      "spine_packets": {
+        "shared-spine-0": 435,
+        "shared-spine-1": 370
+      },
+      "spine_flows": {
+        "shared-spine-0": 87,
+        "shared-spine-1": 74
+      }
+    },
+    "same-zone": {
+      "offered": 815,
+      "delivered": 815,
+      "deadline_misses": 0,
+      "mean_ms": 0.24576000000000123,
+      "p95_ms": 0.2457600000000042,
+      "max_ms": 0.2457600000000042,
+      "spine_packets": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      }
+    },
+    "cross-zone": {
+      "offered": 805,
+      "delivered": 805,
+      "deadline_misses": 0,
+      "mean_ms": 0.46113649689440994,
+      "p95_ms": 0.47321600000000075,
+      "max_ms": 0.48008000000000095,
+      "spine_packets": {
+        "shared-spine-0": 435,
+        "shared-spine-1": 370
+      },
+      "spine_flows": {
+        "shared-spine-0": 87,
+        "shared-spine-1": 74
+      }
+    },
+    "edge-service": {
+      "offered": 790,
+      "delivered": 790,
+      "deadline_misses": 0,
+      "mean_ms": 0.24664334177215197,
+      "p95_ms": 0.26635200000000125,
+      "max_ms": 0.27092800000001205,
+      "spine_packets": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      }
+    }
+  },
+  {
+    "case": "ecmp-s2",
+    "all": {
+      "offered": 2410,
+      "delivered": 2410,
+      "deadline_misses": 0,
+      "mean_ms": 0.31794795020746935,
+      "p95_ms": 0.4686400000000006,
+      "max_ms": 0.477792000000008,
+      "spine_packets": {
+        "shared-spine-0": 390,
+        "shared-spine-1": 415
+      },
+      "spine_flows": {
+        "shared-spine-0": 78,
+        "shared-spine-1": 83
+      }
+    },
+    "same-zone": {
+      "offered": 815,
+      "delivered": 815,
+      "deadline_misses": 0,
+      "mean_ms": 0.24576000000000123,
+      "p95_ms": 0.2457600000000042,
+      "max_ms": 0.2457600000000042,
+      "spine_packets": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      }
+    },
+    "cross-zone": {
+      "offered": 805,
+      "delivered": 805,
+      "deadline_misses": 0,
+      "mean_ms": 0.46100859627329194,
+      "p95_ms": 0.47321599999999997,
+      "max_ms": 0.477792000000008,
+      "spine_packets": {
+        "shared-spine-0": 390,
+        "shared-spine-1": 415
+      },
+      "spine_flows": {
+        "shared-spine-0": 78,
+        "shared-spine-1": 83
+      }
+    },
+    "edge-service": {
+      "offered": 790,
+      "delivered": 790,
+      "deadline_misses": 0,
+      "mean_ms": 0.24664334177215197,
+      "p95_ms": 0.26635200000000125,
+      "max_ms": 0.27092800000001205,
+      "spine_packets": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      }
+    }
+  },
+  {
+    "case": "ecmp-s3",
+    "all": {
+      "offered": 2410,
+      "delivered": 2410,
+      "deadline_misses": 0,
+      "mean_ms": 0.3180239004149382,
+      "p95_ms": 0.4686400000000006,
+      "max_ms": 0.4846560000000011,
+      "spine_packets": {
+        "shared-spine-0": 375,
+        "shared-spine-1": 430
+      },
+      "spine_flows": {
+        "shared-spine-0": 75,
+        "shared-spine-1": 86
+      }
+    },
+    "same-zone": {
+      "offered": 815,
+      "delivered": 815,
+      "deadline_misses": 0,
+      "mean_ms": 0.24576000000000123,
+      "p95_ms": 0.2457600000000042,
+      "max_ms": 0.2457600000000042,
+      "spine_packets": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      }
+    },
+    "cross-zone": {
+      "offered": 805,
+      "delivered": 805,
+      "deadline_misses": 0,
+      "mean_ms": 0.46123597515527953,
+      "p95_ms": 0.47321599999999997,
+      "max_ms": 0.4846560000000011,
+      "spine_packets": {
+        "shared-spine-0": 375,
+        "shared-spine-1": 430
+      },
+      "spine_flows": {
+        "shared-spine-0": 75,
+        "shared-spine-1": 86
+      }
+    },
+    "edge-service": {
+      "offered": 790,
+      "delivered": 790,
+      "deadline_misses": 0,
+      "mean_ms": 0.24664334177215197,
+      "p95_ms": 0.26635200000000125,
+      "max_ms": 0.27092800000001205,
+      "spine_packets": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      },
+      "spine_flows": {
+        "shared-spine-0": 0,
+        "shared-spine-1": 0
+      }
+    }
+  }
+]
