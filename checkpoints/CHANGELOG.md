@@ -141,3 +141,14 @@ scripts/package_delivery.py bundles current source/checkpoints, baseline and out
 Scope: working wired simulation and saved offline demonstrations. Device counts configurable; 24 representative flows, immediate centralized route updates. No guarantee of full-load reliability, hardware convergence, NR or radio behavior. Mac M4/Ubuntu ARM64 instructions remain unexecuted; no target-host binary or toolchain is bundled. Viewing needs only a browser; rebuilding needs documented prerequisites. Original broader research requirements are deferred by the user's two-day scope.
 
 Source manifest: manifests/checkpoint_018.json. Next: use the verified delivery receipt, rehearse the included walkthrough, and perform target-host setup/run validation when that host becomes available. Do not add research features before submission.
+
+
+# checkpoint_025 - Illustrated project report published
+
+Completed the requested 24-page PDF covering architecture, feature status, checkpoints001-024, validation, native routing/failure data, native scheduling and separate core protected/capacity studies, seven numbered figures (including the actual viewer), tables, local website walkthrough, Windows setup, prepared Ubuntu/macOS steps, troubleshooting and prioritized remaining work. Source evidence is checkpoint024; immutable demo ZIP remains checkpoint022. No simulator implementation or experimental data changed.
+
+Read checkpoint024 state/session/next and verified before report drafting. Reverification during continuation differed only for the two new report source files; expected additions retained. Authored with ReportLab, rendered using Poppler and visually inspected every page. Fixed orphan content and command wrapping. Final PDF has24 pages; public anonymous download SHA256 matches local PDF. See evidence/checkpoint_025/report-verification.json for digest and URL. The PDF is a separate GitHub release asset; source builder/text and README link are tracked. Builder requires ReportLab plus original referenced results/screenshot data; viewing the published PDF does not.
+
+Ran scripts/verify.py: initial sandbox run failed five Python tests due Windows temporary-file permissions; rerun outside sandbox PASS21/21. No new full native or132-run core matrix was run for this reporting-only change. Historical data retain their original provenance. All original archives/manifests/results preserved. macOS/Ubuntu execution, realistic failure detection and radio remain pending as stated in report.
+
+Next: user review and presentation rehearsal using the report and unchanged demo; if requested, validate a fresh target-host install and preserve setup/smoke/demo logs. Avoid adding research features before handoff. Source manifest: manifests/checkpoint_025.json.

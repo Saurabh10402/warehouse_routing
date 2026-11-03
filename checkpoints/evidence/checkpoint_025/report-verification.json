@@ -1,0 +1,12 @@
+{
+  "file": "output\\pdf\\warehouse_project_report.pdf",
+  "pages": 24,
+  "sha256": "2ec4adc81c4ce59b0d90e20303904953b47da2482cbbef7e0af0431e2ad418e5",
+  "bytes": 378836,
+  "public_url": "https://github.com/Saurabh10402/warehouse_routing/releases/download/checkpoint-022/warehouse-project-report-20261103.pdf",
+  "anonymous_download_sha256_match": true,
+  "visual_qa": "All 24 pages rendered and inspected; page21 command continuation fixed and re-inspected. No clipped tables or orphan pages.",
+  "source_evidence_checkpoint": "checkpoint_024",
+  "verification": "scripts/verify.py PASS 21/21 outside sandbox; initial sandbox attempt failed Windows temp access",
+  "new_simulation_experiments": false
+}

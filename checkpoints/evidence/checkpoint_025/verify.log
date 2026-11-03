@@ -1,0 +1,64 @@
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --preset bootstrap -B C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\build\verified-bootstrap -DPython3_EXECUTABLE=C:\Users\ermec\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -DEALR_REQUIRE_NS3=OFF -DEALR_NS3_PREFIX= -DEALR_BOOST_SOURCE=C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\boost_1_85_0
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  EALR_BUILD_TESTS="ON"
+  EALR_ENABLE_NS3="OFF"
+
+-- EALR 0.1.0: repository bootstrap configured
+-- ns-3 support: disabled
+-- 5G-LENA NR support: disabled
+-- Configuring done (1.2s)
+-- Generating done (0.2s)
+-- Build files have been written to: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/build/verified-bootstrap
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\cmake.EXE --build C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\build\verified-bootstrap -j 4
+ninja: no work to do.
++ C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\.tools\mingw64\bin\ctest.EXE --test-dir C:\Users\ermec\Downloads\Routing-WIPRO-20261029T174553Z-1-001\Routing-WIPRO\build\verified-bootstrap --output-on-failure
+Internal ctest changing into directory: C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/build/verified-bootstrap
+Test project C:/Users/ermec/Downloads/Routing-WIPRO-20261029T174553Z-1-001/Routing-WIPRO/build/verified-bootstrap
+      Start  1: ealr_framework_smoke
+ 1/21 Test  #1: ealr_framework_smoke .......................   Passed    0.15 sec
+      Start  2: ealr_configuration_tests
+ 2/21 Test  #2: ealr_configuration_tests ...................   Passed    0.09 sec
+      Start  3: ealr_warehouse_configuration_tests
+ 3/21 Test  #3: ealr_warehouse_configuration_tests .........   Passed    0.13 sec
+      Start  4: ealr_temperature_safety_controller_tests
+ 4/21 Test  #4: ealr_temperature_safety_controller_tests ...   Passed    0.12 sec
+      Start  5: ealr_robot_tests
+ 5/21 Test  #5: ealr_robot_tests ...........................   Passed    0.18 sec
+      Start  6: ealr_routing_interface_tests
+ 6/21 Test  #6: ealr_routing_interface_tests ...............   Passed    0.13 sec
+      Start  7: ealr_dijkstra_tests
+ 7/21 Test  #7: ealr_dijkstra_tests ........................   Passed    0.12 sec
+      Start  8: ealr_greedy_tests
+ 8/21 Test  #8: ealr_greedy_tests ..........................   Passed    0.12 sec
+      Start  9: ealr_ealr_tests
+ 9/21 Test  #9: ealr_ealr_tests ............................   Passed    0.13 sec
+      Start 10: ealr_metrics_tests
+10/21 Test #10: ealr_metrics_tests .........................   Passed    0.16 sec
+      Start 11: ealr_core_regression_tests
+11/21 Test #11: ealr_core_regression_tests .................   Passed    0.15 sec
+      Start 12: ealr_fabric_configuration_tests
+12/21 Test #12: ealr_fabric_configuration_tests ............   Passed    0.39 sec
+      Start 13: ealr_fabric_simulation_tests
+13/21 Test #13: ealr_fabric_simulation_tests ...............   Passed    0.24 sec
+      Start 14: ealr_fabric_metrics_tests
+14/21 Test #14: ealr_fabric_metrics_tests ..................   Passed    0.11 sec
+      Start 15: ealr_ecmp_tests
+15/21 Test #15: ealr_ecmp_tests ............................   Passed    0.48 sec
+      Start 16: ealr_protected_queue_tests
+16/21 Test #16: ealr_protected_queue_tests .................   Passed    0.20 sec
+      Start 17: ealr_process_control_tests
+17/21 Test #17: ealr_process_control_tests .................   Passed    2.82 sec
+      Start 18: ealr_verification_tests
+18/21 Test #18: ealr_verification_tests ....................   Passed    0.44 sec
+      Start 19: ealr_warehouse_study_tests
+19/21 Test #19: ealr_warehouse_study_tests .................   Passed    0.27 sec
+      Start 20: ealr_plotting_tests
+20/21 Test #20: ealr_plotting_tests ........................   Passed    0.17 sec
+      Start 21: ealr_fabric_cli_tests
+21/21 Test #21: ealr_fabric_cli_tests ......................   Passed    3.40 sec
+
+100% tests passed, 0 tests failed out of 21
+
+Total Test time (real) =  10.17 sec

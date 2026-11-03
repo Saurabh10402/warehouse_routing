@@ -1,5 +1,3 @@
-# Comprehensive report next
+# Report and handoff ready
 
-GitHub source and verified downloadable demonstration package are published. Use README.md for step-by-step installation, saved website usage and simulation reproduction. Public download and fresh extraction passed; no new clean-machine installation claim.
-
-Next deliver the complete illustrated report requested by the user: architecture and updates, feature inventory, native/core/legacy distinctions, measured tables/graphs with source batches, visualization screenshots and local-PC guide, validation, unresolved limitations and next work. Preserve the checkpoint022 release as the immutable demo artifact; current README is newer. Mac/Ubuntu runtime remains untested.
+The illustrated24-page report and README are published. Next: user review/presentation rehearsal; fresh target-host installation validation when requested. Preserve checkpoint022 demo and original results. Mac/Ubuntu execution, delayed failure detection and radio remain future work; see the report priority table.

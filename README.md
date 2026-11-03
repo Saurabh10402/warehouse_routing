@@ -2,6 +2,12 @@
 
 A configurable stationary warehouse network with native wired ns-3 routing, Dijkstra/ECMP comparison, priority queues, failure/recovery demonstrations and an offline packet-path viewer. The supplied layout has **8 zones and 500 devices: 482 robots, 8 zone switches, 8 local edge servers and 2 shared spines**.
 
+## Complete project report
+
+[Download the illustrated 24-page PDF report](https://github.com/Saurabh10402/warehouse_routing/releases/download/checkpoint-022/warehouse-project-report-20261103.pdf). It covers architecture, features and development history, measured tables and graphs, the visualization walkthrough, installation, limitations and next steps. Prepared 3 November 2026 using evidence through checkpoint024; the demonstration ZIP remains the unchanged checkpoint022 snapshot.
+
+The report text is preserved in [docs/project-report-source.md](docs/project-report-source.md). The optional `scripts/build_project_report.py` requires ReportLab and the original result/screenshot folders referenced in the script; these are reporting dependencies, not requirements for viewing the PDF or running the simulator.
+
 ## 1. View the working demonstrations (no installation required)
 
 1. Open [the delivery release](https://github.com/Saurabh10402/warehouse_routing/releases/tag/checkpoint-022).

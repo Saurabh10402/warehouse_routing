@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_024",
-  "utc": "2026-11-03T05:32:40.737678+00:00",
-  "phase": "github-delivery-and-installation-guide",
-  "source_state": "manifests/checkpoint_024.json",
+  "checkpoint": "checkpoint_025",
+  "utc": "2026-11-03T05:50:03.659807+00:00",
+  "phase": "illustrated-project-report-published",
+  "source_state": "manifests/checkpoint_025.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -183,5 +183,17 @@
   "zone_outage_experiment": "layout-20261102T171806Z-fe0a210a",
   "repository_url": "https://github.com/Saurabh10402/warehouse_routing",
   "github_release": "https://github.com/Saurabh10402/warehouse_routing/releases/tag/checkpoint-022",
-  "github_asset": "https://github.com/Saurabh10402/warehouse_routing/releases/download/checkpoint-022/warehouse-demo-checkpoint-022.zip"
+  "github_asset": "https://github.com/Saurabh10402/warehouse_routing/releases/download/checkpoint-022/warehouse-demo-checkpoint-022.zip",
+  "project_report": {
+    "file": "output\\pdf\\warehouse_project_report.pdf",
+    "pages": 24,
+    "sha256": "2ec4adc81c4ce59b0d90e20303904953b47da2482cbbef7e0af0431e2ad418e5",
+    "bytes": 378836,
+    "public_url": "https://github.com/Saurabh10402/warehouse_routing/releases/download/checkpoint-022/warehouse-project-report-20261103.pdf",
+    "anonymous_download_sha256_match": true,
+    "visual_qa": "All 24 pages rendered and inspected; page21 command continuation fixed and re-inspected. No clipped tables or orphan pages.",
+    "source_evidence_checkpoint": "checkpoint_024",
+    "verification": "scripts/verify.py PASS 21/21 outside sandbox; initial sandbox attempt failed Windows temp access",
+    "new_simulation_experiments": false
+  }
 }
