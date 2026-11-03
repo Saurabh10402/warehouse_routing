@@ -1,0 +1,12 @@
+{
+  "offered": 2410,
+  "delivered": 2252,
+  "deadline_misses": 158,
+  "queue_drops": 0,
+  "no_route": 158,
+  "cutoff": 0,
+  "source_unavailable": 0,
+  "availability_drops": 0,
+  "ip_drops": 0
+}
+Viewer: C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\zone-failure-viewer.html

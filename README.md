@@ -55,18 +55,18 @@ This checks delivery hashes and local links. It requires the delivery ZIP's `DEL
 
 ## 2. Obtain source to run new simulations
 
-Install [Git](https://git-scm.com/downloads) and [Python 3.12](https://www.python.org/downloads/) if needed, then:
+For a Git clone, install [Git](https://git-scm.com/downloads) and [Python 3.12](https://www.python.org/downloads/release/python-31210/) if needed, then:
 
 ```sh
 git clone https://github.com/Saurabh10402/warehouse_routing.git
 cd warehouse_routing
 ```
 
-Alternatively use **Code → Download ZIP**, extract it and open a terminal in its root. All following commands run from the directory containing `CMakeLists.txt`, `configs` and `scripts`. A source clone has no saved result folders; generate your own or download the delivery asset.
+Alternatively use **Code → Download ZIP**, extract it and open a terminal in its root; Git is not required for this route. All following commands run from the directory containing `CMakeLists.txt`, `configs` and `scripts`. A source clone has no saved result folders; generate your own or download the delivery asset.
 
 ### Windows PowerShell — validated platform
 
-1. Install Python 3.12 and reopen PowerShell. Check `py -3.12 --version`.
+1. Install the **Windows installer (64-bit)** from the [Python 3.12.10 release page](https://www.python.org/downloads/release/python-31210/), including the Python launcher, and reopen PowerShell. Check `py -3.12 --version`. The general Python download button may offer a different version. If the launcher is absent, use your installed Python 3.12 executable's full path instead. If Windows Installer fails, use the standalone fallback below.
 2. Create a project-local Python environment:
 
 ```powershell
@@ -90,6 +90,24 @@ This downloads checksum-verified dependencies into `.tools`; it does not edit gl
 Expected fixture: **180/180 delivered, zero deadline misses**. This verifies the abstract-link core, not native ns-3.
 
 **For every later command written as `python ...`, use `.\.venv\Scripts\python.exe ...` in Windows PowerShell.** You do not need to activate the environment or change execution policy.
+
+#### Standalone Python fallback when Windows Installer fails
+
+On the fresh Windows installation check, the signed Python installer failed with MSI error `0x80070003` while opening its cached package. The following alternative uses the [official Python NuGet distribution](https://docs.python.org/3.12/using/windows.html#the-nuget-org-packages), without MSI, administrator access or global PATH changes. It is separate from the smaller embeddable ZIP distribution.
+
+Run from the extracted source root, using a parent directory where `python312` does not already exist:
+
+```powershell
+Invoke-WebRequest 'https://api.nuget.org/v3-flatcontainer/python/3.12.10/python.3.12.10.nupkg' -OutFile ..\python-nuget.zip
+$expected = '0EB85C2DFCCCCF1B17352DE4C397F69194035B7D37149EACC16F1147D93DE3B8'
+if ((Get-FileHash ..\python-nuget.zip -Algorithm SHA256).Hash -ne $expected) { throw 'Python package checksum mismatch' }
+Expand-Archive -LiteralPath ..\python-nuget.zip -DestinationPath ..\python312
+..\python312\tools\python.exe --version
+..\python312\tools\python.exe -m venv .venv
+.\.venv\Scripts\python.exe -m pip --version
+```
+
+Then continue at Windows step 3 (`setup_portable.py --plots`). Keep the sibling `python312` folder: the virtual environment depends on it. This route does not install the `py` launcher. Do not overlay an existing Python/environment directory; preserve failed-install logs and use a fresh folder when retrying a clean installation.
 
 ### Ubuntu 24.04 — prepared, not runtime-validated
 
@@ -134,6 +152,8 @@ python scripts/run_ns3_smoke.py
 ```
 
 The installer downloads pinned **ns-3.46.1**, checks its SHA256, builds the wired runtime and installs it beneath `.tools/ns3-wired-install`. The first build can take substantial time. Use `--jobs 2` on low-memory PCs. Some upstream tests are quiet for several minutes; preserve logs on failure rather than deleting evidence.
+
+If compilation stops, retain the terminal output and `.tools/ns3-setup-*.log`. A retry with `python scripts/setup_ns3.py --jobs 2` verifies the pinned source and reuses completed build steps. On this PC, one four-worker attempt reported `cannot execute ... as.exe: CreateProcess: No such file or directory` even though the assembler existed and executed afterward. Do not assume every such error is memory-related: check that the named tool exists, keep the log, and do not disable security software or checksum checks.
 
 The smoke fixture should deliver **3 packets with 4.416 ms mean delay** and deterministic replay. It cannot silently fall back to the abstract core. This setup does not install 5G-LENA/NR.
 
@@ -191,7 +211,7 @@ Keep JSON valid (double quotes, no comments/trailing commas). Read [the layout/t
 | Spine failure/recovery | 120/120 with observed rerouting |
 | Zone A switch failure | 2,252/2,410; 158 no-route losses/deadline misses; recovery verified |
 
-Windows evidence includes 25 native build tests, 21 core tests, independent audits, exact replays, and historical full native100/core132 regressions. See [routing results](docs/routing-comparison.md), [zone failure](docs/zone-outage.md), [native validation](docs/ns3-warehouse-results.md), and [current checkpoint](checkpoints/CURRENT_STATUS.md).
+Windows evidence includes 25 native build tests, 21 core tests, independent audits, exact replays, and historical full native100/core132 regressions. A separate [fresh Windows installation check](docs/windows-installation-check.md) reproduced the smoke test, all four warehouse scenarios, viewer exports, routing comparison and full 132-case core suite using a new source ZIP and toolchain. See [routing results](docs/routing-comparison.md), [zone failure](docs/zone-outage.md), [native validation](docs/ns3-warehouse-results.md), and [current checkpoint](checkpoints/CURRENT_STATUS.md).
 
 ```sh
 python scripts/verify.py
@@ -207,6 +227,7 @@ The last command is the **abstract core** 132-run/three-seed study; `--quick` is
 |---|---|
 | Missing/blank viewer | Download the delivery asset, extract everything, and open the root menu; a source clone has no saved results. |
 | Python not found | Install Python 3.12; reopen the terminal. On Windows create the environment using `py -3.12`. |
+| Python MSI installation fails | Preserve installer logs; use the standalone Python fallback above if the normal installer cannot complete. |
 | Compiler/CMake/Ninja/Boost missing | Complete platform setup; on Windows use `setup_portable.py` with the same Python environment. |
 | ns-3 prefix absent | Complete `setup_ns3.py`; `--ns3-prefix` is only for a compatible installed native runtime. |
 | Windows path too long | Extract to a short folder such as `C:\Warehouse`. |
@@ -220,6 +241,6 @@ The last command is the **abstract core** 132-run/three-seed study; `--quick` is
 
 Powered infrastructure, peer/service communication, priority scheduling and resilience are the primary direction. EALR remains **legacy** relay research. Protected QoS and capacity/admission studies are experimental: fixed P0 admission can worsen emergency-flood results, and no tested setting eliminated all burst/flood deadline misses. See [study design](docs/warehouse-study.md), [protected-queue results](docs/protected-queue-results.md), and [capacity results](docs/capacity-results.md).
 
-The native model is stationary wired IPv4/UDP with immediate centralized failure knowledge. It is not Ethernet switching, Wi-Fi, private 5G/NR, hardware convergence, or guaranteed deployment performance. Mac/Ubuntu execution, calibrated real warehouse workloads and additional research integration remain pending. The comprehensive illustrated project report is the next requested deliverable.
+The native model is stationary wired IPv4/UDP with immediate centralized failure knowledge. It is not Ethernet switching, Wi-Fi, private 5G/NR, hardware convergence, or guaranteed deployment performance. Mac/Ubuntu execution, calibrated real warehouse workloads and additional research integration remain pending. The comprehensive illustrated project report is linked at the top of this README; this maintained guide includes later installation corrections.
 
 Git contains source, configs, tests and checkpoint summaries. Release ZIPs separately preserve saved viewers, raw/replay results, integrity manifests and a recovery bundle. Toolchains/build trees are intentionally not uploaded. Preserve previous results and manifests. See [reproducibility](docs/reproducibility.md) for recovery and [START_HERE](START_HERE.md) for the presentation walkthrough.

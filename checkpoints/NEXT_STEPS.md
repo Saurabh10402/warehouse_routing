@@ -1,3 +1,3 @@
-# Report and handoff ready
+# Fresh Windows installation complete
 
-The illustrated24-page report and README are published. Next: user review/presentation rehearsal; fresh target-host installation validation when requested. Preserve checkpoint022 demo and original results. Mac/Ubuntu execution, delayed failure detection and radio remain future work; see the report priority table.
+Use the README and docs/windows-installation-check.md for tested Windows steps and evidence. Review the saved demo/report; validate Mac/Ubuntu only when those hosts are available. Preserve all raw results and earlier releases.

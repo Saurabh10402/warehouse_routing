@@ -152,3 +152,14 @@ Read checkpoint024 state/session/next and verified before report drafting. Rever
 Ran scripts/verify.py: initial sandbox run failed five Python tests due Windows temporary-file permissions; rerun outside sandbox PASS21/21. No new full native or132-run core matrix was run for this reporting-only change. Historical data retain their original provenance. All original archives/manifests/results preserved. macOS/Ubuntu execution, realistic failure detection and radio remain pending as stated in report.
 
 Next: user review and presentation rehearsal using the report and unchanged demo; if requested, validate a fresh target-host install and preserve setup/smoke/demo logs. Avoid adding research features before handoff. Source manifest: manifests/checkpoint_025.json.
+
+
+# checkpoint_026 - Fresh Windows installation and README corrections
+
+Fresh public GitHub source ZIP at commit f9649a8 and separate checkpoint022 demo ZIP were extracted under C:\Users\ermec\WarehouseTest-20261103. No old build tree or compiler copied. Signed normal Python installer failed Windows MSI 0x80070003; official Python NuGet 3.12.10 fallback created a working local venv. README documents this fallback and optional source ZIP route. Portable GCC/Boost/plots setup passed. Initial 4-worker ns-3 build failed to launch an existing assembler; retained log, retried at 2 workers without changing code or disabling tests. ns-3 setup passed 150 UNIT QUICK suites.
+
+The fresh project passed 21 core tests and the 180/180 first-run fixture. Full 132-case core study, replay and plots passed; 133 packet traces matched the preserved known-good study byte for byte. Native smoke passed 25/25 project tests and 3/3 packets, 4.416 ms. Fresh native baseline 120/120, all robots 2410/2410, spine outage 120/120, zone outage 2252/2410 with 158 expected no_route losses all passed exact replay and audit. Four viewer exports passed independent checks. Dijkstra and three ECMP comparison cases each delivered 2410/2410 and passed replay/matched-arrival checks. Evidence and batch identities: evidence/checkpoint_026.
+
+Fresh demo ZIP integrity passed 4424 hashes and 6 links/pages; earlier browser interaction checked five saved demos and routing/failure controls. Browser automation later stopped; newly generated HTML was exporter-audited but not interactively rechecked. Original raw results remain in the separate test workspace; previous archives/manifests/results preserved. No simulation source changed. Windows standard MSI cause and earlier transient assembler launch cause are unestablished; working fallback/retry are documented. Mac/Ubuntu execution and radio remain pending.
+
+Next: reviewer presentation from documented README and report; separately validate macOS/Ubuntu when available. Source manifest: manifests/checkpoint_026.json.

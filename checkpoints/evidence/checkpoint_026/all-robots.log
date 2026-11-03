@@ -1,0 +1,78 @@
++ C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\.tools\mingw64\bin\cmake.EXE --preset default -B C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\build\verified-ns3 -DPython3_EXECUTABLE=C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\.venv\Scripts\python.exe -DEALR_REQUIRE_NS3=ON -DEALR_NS3_PREFIX= -DCMAKE_PREFIX_PATH=C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\.tools\ns3-wired-install -DEALR_NS3_PREFIX=C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\.tools\ns3-wired-install -DEALR_BOOST_SOURCE=C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\.tools\boost_1_85_0
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  EALR_BUILD_TESTS="ON"
+  EALR_ENABLE_NS3="ON"
+
+-- Found ns-3 wired packet runtime targets.
+-- Optional NetAnim unavailable: legacy animation scenario excluded; wired packet runtime enabled.
+-- 5G-LENA NR unavailable; wired ns-3 runtime is not radio validation.
+-- EALR 0.1.0: repository bootstrap configured
+-- ns-3 support: available
+-- 5G-LENA NR support: not found (install a 5G-LENA-enabled ns-3 package for NR device setup)
+-- Configuring done (2.8s)
+-- Generating done (0.2s)
+-- Build files have been written to: C:/Users/ermec/WarehouseTest-20261103/warehouse_routing-main/build/verified-ns3
++ C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\.tools\mingw64\bin\cmake.EXE --build C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\build\verified-ns3 -j 4
+ninja: no work to do.
++ C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\.tools\mingw64\bin\ctest.EXE --test-dir C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\build\verified-ns3 --output-on-failure
+Internal ctest changing into directory: C:/Users/ermec/WarehouseTest-20261103/warehouse_routing-main/build/verified-ns3
+Test project C:/Users/ermec/WarehouseTest-20261103/warehouse_routing-main/build/verified-ns3
+      Start  1: ealr_framework_smoke
+ 1/25 Test  #1: ealr_framework_smoke .......................   Passed    0.07 sec
+      Start  2: ealr_configuration_tests
+ 2/25 Test  #2: ealr_configuration_tests ...................   Passed    0.08 sec
+      Start  3: ealr_warehouse_configuration_tests
+ 3/25 Test  #3: ealr_warehouse_configuration_tests .........   Passed    0.07 sec
+      Start  4: ealr_temperature_safety_controller_tests
+ 4/25 Test  #4: ealr_temperature_safety_controller_tests ...   Passed    0.06 sec
+      Start  5: ealr_robot_tests
+ 5/25 Test  #5: ealr_robot_tests ...........................   Passed    0.07 sec
+      Start  6: ealr_routing_interface_tests
+ 6/25 Test  #6: ealr_routing_interface_tests ...............   Passed    0.06 sec
+      Start  7: ealr_dijkstra_tests
+ 7/25 Test  #7: ealr_dijkstra_tests ........................   Passed    0.07 sec
+      Start  8: ealr_greedy_tests
+ 8/25 Test  #8: ealr_greedy_tests ..........................   Passed    0.08 sec
+      Start  9: ealr_ealr_tests
+ 9/25 Test  #9: ealr_ealr_tests ............................   Passed    0.07 sec
+      Start 10: ealr_metrics_tests
+10/25 Test #10: ealr_metrics_tests .........................   Passed    0.07 sec
+      Start 11: ealr_core_regression_tests
+11/25 Test #11: ealr_core_regression_tests .................   Passed    0.06 sec
+      Start 12: ealr_fabric_configuration_tests
+12/25 Test #12: ealr_fabric_configuration_tests ............   Passed    0.29 sec
+      Start 13: ealr_fabric_simulation_tests
+13/25 Test #13: ealr_fabric_simulation_tests ...............   Passed    0.15 sec
+      Start 14: ealr_fabric_metrics_tests
+14/25 Test #14: ealr_fabric_metrics_tests ..................   Passed    0.07 sec
+      Start 15: ealr_ecmp_tests
+15/25 Test #15: ealr_ecmp_tests ............................   Passed    0.53 sec
+      Start 16: ealr_protected_queue_tests
+16/25 Test #16: ealr_protected_queue_tests .................   Passed    0.14 sec
+      Start 17: ealr_process_control_tests
+17/25 Test #17: ealr_process_control_tests .................   Passed    2.60 sec
+      Start 18: ealr_verification_tests
+18/25 Test #18: ealr_verification_tests ....................   Passed    0.33 sec
+      Start 19: ealr_warehouse_study_tests
+19/25 Test #19: ealr_warehouse_study_tests .................   Passed    0.27 sec
+      Start 20: ealr_plotting_tests
+20/25 Test #20: ealr_plotting_tests ........................   Passed    0.16 sec
+      Start 21: ealr_fabric_cli_tests
+21/25 Test #21: ealr_fabric_cli_tests ......................   Passed    6.55 sec
+      Start 22: ealr_ns3_fabric_tests
+22/25 Test #22: ealr_ns3_fabric_tests ......................   Passed    0.20 sec
+      Start 23: ealr_ns3_fabric_cli_tests
+23/25 Test #23: ealr_ns3_fabric_cli_tests ..................   Passed    8.54 sec
+      Start 24: ealr_ns3_packet_tests
+24/25 Test #24: ealr_ns3_packet_tests ......................   Passed    0.13 sec
+      Start 25: ealr_flow_monitor_tests
+25/25 Test #25: ealr_flow_monitor_tests ....................   Passed    0.13 sec
+
+100% tests passed, 0 tests failed out of 25
+
+Total Test time (real) =  20.94 sec
++ C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\results\layout-20261103T155306Z-44b7d650\config.json --output C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\results\layout-20261103T155306Z-44b7d650\run
++ C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\build\verified-ns3\ealr-ns3-fabric.exe --config C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\results\layout-20261103T155306Z-44b7d650\config.json --output C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\results\layout-20261103T155306Z-44b7d650\replay
+PASS: C:\Users\ermec\WarehouseTest-20261103\warehouse_routing-main\results\layout-20261103T155306Z-44b7d650

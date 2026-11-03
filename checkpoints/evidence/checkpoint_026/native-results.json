@@ -1,0 +1,83 @@
+[
+  {
+    "batch": "layout-20261103T155230Z-d522e88a",
+    "status": {
+      "status": "PASS",
+      "completed_processes": 2,
+      "suite": "editable-layout",
+      "runs": 1,
+      "replay": "PASS",
+      "artifact_checks": "PASS",
+      "devices": 500,
+      "zones": 8
+    }
+  },
+  {
+    "batch": "layout-20261103T155306Z-44b7d650",
+    "status": {
+      "status": "PASS",
+      "completed_processes": 2,
+      "suite": "editable-layout",
+      "runs": 1,
+      "replay": "PASS",
+      "artifact_checks": "PASS",
+      "devices": 500,
+      "zones": 8
+    }
+  },
+  {
+    "batch": "layout-20261103T155502Z-718452b7",
+    "status": {
+      "status": "PASS",
+      "completed_processes": 2,
+      "suite": "editable-layout",
+      "runs": 1,
+      "replay": "PASS",
+      "artifact_checks": "PASS",
+      "devices": 500,
+      "zones": 8
+    }
+  },
+  {
+    "batch": "layout-20261103T155548Z-df947d8f",
+    "status": {
+      "status": "PASS",
+      "completed_processes": 2,
+      "suite": "editable-layout",
+      "runs": 1,
+      "replay": "PASS",
+      "artifact_checks": "PASS",
+      "devices": 500,
+      "zones": 8
+    }
+  },
+  {
+    "batch": "ns3-smoke-20261103T155119Z-79afd81d",
+    "status": {
+      "status": "PASS",
+      "suite": "ns3-wired-smoke",
+      "runs": 1,
+      "replay": "PASS",
+      "checks": "analytical UDP delivery/delay, constant positions, one/two-hop loss tests",
+      "scope": "Prerequisite runtime validation only; schema-v2/NR integration pending"
+    }
+  },
+  {
+    "batch": "routing-20261103T155932Z-46714c41",
+    "status": {
+      "status": "PASS",
+      "completed_processes": 8,
+      "suite": "all-robot-routing-comparison",
+      "runs": 4,
+      "replay": "PASS every case",
+      "artifact_checks": "PASS",
+      "matched_arrivals": "PASS",
+      "hash_seeds": [
+        1,
+        2,
+        3
+      ],
+      "stochastic_evaluation": false
+    }
+  }
+]
