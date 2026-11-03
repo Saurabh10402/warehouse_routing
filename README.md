@@ -1,177 +1,219 @@
-# WIPRO warehouse networking research prototype
+# Warehouse routing simulation — installation and usage
 
-## Current working demonstration
+A configurable stationary warehouse network with native wired ns-3 routing, Dijkstra/ECMP comparison, priority queues, failure/recovery demonstrations and an offline packet-path viewer. The supplied layout has **8 zones and 500 devices: 482 robots, 8 zone switches, 8 local edge servers and 2 shared spines**.
 
-The latest validated demonstration has **8 configurable zones, 500 total devices and
-482 robots**, with native wired ns-3 routing, all-robot traffic, Dijkstra/ECMP comparison,
-spine rerouting, and zone-switch failure/recovery. See [the current checkpoint](checkpoints/CURRENT_STATUS.md)
-and [the local-use guide](START_HERE.md).
+## 1. View the working demonstrations (no installation required)
 
-For the ready-to-open visualization and saved results, use the verified delivery ZIP
-attached to [GitHub Releases](https://github.com/Saurabh10402/warehouse_routing/releases).
-Extract the complete ZIP, then open `OPEN_WAREHOUSE.html`. On Windows use a short extraction
-folder such as `C:\Warehouse`. The viewer works offline; its controls inspect recorded
-simulation data. The source template in `scripts/` is not a populated viewer.
+1. Open [the delivery release](https://github.com/Saurabh10402/warehouse_routing/releases/tag/checkpoint-022).
+2. Under **Assets**, download **warehouse-demo-checkpoint-022.zip**. Do not select GitHub's automatic “Source code” ZIP: it omits generated results.
+3. Extract the **entire** archive. On Windows use a short folder such as `C:\Warehouse` (right-click → Extract All). On macOS/Linux use a short folder in your home directory.
+4. Find the extracted folder containing `OPEN_WAREHOUSE.html`, `START_HERE.md` and `results`.
+5. Double-click **OPEN_WAREHOUSE.html**, or open it through your browser's File → Open menu. Keep the folder structure intact.
+6. Select a demonstration:
 
-**A source clone alone does not include generated result folders.** Download the delivery
-ZIP for the saved demonstrations, or install the documented prerequisites and regenerate
-results. Build trees, toolchains and generated raw outputs are deliberately excluded from
-Git; release archives carry the separate recovery data. Windows native execution has been
-validated. Mac/Ubuntu execution remains untested, and there is no radio/NR or hardware
-convergence claim. The sections below describe the broader preserved research work.
+| Demonstration | Recorded behavior |
+|---|---|
+| Working topology viewer | 500 devices, 24 representative flows, 120 packets |
+| Traffic from all 482 robots | One flow per robot, 2,410 packets |
+| Dijkstra and ECMP comparison | Identical arrivals; one Dijkstra case and three ECMP hash seeds |
+| Spine failure | Alternate-spine routing during failure and recovery |
+| Zone-switch failure | Zone A isolation while unaffected communication continues |
 
-A configurable **stationary warehouse network** with priority-aware packet forwarding,
-same-zone/cross-zone communication, local safety events, failures, and reproducible metrics.
-The reference leaf-spine design is supported; the physical warehouse layout is not finalized.
-Ten zones and 500 endpoints are example inputs, not algorithm requirements.
+### Viewer controls
 
-The primary executable is `ealr-fabric`, an independently tested C++17 discrete-event
-**abstract-link simulator**. It models transmission, propagation, finite queues and packet
-paths. Wi-Fi/private-5G labels do not implement radio scheduling or a full 5G core.
-Legacy ns-3/5G-LENA scaffolding is separate and has its own verification status.
+1. Choose a **Traffic flow**, then a **Recorded packet**.
+2. Read its status, latency and observed path. Green links show the actual recorded route.
+3. Use **Next hop**, **Previous hop**, and **Show full path** to inspect the route.
+4. Toggle **Show all robots** to simplify the diagram; this does not change the simulation.
+5. Click a device for its identity; read **Availability events** for failure state at packet creation.
+6. In the zone-switch demo, keep the first flow and compare #1 (20 ms), #2 (40 ms), and #4 (80 ms). The `no_route` outcome during failure is intentional. Zone B flow `zone-B-robot-0-same-zone`, packet #297, still delivers at 40 ms.
+7. In the spine-failure demo, select `A-cross-zone` and compare #6, #7 and #9.
 
-The primary research focus is now **priority scheduling and resilience in powered
-infrastructure**. The default experiment matrix compares shortest-path and ECMP forwarding
-with FIFO and strict-priority queues. EALR remains preserved as earlier relay research;
-it is not the primary warehouse routing proposal. See [the study design](docs/warehouse-study.md).
+This website displays saved observations: controls do not rerun routing or inject failures. Hop stepping is not real-time animation; the layout is schematic. **Do not open `scripts/warehouse_viewer.html`**, which is an unpopulated source template.
 
-The next comparison adds [protected emergency queues](docs/protected-queues.md), bounded
-P0 admissions and byte-weighted lower-class service. The [traffic specification](docs/traffic-requirements.md)
-declares inputs and acceptance checks; these are experimental assumptions, not measured
-warehouse requirements. Run it with `python scripts/run_all_experiments.py --suite protected-qos`
-(144 runs). The original default warehouse matrix remains unchanged.
-See [protected queue results](docs/protected-queue-results.md) for both improvements and
-admission losses; the fixed 20% P0 budget is not a production recommendation.
-
-The completed [capacity/admission study](docs/capacity-study.md) compares eight settings at
-four destination attachment capacities with new seeds (288 runs). Its [results and operating
-limits](docs/capacity-results.md) include reservation without policing, burst/flood failures,
-and the cost to lower-priority traffic. Run `python scripts/run_all_experiments.py --suite capacity-admission`.
-
-## Start or resume
-
-For a fresh extraction, start with the [first-run guide](docs/first-run.md). It gives the
-Mac M4/Ubuntu 24.04 setup commands, a small checked example, expected outputs and log paths.
-`python scripts/first_run.py` validates the independent core; `python scripts/run_ns3_smoke.py`
-separately requires a real installed ns-3 wired runtime. Neither implies NR validation.
-See [runtime validation](docs/runtime-validation.md) for the executed Windows tests and
-remaining schema-v2/NR and Mac/Ubuntu boundaries.
-The initial [native wired warehouse backend](docs/ns3-wired-warehouse.md) now accepts a strict
-schema-v2 FIFO/strictPriority and Dijkstra/ECMP subset with immediate availability events
-and ordered service failover. See the [resilience model](docs/ns3-resilience-study.md). See the
-[native policy validation report](docs/ns3-policy-results.md). The
-[bounded-run validation](docs/ns3-run-control.md) covers timeout handling and retained logs. Run `python scripts/run_ns3_warehouse.py` for its deterministic
-packet/queue/path acceptance cases; it has separate outputs and does not replace the core study.
-Its [validation results](docs/ns3-warehouse-results.md) include exact peer/service paths,
-native queue loss, cutoff accounting and an independently rebuilt source copy.
-
-Read `checkpoints/CURRENT_STATUS.md`, `checkpoints/PROJECT_STATE.json`, `checkpoints/NEXT_STEPS.md`, and the latest
-session summary. Verify the recorded manifest with:
+No Python, ns-3, Internet connection or server is needed to view the extracted demos. If your browser restricts local HTML, optionally run this from the extracted folder with Python installed:
 
 ```sh
-python scripts/checkpoint.py CHECKPOINT_ID --verify
+python -m http.server 8000 --bind 127.0.0.1
 ```
 
-## One-command validation and experiments
+Open `http://127.0.0.1:8000/OPEN_WAREHOUSE.html`; keep the terminal open and press Ctrl+C to stop. Use `python3` if that is your system's Python command.
 
-With Python 3.10+, CMake 3.22+, Ninja, a C++17 compiler and Boost.JSON available:
+Optional archive integrity check:
 
 ```sh
-python scripts/run_all_experiments.py
+python scripts/verify_delivery.py
 ```
 
-This configures a host-specific build, runs CTest, runs four forwarding/scheduling policies on the same
-inputs/seeds, checks packet paths and stationary positions, exports raw/per-class metrics,
-replays a run, and produces comparison plots when matplotlib is installed. It exits nonzero
-on required-step failure and prints a unique results directory. `--quick` uses one seed and
-omits the two large layouts; it is not the full research matrix. The full default study
-has 132 runs (11 scenarios, three seeds, four policies). Use `--suite legacy-ealr` to
-reproduce the preserved 114-run EALR comparison instead.
+This checks delivery hashes and local links. It requires the delivery ZIP's `DELIVERY_MANIFEST.json`, which is not present in a normal source clone.
 
-Windows local setup (optional, no global installation or PATH changes):
+## 2. Obtain source to run new simulations
+
+Install [Git](https://git-scm.com/downloads) and [Python 3.12](https://www.python.org/downloads/) if needed, then:
+
+```sh
+git clone https://github.com/Saurabh10402/warehouse_routing.git
+cd warehouse_routing
+```
+
+Alternatively use **Code → Download ZIP**, extract it and open a terminal in its root. All following commands run from the directory containing `CMakeLists.txt`, `configs` and `scripts`. A source clone has no saved result folders; generate your own or download the delivery asset.
+
+### Windows PowerShell — validated platform
+
+1. Install Python 3.12 and reopen PowerShell. Check `py -3.12 --version`.
+2. Create a project-local Python environment:
 
 ```powershell
-python scripts/setup_portable.py --plots
-python scripts/run_all_experiments.py
+py -3.12 -m venv .venv
 ```
 
-The current recovered workspace already has the portable toolchain under `.tools/`.
-See [reproducibility](docs/reproducibility.md) for the exact local Python command, platform
-setup, direct CMake commands, dependency hashes and recovery packaging.
+3. Install pinned portable compiler/build tools, Boost and plotting dependencies:
 
-## Primary configurations
+```powershell
+.\.venv\Scripts\python.exe scripts/setup_portable.py --plots
+```
 
-| File | Purpose |
+This downloads checksum-verified dependencies into `.tools`; it does not edit global PATH or the registry. Internet access and disk space are required. The Windows package is x86-64; Windows ARM is not validated.
+
+4. Run the independent core check:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/first_run.py
+```
+
+Expected fixture: **180/180 delivered, zero deadline misses**. This verifies the abstract-link core, not native ns-3.
+
+**For every later command written as `python ...`, use `.\.venv\Scripts\python.exe ...` in Windows PowerShell.** You do not need to activate the environment or change execution policy.
+
+### Ubuntu 24.04 — prepared, not runtime-validated
+
+```sh
+sudo apt update
+sudo apt install git build-essential cmake ninja-build libboost-json-dev python3 python3-venv
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r scripts/requirements.txt
+python scripts/first_run.py
+```
+
+Check `python --version`: native dependency extraction needs Python 3.12+. These Ubuntu steps have not been executed as part of the Windows validation.
+
+### macOS / Apple Silicon — prepared, not runtime-validated
+
+Install Xcode Command Line Tools and Homebrew from [brew.sh](https://brew.sh/) if absent:
+
+```sh
+xcode-select --install
+```
+
+Complete the installer before proceeding:
+
+```sh
+brew install cmake ninja boost python@3.12
+python3.12 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r scripts/requirements.txt
+python scripts/first_run.py
+```
+
+Use native ARM64 tools on Apple Silicon; do not mix Intel and ARM64 dependencies. Never copy build/toolchain folders between operating systems. See [the first-run guide](docs/first-run.md).
+
+## 3. Install and check native wired ns-3
+
+After your platform setup, use the same Python environment:
+
+```sh
+python scripts/setup_ns3.py --jobs 4
+python scripts/run_ns3_smoke.py
+```
+
+The installer downloads pinned **ns-3.46.1**, checks its SHA256, builds the wired runtime and installs it beneath `.tools/ns3-wired-install`. The first build can take substantial time. Use `--jobs 2` on low-memory PCs. Some upstream tests are quiet for several minutes; preserve logs on failure rather than deleting evidence.
+
+The smoke fixture should deliver **3 packets with 4.416 ms mean delay** and deterministic replay. It cannot silently fall back to the abstract core. This setup does not install 5G-LENA/NR.
+
+## 4. Run a warehouse simulation and export its website
+
+Representative workload:
+
+```sh
+python scripts/run_warehouse_layout.py
+```
+
+Traffic from every robot:
+
+```sh
+python scripts/run_warehouse_layout.py --layout configs/warehouse_layout_all_robots.json
+```
+
+The runner builds/tests, generates inputs, runs native simulation and replay, and independently audits both. Wait for **PASS** and note the printed `results/layout-...` directory. `RUN_STATUS.json` must say `PASS`; partial `RUNNING`, `FAILED` or `TIMEOUT` results are not validated.
+
+Substitute that actual batch directory for `YOUR_BATCH` below:
+
+```sh
+python scripts/visualize_warehouse.py --batch results/YOUR_BATCH --output warehouse-viewer.html
+```
+
+Open the newly created `warehouse-viewer.html`. Choose a new filename for subsequent exports: overwriting is deliberately rejected. The root menu points to packaged demos and does not automatically discover new runs.
+
+Other demonstrations:
+
+```sh
+python scripts/run_warehouse_layout.py --spine-outage
+python scripts/run_warehouse_layout.py --layout configs/warehouse_layout_all_robots.json --zone-outage A
+python scripts/compare_warehouse_routing.py
+```
+
+Export either layout scenario as above. The comparison runner writes `comparison.html` directly in its printed `results/routing-...` folder. The outage flags are mutually exclusive; zone isolation needs a selected zone with exactly one switch.
+
+### Change devices and traffic
+
+Edit a copy of `configs/warehouse_layout_all_robots.json`. Each entry in `zones` declares `id`, `robots`, `switches`, and `edgeServers`; `sharedSpines` sets the backbone count. Add/remove zone entries to change zone count. The `traffic` object sets mode, destination scope, interval, payload, priority and service candidates.
+
+```sh
+python scripts/run_warehouse_layout.py --layout path/to/your-layout.json
+```
+
+Keep JSON valid (double quotes, no comments/trailing commas). Read [the layout/traffic reference](docs/warehouse-demo.md) for valid ranges and attachment rules. Devices remain stationary. Larger or faster workloads can increase runtime, congestion and losses; example performance is not a guarantee.
+
+## 5. Results and complete validation
+
+| Demonstration | Validated observation |
 |---|---|
-| `configs/warehouse_communications.json` | Primary wired peer/service traffic, unequal zones, dual spines and edges |
-| `configs/warehouse_protected.json` | Destination bottleneck with protectedPriority and explicit queue parameters |
-| `configs/warehouse_small.json` | Five-node deterministic graph with four traffic classes |
-| `configs/warehouse_uneven.json` | Four zones: 10, 35, 75, 20 endpoints |
-| `configs/warehouse_reference.json` | 500 endpoints in 10 zones, dual spines and edges |
+| Representative baseline | 120/120 delivered |
+| All-robot baseline | 2,410/2,410 delivered from 482 sources |
+| Dijkstra / three ECMP seeds | Each 2,410/2,410; ECMP uses both spines |
+| Spine failure/recovery | 120/120 with observed rerouting |
+| Zone A switch failure | 2,252/2,410; 158 no-route losses/deadline misses; recovery verified |
 
-Each schema-v2 file explicitly defines zones, nodes, endpoint access, links, capacities,
-delays, queue sizes, ordered service destinations, workload priorities and optional failures.
-Graph mode supports arbitrary test graphs. Leaf-spine mode validates role/zone connectivity.
-The old `warehouse_leaf_spine.json` is a preserved legacy planning schema, not the executable
-primary configuration. Legacy robot/mobility experiments remain outside the primary scope.
+Windows evidence includes 25 native build tests, 21 core tests, independent audits, exact replays, and historical full native100/core132 regressions. See [routing results](docs/routing-comparison.md), [zone failure](docs/zone-outage.md), [native validation](docs/ns3-warehouse-results.md), and [current checkpoint](checkpoints/CURRENT_STATUS.md).
 
 ```sh
 python scripts/verify.py
-./build/verified-bootstrap/ealr-fabric --config configs/warehouse_communications.json --output results/my-new-run
+python scripts/run_ns3_warehouse.py
+python scripts/run_all_experiments.py
 ```
 
-On Windows use `build/verified-bootstrap/ealr-fabric.exe` and ensure the compiler DLL directory
-is on PATH; the Python runner manages this automatically. Existing result directories are rejected.
+The last command is the **abstract core** 132-run/three-seed study; `--quick` is only a smoke check. Native and abstract measurements are distinct models, neither radio results. Native subprocesses have timeouts; build and audit durations are additional.
 
-## What is implemented
+## 6. Troubleshooting
 
-- Validated explicit topology with arbitrary zone membership and unequal endpoint counts.
-- Reused routing algorithms with explicit fabric link costs; legacy distance APIs preserved.
-- Stable per-flow ECMP using equal minimum-cost next hops, with unavailable paths excluded.
-- EALR normalized latency/queue/energy cost and a snapshot latency guard.
-- Per-direction finite queues: strict priority 0..3, FIFO within each class, nonpreemptive frames.
-- Optional reserved P0 slots, token-bucket P0 admission and byte-weighted P1/P2/P3 service.
-- Actual packet forwarding over selected links, with serialization and propagation delay.
-- Per-hop route selection, node/link outages, ordered backup edges and component recovery.
-- Battery accounting only on constrained endpoints/relays; no infrastructure battery penalty.
-- Local configurable temperature safety, latched stops, manual reset and priority-0 fan-out.
-- Raw packet traces, measured latency distributions, delivery/deadline rates and application throughput.
-- Source/configuration/executable provenance, seed comparisons, ablations and recovery checkpoints.
+| Problem | Action |
+|---|---|
+| Missing/blank viewer | Download the delivery asset, extract everything, and open the root menu; a source clone has no saved results. |
+| Python not found | Install Python 3.12; reopen the terminal. On Windows create the environment using `py -3.12`. |
+| Compiler/CMake/Ninja/Boost missing | Complete platform setup; on Windows use `setup_portable.py` with the same Python environment. |
+| ns-3 prefix absent | Complete `setup_ns3.py`; `--ns3-prefix` is only for a compatible installed native runtime. |
+| Windows path too long | Extract to a short folder such as `C:\Warehouse`. |
+| Build killed / memory exhausted | Retry dependency setup with `--jobs 2`; retain logs. |
+| Checksum mismatch | Stop and inspect the retained download/log; never disable checksum checks. |
+| Native case failed/timed out | Read `RUN_STATUS.json`, `processes/*.log` and `processes/*.json`; partial traces are not a successful result. |
+| Export file exists | Choose a fresh output filename. |
+| Zone-outage reports losses | Expected while isolated; inspect phase reports and recovery packets. |
 
-The [model specification](docs/fabric-model.md) defines defaults, algorithms, units, timing,
-loss semantics, safety behavior and fidelity limits. [Current warehouse results](docs/warehouse-results.md)
-and [earlier recovery validation](docs/validation-report.md) separate executed evidence from
-limitations. Do not interpret configured latency targets as guarantees.
+## 7. Scope, research history and remaining work
 
-## Layout and build boundaries
+Powered infrastructure, peer/service communication, priority scheduling and resilience are the primary direction. EALR remains **legacy** relay research. Protected QoS and capacity/admission studies are experimental: fixed P0 admission can worsen emergency-flood results, and no tested setting eliminated all burst/flood deadline misses. See [study design](docs/warehouse-study.md), [protected-queue results](docs/protected-queue-results.md), and [capacity results](docs/capacity-results.md).
 
-`src/config` validates JSON; `src/routing` selects paths without parsing JSON;
-`src/simulation/fabric_simulator.cpp` runs events/forwarding; `src/metrics/fabric_metrics.cpp`
-aggregates packet observations; `scripts/warehouse_study.py` defines the primary comparisons;
-other `scripts` build, run and plot experiments; `tests` contains
-legacy and primary regression suites. Public contracts are under `include/ealr/`.
+The native model is stationary wired IPv4/UDP with immediate centralized failure knowledge. It is not Ethernet switching, Wi-Fi, private 5G/NR, hardware convergence, or guaranteed deployment performance. Mac/Ubuntu execution, calibrated real warehouse workloads and additional research integration remain pending. The comprehensive illustrated project report is the next requested deliverable.
 
-The core remains C++17 and never requires ns-3. `EALR_BOOST_SOURCE` optionally compiles the
-existing Boost.JSON implementation from an official extracted Boost tree; no replacement parser.
-The optional ns-3 target has its own C++ standard setting. See [ns-3 integration](docs/ns3-integration.md).
-
-## Explicit limitations
-
-No calibrated radio PHY/MAC, collision/retransmission model, full 5G core, distributed route
-convergence, admission control, hard deadline assurance, disjoint packet replication, or
-certified emergency-stop behavior. Safety readings start at a local edge; sensor transport
-and actuator response are outside the model. Energy uses configured percentage points, not joules.
-Strict priority can starve lower classes, and a full shared queue can drop safety traffic.
-The protected policy counts policing/reservation losses explicitly; it cannot promise deadlines
-or admission for every packet. Lower-class fairness applies to packets admitted to its queues.
-
-The retained [legacy project documentation](docs/legacy-project.md) describes the original
-robot experiment and its incomplete ns-3 orchestration. It is historical context, not the
-current primary workflow or evidence of verified 5G behavior.
-
-
-## Editable eight-zone demonstration
-
-See [warehouse-demo.md](docs/warehouse-demo.md). Edit device counts in `configs/warehouse_layout.json`, then run `python scripts/run_warehouse_layout.py`. The reference layout contains 500 devices. The demonstration uses representative traffic; full-load and target-platform claims require separate validation.
-
-Offline topology/path viewing: see the viewer section in [warehouse-demo.md](docs/warehouse-demo.md). `scripts/visualize_warehouse.py` exports a completed layout batch to one self-contained HTML file.
+Git contains source, configs, tests and checkpoint summaries. Release ZIPs separately preserve saved viewers, raw/replay results, integrity manifests and a recovery bundle. Toolchains/build trees are intentionally not uploaded. Preserve previous results and manifests. See [reproducibility](docs/reproducibility.md) for recovery and [START_HERE](START_HERE.md) for the presentation walkthrough.

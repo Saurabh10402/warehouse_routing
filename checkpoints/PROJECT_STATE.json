@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_023",
-  "utc": "2026-11-02T18:39:06.493972+00:00",
-  "phase": "github-publication-prepared",
-  "source_state": "manifests/checkpoint_023.json",
+  "checkpoint": "checkpoint_024",
+  "utc": "2026-11-03T05:32:40.737678+00:00",
+  "phase": "github-delivery-and-installation-guide",
+  "source_state": "manifests/checkpoint_024.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -120,7 +120,7 @@
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
     "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
   ],
-  "next_action": "Publish source and checkpoint022 delivery to supplied GitHub repository, then prepare comprehensive illustrated report.",
+  "next_action": "Create the requested comprehensive illustrated report using verified source/data and README local-PC walkthrough.",
   "tested_code_commit": "fb60dad",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
@@ -181,5 +181,7 @@
   "delivery_receipt": "recovery_packages/receipt-checkpoint_022-delivery.json",
   "routing_comparison_experiment": "routing-20261102T152642Z-82d74709",
   "zone_outage_experiment": "layout-20261102T171806Z-fe0a210a",
-  "repository_url": "https://github.com/Saurabh10402/warehouse_routing"
+  "repository_url": "https://github.com/Saurabh10402/warehouse_routing",
+  "github_release": "https://github.com/Saurabh10402/warehouse_routing/releases/tag/checkpoint-022",
+  "github_asset": "https://github.com/Saurabh10402/warehouse_routing/releases/download/checkpoint-022/warehouse-demo-checkpoint-022.zip"
 }
