@@ -1,3 +1,3 @@
-# Fresh Windows installation complete
+Predeclare a controlled ARP wait/retry sensitivity study against the unchanged 300-device baseline, then implement an explicit experiment parameter and validate small controls before expensive multi-seed runs. Keep100ms deadlines,1000ms authorization timeout and all-offered denominators. Do not silently prewarm caches or bypass approval. Review native/Python device and task limits before500-device work;500 is unvalidated.
 
-Use the README and docs/windows-installation-check.md for tested Windows steps and evidence. Review the saved demo/report; validate Mac/Ubuntu only when those hosts are available. Preserve all raw results and earlier releases.
+Read session_046.md and docs/access-300-diagnosis.md. Worker is complete; do not rerun it.

@@ -1,9 +1,36 @@
-# checkpoint_026 - Fresh Windows installation and README corrections
+# checkpoint_050 — 300-device measurement and wireless diagnosis
 
-Fresh public GitHub source ZIP at commit f9649a8 and separate checkpoint022 demo ZIP were extracted under C:\Users\ermec\WarehouseTest-20261103. No old build tree or compiler copied. Signed normal Python installer failed Windows MSI 0x80070003; official Python NuGet 3.12.10 fallback created a working local venv. README documents this fallback and optional source ZIP route. Portable GCC/Boost/plots setup passed. Initial 4-worker ns-3 build failed to launch an existing assembler; retained log, retried at 2 workers without changing code or disabling tests. ns-3 setup passed 150 UNIT QUICK suites.
+Completed 13 November 2026. No active simulation from this worker sequence.
+Read docs/access-300-diagnosis.md for the timeline, task table and limitations.
 
-The fresh project passed 21 core tests and the 180/180 first-run fixture. Full 132-case core study, replay and plots passed; 133 packet traces matched the preserved known-good study byte for byte. Native smoke passed 25/25 project tests and 3/3 packets, 4.416 ms. Fresh native baseline 120/120, all robots 2410/2410, spine outage 120/120, zone outage 2252/2410 with 158 expected no_route losses all passed exact replay and audit. Four viewer exports passed independent checks. Dijkstra and three ECMP comparison cases each delivered 2410/2410 and passed replay/matched-arrival checks. Evidence and batch identities: evidence/checkpoint_026.
+Result results/access-auth-20261113T101202Z-025cb365 is MEASURED, validation PASS:
+905/906 delivered,901/906 deadline-met; one authorization timeout with no payload,
+four late deliveries. Native exit2 and deliveryControlPassed=false are retained.
+Original/replay byte-identical and identical to the earlier failed300-device run.
+Native times894.978/838.432s, within1200s each. Single seed1/run1, not a seed study.
+ECMP audit:8694 hops,2020 equal-cost selections,1596 restored flow mappings.
 
-Fresh demo ZIP integrity passed 4424 hashes and 6 links/pages; earlier browser interaction checked five saved demos and routing/failure controls. Browser automation later stopped; newly generated HTML was exporter-audited but not interactively rechecked. Original raw results remain in the separate test workspace; previous archives/manifests/results preserved. No simulation source changed. Windows standard MSI cause and earlier transient assembler launch cause are unestablished; working fallback/retry are documented. Mac/Ubuntu execution and radio remain pending.
+Isolated diagnostic smoke and full300 trace/CSV are byte-identical to their known
+references; library hashes match. Full diagnostic658.246s. ZoneA/H initial AP ARP
+requests to Wi-Fi robot0 drop with BUSY_DECODING_PREAMBLE while another ARP frame
+is received. Retries resolve the mappings and flush queued traffic after about
+1000.288/973.252ms respectively. This explains the observed late approval/payload
+timing. Task16 correctly ignores approval after timeout. Modeled cause only;
+not calibrated real warehouse radio performance. No native model, deadlines,
+authorization timeout, caches, dependencies or scale limits were changed.
 
-Next: reviewer presentation from documented README and report; separately validate macOS/Ubuntu when available. Source manifest: manifests/checkpoint_026.json.
+Evidence: .recovery/access-300-resume/measurement-receipt.json,frame-analysis.json,
+diagnostic-build-receipt.json,diagnostic-smoke/receipt.json,
+focused-diagnostic/receipt.json and raw logs. Worker job-status.json is COMPLETE.
+Prior interrupted attempts remain in .recovery/access-300-measured and their
+original receipts are preserved. Earlier timeout evidence/results remain intact.
+
+Source regression tests remain71 access/21 core PASS from checkpoint049, not
+rerun for this documentation/evidence milestone. New validation is actual native
+300 measurement/replay, isolated smoke and full diagnostic equivalence.
+Source checkpoint050; separate recovery archive checkpoint_050-300-diagnosis.zip.
+No Git commit/push.500-device wireless validation, multiple seeds, visualization
+and report integration remain unfinished.200 devices remains the last larger
+strict all-delivered/deadline-passing probe.
+
+Next exact action: Predeclare a controlled ARP wait/retry sensitivity study against the unchanged 300-device baseline, then implement an explicit experiment parameter and validate small controls before expensive multi-seed runs. Keep100ms deadlines,1000ms authorization timeout and all-offered denominators. Do not silently prewarm caches or bypass approval. Review native/Python device and task limits before500-device work;500 is unvalidated.

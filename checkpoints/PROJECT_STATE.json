@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "project": "wipro-warehouse-routing",
-  "checkpoint": "checkpoint_026",
-  "utc": "2026-11-03T16:06:04.763160+00:00",
-  "phase": "fresh-windows-installation-validated",
-  "source_state": "manifests/checkpoint_026.json",
+  "checkpoint": "checkpoint_050",
+  "utc": "2026-11-13T16:01:30.192078+00:00",
+  "phase": "stationary-wireless-outcome-measurement",
+  "source_state": "manifests/checkpoint_050.json",
   "configuration_versions": [
     "schema v2 stationary fabric",
     "legacy robot",
@@ -108,19 +108,39 @@
     "layout-20261102T120343Z-c17f3ded",
     "route-entry-regression-20261102T120420Z-681299aa",
     "routing-20261102T152642Z-82d74709",
-    "layout-20261102T171806Z-fe0a210a"
+    "layout-20261102T171806Z-fe0a210a",
+    "access-auth-20261107T113553Z-29c5e23a",
+    "access-auth-20261107T113638Z-73a76d46",
+    "access-auth-20261107T114049Z-d969ca00",
+    "access-auth-20261107T114519Z-5af5e60f",
+    "access-auth-20261107T163513Z-6b2523d9",
+    "access-auth-20261107T164052Z-3ec428ee",
+    "access-auth-20261107T164220Z-f47868df",
+    "access-auth-20261107T164240Z-5536692d",
+    "access-auth-20261107T164300Z-3567b65b",
+    "access-auth-20261107T165030Z-18384f0b",
+    "access-auth-20261107T171246Z-8f595a8c",
+    "access-auth-20261108T085859Z-4f29fbed",
+    "access-auth-20261112T183020Z-023d3e1c",
+    "access-auth-20261112T183052Z-18d0b87d",
+    "access-auth-20261112T183118Z-7881e4f0",
+    "access-auth-20261112T183146Z-60e5adb9",
+    "access-auth-20261112T183208Z-a3ab44b3",
+    "access-auth-20261112T183538Z-54a842f7",
+    "access-auth-20261113T101202Z-025cb365"
   ],
   "dependencies": {
     "ns3": "Verified wired 3.46.1 Release; current main/fresh 25 tests and 100 cases with every replay PASS. Historical 150 UNIT QUICK suites; no NR claim.",
-    "5g_lena": "not installed",
-    "portable_toolchain": "GCC 14.2.0, Boost 1.85 SHA256 verified"
+    "5g_lena": "v4.1.1 f29ebd33450c49af934ea5dde8606f855c22c2a6 built in Ubuntu WSL2; small controls PASS",
+    "portable_toolchain": "GCC 14.2.0, Boost 1.85 SHA256 verified",
+    "wireless_ns3": "3.46 ea50b72ab79b1ec5912c66d5b384effa829f18bc; separate from wired 3.46.1"
   },
   "blockers": [
-    "NR module absent and unverified",
     "Mac M4 / Ubuntu 24.04 ARM64 execution unavailable on this Windows host",
-    "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated"
+    "Optional full Wi-Fi/NetAnim build retains GCC maybe-uninitialized failure; wired runtime now validated",
+    "Full warehouse wireless integration and upstream suite acceptance remain pending; native Windows radio builds failed, working build is Ubuntu WSL2"
   ],
-  "next_action": "Reviewer handoff; target-host Mac/Ubuntu validation when available",
+  "next_action": "Predeclare a controlled ARP wait/retry sensitivity study against the unchanged 300-device baseline, then implement an explicit experiment parameter and validate small controls before expensive multi-seed runs. Keep100ms deadlines,1000ms authorization timeout and all-offered denominators. Do not silently prewarm caches or bypass approval. Review native/Python device and task limits before500-device work;500 is unvalidated.",
   "tested_code_commit": "fb60dad",
   "authoritative_experiment": "experiments-20261030T175442Z-cb0b1ccc",
   "legacy_smoke_experiment": "experiments-20261030T141204Z-9e04fe27",
@@ -142,7 +162,8 @@
     "Native 12 controls + 36 policy runs cover static wired behavior; three seeds vary ECMP hash only, not stochastic arrivals or radio",
     "Native protected queues/safety events/energy/radio/jitter/fragmentation remain unsupported",
     "One Windows native child delayed exit after writing results; exact retry/full retry/fresh workflow passed, cause unestablished; interrupted raw batch retained",
-    "Native case timeout supervises one process only; build/setup/CTest unchanged. It mitigates waiting but does not diagnose prior Windows exit stall."
+    "Native case timeout supervises one process only; build/setup/CTest unchanged. It mitigates waiting but does not diagnose prior Windows exit stall.",
+    "Four-zone wireless seed1/run2: one task per routing policy takes979.171427ms, misses100ms deadline due to Wi-Fi AP ARP pending/retry; initial exchange failure PHY/MAC cause unconfirmed."
   ],
   "baseline_regression_experiment": "experiments-20261031T215045Z-6af82532",
   "baseline_comparison_reference": "experiments-20261031T173020Z-a8e5dbed",
@@ -195,5 +216,418 @@
     "source_evidence_checkpoint": "checkpoint_024",
     "verification": "scripts/verify.py PASS 21/21 outside sandbox; initial sandbox attempt failed Windows temp access",
     "new_simulation_experiments": false
+  },
+  "wireless_handoff": "ACCOUNT_SWITCH_HANDOFF.md",
+  "wireless_status": {
+    "linux_build": "PASS 1609 steps",
+    "nr_downlink": "PASS aggregate replay",
+    "nr_uplink": "PASS 10/10 per UE with replay",
+    "wifi": "PASS 10/10 repeated",
+    "mixed_access": "PASS four flows 10/10 with replay",
+    "upstream_tests": "COMPLETED exit 1: 725 passed, 2 skipped, 3 failed (wifi-gcr,wifi-mlo,wifi-txop), 1 crashed (wifi-emlsr-basic-exchanges)",
+    "warehouse_integration": "Checkpoint045: eight-zone/100-device corrected wireless controls: 1224/1224 delivered, 1220/1224 deadline-met.",
+    "wifi_diagnostic_tests": "PASS all four isolated and rebuilt combined-runner QUICK suites; maintained test-only patch applied",
+    "patched_upstream_tests": "PASS exit 0: 729 passed, 2 intentional QUICK skips, 0 failed, 0 crashed; patched-validation-20261104T073031Z",
+    "configuration": "Small scheduled outage JSON runnable; unscheduled/large design files remain outside validated controls",
+    "maintained_runner": "Ordinary64/180s. Explicit scale<=300 local;300s through128,600s through200,1200s above.200 total passing probe;300 delivery failed;500 pending. Failed timing now retained.",
+    "stable_identities": "PASS checkpoint039; used by live outage checkpoint040 and boundary checkpoint041",
+    "live_spine_outage": "PASS 5 outage variants + static regression; before/during/after traffic verified, no boundary-loss guarantee",
+    "boundary_loss": "PASS 43/46 delivered,2 authorization timeouts,1 observed payload drop; exact replay; fractional timing fixed; native exit2 preserved",
+    "ecmp": "Corrected uninitialized source; independent assigned-source audit; historical sentinel-bearing ECMP results superseded.",
+    "radio_randomness": "Optional seed/run implemented, default1/1 preserved; actual native settings audited",
+    "multi_seed": "Historical ECMP portions superseded for source validity. Corrected100-device matched two-seed/four-case comparison documented at checkpoint045.",
+    "four_zone": "PASS topology/auth/routing/replay,2 deadline misses under seed1/run2 due to unresolved Wi-Fi ARP waiting/retry; first-exchange PHY/MAC cause not established",
+    "coverage": "All70 robot sources deliver every phase in100-device cases;51/51 access tests",
+    "eight_zone": {
+      "offered": 1224,
+      "delivered": 1224,
+      "deadlineMet": 1220,
+      "results": [
+        "access-auth-20261107T113638Z-73a76d46",
+        "access-auth-20261107T114049Z-d969ca00",
+        "access-auth-20261107T114519Z-5af5e60f",
+        "access-auth-20261107T163513Z-6b2523d9"
+      ]
+    },
+    "probe_128": {
+      "result": "results/access-auth-20261107T165030Z-18384f0b",
+      "totalDevices": 128,
+      "robots": 98,
+      "offered": 390,
+      "delivered": 390,
+      "deadlineMet": 390,
+      "maxFullMs": 49.854538,
+      "misses": [],
+      "replay": "byte-identical",
+      "nativeSeconds": {
+        "original": 240.32492281100002,
+        "replay": 203.41871870200004
+      },
+      "ecmp": {
+        "hash": "node + source/destination IPv4 + IP protocol; FNV1a32 with avalanche; sorted shortest-hop candidates",
+        "wireHopsChecked": 3576,
+        "unmappedWireHops": 0,
+        "equalCostSelections": 832,
+        "repeatedFlowGroups": 64,
+        "restoredFlowMappings": 650,
+        "spinesByPhase": {
+          "before": [
+            "spine-0",
+            "spine-1"
+          ],
+          "during": [
+            "spine-1"
+          ],
+          "after": [
+            "spine-0",
+            "spine-1"
+          ]
+        },
+        "scope": "Layer-3 per-flow ECMP; outer GTP tunnels remain grouped; not per-task load balancing"
+      },
+      "sourceCoverage": {
+        "before": {
+          "tasks": 130,
+          "offeredSources": 98,
+          "payloadSources": 98,
+          "deliveredSources": 98,
+          "missingOfferedSources": [],
+          "zoneAccessOfferedSources": {
+            "A": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "B": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "C": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "D": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "E": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "F": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "G": {
+              "nr": 6,
+              "wifi": 7
+            },
+            "H": {
+              "nr": 6,
+              "wifi": 7
+            }
+          }
+        },
+        "during": {
+          "tasks": 130,
+          "offeredSources": 98,
+          "payloadSources": 98,
+          "deliveredSources": 98,
+          "missingOfferedSources": [],
+          "zoneAccessOfferedSources": {
+            "A": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "B": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "C": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "D": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "E": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "F": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "G": {
+              "nr": 6,
+              "wifi": 7
+            },
+            "H": {
+              "nr": 6,
+              "wifi": 7
+            }
+          }
+        },
+        "after": {
+          "tasks": 130,
+          "offeredSources": 98,
+          "payloadSources": 98,
+          "deliveredSources": 98,
+          "missingOfferedSources": [],
+          "zoneAccessOfferedSources": {
+            "A": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "B": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "C": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "D": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "E": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "F": {
+              "nr": 6,
+              "wifi": 6
+            },
+            "G": {
+              "nr": 6,
+              "wifi": 7
+            },
+            "H": {
+              "nr": 6,
+              "wifi": 7
+            }
+          }
+        }
+      }
+    },
+    "probe_200": {
+      "result": "results/access-auth-20261107T171246Z-8f595a8c",
+      "totalDevices": 200,
+      "robots": 170,
+      "offered": 606,
+      "delivered": 606,
+      "deadlineMet": 606,
+      "maxFullMs": 50.746369,
+      "misses": [],
+      "replay": "byte-identical",
+      "timing": {
+        "nativeSeconds": {
+          "original": 429.76617930099997,
+          "replay": 335.05552910800003
+        },
+        "perRunLimitSeconds": 600
+      },
+      "ecmp": {
+        "hash": "node + source/destination IPv4 + IP protocol; FNV1a32 with avalanche; sorted shortest-hop candidates",
+        "wireHopsChecked": 5748,
+        "unmappedWireHops": 0,
+        "equalCostSelections": 1336,
+        "repeatedFlowGroups": 64,
+        "restoredFlowMappings": 1062,
+        "spinesByPhase": {
+          "before": [
+            "spine-0",
+            "spine-1"
+          ],
+          "during": [
+            "spine-1"
+          ],
+          "after": [
+            "spine-0",
+            "spine-1"
+          ]
+        },
+        "scope": "Layer-3 per-flow ECMP; outer GTP tunnels remain grouped; not per-task load balancing"
+      },
+      "coverage": {
+        "localDevices": 199,
+        "actualNodesIncludingExternalServer": 200,
+        "robots": 170,
+        "zones": 8,
+        "phases": {
+          "before": {
+            "tasks": 202,
+            "offeredSources": 170,
+            "payloadSources": 170,
+            "deliveredSources": 170,
+            "missingOfferedSources": [],
+            "zoneAccessOfferedSources": {
+              "A": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "B": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "C": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "D": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "E": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "F": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "G": {
+                "nr": 10,
+                "wifi": 12
+              },
+              "H": {
+                "nr": 10,
+                "wifi": 12
+              }
+            }
+          },
+          "during": {
+            "tasks": 202,
+            "offeredSources": 170,
+            "payloadSources": 170,
+            "deliveredSources": 170,
+            "missingOfferedSources": [],
+            "zoneAccessOfferedSources": {
+              "A": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "B": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "C": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "D": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "E": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "F": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "G": {
+                "nr": 10,
+                "wifi": 12
+              },
+              "H": {
+                "nr": 10,
+                "wifi": 12
+              }
+            }
+          },
+          "after": {
+            "tasks": 202,
+            "offeredSources": 170,
+            "payloadSources": 170,
+            "deliveredSources": 170,
+            "missingOfferedSources": [],
+            "zoneAccessOfferedSources": {
+              "A": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "B": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "C": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "D": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "E": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "F": {
+                "nr": 10,
+                "wifi": 11
+              },
+              "G": {
+                "nr": 10,
+                "wifi": 12
+              },
+              "H": {
+                "nr": 10,
+                "wifi": 12
+              }
+            }
+          }
+        },
+        "allRobotsOfferedInEveryPhase": true,
+        "scope": "Per-phase source coverage; blocked tasks remain offered, not counted as payload sources"
+      }
+    },
+    "probe_300": {
+      "status": "FAILED delivery requirement",
+      "result": "results/access-auth-20261108T085859Z-4f29fbed",
+      "offered": 906,
+      "delivered": 905,
+      "deadlineMet": 901,
+      "replay": "diagnostic timed out; prefix only matches",
+      "analysis": ".recovery/access-300/failure-analysis.json",
+      "diagnostic": ".recovery/access-300/arp-diagnostic/partial-receipt.json"
+    },
+    "outcome_measurement": {
+      "status": "Six small native controls and exact replays audited",
+      "guide": "docs/access-outcome-measurement.md",
+      "results": [
+        "access-auth-20261112T183020Z-023d3e1c",
+        "access-auth-20261112T183052Z-18d0b87d",
+        "access-auth-20261112T183118Z-7881e4f0",
+        "access-auth-20261112T183146Z-60e5adb9",
+        "access-auth-20261112T183208Z-a3ab44b3",
+        "access-auth-20261112T183538Z-54a842f7"
+      ],
+      "tests": "71 access and21 core PASS",
+      "large300Replay": "Complete; see wireless_300_diagnosis and checkpoint050"
+    }
+  },
+  "active_work": {
+    "status": "COMPLETE",
+    "receipt": ".recovery/access-300-resume/job-status.json",
+    "lastCompletedCheckpoint": "checkpoint_050"
+  },
+  "wireless_300_diagnosis": {
+    "result": "results/access-auth-20261113T101202Z-025cb365",
+    "status": "MEASURED",
+    "validation": "PASS",
+    "offered": 906,
+    "delivered": 905,
+    "deadlineMet": 901,
+    "nativeExit": 2,
+    "allTasksDelivered": false,
+    "allDeadlinesMet": false,
+    "replay": "byte-identical",
+    "diagnostic": "DIAGNOSTIC_EQUIVALENT",
+    "guide": "docs/access-300-diagnosis.md",
+    "frameAnalysis": ".recovery/access-300-resume/frame-analysis.json",
+    "scope": "One seed, modeled Wi-Fi ARP initial-frame drops and delayed resolution;500 unvalidated"
   }
 }

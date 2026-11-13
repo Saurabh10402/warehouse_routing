@@ -1,0 +1,259 @@
+{
+  "schema": "warehouse-access-study-v1",
+  "implementationStatus": "design-only",
+  "inventory": {
+    "schema": "warehouse-wireless-layout-v1",
+    "kind": "inventory",
+    "mobility": "stationary",
+    "sharedSpines": 2,
+    "core": {
+      "model": "5g-lena-epc",
+      "pgw": 1,
+      "sgw": 1,
+      "mme": 1
+    },
+    "zones": [
+      {
+        "id": "A",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 28,
+          "wifi": 29
+        },
+        "originM": [
+          0,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "B",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 29,
+          "wifi": 30
+        },
+        "originM": [
+          40,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "C",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 28,
+          "wifi": 30
+        },
+        "originM": [
+          80,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "D",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 29,
+          "wifi": 31
+        },
+        "originM": [
+          120,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "E",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 29,
+          "wifi": 30
+        },
+        "originM": [
+          0,
+          40,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "F",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 30,
+          "wifi": 31
+        },
+        "originM": [
+          40,
+          40,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "G",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 28,
+          "wifi": 30
+        },
+        "originM": [
+          80,
+          40,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "H",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 29,
+          "wifi": 30
+        },
+        "originM": [
+          120,
+          40,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      }
+    ]
+  },
+  "fabric": {
+    "accessToSpines": "wired-dual-homed",
+    "directZoneLinks": [
+      {
+        "from": "A",
+        "to": "B"
+      },
+      {
+        "from": "B",
+        "to": "C"
+      },
+      {
+        "from": "C",
+        "to": "D"
+      },
+      {
+        "from": "D",
+        "to": "E"
+      },
+      {
+        "from": "E",
+        "to": "F"
+      },
+      {
+        "from": "F",
+        "to": "G"
+      },
+      {
+        "from": "G",
+        "to": "H"
+      }
+    ],
+    "routing": "shortest-path",
+    "failureStudy": "single-spine-outage"
+  },
+  "cellularSupport": {
+    "model": "5g-lena-epc",
+    "placementStatus": "shared-local-core-via-fabric",
+    "bypassSpinesForAuthorization": false
+  },
+  "authorization": {
+    "authority": "main-server",
+    "requiredTaskTypes": [
+      "restricted_actuation",
+      "restricted_area_entry"
+    ],
+    "afterApproval": "local-routing",
+    "onDeny": "block",
+    "onTimeout": "block",
+    "timeoutMs": 1000,
+    "cacheApprovals": false
+  },
+  "externalService": {
+    "scope": "abstract-upper-network-and-main-server",
+    "oneWayDelayMs": 10,
+    "processingDelayMs": 5,
+    "response": "allow"
+  },
+  "tasks": [
+    {
+      "id": "normal-cross-zone",
+      "type": "telemetry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "deadlineMs": 100
+    },
+    {
+      "id": "protected-same-zone",
+      "type": "restricted_actuation",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "deadlineMs": 100
+    },
+    {
+      "id": "protected-cross-zone",
+      "type": "restricted_area_entry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "deadlineMs": 100
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "warehouse-access-study-v1",
+  "implementationStatus": "design-only",
+  "inventory": {
+    "schema": "warehouse-wireless-layout-v1",
+    "kind": "inventory",
+    "mobility": "stationary",
+    "sharedSpines": 2,
+    "core": {
+      "model": "5g-lena-epc",
+      "pgw": 1,
+      "sgw": 1,
+      "mme": 1
+    },
+    "zones": [
+      {
+        "id": "A",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 2,
+          "wifi": 2
+        },
+        "originM": [
+          0,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "B",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 2,
+          "wifi": 2
+        },
+        "originM": [
+          40,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      }
+    ]
+  },
+  "fabric": {
+    "accessToSpines": "wired-dual-homed",
+    "directZoneLinks": [
+      {
+        "from": "A",
+        "to": "B"
+      }
+    ],
+    "routing": "shortest-path",
+    "failureStudy": "none"
+  },
+  "cellularSupport": {
+    "model": "5g-lena-epc",
+    "placementStatus": "shared-local-core-via-fabric",
+    "bypassSpinesForAuthorization": false
+  },
+  "authorization": {
+    "authority": "main-server",
+    "requiredTaskTypes": [
+      "restricted_actuation",
+      "restricted_area_entry"
+    ],
+    "afterApproval": "local-routing",
+    "onDeny": "block",
+    "onTimeout": "block",
+    "timeoutMs": 1000,
+    "cacheApprovals": false
+  },
+  "externalService": {
+    "scope": "abstract-upper-network-and-main-server",
+    "oneWayDelayMs": 10,
+    "processingDelayMs": 5,
+    "response": "allow"
+  },
+  "tasks": [
+    {
+      "id": "normal-cross-zone",
+      "type": "telemetry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "deadlineMs": 100
+    },
+    {
+      "id": "protected-same-zone",
+      "type": "restricted_actuation",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "deadlineMs": 100
+    },
+    {
+      "id": "protected-cross-zone",
+      "type": "restricted_area_entry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "deadlineMs": 100
+    }
+  ]
+}

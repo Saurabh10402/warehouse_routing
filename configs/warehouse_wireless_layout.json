@@ -1,0 +1,174 @@
+{
+  "schema": "warehouse-wireless-layout-v1",
+  "kind": "inventory",
+  "mobility": "stationary",
+  "sharedSpines": 2,
+  "core": {
+    "model": "5g-lena-epc",
+    "pgw": 1,
+    "sgw": 1,
+    "mme": 1
+  },
+  "zones": [
+    {
+      "id": "A",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 28,
+        "wifi": 28
+      },
+      "originM": [
+        0,
+        0,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    },
+    {
+      "id": "B",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 29,
+        "wifi": 29
+      },
+      "originM": [
+        40,
+        0,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    },
+    {
+      "id": "C",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 28,
+        "wifi": 29
+      },
+      "originM": [
+        80,
+        0,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    },
+    {
+      "id": "D",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 29,
+        "wifi": 30
+      },
+      "originM": [
+        120,
+        0,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    },
+    {
+      "id": "E",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 29,
+        "wifi": 29
+      },
+      "originM": [
+        0,
+        40,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    },
+    {
+      "id": "F",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 30,
+        "wifi": 30
+      },
+      "originM": [
+        40,
+        40,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    },
+    {
+      "id": "G",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 28,
+        "wifi": 29
+      },
+      "originM": [
+        80,
+        40,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    },
+    {
+      "id": "H",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 29,
+        "wifi": 29
+      },
+      "originM": [
+        120,
+        40,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    }
+  ]
+}

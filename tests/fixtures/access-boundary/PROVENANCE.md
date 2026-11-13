@@ -1,0 +1,1 @@
+Native ns-3.46/NR v4.1.1 result access-auth-20261106T193539Z-236294af, seed1/run1. Original/replay identical. Native exit2 deliberately preserved:43 deliveries,2 authorization timeouts,1 observed payload drop out of46 offered. Fixture verifies audit behavior, not model performance. Full provenance remains in results and checkpoint041 recovery package.

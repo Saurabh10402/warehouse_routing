@@ -1,0 +1,1 @@
+Native ns-3.46 + NR v4.1.1 control from results/access-auth-20261106T191625Z-ebf3b877. Fixed seed1/run1, original/replay byte-identical. This compact fixture tests audit rejection of corrupted evidence; it is not a replacement for running native controls. Full source/binary/library hashes and logs remain in that result directory.

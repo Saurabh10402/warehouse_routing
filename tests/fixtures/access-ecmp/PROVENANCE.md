@@ -1,0 +1,1 @@
+Corrected native ECMP source-address control access-auth-20261107T113553Z-29c5e23a.36 tasks delivered with exact replay; all observed sources assigned. Earlier fixture predates handling ns-3 uninitialized Ipv4Address and is preserved in checkpoint042/044 packages and .recovery/access-eight-zone/previous-ecmp-fixture; it is rejected by the strengthened source audit.

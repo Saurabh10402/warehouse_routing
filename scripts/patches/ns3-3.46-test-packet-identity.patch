@@ -1,0 +1,53 @@
+--- a/src/wifi/test/wifi-mlo-test.cc
++++ b/src/wifi/test/wifi-mlo-test.cc
+@@ -2996,7 +2996,7 @@
+         // corrupt the reception of the data frame the first time it is sent
+         if (m_nQosDataCount++ == 0)
+         {
+-            m_staErrorModel->SetList({psdu->GetPacket()->GetUid()});
++            m_staErrorModel->SetList({(*psdu->begin())->GetPacket()->GetUid()});
+         }
+         else
+         {
+--- a/src/wifi/test/wifi-txop-test.cc
++++ b/src/wifi/test/wifi-txop-test.cc
+@@ -233,7 +233,7 @@
+         m_txPsdus.back().header.GetAddr1() == m_staDevices.Get(0)->GetAddress())
+     {
+         corrupted = m_apCorrupted = true;
+-        m_apErrorModel->SetList({psduMap.begin()->second->GetPacket()->GetUid()});
++        m_apErrorModel->SetList({(*psduMap.begin()->second->begin())->GetPacket()->GetUid()});
+     }
+ 
+     // The second station does not correctly receive the first QoS data frame sent by the AP
+@@ -247,7 +247,7 @@
+         }
+         if (corrupted)
+         {
+-            m_staErrorModel->SetList({psduMap.begin()->second->GetPacket()->GetUid()});
++            m_staErrorModel->SetList({(*psduMap.begin()->second->begin())->GetPacket()->GetUid()});
+         }
+         else
+         {
+--- a/src/wifi/test/wifi-emlsr-basic-exchanges-test.cc
++++ b/src/wifi/test/wifi-emlsr-basic-exchanges-test.cc
+@@ -1641,7 +1641,7 @@
+         });
+         // corrupt this BlockAck so that the AP MLD sends a BlockAckReq later on
+         {
+-            auto uid = psduMap.cbegin()->second->GetPacket()->GetUid();
++            auto uid = (*psduMap.cbegin()->second->begin())->GetPacket()->GetUid();
+             m_errorModel->SetList({uid});
+         }
+         break;
+--- a/src/wifi/test/wifi-gcr-test.cc
++++ b/src/wifi/test/wifi-gcr-test.cc
+@@ -1077,7 +1077,7 @@
+     auto addr1 = mpdu->GetHeader().GetAddr1();
+     if (addr1.IsGroup() && !addr1.IsBroadcast() && mpdu->GetHeader().IsQosData())
+     {
+-        if (const auto uid = mpdu->GetPacket()->GetUid(); m_currentUid != uid)
++        if (const auto uid = (mpdu->GetHeader().IsQosAmsdu() ? mpdu->begin()->first : mpdu->GetPacket())->GetUid(); m_currentUid != uid)
+         {
+             m_totalTxGroupcasts.push_back(0);
+             m_currentUid = uid;

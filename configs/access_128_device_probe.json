@@ -1,0 +1,3338 @@
+{
+  "schema": "warehouse-access-study-v1",
+  "implementationStatus": "design-only",
+  "inventory": {
+    "schema": "warehouse-wireless-layout-v1",
+    "kind": "inventory",
+    "mobility": "stationary",
+    "sharedSpines": 2,
+    "core": {
+      "model": "5g-lena-epc",
+      "pgw": 1,
+      "sgw": 1,
+      "mme": 1
+    },
+    "zones": [
+      {
+        "id": "A",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 6,
+          "wifi": 6
+        },
+        "originM": [
+          0,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "B",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 6,
+          "wifi": 6
+        },
+        "originM": [
+          40,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "C",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 6,
+          "wifi": 6
+        },
+        "originM": [
+          80,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "D",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 6,
+          "wifi": 6
+        },
+        "originM": [
+          120,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "E",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 6,
+          "wifi": 6
+        },
+        "originM": [
+          0,
+          40,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "F",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 6,
+          "wifi": 6
+        },
+        "originM": [
+          40,
+          40,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "G",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 6,
+          "wifi": 7
+        },
+        "originM": [
+          80,
+          40,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "H",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 6,
+          "wifi": 7
+        },
+        "originM": [
+          120,
+          40,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      }
+    ]
+  },
+  "fabric": {
+    "accessToSpines": "wired-dual-homed",
+    "directZoneLinks": [],
+    "routing": "ecmp",
+    "failureStudy": "single-spine-outage"
+  },
+  "cellularSupport": {
+    "model": "5g-lena-epc",
+    "placementStatus": "shared-local-core-via-fabric",
+    "bypassSpinesForAuthorization": false
+  },
+  "authorization": {
+    "authority": "main-server",
+    "requiredTaskTypes": [
+      "restricted_actuation",
+      "restricted_area_entry"
+    ],
+    "afterApproval": "local-routing",
+    "onDeny": "block",
+    "onTimeout": "block",
+    "timeoutMs": 1000,
+    "cacheApprovals": false
+  },
+  "externalService": {
+    "scope": "abstract-upper-network-and-main-server",
+    "oneWayDelayMs": 10,
+    "processingDelayMs": 5,
+    "response": "allow"
+  },
+  "tasks": [
+    {
+      "id": "before-A-nr-0",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1200
+    },
+    {
+      "id": "before-A-nr-1",
+      "source": "zone-A-nr-robot-1",
+      "destination": "zone-B-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1211
+    },
+    {
+      "id": "before-A-nr-2",
+      "source": "zone-A-nr-robot-2",
+      "destination": "zone-B-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1222
+    },
+    {
+      "id": "before-A-nr-3",
+      "source": "zone-A-nr-robot-3",
+      "destination": "zone-B-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1233
+    },
+    {
+      "id": "before-A-nr-4",
+      "source": "zone-A-nr-robot-4",
+      "destination": "zone-B-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1244
+    },
+    {
+      "id": "before-A-nr-5",
+      "source": "zone-A-nr-robot-5",
+      "destination": "zone-B-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1255
+    },
+    {
+      "id": "before-A-wifi-0",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1266
+    },
+    {
+      "id": "before-A-wifi-1",
+      "source": "zone-A-wifi-robot-1",
+      "destination": "zone-B-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1277
+    },
+    {
+      "id": "before-A-wifi-2",
+      "source": "zone-A-wifi-robot-2",
+      "destination": "zone-B-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1288
+    },
+    {
+      "id": "before-A-wifi-3",
+      "source": "zone-A-wifi-robot-3",
+      "destination": "zone-B-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1299
+    },
+    {
+      "id": "before-A-wifi-4",
+      "source": "zone-A-wifi-robot-4",
+      "destination": "zone-B-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1310
+    },
+    {
+      "id": "before-A-wifi-5",
+      "source": "zone-A-wifi-robot-5",
+      "destination": "zone-B-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1321
+    },
+    {
+      "id": "before-A-local-protected",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 1332
+    },
+    {
+      "id": "before-A-local-normal",
+      "source": "zone-A-wifi-robot-1",
+      "destination": "zone-A-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1343
+    },
+    {
+      "id": "before-A-wifi-peer",
+      "source": "zone-A-wifi-robot-3",
+      "destination": "zone-B-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1354
+    },
+    {
+      "id": "before-A-nr-peer",
+      "source": "zone-A-nr-robot-3",
+      "destination": "zone-B-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1365
+    },
+    {
+      "id": "before-B-nr-0",
+      "source": "zone-B-nr-robot-0",
+      "destination": "zone-C-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1376
+    },
+    {
+      "id": "before-B-nr-1",
+      "source": "zone-B-nr-robot-1",
+      "destination": "zone-C-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1387
+    },
+    {
+      "id": "before-B-nr-2",
+      "source": "zone-B-nr-robot-2",
+      "destination": "zone-C-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1398
+    },
+    {
+      "id": "before-B-nr-3",
+      "source": "zone-B-nr-robot-3",
+      "destination": "zone-C-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1409
+    },
+    {
+      "id": "before-B-nr-4",
+      "source": "zone-B-nr-robot-4",
+      "destination": "zone-C-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1420
+    },
+    {
+      "id": "before-B-nr-5",
+      "source": "zone-B-nr-robot-5",
+      "destination": "zone-C-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1431
+    },
+    {
+      "id": "before-B-wifi-0",
+      "source": "zone-B-wifi-robot-0",
+      "destination": "zone-C-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1442
+    },
+    {
+      "id": "before-B-wifi-1",
+      "source": "zone-B-wifi-robot-1",
+      "destination": "zone-C-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1453
+    },
+    {
+      "id": "before-B-wifi-2",
+      "source": "zone-B-wifi-robot-2",
+      "destination": "zone-C-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1464
+    },
+    {
+      "id": "before-B-wifi-3",
+      "source": "zone-B-wifi-robot-3",
+      "destination": "zone-C-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1475
+    },
+    {
+      "id": "before-B-wifi-4",
+      "source": "zone-B-wifi-robot-4",
+      "destination": "zone-C-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1486
+    },
+    {
+      "id": "before-B-wifi-5",
+      "source": "zone-B-wifi-robot-5",
+      "destination": "zone-C-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1497
+    },
+    {
+      "id": "before-B-local-protected",
+      "source": "zone-B-nr-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 1508
+    },
+    {
+      "id": "before-B-local-normal",
+      "source": "zone-B-wifi-robot-1",
+      "destination": "zone-B-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1519
+    },
+    {
+      "id": "before-B-wifi-peer",
+      "source": "zone-B-wifi-robot-3",
+      "destination": "zone-C-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1530
+    },
+    {
+      "id": "before-B-nr-peer",
+      "source": "zone-B-nr-robot-3",
+      "destination": "zone-C-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1541
+    },
+    {
+      "id": "before-C-nr-0",
+      "source": "zone-C-nr-robot-0",
+      "destination": "zone-D-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1552
+    },
+    {
+      "id": "before-C-nr-1",
+      "source": "zone-C-nr-robot-1",
+      "destination": "zone-D-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1563
+    },
+    {
+      "id": "before-C-nr-2",
+      "source": "zone-C-nr-robot-2",
+      "destination": "zone-D-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1574
+    },
+    {
+      "id": "before-C-nr-3",
+      "source": "zone-C-nr-robot-3",
+      "destination": "zone-D-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1585
+    },
+    {
+      "id": "before-C-nr-4",
+      "source": "zone-C-nr-robot-4",
+      "destination": "zone-D-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1596
+    },
+    {
+      "id": "before-C-nr-5",
+      "source": "zone-C-nr-robot-5",
+      "destination": "zone-D-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1607
+    },
+    {
+      "id": "before-C-wifi-0",
+      "source": "zone-C-wifi-robot-0",
+      "destination": "zone-D-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1618
+    },
+    {
+      "id": "before-C-wifi-1",
+      "source": "zone-C-wifi-robot-1",
+      "destination": "zone-D-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1629
+    },
+    {
+      "id": "before-C-wifi-2",
+      "source": "zone-C-wifi-robot-2",
+      "destination": "zone-D-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1640
+    },
+    {
+      "id": "before-C-wifi-3",
+      "source": "zone-C-wifi-robot-3",
+      "destination": "zone-D-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1651
+    },
+    {
+      "id": "before-C-wifi-4",
+      "source": "zone-C-wifi-robot-4",
+      "destination": "zone-D-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1662
+    },
+    {
+      "id": "before-C-wifi-5",
+      "source": "zone-C-wifi-robot-5",
+      "destination": "zone-D-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1673
+    },
+    {
+      "id": "before-C-local-protected",
+      "source": "zone-C-nr-robot-0",
+      "destination": "zone-C-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 1684
+    },
+    {
+      "id": "before-C-local-normal",
+      "source": "zone-C-wifi-robot-1",
+      "destination": "zone-C-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1695
+    },
+    {
+      "id": "before-C-wifi-peer",
+      "source": "zone-C-wifi-robot-3",
+      "destination": "zone-D-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1706
+    },
+    {
+      "id": "before-C-nr-peer",
+      "source": "zone-C-nr-robot-3",
+      "destination": "zone-D-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1717
+    },
+    {
+      "id": "before-D-nr-0",
+      "source": "zone-D-nr-robot-0",
+      "destination": "zone-E-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1728
+    },
+    {
+      "id": "before-D-nr-1",
+      "source": "zone-D-nr-robot-1",
+      "destination": "zone-E-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1739
+    },
+    {
+      "id": "before-D-nr-2",
+      "source": "zone-D-nr-robot-2",
+      "destination": "zone-E-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1750
+    },
+    {
+      "id": "before-D-nr-3",
+      "source": "zone-D-nr-robot-3",
+      "destination": "zone-E-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1761
+    },
+    {
+      "id": "before-D-nr-4",
+      "source": "zone-D-nr-robot-4",
+      "destination": "zone-E-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1772
+    },
+    {
+      "id": "before-D-nr-5",
+      "source": "zone-D-nr-robot-5",
+      "destination": "zone-E-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1783
+    },
+    {
+      "id": "before-D-wifi-0",
+      "source": "zone-D-wifi-robot-0",
+      "destination": "zone-E-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1794
+    },
+    {
+      "id": "before-D-wifi-1",
+      "source": "zone-D-wifi-robot-1",
+      "destination": "zone-E-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1805
+    },
+    {
+      "id": "before-D-wifi-2",
+      "source": "zone-D-wifi-robot-2",
+      "destination": "zone-E-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1816
+    },
+    {
+      "id": "before-D-wifi-3",
+      "source": "zone-D-wifi-robot-3",
+      "destination": "zone-E-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1827
+    },
+    {
+      "id": "before-D-wifi-4",
+      "source": "zone-D-wifi-robot-4",
+      "destination": "zone-E-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1838
+    },
+    {
+      "id": "before-D-wifi-5",
+      "source": "zone-D-wifi-robot-5",
+      "destination": "zone-E-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1849
+    },
+    {
+      "id": "before-D-local-protected",
+      "source": "zone-D-nr-robot-0",
+      "destination": "zone-D-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 1860
+    },
+    {
+      "id": "before-D-local-normal",
+      "source": "zone-D-wifi-robot-1",
+      "destination": "zone-D-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1871
+    },
+    {
+      "id": "before-D-wifi-peer",
+      "source": "zone-D-wifi-robot-3",
+      "destination": "zone-E-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1882
+    },
+    {
+      "id": "before-D-nr-peer",
+      "source": "zone-D-nr-robot-3",
+      "destination": "zone-E-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1893
+    },
+    {
+      "id": "before-E-nr-0",
+      "source": "zone-E-nr-robot-0",
+      "destination": "zone-F-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1904
+    },
+    {
+      "id": "before-E-nr-1",
+      "source": "zone-E-nr-robot-1",
+      "destination": "zone-F-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1915
+    },
+    {
+      "id": "before-E-nr-2",
+      "source": "zone-E-nr-robot-2",
+      "destination": "zone-F-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1926
+    },
+    {
+      "id": "before-E-nr-3",
+      "source": "zone-E-nr-robot-3",
+      "destination": "zone-F-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1937
+    },
+    {
+      "id": "before-E-nr-4",
+      "source": "zone-E-nr-robot-4",
+      "destination": "zone-F-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1948
+    },
+    {
+      "id": "before-E-nr-5",
+      "source": "zone-E-nr-robot-5",
+      "destination": "zone-F-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1959
+    },
+    {
+      "id": "before-E-wifi-0",
+      "source": "zone-E-wifi-robot-0",
+      "destination": "zone-F-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1970
+    },
+    {
+      "id": "before-E-wifi-1",
+      "source": "zone-E-wifi-robot-1",
+      "destination": "zone-F-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 1981
+    },
+    {
+      "id": "before-E-wifi-2",
+      "source": "zone-E-wifi-robot-2",
+      "destination": "zone-F-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 1992
+    },
+    {
+      "id": "before-E-wifi-3",
+      "source": "zone-E-wifi-robot-3",
+      "destination": "zone-F-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2003
+    },
+    {
+      "id": "before-E-wifi-4",
+      "source": "zone-E-wifi-robot-4",
+      "destination": "zone-F-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2014
+    },
+    {
+      "id": "before-E-wifi-5",
+      "source": "zone-E-wifi-robot-5",
+      "destination": "zone-F-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2025
+    },
+    {
+      "id": "before-E-local-protected",
+      "source": "zone-E-nr-robot-0",
+      "destination": "zone-E-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 2036
+    },
+    {
+      "id": "before-E-local-normal",
+      "source": "zone-E-wifi-robot-1",
+      "destination": "zone-E-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2047
+    },
+    {
+      "id": "before-E-wifi-peer",
+      "source": "zone-E-wifi-robot-3",
+      "destination": "zone-F-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2058
+    },
+    {
+      "id": "before-E-nr-peer",
+      "source": "zone-E-nr-robot-3",
+      "destination": "zone-F-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2069
+    },
+    {
+      "id": "before-F-nr-0",
+      "source": "zone-F-nr-robot-0",
+      "destination": "zone-G-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2080
+    },
+    {
+      "id": "before-F-nr-1",
+      "source": "zone-F-nr-robot-1",
+      "destination": "zone-G-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2091
+    },
+    {
+      "id": "before-F-nr-2",
+      "source": "zone-F-nr-robot-2",
+      "destination": "zone-G-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2102
+    },
+    {
+      "id": "before-F-nr-3",
+      "source": "zone-F-nr-robot-3",
+      "destination": "zone-G-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2113
+    },
+    {
+      "id": "before-F-nr-4",
+      "source": "zone-F-nr-robot-4",
+      "destination": "zone-G-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2124
+    },
+    {
+      "id": "before-F-nr-5",
+      "source": "zone-F-nr-robot-5",
+      "destination": "zone-G-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2135
+    },
+    {
+      "id": "before-F-wifi-0",
+      "source": "zone-F-wifi-robot-0",
+      "destination": "zone-G-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2146
+    },
+    {
+      "id": "before-F-wifi-1",
+      "source": "zone-F-wifi-robot-1",
+      "destination": "zone-G-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2157
+    },
+    {
+      "id": "before-F-wifi-2",
+      "source": "zone-F-wifi-robot-2",
+      "destination": "zone-G-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2168
+    },
+    {
+      "id": "before-F-wifi-3",
+      "source": "zone-F-wifi-robot-3",
+      "destination": "zone-G-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2179
+    },
+    {
+      "id": "before-F-wifi-4",
+      "source": "zone-F-wifi-robot-4",
+      "destination": "zone-G-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2190
+    },
+    {
+      "id": "before-F-wifi-5",
+      "source": "zone-F-wifi-robot-5",
+      "destination": "zone-G-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2201
+    },
+    {
+      "id": "before-F-local-protected",
+      "source": "zone-F-nr-robot-0",
+      "destination": "zone-F-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 2212
+    },
+    {
+      "id": "before-F-local-normal",
+      "source": "zone-F-wifi-robot-1",
+      "destination": "zone-F-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2223
+    },
+    {
+      "id": "before-F-wifi-peer",
+      "source": "zone-F-wifi-robot-3",
+      "destination": "zone-G-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2234
+    },
+    {
+      "id": "before-F-nr-peer",
+      "source": "zone-F-nr-robot-3",
+      "destination": "zone-G-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2245
+    },
+    {
+      "id": "before-G-nr-0",
+      "source": "zone-G-nr-robot-0",
+      "destination": "zone-H-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2256
+    },
+    {
+      "id": "before-G-nr-1",
+      "source": "zone-G-nr-robot-1",
+      "destination": "zone-H-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2267
+    },
+    {
+      "id": "before-G-nr-2",
+      "source": "zone-G-nr-robot-2",
+      "destination": "zone-H-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2278
+    },
+    {
+      "id": "before-G-nr-3",
+      "source": "zone-G-nr-robot-3",
+      "destination": "zone-H-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2289
+    },
+    {
+      "id": "before-G-nr-4",
+      "source": "zone-G-nr-robot-4",
+      "destination": "zone-H-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2300
+    },
+    {
+      "id": "before-G-nr-5",
+      "source": "zone-G-nr-robot-5",
+      "destination": "zone-H-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2311
+    },
+    {
+      "id": "before-G-wifi-0",
+      "source": "zone-G-wifi-robot-0",
+      "destination": "zone-H-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2322
+    },
+    {
+      "id": "before-G-wifi-1",
+      "source": "zone-G-wifi-robot-1",
+      "destination": "zone-H-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2333
+    },
+    {
+      "id": "before-G-wifi-2",
+      "source": "zone-G-wifi-robot-2",
+      "destination": "zone-H-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2344
+    },
+    {
+      "id": "before-G-wifi-3",
+      "source": "zone-G-wifi-robot-3",
+      "destination": "zone-H-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2355
+    },
+    {
+      "id": "before-G-wifi-4",
+      "source": "zone-G-wifi-robot-4",
+      "destination": "zone-H-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2366
+    },
+    {
+      "id": "before-G-wifi-5",
+      "source": "zone-G-wifi-robot-5",
+      "destination": "zone-H-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2377
+    },
+    {
+      "id": "before-G-wifi-6",
+      "source": "zone-G-wifi-robot-6",
+      "destination": "zone-H-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2388
+    },
+    {
+      "id": "before-G-local-protected",
+      "source": "zone-G-nr-robot-0",
+      "destination": "zone-G-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 2399
+    },
+    {
+      "id": "before-G-local-normal",
+      "source": "zone-G-wifi-robot-1",
+      "destination": "zone-G-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2410
+    },
+    {
+      "id": "before-G-wifi-peer",
+      "source": "zone-G-wifi-robot-3",
+      "destination": "zone-H-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2421
+    },
+    {
+      "id": "before-G-nr-peer",
+      "source": "zone-G-nr-robot-3",
+      "destination": "zone-H-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2432
+    },
+    {
+      "id": "before-H-nr-0",
+      "source": "zone-H-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2443
+    },
+    {
+      "id": "before-H-nr-1",
+      "source": "zone-H-nr-robot-1",
+      "destination": "zone-A-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2454
+    },
+    {
+      "id": "before-H-nr-2",
+      "source": "zone-H-nr-robot-2",
+      "destination": "zone-A-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2465
+    },
+    {
+      "id": "before-H-nr-3",
+      "source": "zone-H-nr-robot-3",
+      "destination": "zone-A-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2476
+    },
+    {
+      "id": "before-H-nr-4",
+      "source": "zone-H-nr-robot-4",
+      "destination": "zone-A-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2487
+    },
+    {
+      "id": "before-H-nr-5",
+      "source": "zone-H-nr-robot-5",
+      "destination": "zone-A-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2498
+    },
+    {
+      "id": "before-H-wifi-0",
+      "source": "zone-H-wifi-robot-0",
+      "destination": "zone-A-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2509
+    },
+    {
+      "id": "before-H-wifi-1",
+      "source": "zone-H-wifi-robot-1",
+      "destination": "zone-A-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2520
+    },
+    {
+      "id": "before-H-wifi-2",
+      "source": "zone-H-wifi-robot-2",
+      "destination": "zone-A-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2531
+    },
+    {
+      "id": "before-H-wifi-3",
+      "source": "zone-H-wifi-robot-3",
+      "destination": "zone-A-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2542
+    },
+    {
+      "id": "before-H-wifi-4",
+      "source": "zone-H-wifi-robot-4",
+      "destination": "zone-A-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2553
+    },
+    {
+      "id": "before-H-wifi-5",
+      "source": "zone-H-wifi-robot-5",
+      "destination": "zone-A-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2564
+    },
+    {
+      "id": "before-H-wifi-6",
+      "source": "zone-H-wifi-robot-6",
+      "destination": "zone-A-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 2575
+    },
+    {
+      "id": "before-H-local-protected",
+      "source": "zone-H-nr-robot-0",
+      "destination": "zone-H-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 2586
+    },
+    {
+      "id": "before-H-local-normal",
+      "source": "zone-H-wifi-robot-1",
+      "destination": "zone-H-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2597
+    },
+    {
+      "id": "before-H-wifi-peer",
+      "source": "zone-H-wifi-robot-3",
+      "destination": "zone-A-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2608
+    },
+    {
+      "id": "before-H-nr-peer",
+      "source": "zone-H-nr-robot-3",
+      "destination": "zone-A-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 2619
+    },
+    {
+      "id": "during-A-nr-0",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3300
+    },
+    {
+      "id": "during-A-nr-1",
+      "source": "zone-A-nr-robot-1",
+      "destination": "zone-B-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3311
+    },
+    {
+      "id": "during-A-nr-2",
+      "source": "zone-A-nr-robot-2",
+      "destination": "zone-B-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3322
+    },
+    {
+      "id": "during-A-nr-3",
+      "source": "zone-A-nr-robot-3",
+      "destination": "zone-B-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3333
+    },
+    {
+      "id": "during-A-nr-4",
+      "source": "zone-A-nr-robot-4",
+      "destination": "zone-B-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3344
+    },
+    {
+      "id": "during-A-nr-5",
+      "source": "zone-A-nr-robot-5",
+      "destination": "zone-B-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3355
+    },
+    {
+      "id": "during-A-wifi-0",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3366
+    },
+    {
+      "id": "during-A-wifi-1",
+      "source": "zone-A-wifi-robot-1",
+      "destination": "zone-B-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3377
+    },
+    {
+      "id": "during-A-wifi-2",
+      "source": "zone-A-wifi-robot-2",
+      "destination": "zone-B-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3388
+    },
+    {
+      "id": "during-A-wifi-3",
+      "source": "zone-A-wifi-robot-3",
+      "destination": "zone-B-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3399
+    },
+    {
+      "id": "during-A-wifi-4",
+      "source": "zone-A-wifi-robot-4",
+      "destination": "zone-B-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3410
+    },
+    {
+      "id": "during-A-wifi-5",
+      "source": "zone-A-wifi-robot-5",
+      "destination": "zone-B-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3421
+    },
+    {
+      "id": "during-A-local-protected",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 3432
+    },
+    {
+      "id": "during-A-local-normal",
+      "source": "zone-A-wifi-robot-1",
+      "destination": "zone-A-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3443
+    },
+    {
+      "id": "during-A-wifi-peer",
+      "source": "zone-A-wifi-robot-3",
+      "destination": "zone-B-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3454
+    },
+    {
+      "id": "during-A-nr-peer",
+      "source": "zone-A-nr-robot-3",
+      "destination": "zone-B-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3465
+    },
+    {
+      "id": "during-B-nr-0",
+      "source": "zone-B-nr-robot-0",
+      "destination": "zone-C-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3476
+    },
+    {
+      "id": "during-B-nr-1",
+      "source": "zone-B-nr-robot-1",
+      "destination": "zone-C-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3487
+    },
+    {
+      "id": "during-B-nr-2",
+      "source": "zone-B-nr-robot-2",
+      "destination": "zone-C-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3498
+    },
+    {
+      "id": "during-B-nr-3",
+      "source": "zone-B-nr-robot-3",
+      "destination": "zone-C-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3509
+    },
+    {
+      "id": "during-B-nr-4",
+      "source": "zone-B-nr-robot-4",
+      "destination": "zone-C-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3520
+    },
+    {
+      "id": "during-B-nr-5",
+      "source": "zone-B-nr-robot-5",
+      "destination": "zone-C-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3531
+    },
+    {
+      "id": "during-B-wifi-0",
+      "source": "zone-B-wifi-robot-0",
+      "destination": "zone-C-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3542
+    },
+    {
+      "id": "during-B-wifi-1",
+      "source": "zone-B-wifi-robot-1",
+      "destination": "zone-C-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3553
+    },
+    {
+      "id": "during-B-wifi-2",
+      "source": "zone-B-wifi-robot-2",
+      "destination": "zone-C-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3564
+    },
+    {
+      "id": "during-B-wifi-3",
+      "source": "zone-B-wifi-robot-3",
+      "destination": "zone-C-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3575
+    },
+    {
+      "id": "during-B-wifi-4",
+      "source": "zone-B-wifi-robot-4",
+      "destination": "zone-C-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3586
+    },
+    {
+      "id": "during-B-wifi-5",
+      "source": "zone-B-wifi-robot-5",
+      "destination": "zone-C-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3597
+    },
+    {
+      "id": "during-B-local-protected",
+      "source": "zone-B-nr-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 3608
+    },
+    {
+      "id": "during-B-local-normal",
+      "source": "zone-B-wifi-robot-1",
+      "destination": "zone-B-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3619
+    },
+    {
+      "id": "during-B-wifi-peer",
+      "source": "zone-B-wifi-robot-3",
+      "destination": "zone-C-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3630
+    },
+    {
+      "id": "during-B-nr-peer",
+      "source": "zone-B-nr-robot-3",
+      "destination": "zone-C-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3641
+    },
+    {
+      "id": "during-C-nr-0",
+      "source": "zone-C-nr-robot-0",
+      "destination": "zone-D-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3652
+    },
+    {
+      "id": "during-C-nr-1",
+      "source": "zone-C-nr-robot-1",
+      "destination": "zone-D-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3663
+    },
+    {
+      "id": "during-C-nr-2",
+      "source": "zone-C-nr-robot-2",
+      "destination": "zone-D-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3674
+    },
+    {
+      "id": "during-C-nr-3",
+      "source": "zone-C-nr-robot-3",
+      "destination": "zone-D-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3685
+    },
+    {
+      "id": "during-C-nr-4",
+      "source": "zone-C-nr-robot-4",
+      "destination": "zone-D-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3696
+    },
+    {
+      "id": "during-C-nr-5",
+      "source": "zone-C-nr-robot-5",
+      "destination": "zone-D-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3707
+    },
+    {
+      "id": "during-C-wifi-0",
+      "source": "zone-C-wifi-robot-0",
+      "destination": "zone-D-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3718
+    },
+    {
+      "id": "during-C-wifi-1",
+      "source": "zone-C-wifi-robot-1",
+      "destination": "zone-D-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3729
+    },
+    {
+      "id": "during-C-wifi-2",
+      "source": "zone-C-wifi-robot-2",
+      "destination": "zone-D-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3740
+    },
+    {
+      "id": "during-C-wifi-3",
+      "source": "zone-C-wifi-robot-3",
+      "destination": "zone-D-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3751
+    },
+    {
+      "id": "during-C-wifi-4",
+      "source": "zone-C-wifi-robot-4",
+      "destination": "zone-D-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3762
+    },
+    {
+      "id": "during-C-wifi-5",
+      "source": "zone-C-wifi-robot-5",
+      "destination": "zone-D-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3773
+    },
+    {
+      "id": "during-C-local-protected",
+      "source": "zone-C-nr-robot-0",
+      "destination": "zone-C-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 3784
+    },
+    {
+      "id": "during-C-local-normal",
+      "source": "zone-C-wifi-robot-1",
+      "destination": "zone-C-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3795
+    },
+    {
+      "id": "during-C-wifi-peer",
+      "source": "zone-C-wifi-robot-3",
+      "destination": "zone-D-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3806
+    },
+    {
+      "id": "during-C-nr-peer",
+      "source": "zone-C-nr-robot-3",
+      "destination": "zone-D-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3817
+    },
+    {
+      "id": "during-D-nr-0",
+      "source": "zone-D-nr-robot-0",
+      "destination": "zone-E-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3828
+    },
+    {
+      "id": "during-D-nr-1",
+      "source": "zone-D-nr-robot-1",
+      "destination": "zone-E-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3839
+    },
+    {
+      "id": "during-D-nr-2",
+      "source": "zone-D-nr-robot-2",
+      "destination": "zone-E-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3850
+    },
+    {
+      "id": "during-D-nr-3",
+      "source": "zone-D-nr-robot-3",
+      "destination": "zone-E-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3861
+    },
+    {
+      "id": "during-D-nr-4",
+      "source": "zone-D-nr-robot-4",
+      "destination": "zone-E-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3872
+    },
+    {
+      "id": "during-D-nr-5",
+      "source": "zone-D-nr-robot-5",
+      "destination": "zone-E-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3883
+    },
+    {
+      "id": "during-D-wifi-0",
+      "source": "zone-D-wifi-robot-0",
+      "destination": "zone-E-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3894
+    },
+    {
+      "id": "during-D-wifi-1",
+      "source": "zone-D-wifi-robot-1",
+      "destination": "zone-E-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3905
+    },
+    {
+      "id": "during-D-wifi-2",
+      "source": "zone-D-wifi-robot-2",
+      "destination": "zone-E-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3916
+    },
+    {
+      "id": "during-D-wifi-3",
+      "source": "zone-D-wifi-robot-3",
+      "destination": "zone-E-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3927
+    },
+    {
+      "id": "during-D-wifi-4",
+      "source": "zone-D-wifi-robot-4",
+      "destination": "zone-E-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 3938
+    },
+    {
+      "id": "during-D-wifi-5",
+      "source": "zone-D-wifi-robot-5",
+      "destination": "zone-E-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3949
+    },
+    {
+      "id": "during-D-local-protected",
+      "source": "zone-D-nr-robot-0",
+      "destination": "zone-D-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 3960
+    },
+    {
+      "id": "during-D-local-normal",
+      "source": "zone-D-wifi-robot-1",
+      "destination": "zone-D-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3971
+    },
+    {
+      "id": "during-D-wifi-peer",
+      "source": "zone-D-wifi-robot-3",
+      "destination": "zone-E-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3982
+    },
+    {
+      "id": "during-D-nr-peer",
+      "source": "zone-D-nr-robot-3",
+      "destination": "zone-E-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 3993
+    },
+    {
+      "id": "during-E-nr-0",
+      "source": "zone-E-nr-robot-0",
+      "destination": "zone-F-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4004
+    },
+    {
+      "id": "during-E-nr-1",
+      "source": "zone-E-nr-robot-1",
+      "destination": "zone-F-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4015
+    },
+    {
+      "id": "during-E-nr-2",
+      "source": "zone-E-nr-robot-2",
+      "destination": "zone-F-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4026
+    },
+    {
+      "id": "during-E-nr-3",
+      "source": "zone-E-nr-robot-3",
+      "destination": "zone-F-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4037
+    },
+    {
+      "id": "during-E-nr-4",
+      "source": "zone-E-nr-robot-4",
+      "destination": "zone-F-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4048
+    },
+    {
+      "id": "during-E-nr-5",
+      "source": "zone-E-nr-robot-5",
+      "destination": "zone-F-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4059
+    },
+    {
+      "id": "during-E-wifi-0",
+      "source": "zone-E-wifi-robot-0",
+      "destination": "zone-F-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4070
+    },
+    {
+      "id": "during-E-wifi-1",
+      "source": "zone-E-wifi-robot-1",
+      "destination": "zone-F-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4081
+    },
+    {
+      "id": "during-E-wifi-2",
+      "source": "zone-E-wifi-robot-2",
+      "destination": "zone-F-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4092
+    },
+    {
+      "id": "during-E-wifi-3",
+      "source": "zone-E-wifi-robot-3",
+      "destination": "zone-F-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4103
+    },
+    {
+      "id": "during-E-wifi-4",
+      "source": "zone-E-wifi-robot-4",
+      "destination": "zone-F-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4114
+    },
+    {
+      "id": "during-E-wifi-5",
+      "source": "zone-E-wifi-robot-5",
+      "destination": "zone-F-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4125
+    },
+    {
+      "id": "during-E-local-protected",
+      "source": "zone-E-nr-robot-0",
+      "destination": "zone-E-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 4136
+    },
+    {
+      "id": "during-E-local-normal",
+      "source": "zone-E-wifi-robot-1",
+      "destination": "zone-E-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4147
+    },
+    {
+      "id": "during-E-wifi-peer",
+      "source": "zone-E-wifi-robot-3",
+      "destination": "zone-F-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4158
+    },
+    {
+      "id": "during-E-nr-peer",
+      "source": "zone-E-nr-robot-3",
+      "destination": "zone-F-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4169
+    },
+    {
+      "id": "during-F-nr-0",
+      "source": "zone-F-nr-robot-0",
+      "destination": "zone-G-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4180
+    },
+    {
+      "id": "during-F-nr-1",
+      "source": "zone-F-nr-robot-1",
+      "destination": "zone-G-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4191
+    },
+    {
+      "id": "during-F-nr-2",
+      "source": "zone-F-nr-robot-2",
+      "destination": "zone-G-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4202
+    },
+    {
+      "id": "during-F-nr-3",
+      "source": "zone-F-nr-robot-3",
+      "destination": "zone-G-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4213
+    },
+    {
+      "id": "during-F-nr-4",
+      "source": "zone-F-nr-robot-4",
+      "destination": "zone-G-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4224
+    },
+    {
+      "id": "during-F-nr-5",
+      "source": "zone-F-nr-robot-5",
+      "destination": "zone-G-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4235
+    },
+    {
+      "id": "during-F-wifi-0",
+      "source": "zone-F-wifi-robot-0",
+      "destination": "zone-G-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4246
+    },
+    {
+      "id": "during-F-wifi-1",
+      "source": "zone-F-wifi-robot-1",
+      "destination": "zone-G-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4257
+    },
+    {
+      "id": "during-F-wifi-2",
+      "source": "zone-F-wifi-robot-2",
+      "destination": "zone-G-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4268
+    },
+    {
+      "id": "during-F-wifi-3",
+      "source": "zone-F-wifi-robot-3",
+      "destination": "zone-G-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4279
+    },
+    {
+      "id": "during-F-wifi-4",
+      "source": "zone-F-wifi-robot-4",
+      "destination": "zone-G-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4290
+    },
+    {
+      "id": "during-F-wifi-5",
+      "source": "zone-F-wifi-robot-5",
+      "destination": "zone-G-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4301
+    },
+    {
+      "id": "during-F-local-protected",
+      "source": "zone-F-nr-robot-0",
+      "destination": "zone-F-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 4312
+    },
+    {
+      "id": "during-F-local-normal",
+      "source": "zone-F-wifi-robot-1",
+      "destination": "zone-F-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4323
+    },
+    {
+      "id": "during-F-wifi-peer",
+      "source": "zone-F-wifi-robot-3",
+      "destination": "zone-G-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4334
+    },
+    {
+      "id": "during-F-nr-peer",
+      "source": "zone-F-nr-robot-3",
+      "destination": "zone-G-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4345
+    },
+    {
+      "id": "during-G-nr-0",
+      "source": "zone-G-nr-robot-0",
+      "destination": "zone-H-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4356
+    },
+    {
+      "id": "during-G-nr-1",
+      "source": "zone-G-nr-robot-1",
+      "destination": "zone-H-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4367
+    },
+    {
+      "id": "during-G-nr-2",
+      "source": "zone-G-nr-robot-2",
+      "destination": "zone-H-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4378
+    },
+    {
+      "id": "during-G-nr-3",
+      "source": "zone-G-nr-robot-3",
+      "destination": "zone-H-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4389
+    },
+    {
+      "id": "during-G-nr-4",
+      "source": "zone-G-nr-robot-4",
+      "destination": "zone-H-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4400
+    },
+    {
+      "id": "during-G-nr-5",
+      "source": "zone-G-nr-robot-5",
+      "destination": "zone-H-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4411
+    },
+    {
+      "id": "during-G-wifi-0",
+      "source": "zone-G-wifi-robot-0",
+      "destination": "zone-H-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4422
+    },
+    {
+      "id": "during-G-wifi-1",
+      "source": "zone-G-wifi-robot-1",
+      "destination": "zone-H-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4433
+    },
+    {
+      "id": "during-G-wifi-2",
+      "source": "zone-G-wifi-robot-2",
+      "destination": "zone-H-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4444
+    },
+    {
+      "id": "during-G-wifi-3",
+      "source": "zone-G-wifi-robot-3",
+      "destination": "zone-H-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4455
+    },
+    {
+      "id": "during-G-wifi-4",
+      "source": "zone-G-wifi-robot-4",
+      "destination": "zone-H-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4466
+    },
+    {
+      "id": "during-G-wifi-5",
+      "source": "zone-G-wifi-robot-5",
+      "destination": "zone-H-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4477
+    },
+    {
+      "id": "during-G-wifi-6",
+      "source": "zone-G-wifi-robot-6",
+      "destination": "zone-H-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4488
+    },
+    {
+      "id": "during-G-local-protected",
+      "source": "zone-G-nr-robot-0",
+      "destination": "zone-G-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 4499
+    },
+    {
+      "id": "during-G-local-normal",
+      "source": "zone-G-wifi-robot-1",
+      "destination": "zone-G-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4510
+    },
+    {
+      "id": "during-G-wifi-peer",
+      "source": "zone-G-wifi-robot-3",
+      "destination": "zone-H-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4521
+    },
+    {
+      "id": "during-G-nr-peer",
+      "source": "zone-G-nr-robot-3",
+      "destination": "zone-H-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4532
+    },
+    {
+      "id": "during-H-nr-0",
+      "source": "zone-H-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4543
+    },
+    {
+      "id": "during-H-nr-1",
+      "source": "zone-H-nr-robot-1",
+      "destination": "zone-A-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4554
+    },
+    {
+      "id": "during-H-nr-2",
+      "source": "zone-H-nr-robot-2",
+      "destination": "zone-A-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4565
+    },
+    {
+      "id": "during-H-nr-3",
+      "source": "zone-H-nr-robot-3",
+      "destination": "zone-A-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4576
+    },
+    {
+      "id": "during-H-nr-4",
+      "source": "zone-H-nr-robot-4",
+      "destination": "zone-A-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4587
+    },
+    {
+      "id": "during-H-nr-5",
+      "source": "zone-H-nr-robot-5",
+      "destination": "zone-A-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4598
+    },
+    {
+      "id": "during-H-wifi-0",
+      "source": "zone-H-wifi-robot-0",
+      "destination": "zone-A-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4609
+    },
+    {
+      "id": "during-H-wifi-1",
+      "source": "zone-H-wifi-robot-1",
+      "destination": "zone-A-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4620
+    },
+    {
+      "id": "during-H-wifi-2",
+      "source": "zone-H-wifi-robot-2",
+      "destination": "zone-A-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4631
+    },
+    {
+      "id": "during-H-wifi-3",
+      "source": "zone-H-wifi-robot-3",
+      "destination": "zone-A-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4642
+    },
+    {
+      "id": "during-H-wifi-4",
+      "source": "zone-H-wifi-robot-4",
+      "destination": "zone-A-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4653
+    },
+    {
+      "id": "during-H-wifi-5",
+      "source": "zone-H-wifi-robot-5",
+      "destination": "zone-A-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4664
+    },
+    {
+      "id": "during-H-wifi-6",
+      "source": "zone-H-wifi-robot-6",
+      "destination": "zone-A-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 4675
+    },
+    {
+      "id": "during-H-local-protected",
+      "source": "zone-H-nr-robot-0",
+      "destination": "zone-H-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 4686
+    },
+    {
+      "id": "during-H-local-normal",
+      "source": "zone-H-wifi-robot-1",
+      "destination": "zone-H-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4697
+    },
+    {
+      "id": "during-H-wifi-peer",
+      "source": "zone-H-wifi-robot-3",
+      "destination": "zone-A-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4708
+    },
+    {
+      "id": "during-H-nr-peer",
+      "source": "zone-H-nr-robot-3",
+      "destination": "zone-A-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 4719
+    },
+    {
+      "id": "after-A-nr-0",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5300
+    },
+    {
+      "id": "after-A-nr-1",
+      "source": "zone-A-nr-robot-1",
+      "destination": "zone-B-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5311
+    },
+    {
+      "id": "after-A-nr-2",
+      "source": "zone-A-nr-robot-2",
+      "destination": "zone-B-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5322
+    },
+    {
+      "id": "after-A-nr-3",
+      "source": "zone-A-nr-robot-3",
+      "destination": "zone-B-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5333
+    },
+    {
+      "id": "after-A-nr-4",
+      "source": "zone-A-nr-robot-4",
+      "destination": "zone-B-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5344
+    },
+    {
+      "id": "after-A-nr-5",
+      "source": "zone-A-nr-robot-5",
+      "destination": "zone-B-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5355
+    },
+    {
+      "id": "after-A-wifi-0",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5366
+    },
+    {
+      "id": "after-A-wifi-1",
+      "source": "zone-A-wifi-robot-1",
+      "destination": "zone-B-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5377
+    },
+    {
+      "id": "after-A-wifi-2",
+      "source": "zone-A-wifi-robot-2",
+      "destination": "zone-B-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5388
+    },
+    {
+      "id": "after-A-wifi-3",
+      "source": "zone-A-wifi-robot-3",
+      "destination": "zone-B-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5399
+    },
+    {
+      "id": "after-A-wifi-4",
+      "source": "zone-A-wifi-robot-4",
+      "destination": "zone-B-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5410
+    },
+    {
+      "id": "after-A-wifi-5",
+      "source": "zone-A-wifi-robot-5",
+      "destination": "zone-B-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5421
+    },
+    {
+      "id": "after-A-local-protected",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 5432
+    },
+    {
+      "id": "after-A-local-normal",
+      "source": "zone-A-wifi-robot-1",
+      "destination": "zone-A-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5443
+    },
+    {
+      "id": "after-A-wifi-peer",
+      "source": "zone-A-wifi-robot-3",
+      "destination": "zone-B-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5454
+    },
+    {
+      "id": "after-A-nr-peer",
+      "source": "zone-A-nr-robot-3",
+      "destination": "zone-B-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5465
+    },
+    {
+      "id": "after-B-nr-0",
+      "source": "zone-B-nr-robot-0",
+      "destination": "zone-C-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5476
+    },
+    {
+      "id": "after-B-nr-1",
+      "source": "zone-B-nr-robot-1",
+      "destination": "zone-C-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5487
+    },
+    {
+      "id": "after-B-nr-2",
+      "source": "zone-B-nr-robot-2",
+      "destination": "zone-C-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5498
+    },
+    {
+      "id": "after-B-nr-3",
+      "source": "zone-B-nr-robot-3",
+      "destination": "zone-C-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5509
+    },
+    {
+      "id": "after-B-nr-4",
+      "source": "zone-B-nr-robot-4",
+      "destination": "zone-C-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5520
+    },
+    {
+      "id": "after-B-nr-5",
+      "source": "zone-B-nr-robot-5",
+      "destination": "zone-C-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5531
+    },
+    {
+      "id": "after-B-wifi-0",
+      "source": "zone-B-wifi-robot-0",
+      "destination": "zone-C-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5542
+    },
+    {
+      "id": "after-B-wifi-1",
+      "source": "zone-B-wifi-robot-1",
+      "destination": "zone-C-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5553
+    },
+    {
+      "id": "after-B-wifi-2",
+      "source": "zone-B-wifi-robot-2",
+      "destination": "zone-C-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5564
+    },
+    {
+      "id": "after-B-wifi-3",
+      "source": "zone-B-wifi-robot-3",
+      "destination": "zone-C-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5575
+    },
+    {
+      "id": "after-B-wifi-4",
+      "source": "zone-B-wifi-robot-4",
+      "destination": "zone-C-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5586
+    },
+    {
+      "id": "after-B-wifi-5",
+      "source": "zone-B-wifi-robot-5",
+      "destination": "zone-C-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5597
+    },
+    {
+      "id": "after-B-local-protected",
+      "source": "zone-B-nr-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 5608
+    },
+    {
+      "id": "after-B-local-normal",
+      "source": "zone-B-wifi-robot-1",
+      "destination": "zone-B-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5619
+    },
+    {
+      "id": "after-B-wifi-peer",
+      "source": "zone-B-wifi-robot-3",
+      "destination": "zone-C-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5630
+    },
+    {
+      "id": "after-B-nr-peer",
+      "source": "zone-B-nr-robot-3",
+      "destination": "zone-C-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5641
+    },
+    {
+      "id": "after-C-nr-0",
+      "source": "zone-C-nr-robot-0",
+      "destination": "zone-D-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5652
+    },
+    {
+      "id": "after-C-nr-1",
+      "source": "zone-C-nr-robot-1",
+      "destination": "zone-D-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5663
+    },
+    {
+      "id": "after-C-nr-2",
+      "source": "zone-C-nr-robot-2",
+      "destination": "zone-D-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5674
+    },
+    {
+      "id": "after-C-nr-3",
+      "source": "zone-C-nr-robot-3",
+      "destination": "zone-D-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5685
+    },
+    {
+      "id": "after-C-nr-4",
+      "source": "zone-C-nr-robot-4",
+      "destination": "zone-D-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5696
+    },
+    {
+      "id": "after-C-nr-5",
+      "source": "zone-C-nr-robot-5",
+      "destination": "zone-D-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5707
+    },
+    {
+      "id": "after-C-wifi-0",
+      "source": "zone-C-wifi-robot-0",
+      "destination": "zone-D-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5718
+    },
+    {
+      "id": "after-C-wifi-1",
+      "source": "zone-C-wifi-robot-1",
+      "destination": "zone-D-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5729
+    },
+    {
+      "id": "after-C-wifi-2",
+      "source": "zone-C-wifi-robot-2",
+      "destination": "zone-D-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5740
+    },
+    {
+      "id": "after-C-wifi-3",
+      "source": "zone-C-wifi-robot-3",
+      "destination": "zone-D-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5751
+    },
+    {
+      "id": "after-C-wifi-4",
+      "source": "zone-C-wifi-robot-4",
+      "destination": "zone-D-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5762
+    },
+    {
+      "id": "after-C-wifi-5",
+      "source": "zone-C-wifi-robot-5",
+      "destination": "zone-D-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5773
+    },
+    {
+      "id": "after-C-local-protected",
+      "source": "zone-C-nr-robot-0",
+      "destination": "zone-C-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 5784
+    },
+    {
+      "id": "after-C-local-normal",
+      "source": "zone-C-wifi-robot-1",
+      "destination": "zone-C-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5795
+    },
+    {
+      "id": "after-C-wifi-peer",
+      "source": "zone-C-wifi-robot-3",
+      "destination": "zone-D-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5806
+    },
+    {
+      "id": "after-C-nr-peer",
+      "source": "zone-C-nr-robot-3",
+      "destination": "zone-D-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5817
+    },
+    {
+      "id": "after-D-nr-0",
+      "source": "zone-D-nr-robot-0",
+      "destination": "zone-E-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5828
+    },
+    {
+      "id": "after-D-nr-1",
+      "source": "zone-D-nr-robot-1",
+      "destination": "zone-E-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5839
+    },
+    {
+      "id": "after-D-nr-2",
+      "source": "zone-D-nr-robot-2",
+      "destination": "zone-E-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5850
+    },
+    {
+      "id": "after-D-nr-3",
+      "source": "zone-D-nr-robot-3",
+      "destination": "zone-E-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5861
+    },
+    {
+      "id": "after-D-nr-4",
+      "source": "zone-D-nr-robot-4",
+      "destination": "zone-E-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5872
+    },
+    {
+      "id": "after-D-nr-5",
+      "source": "zone-D-nr-robot-5",
+      "destination": "zone-E-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5883
+    },
+    {
+      "id": "after-D-wifi-0",
+      "source": "zone-D-wifi-robot-0",
+      "destination": "zone-E-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5894
+    },
+    {
+      "id": "after-D-wifi-1",
+      "source": "zone-D-wifi-robot-1",
+      "destination": "zone-E-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5905
+    },
+    {
+      "id": "after-D-wifi-2",
+      "source": "zone-D-wifi-robot-2",
+      "destination": "zone-E-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5916
+    },
+    {
+      "id": "after-D-wifi-3",
+      "source": "zone-D-wifi-robot-3",
+      "destination": "zone-E-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5927
+    },
+    {
+      "id": "after-D-wifi-4",
+      "source": "zone-D-wifi-robot-4",
+      "destination": "zone-E-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 5938
+    },
+    {
+      "id": "after-D-wifi-5",
+      "source": "zone-D-wifi-robot-5",
+      "destination": "zone-E-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5949
+    },
+    {
+      "id": "after-D-local-protected",
+      "source": "zone-D-nr-robot-0",
+      "destination": "zone-D-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 5960
+    },
+    {
+      "id": "after-D-local-normal",
+      "source": "zone-D-wifi-robot-1",
+      "destination": "zone-D-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5971
+    },
+    {
+      "id": "after-D-wifi-peer",
+      "source": "zone-D-wifi-robot-3",
+      "destination": "zone-E-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5982
+    },
+    {
+      "id": "after-D-nr-peer",
+      "source": "zone-D-nr-robot-3",
+      "destination": "zone-E-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 5993
+    },
+    {
+      "id": "after-E-nr-0",
+      "source": "zone-E-nr-robot-0",
+      "destination": "zone-F-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6004
+    },
+    {
+      "id": "after-E-nr-1",
+      "source": "zone-E-nr-robot-1",
+      "destination": "zone-F-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6015
+    },
+    {
+      "id": "after-E-nr-2",
+      "source": "zone-E-nr-robot-2",
+      "destination": "zone-F-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6026
+    },
+    {
+      "id": "after-E-nr-3",
+      "source": "zone-E-nr-robot-3",
+      "destination": "zone-F-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6037
+    },
+    {
+      "id": "after-E-nr-4",
+      "source": "zone-E-nr-robot-4",
+      "destination": "zone-F-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6048
+    },
+    {
+      "id": "after-E-nr-5",
+      "source": "zone-E-nr-robot-5",
+      "destination": "zone-F-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6059
+    },
+    {
+      "id": "after-E-wifi-0",
+      "source": "zone-E-wifi-robot-0",
+      "destination": "zone-F-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6070
+    },
+    {
+      "id": "after-E-wifi-1",
+      "source": "zone-E-wifi-robot-1",
+      "destination": "zone-F-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6081
+    },
+    {
+      "id": "after-E-wifi-2",
+      "source": "zone-E-wifi-robot-2",
+      "destination": "zone-F-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6092
+    },
+    {
+      "id": "after-E-wifi-3",
+      "source": "zone-E-wifi-robot-3",
+      "destination": "zone-F-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6103
+    },
+    {
+      "id": "after-E-wifi-4",
+      "source": "zone-E-wifi-robot-4",
+      "destination": "zone-F-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6114
+    },
+    {
+      "id": "after-E-wifi-5",
+      "source": "zone-E-wifi-robot-5",
+      "destination": "zone-F-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6125
+    },
+    {
+      "id": "after-E-local-protected",
+      "source": "zone-E-nr-robot-0",
+      "destination": "zone-E-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 6136
+    },
+    {
+      "id": "after-E-local-normal",
+      "source": "zone-E-wifi-robot-1",
+      "destination": "zone-E-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6147
+    },
+    {
+      "id": "after-E-wifi-peer",
+      "source": "zone-E-wifi-robot-3",
+      "destination": "zone-F-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6158
+    },
+    {
+      "id": "after-E-nr-peer",
+      "source": "zone-E-nr-robot-3",
+      "destination": "zone-F-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6169
+    },
+    {
+      "id": "after-F-nr-0",
+      "source": "zone-F-nr-robot-0",
+      "destination": "zone-G-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6180
+    },
+    {
+      "id": "after-F-nr-1",
+      "source": "zone-F-nr-robot-1",
+      "destination": "zone-G-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6191
+    },
+    {
+      "id": "after-F-nr-2",
+      "source": "zone-F-nr-robot-2",
+      "destination": "zone-G-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6202
+    },
+    {
+      "id": "after-F-nr-3",
+      "source": "zone-F-nr-robot-3",
+      "destination": "zone-G-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6213
+    },
+    {
+      "id": "after-F-nr-4",
+      "source": "zone-F-nr-robot-4",
+      "destination": "zone-G-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6224
+    },
+    {
+      "id": "after-F-nr-5",
+      "source": "zone-F-nr-robot-5",
+      "destination": "zone-G-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6235
+    },
+    {
+      "id": "after-F-wifi-0",
+      "source": "zone-F-wifi-robot-0",
+      "destination": "zone-G-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6246
+    },
+    {
+      "id": "after-F-wifi-1",
+      "source": "zone-F-wifi-robot-1",
+      "destination": "zone-G-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6257
+    },
+    {
+      "id": "after-F-wifi-2",
+      "source": "zone-F-wifi-robot-2",
+      "destination": "zone-G-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6268
+    },
+    {
+      "id": "after-F-wifi-3",
+      "source": "zone-F-wifi-robot-3",
+      "destination": "zone-G-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6279
+    },
+    {
+      "id": "after-F-wifi-4",
+      "source": "zone-F-wifi-robot-4",
+      "destination": "zone-G-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6290
+    },
+    {
+      "id": "after-F-wifi-5",
+      "source": "zone-F-wifi-robot-5",
+      "destination": "zone-G-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6301
+    },
+    {
+      "id": "after-F-local-protected",
+      "source": "zone-F-nr-robot-0",
+      "destination": "zone-F-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 6312
+    },
+    {
+      "id": "after-F-local-normal",
+      "source": "zone-F-wifi-robot-1",
+      "destination": "zone-F-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6323
+    },
+    {
+      "id": "after-F-wifi-peer",
+      "source": "zone-F-wifi-robot-3",
+      "destination": "zone-G-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6334
+    },
+    {
+      "id": "after-F-nr-peer",
+      "source": "zone-F-nr-robot-3",
+      "destination": "zone-G-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6345
+    },
+    {
+      "id": "after-G-nr-0",
+      "source": "zone-G-nr-robot-0",
+      "destination": "zone-H-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6356
+    },
+    {
+      "id": "after-G-nr-1",
+      "source": "zone-G-nr-robot-1",
+      "destination": "zone-H-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6367
+    },
+    {
+      "id": "after-G-nr-2",
+      "source": "zone-G-nr-robot-2",
+      "destination": "zone-H-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6378
+    },
+    {
+      "id": "after-G-nr-3",
+      "source": "zone-G-nr-robot-3",
+      "destination": "zone-H-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6389
+    },
+    {
+      "id": "after-G-nr-4",
+      "source": "zone-G-nr-robot-4",
+      "destination": "zone-H-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6400
+    },
+    {
+      "id": "after-G-nr-5",
+      "source": "zone-G-nr-robot-5",
+      "destination": "zone-H-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6411
+    },
+    {
+      "id": "after-G-wifi-0",
+      "source": "zone-G-wifi-robot-0",
+      "destination": "zone-H-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6422
+    },
+    {
+      "id": "after-G-wifi-1",
+      "source": "zone-G-wifi-robot-1",
+      "destination": "zone-H-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6433
+    },
+    {
+      "id": "after-G-wifi-2",
+      "source": "zone-G-wifi-robot-2",
+      "destination": "zone-H-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6444
+    },
+    {
+      "id": "after-G-wifi-3",
+      "source": "zone-G-wifi-robot-3",
+      "destination": "zone-H-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6455
+    },
+    {
+      "id": "after-G-wifi-4",
+      "source": "zone-G-wifi-robot-4",
+      "destination": "zone-H-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6466
+    },
+    {
+      "id": "after-G-wifi-5",
+      "source": "zone-G-wifi-robot-5",
+      "destination": "zone-H-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6477
+    },
+    {
+      "id": "after-G-wifi-6",
+      "source": "zone-G-wifi-robot-6",
+      "destination": "zone-H-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6488
+    },
+    {
+      "id": "after-G-local-protected",
+      "source": "zone-G-nr-robot-0",
+      "destination": "zone-G-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 6499
+    },
+    {
+      "id": "after-G-local-normal",
+      "source": "zone-G-wifi-robot-1",
+      "destination": "zone-G-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6510
+    },
+    {
+      "id": "after-G-wifi-peer",
+      "source": "zone-G-wifi-robot-3",
+      "destination": "zone-H-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6521
+    },
+    {
+      "id": "after-G-nr-peer",
+      "source": "zone-G-nr-robot-3",
+      "destination": "zone-H-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6532
+    },
+    {
+      "id": "after-H-nr-0",
+      "source": "zone-H-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6543
+    },
+    {
+      "id": "after-H-nr-1",
+      "source": "zone-H-nr-robot-1",
+      "destination": "zone-A-wifi-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6554
+    },
+    {
+      "id": "after-H-nr-2",
+      "source": "zone-H-nr-robot-2",
+      "destination": "zone-A-wifi-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6565
+    },
+    {
+      "id": "after-H-nr-3",
+      "source": "zone-H-nr-robot-3",
+      "destination": "zone-A-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6576
+    },
+    {
+      "id": "after-H-nr-4",
+      "source": "zone-H-nr-robot-4",
+      "destination": "zone-A-wifi-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6587
+    },
+    {
+      "id": "after-H-nr-5",
+      "source": "zone-H-nr-robot-5",
+      "destination": "zone-A-wifi-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6598
+    },
+    {
+      "id": "after-H-wifi-0",
+      "source": "zone-H-wifi-robot-0",
+      "destination": "zone-A-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6609
+    },
+    {
+      "id": "after-H-wifi-1",
+      "source": "zone-H-wifi-robot-1",
+      "destination": "zone-A-nr-robot-1",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6620
+    },
+    {
+      "id": "after-H-wifi-2",
+      "source": "zone-H-wifi-robot-2",
+      "destination": "zone-A-nr-robot-2",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6631
+    },
+    {
+      "id": "after-H-wifi-3",
+      "source": "zone-H-wifi-robot-3",
+      "destination": "zone-A-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6642
+    },
+    {
+      "id": "after-H-wifi-4",
+      "source": "zone-H-wifi-robot-4",
+      "destination": "zone-A-nr-robot-4",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6653
+    },
+    {
+      "id": "after-H-wifi-5",
+      "source": "zone-H-wifi-robot-5",
+      "destination": "zone-A-nr-robot-5",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6664
+    },
+    {
+      "id": "after-H-wifi-6",
+      "source": "zone-H-wifi-robot-6",
+      "destination": "zone-A-nr-robot-0",
+      "type": "restricted_actuation",
+      "deadlineMs": 100,
+      "startMs": 6675
+    },
+    {
+      "id": "after-H-local-protected",
+      "source": "zone-H-nr-robot-0",
+      "destination": "zone-H-wifi-robot-0",
+      "type": "restricted_area_entry",
+      "deadlineMs": 100,
+      "startMs": 6686
+    },
+    {
+      "id": "after-H-local-normal",
+      "source": "zone-H-wifi-robot-1",
+      "destination": "zone-H-wifi-robot-2",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6697
+    },
+    {
+      "id": "after-H-wifi-peer",
+      "source": "zone-H-wifi-robot-3",
+      "destination": "zone-A-wifi-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6708
+    },
+    {
+      "id": "after-H-nr-peer",
+      "source": "zone-H-nr-robot-3",
+      "destination": "zone-A-nr-robot-3",
+      "type": "telemetry",
+      "deadlineMs": 100,
+      "startMs": 6719
+    }
+  ],
+  "outage": {
+    "spine": "spine-0",
+    "downMs": 3000,
+    "upMs": 5000
+  },
+  "radioRandomness": {
+    "seed": 1,
+    "run": 1
+  }
+}

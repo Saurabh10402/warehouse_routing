@@ -1,0 +1,54 @@
+{
+  "schema": "warehouse-wireless-layout-v1",
+  "kind": "inventory",
+  "mobility": "stationary",
+  "sharedSpines": 2,
+  "core": {
+    "model": "5g-lena-epc",
+    "pgw": 1,
+    "sgw": 1,
+    "mme": 1
+  },
+  "zones": [
+    {
+      "id": "A",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 2,
+        "wifi": 2
+      },
+      "originM": [
+        0,
+        0,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    },
+    {
+      "id": "B",
+      "switches": 1,
+      "edgeServers": 1,
+      "wifiAps": 1,
+      "nrGnbs": 1,
+      "robots": {
+        "nr": 2,
+        "wifi": 2
+      },
+      "originM": [
+        40,
+        0,
+        1
+      ],
+      "grid": {
+        "columns": 10,
+        "spacingM": 2
+      }
+    }
+  ]
+}

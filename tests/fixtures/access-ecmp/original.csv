@@ -1,0 +1,17 @@
+id,role,nodeId,radioType,attachment,x,y,z
+spine-0,spine,0,none,-,0,0,0
+spine-1,spine,1,none,-,0,0,0
+zone-A-ap-0,ap,3,ns3::WifiNetDevice,-,0,-2,4
+zone-A-gnb-0,gnb,4,ns3::NrGnbNetDevice,-,0,-2,4
+zone-A-nr-robot-0,robot,5,ns3::NrUeNetDevice,zone-A-gnb-0,0,0,1
+zone-A-nr-robot-1,robot,6,ns3::NrUeNetDevice,zone-A-gnb-0,2,0,1
+zone-A-switch-0,switch,2,none,-,0,0,0
+zone-A-wifi-robot-0,robot,7,ns3::WifiNetDevice,zone-A-ap-0,4,0,1
+zone-A-wifi-robot-1,robot,8,ns3::WifiNetDevice,zone-A-ap-0,6,0,1
+zone-B-ap-0,ap,10,ns3::WifiNetDevice,-,40,-2,4
+zone-B-gnb-0,gnb,11,ns3::NrGnbNetDevice,-,40,-2,4
+zone-B-nr-robot-0,robot,12,ns3::NrUeNetDevice,zone-B-gnb-0,40,0,1
+zone-B-nr-robot-1,robot,13,ns3::NrUeNetDevice,zone-B-gnb-0,42,0,1
+zone-B-switch-0,switch,9,none,-,0,0,0
+zone-B-wifi-robot-0,robot,14,ns3::WifiNetDevice,zone-B-ap-0,44,0,1
+zone-B-wifi-robot-1,robot,15,ns3::WifiNetDevice,zone-B-ap-0,46,0,1

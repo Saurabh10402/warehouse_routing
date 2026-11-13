@@ -1,5 +1,13 @@
 # Warehouse routing simulation — installation and usage
 
+> **Current wireless development:** the stationary NR/Wi-Fi access study now has
+> main-server task authorization, live spine recovery and Layer-3 ECMP. See the
+> [wireless run guide](docs/run-access-authorization.md) and
+> [ECMP control/results](docs/access-ecmp-control.md). These small controls use
+> nineteen local devices plus the external server model. The 500-device demo
+> described below is the separate, preserved wired implementation.
+
+
 A configurable stationary warehouse network with native wired ns-3 routing, Dijkstra/ECMP comparison, priority queues, failure/recovery demonstrations and an offline packet-path viewer. The supplied layout has **8 zones and 500 devices: 482 robots, 8 zone switches, 8 local edge servers and 2 shared spines**.
 
 ## Complete project report

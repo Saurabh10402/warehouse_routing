@@ -1,0 +1,195 @@
+{
+  "schema": "warehouse-access-study-v1",
+  "implementationStatus": "design-only",
+  "inventory": {
+    "schema": "warehouse-wireless-layout-v1",
+    "kind": "inventory",
+    "mobility": "stationary",
+    "sharedSpines": 2,
+    "core": {
+      "model": "5g-lena-epc",
+      "pgw": 1,
+      "sgw": 1,
+      "mme": 1
+    },
+    "zones": [
+      {
+        "id": "A",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 2,
+          "wifi": 2
+        },
+        "originM": [
+          0,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      },
+      {
+        "id": "B",
+        "switches": 1,
+        "edgeServers": 0,
+        "wifiAps": 1,
+        "nrGnbs": 1,
+        "robots": {
+          "nr": 2,
+          "wifi": 2
+        },
+        "originM": [
+          40,
+          0,
+          1
+        ],
+        "grid": {
+          "columns": 10,
+          "spacingM": 2
+        }
+      }
+    ]
+  },
+  "fabric": {
+    "accessToSpines": "wired-dual-homed",
+    "directZoneLinks": [
+      {
+        "from": "A",
+        "to": "B"
+      }
+    ],
+    "routing": "shortest-path",
+    "failureStudy": "single-spine-outage"
+  },
+  "cellularSupport": {
+    "model": "5g-lena-epc",
+    "placementStatus": "shared-local-core-via-fabric",
+    "bypassSpinesForAuthorization": false
+  },
+  "authorization": {
+    "authority": "main-server",
+    "requiredTaskTypes": [
+      "restricted_actuation",
+      "restricted_area_entry"
+    ],
+    "afterApproval": "local-routing",
+    "onDeny": "block",
+    "onTimeout": "block",
+    "timeoutMs": 1000,
+    "cacheApprovals": false
+  },
+  "externalService": {
+    "scope": "abstract-upper-network-and-main-server",
+    "oneWayDelayMs": 10,
+    "processingDelayMs": 5,
+    "response": "allow"
+  },
+  "tasks": [
+    {
+      "id": "before-normal-cross-zone",
+      "type": "telemetry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "deadlineMs": 100,
+      "startMs": 1200
+    },
+    {
+      "id": "before-protected-same-zone",
+      "type": "restricted_actuation",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "deadlineMs": 100,
+      "startMs": 1280
+    },
+    {
+      "id": "before-protected-cross-zone",
+      "type": "restricted_area_entry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "deadlineMs": 100,
+      "startMs": 1360
+    },
+    {
+      "id": "before-normal-nr-peer",
+      "type": "telemetry",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "deadlineMs": 100,
+      "startMs": 1440
+    },
+    {
+      "id": "during-normal-cross-zone",
+      "type": "telemetry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "deadlineMs": 100,
+      "startMs": 2300
+    },
+    {
+      "id": "during-protected-same-zone",
+      "type": "restricted_actuation",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "deadlineMs": 100,
+      "startMs": 2380
+    },
+    {
+      "id": "during-protected-cross-zone",
+      "type": "restricted_area_entry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "deadlineMs": 100,
+      "startMs": 2460
+    },
+    {
+      "id": "during-normal-nr-peer",
+      "type": "telemetry",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "deadlineMs": 100,
+      "startMs": 2540
+    },
+    {
+      "id": "after-normal-cross-zone",
+      "type": "telemetry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-wifi-robot-0",
+      "deadlineMs": 100,
+      "startMs": 3800
+    },
+    {
+      "id": "after-protected-same-zone",
+      "type": "restricted_actuation",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-A-wifi-robot-0",
+      "deadlineMs": 100,
+      "startMs": 3880
+    },
+    {
+      "id": "after-protected-cross-zone",
+      "type": "restricted_area_entry",
+      "source": "zone-A-wifi-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "deadlineMs": 100,
+      "startMs": 3960
+    },
+    {
+      "id": "after-normal-nr-peer",
+      "type": "telemetry",
+      "source": "zone-A-nr-robot-0",
+      "destination": "zone-B-nr-robot-0",
+      "deadlineMs": 100,
+      "startMs": 4040
+    }
+  ],
+  "outage": {
+    "spine": "spine-0",
+    "downMs": 2000,
+    "upMs": 3500
+  }
+}
