@@ -1,3 +1,7 @@
+> The500-device three-seed study is complete. See
+> [results and limits](access-500-device-results.md) and the explicit
+> [500-device run instructions](access-500-device-plan.md).
+
 > Update, 13 November 2026: the 300-device measurement and full diagnostic
 > replay are complete. See [300-device diagnosis](access-300-diagnosis.md).
 > Earlier failures and incomplete diagnostics below remain historical evidence.

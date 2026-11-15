@@ -1,12 +1,73 @@
-# Warehouse routing simulation — installation and usage
+# Industrial warehouse routing simulation
 
-> **Current wireless development:** the stationary NR/Wi-Fi access study now has
-> main-server task authorization, live spine recovery and Layer-3 ECMP. See the
-> [wireless run guide](docs/run-access-authorization.md) and
-> [ECMP control/results](docs/access-ecmp-control.md). These small controls use
-> nineteen local devices plus the external server model. The 500-device demo
-> described below is the separate, preserved wired implementation.
+The current study models **stationary wireless robots using ns-3 Wi-Fi and
+5G-LENA NR**, connected through zone gateways and two powered spines. Protected
+tasks require main-server approval before local payload routing. The upper
+TSN/shim/backhaul is an abstract service boundary, not an implemented 5G backhaul.
 
+## Start with the current wireless study
+
+- [Download the wireless viewer and recorded experiment data](https://github.com/Saurabh10402/warehouse_routing/releases/tag/wireless-2026-11-15).
+- [Install on Ubuntu 24.04 or Windows through WSL2](docs/wireless-installation.md).
+- [Run, configure and view simulations step by step](docs/wireless-quickstart.md).
+- [Understand the offline viewer](docs/wireless-viewer.md).
+- [Read the 500-device results and limitations](docs/access-500-device-results.md).
+- [Understand the ARP retry study](docs/access-arp-results.md) and [overhead comparison](docs/access-arp-overhead-results.md).
+
+The reference has **8 zones, 470 robots, 24 zone infrastructure devices, 2 spines,
+3 EPC support nodes and 1 main-server model: 500 devices total**. Three radio
+seeds produced 4,518/4,518 delivered tasks within the configured 100 ms deadline,
+with exact original/replay traces. These are finite workload observations, not
+industrial deadline guarantees. Robot counts and task definitions are JSON data.
+
+### View without installing the simulator
+
+1. Download `warehouse-wireless-data-2026-11-15.zip` from the wireless release.
+2. Extract it and open `wireless-viewer.html` in a modern browser.
+3. Choose a zone and phase, inspect devices, and select a task to see event times.
+4. Scroll within tables/diagrams on small screens. The page shows saved results.
+
+### Clone and run on Ubuntu or in the Ubuntu WSL terminal
+
+```sh
+sudo apt update
+sudo apt install -y git python3 cmake ninja-build g++ libeigen3-dev libsqlite3-dev
+git clone https://github.com/Saurabh10402/warehouse_routing.git
+cd warehouse_routing
+python3 scripts/setup_wireless.py "$HOME/warehouse-wireless" --jobs 2
+```
+
+The setup destination must not exist. The installer pins ns-3 and NR, applies a
+reviewed test-only patch, compiles, runs upstream QUICK tests and a small warehouse
+control. Logs and a status receipt are retained. Keep the PC awake and use one
+build workflow at a time. On Windows first install Ubuntu with
+`wsl --install -d Ubuntu-24.04`; the simulation commands above run **inside Ubuntu**.
+
+After the small control passes, run the reference workload:
+
+```sh
+python3 scripts/run_access_authorization.py configs/access_500_device_probe.json --probe-500 --outcome-measurement --ns3-source "$HOME/warehouse-wireless/ns-3" --build "$HOME/warehouse-wireless/build"
+python3 scripts/visualize_access.py results/YOUR_RESULT output/my-wireless-run.html
+```
+
+Replace `YOUR_RESULT` with the printed directory, then open the HTML. `MEASURED`
+with `validation: PASS` verifies accounting and replay; inspect delivery and
+`allDeadlinesMet` separately. Original plus replay took about an hour per seed
+on the existing PC. Export does not overwrite an existing HTML file.
+
+**Validation:** an isolated local-mirror dependency build passed 1,609 build steps,
+729 upstream QUICK checks (2 intentional skips), and a 36-task warehouse run with
+identical replay. A clean OS, internet-clone installation and an uninterrupted
+full-installer invocation have not been independently completed. Native Windows
+radio builds and macOS radio execution are not validated. See the installation
+guide for precise scope and troubleshooting.
+
+## Earlier wired and abstract studies
+
+The remaining sections preserve the earlier wired release and core workflows.
+Their robot counts, results, queue policies and installation commands belong to
+those studies, not the current Wi-Fi/NR workload. The college report is distributed
+separately and is not included in this repository.
 
 A configurable stationary warehouse network with native wired ns-3 routing, Dijkstra/ECMP comparison, priority queues, failure/recovery demonstrations and an offline packet-path viewer. The supplied layout has **8 zones and 500 devices: 482 robots, 8 zone switches, 8 local edge servers and 2 shared spines**.
 

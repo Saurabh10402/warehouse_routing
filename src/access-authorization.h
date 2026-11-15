@@ -36,19 +36,21 @@ struct TaskControl
     {
         return Create<Packet>(reinterpret_cast<const uint8_t*>(value.data()),value.size());
     }
-    void Load(const std::string& file)
+    void Load(const std::string& file,uint32_t taskLimit=1000)
     {
         std::ifstream in(file);
         NS_ABORT_MSG_IF(!(in>>upperDelayMs>>processingMs>>timeoutMs>>response>>outageSpine>>downMs>>upMs>>routingPolicy),"Invalid service table");
         NS_ABORT_MSG_IF(upperDelayMs<=0 || processingMs<=0 || timeoutMs<=0 || timeoutMs>60000,"Invalid control timing");
         NS_ABORT_MSG_IF(response!="allow" && response!="deny" && response!="timeout","Invalid response mode");
         Task t; int required;
+        NS_ABORT_MSG_IF(taskLimit!=1000 && taskLimit!=2000,"Invalid task limit");
         while(in>>t.source>>t.destination>>required>>t.deadlineMs>>t.startMs)
         {
             NS_ABORT_MSG_IF((required!=0 && required!=1) || t.deadlineMs<=0 || t.startMs<1000 || t.startMs>60000,"Invalid task");
             t.protectedTask=required;tasks.push_back(t);
+            NS_ABORT_MSG_IF(tasks.size()>taskLimit,"Task limit exceeded");
         }
-        NS_ABORT_MSG_IF(!in.eof() || tasks.empty() || tasks.size()>1000,"Invalid task table");
+        NS_ABORT_MSG_IF(!in.eof() || tasks.empty(),"Invalid task table");
         double lastMs=upMs;
         for(const auto& task:tasks)lastMs=std::max(lastMs,task.startMs);
         stopSeconds=lastMs/1000+2.0+timeoutMs/1000+2*upperDelayMs/1000+processingMs/1000;

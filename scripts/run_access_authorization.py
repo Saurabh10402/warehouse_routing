@@ -22,27 +22,29 @@ NS3='ea50b72ab79b1ec5912c66d5b384effa829f18bc'
 NR='f29ebd33450c49af934ea5dde8606f855c22c2a6'
 
 
-def capabilities(config, boundary=False, scale=False):
+def capabilities(config, boundary=False, scale=False, probe500=False):
+    if scale and probe500:raise ValueError('Choose scale-control or probe-500, not both')
     summary=validate(config);plan(config)
     if boundary and config['fabric']['routing']=='ecmp':
         raise ValueError('Boundary-loss audit is validated only for shortest-path; use the phased ECMP control')
     if config['fabric']['failureStudy']=='single-spine-outage' and 'outage' not in config:
         raise ValueError('Live outage requires an explicit outage schedule')
-    limit=300 if scale else 64
+    limit=499 if probe500 else (300 if scale else 64)
     if summary['totalDevices']>limit:
         raise ValueError(f'This control is limited to {limit} local devices; use the explicit bounded scale control only for intermediate validation')
     if not any(z['robots']['nr'] for z in config['inventory']['zones']):
         raise ValueError('This native control requires NR UEs')
-    if len(config['tasks'])>1000 or config['authorization']['timeoutMs']>60000:
-        raise ValueError('At most1000 tasks and60000ms timeout supported')
+    task_limit=2000 if probe500 else 1000
+    if len(config['tasks'])>task_limit or config['authorization']['timeoutMs']>60000:
+        raise ValueError(f'At most{task_limit} tasks and60000ms timeout supported')
     if max(config['externalService'][k] for k in ('oneWayDelayMs','processingDelayMs'))>60000:
         raise ValueError('External delays above60000ms outside bounded control scope')
     return summary
 
 
-def native_run_limit(local_devices, scale=False):
+def native_run_limit(local_devices, scale=False, probe500=False):
     """Bound wall time separately from simulated task deadlines."""
-    return (300 if local_devices<=128 else (600 if local_devices<=200 else 1200)) if scale else 180
+    return 3600 if probe500 else ((300 if local_devices<=128 else (600 if local_devices<=200 else 1200)) if scale else 180)
 
 
 def check_radio(config, trace):
@@ -83,11 +85,11 @@ def timed_command(args, log, cwd, seconds, timings, label, timing_path, allowed=
         write_json(timing_path,{'nativeSeconds':timings,'perRunLimitSeconds':seconds})
 
 
-def run(config_path, ns3, build, results, boundary=False, scale=False, measure=False):
+def run(config_path, ns3, build, results, boundary=False, scale=False, measure=False, probe500=False):
     if boundary and measure:raise ValueError("Choose boundary control or outcome measurement, not both")
-    config=json.loads(config_path.read_text(encoding='utf-8'));summary=capabilities(config,boundary,scale)
+    config=json.loads(config_path.read_text(encoding='utf-8'));summary=capabilities(config,boundary,scale,probe500)
     radio=config.get('radioRandomness',{'seed':1,'run':1})
-    run_limit=native_run_limit(summary['totalDevices'],scale)
+    run_limit=native_run_limit(summary['totalDevices'],scale,probe500)
     if boundary and ('outage' not in config or config['externalService']['response']!='allow'):
         raise ValueError('Boundary audit requires scheduled outage and allow response')
     if platform.system()!='Linux':raise ValueError('Run this command in Linux/WSL, not native Windows')
@@ -99,6 +101,7 @@ def run(config_path, ns3, build, results, boundary=False, scale=False, measure=F
     batch=results.resolve()/('access-auth-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8])
     batch.mkdir(parents=True,exist_ok=False)
     status={'status':'RUNNING','scope':'authorization control; immediate centralized spine recovery when scheduled; no scale claim','scaleControl':scale,'radioRandomness':radio,'localDevices':summary['totalDevices'],'auditMode':'outcome-measurement' if measure else ('boundary-loss' if boundary else 'delivery-control')}
+    status.update(probe500=probe500,taskLimit=2000 if probe500 else 1000,perRunWallLimitSeconds=run_limit)
     write_json(batch/'status.json',status)
     print('Results: '+str(batch),flush=True)
     try:
@@ -127,12 +130,12 @@ def run(config_path, ns3, build, results, boundary=False, scale=False, measure=F
         write_json(batch/'provenance.json',{'ns3':NS3,'nr':NR,'platform':platform.platform(),'radioRandomness':radio,
             'executable':str(exe),'executableSha256':sha(exe),'libraries':{str(p):sha(p) for p in libs},
             'cmakeCacheSha256':sha(build/'CMakeCache.txt')})
-        command([sys.executable,ROOT/'scripts/prepare_access_tasks.py',batch/'input.json',batch/'case'],batch/'prepare.log',ROOT,60)
+        command([sys.executable,ROOT/'scripts/prepare_access_tasks.py',batch/'input.json',batch/'case']+(['--probe-500'] if probe500 else []),batch/'prepare.log',ROOT,60)
         case=batch/'case'
         timings={}
         for label in ('original','replay'):
             code=timed_command([exe,'--inventory='+str(case/'nodes.txt'),'--links='+str(case/'links.txt'),
-                     '--tasks='+str(case/'tasks.txt'),'--radioSeed='+str(radio['seed']),'--radioRun='+str(radio['run']),'--output='+str(case/(label+'.csv'))],case/(label+'.log'),case,run_limit,timings,label,batch/'execution-timing.json',allowed=(0,2) if boundary or measure else (0,))
+                     '--tasks='+str(case/'tasks.txt'),'--radioSeed='+str(radio['seed']),'--radioRun='+str(radio['run']),'--taskLimit='+str(2000 if probe500 else 1000),'--arpWaitReplyTimeoutMs='+str(config.get('arp',{}).get('waitReplyTimeoutMs',1000)),'--output='+str(case/(label+'.csv'))],case/(label+'.log'),case,run_limit,timings,label,batch/'execution-timing.json',allowed=(0,2) if boundary or measure else (0,))
             (case/(label+'.exit')).write_text(str(code)+'\n')
         if measure:
             from audit_access_outcomes import check_outcomes
@@ -167,6 +170,7 @@ if __name__=='__main__':
     modes.add_argument('--outcome-measurement',action='store_true',help='Audit outcomes and replay even on native delivery exit2; reports MEASURED, not delivery PASS')
     modes.add_argument('--boundary-control',action='store_true',help='Audit observed transition loss/timeouts; does not require all tasks to deliver')
     p.add_argument('--scale-control',action='store_true',help='Explicit intermediate control: at most300 local devices;300s through128,600s through200,1200s above; not500-device validation')
+    p.add_argument('--probe-500',action='store_true',help='Explicit probe:499local+external server,2000tasks,3600s per native run; not a readiness claim')
     args=p.parse_args()
-    try:run(args.config,args.ns3_source,args.build,args.results,args.boundary_control,args.scale_control,args.outcome_measurement)
+    try:run(args.config,args.ns3_source,args.build,args.results,args.boundary_control,args.scale_control,args.outcome_measurement,args.probe_500)
     except (ValueError,RuntimeError,OSError,subprocess.SubprocessError) as error:p.exit(1,str(error)+'\n')

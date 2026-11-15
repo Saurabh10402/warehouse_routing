@@ -9,9 +9,11 @@ from access_study import validate
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('config',type=Path);p.add_argument('output',type=Path)
+    p.add_argument('--probe-500',action='store_true')
     args=p.parse_args();c=json.loads(args.config.read_text(encoding='utf-8'));validate(c)
-    if c['authorization']['timeoutMs']>60000 or len(c['tasks'])>1000:
-        raise SystemExit('Small native control limit: timeout <=60000 ms and <=1000 tasks')
+    limit=2000 if args.probe_500 else 1000
+    if c['authorization']['timeoutMs']>60000 or len(c['tasks'])>limit:
+        raise SystemExit(f'Native control limit: timeout <=60000 ms and <={limit} tasks')
     subprocess.run([sys.executable,str(Path(__file__).with_name('prepare_access_control.py')),str(args.config),str(args.output)],check=True)
     service=c['externalService'];required=set(c['authorization']['requiredTaskTypes'])
     outage=c.get('outage',{'spine':'none','downMs':0,'upMs':0})

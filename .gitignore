@@ -21,3 +21,6 @@ __pycache__/
 
 # Generated report artifacts (published separately)
 /output/
+
+# Private continuation notes
+/ACCOUNT_SWITCH_HANDOFF.md

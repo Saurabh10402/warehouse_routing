@@ -8,6 +8,16 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from access_study import validate
 
 class AccessStudyTests(unittest.TestCase):
+    def test_arp_wait_bounds_and_unknown_fields(self):
+        c=json.loads((ROOT/'configs/warehouse_access_small.json').read_text())
+        for value in [10,20,50,100,1000]:
+            c['arp']={'waitReplyTimeoutMs':value}
+            validate(c)
+        for value in [True,0,9,1001,20.5,'20',None]:
+            c['arp']={'waitReplyTimeoutMs':value}
+            with self.assertRaises(ValueError):validate(c)
+        c['arp']={'waitReplyTimeoutMs':100,'warmCache':True}
+        with self.assertRaises(ValueError):validate(c)
     def setUp(self):
         self.c=json.loads((ROOT/'configs/warehouse_access_small.json').read_text())
 

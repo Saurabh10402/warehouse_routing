@@ -7,6 +7,30 @@ from run_access_seed_comparison import make_plan
 from wireless_layout import expand
 
 class IntermediateScale(unittest.TestCase):
+    def test_500_probe_explicit_and_bounded(self):
+        c=json.loads((ROOT/'configs/access_500_device_probe.json').read_text())
+        with self.assertRaisesRegex(ValueError,'64'):capabilities(c)
+        with self.assertRaisesRegex(ValueError,'300'):capabilities(c,scale=True)
+        with self.assertRaises(ValueError):capabilities(c,scale=True,probe500=True)
+        self.assertEqual(capabilities(c,probe500=True)['totalDevices'],499)
+        self.assertEqual(native_run_limit(499,probe500=True),3600)
+        self.assertEqual(len(c['tasks']),1506)
+        robots={d['id'] for d in expand(c['inventory'])['devices'] if d['role']=='robot'}
+        self.assertEqual(len(robots),470)
+        for phase in ['before','during','after']:
+            self.assertEqual({t['source'] for t in c['tasks'] if t['id'].startswith(phase+'-')},robots)
+        c['inventory']['zones'][0]['robots']['wifi']+=1
+        with self.assertRaisesRegex(ValueError,'499'):capabilities(c,probe500=True)
+
+    def test_probe_task_caps(self):
+        c=json.loads((ROOT/'configs/access_authorization_control.json').read_text())
+        template=c['tasks'][0]
+        def tasks(n):return [dict(template,id=f't{i}') for i in range(n)]
+        c['tasks']=tasks(1001)
+        with self.assertRaisesRegex(ValueError,'1000'):capabilities(c)
+        c['tasks']=tasks(2000);capabilities(c,probe500=True)
+        c['tasks']=tasks(2001)
+        with self.assertRaisesRegex(ValueError,'2000'):capabilities(c,probe500=True)
     def setUp(self):self.c=json.loads((ROOT/'configs/access_eight_zone_control.json').read_text())
     def test_explicit_guard_required(self):
         with self.assertRaisesRegex(ValueError,'64'):capabilities(self.c)

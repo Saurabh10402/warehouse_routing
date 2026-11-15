@@ -25,14 +25,20 @@ int main(int argc, char** argv)
 {
     std::string input, output, links, tasks;
     uint32_t radioSeed=1;uint64_t radioRun=1;
+    uint32_t arpWaitReplyTimeoutMs=1000;
+    uint32_t taskLimit=1000;
     CommandLine cmd;
     cmd.AddValue("inventory", "Validated node table from prepare_wireless_nodes.py", input);
     cmd.AddValue("output", "New CSV device audit path", output);
     cmd.AddValue("links", "Validated direct-zone links", links);
     cmd.AddValue("tasks", "Validated task control table", tasks);
+    cmd.AddValue("taskLimit","Explicit task cap:1000 or2000 for probe500",taskLimit);
     cmd.AddValue("radioSeed","ns-3 radio RNG seed",radioSeed);
     cmd.AddValue("radioRun","ns-3 radio RNG substream run",radioRun);
+    cmd.AddValue("arpWaitReplyTimeoutMs","Experimental ARP cache retry wait in milliseconds (10..1000)",arpWaitReplyTimeoutMs);
     cmd.Parse(argc, argv);
+    NS_ABORT_MSG_IF(arpWaitReplyTimeoutMs<10 || arpWaitReplyTimeoutMs>1000,"Invalid ARP retry wait");
+    Config::SetDefault("ns3::ArpCache::WaitReplyTimeout",TimeValue(MilliSeconds(arpWaitReplyTimeoutMs)));
     NS_ABORT_MSG_IF(radioSeed<1 || radioSeed>2147483647 || radioRun<1 || radioRun>2147483647,"Invalid radio seed/run");
     RngSeedManager::SetSeed(radioSeed);RngSeedManager::SetRun(radioRun);
     std::cout<<"RADIO_RNG "<<RngSeedManager::GetSeed()<<" "<<RngSeedManager::GetRun()<<'\n';
@@ -115,7 +121,7 @@ int main(int argc, char** argv)
         e.radio=devices.Get(0);
     }
     TaskControl control;
-    control.Load(tasks);
+    control.Load(tasks,taskLimit);
     auto server=CreateObject<Node>(); internet.Install(server);
     auto addresses=InstallTaskFabric(entries,epc,links,server,control.upperDelayMs,control.outageSpine,control.downMs,control.upMs,control.routingPolicy);
     control.Install(entries,addresses,server);

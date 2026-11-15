@@ -18,7 +18,12 @@ def validate(c):
     def positive(value):
         if type(value) not in (int,float) or not math.isfinite(value) or value <= 0:
             raise ValueError('Timing must be finite and positive')
-    fields(c,'schema implementationStatus inventory fabric cellularSupport authorization externalService tasks'+(' outage' if 'outage' in c else '')+(' radioRandomness' if 'radioRandomness' in c else ''))
+    fields(c,'schema implementationStatus inventory fabric cellularSupport authorization externalService tasks'+(' outage' if 'outage' in c else '')+(' radioRandomness' if 'radioRandomness' in c else '')+(' arp' if 'arp' in c else ''))
+    if 'arp' in c:
+        fields(c['arp'],'waitReplyTimeoutMs')
+        value=c['arp']['waitReplyTimeoutMs']
+        if type(value) is not int or not 10<=value<=1000:
+            raise ValueError('ARP waitReplyTimeoutMs must be an integer between 10 and 1000')
     if 'radioRandomness' in c:
         fields(c['radioRandomness'],'seed run')
         if any(type(value) is not int or not 1<=value<=2147483647 for value in c['radioRandomness'].values()):

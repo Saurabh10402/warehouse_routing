@@ -12,6 +12,13 @@ struct FabricFlow
 
 static void ArpDrop(std::string node, Ptr<const Packet> packet)
 {
+    uint8_t header[20];
+    if (packet->GetSize()<20) return;
+    packet->CopyData(header,20);
+    const uint32_t ihl=(header[0]&15)*4;
+    const uint32_t total=(uint32_t(header[2])<<8)|header[3];
+    if ((header[0]>>4)!=4 || ihl<20 || total<ihl+8 || total>packet->GetSize()
+        || packet->GetSize()<ihl+8 || header[9]!=17) return;
     auto copy=packet->Copy();
     Ipv4Header ip;
     copy->RemoveHeader(ip);
